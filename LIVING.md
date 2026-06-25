@@ -9,6 +9,7 @@
 **Started:** 2026-06-25
 **Hardware:** M4 Mac Mini 16GB (development) + Google Colab Free/T4 (training)
 **Goal:** Build a tiny ASR model for English and Hindi using shared Whisper Base encoder + language-specific decoder adapters.
+**Repo:** https://github.com/eulogik/PolyWhisper (private)
 
 ---
 
