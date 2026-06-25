@@ -1,0 +1,9 @@
+torch>=2.0
+torchaudio
+transformers>=4.40
+datasets>=2.0
+soundfile
+librosa
+huggingface_hub
+numpy
+scipy
