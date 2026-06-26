@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "PolyWhisper: Tiny Multilingual ASR with Language-Specific Adapters"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "Eulogik"
+    website: "https://eulogik.com"
+repository-code: "https://github.com/eulogik/PolyWhisper"
+license: MIT
+keywords:
+  - speech-recognition
+  - multilingual
+  - asr
+  - whisper
+  - adapter
+  - pytorch
+  - deep-learning
+version: "0.1.0"
+date-released: "2026-06-26"
