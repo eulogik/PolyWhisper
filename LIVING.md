@@ -152,19 +152,39 @@ Device: MPS working
 | 2026-06-25 | English + Hindi MVP | Prove architecture works before scaling to 50 languages |
 | 2026-06-25 | Freeze encoder entirely | M4 can't handle fine-tuning 74M params; Colab T4 barely can |
 | 2026-06-25 | Custom adapter (not HuggingFace PEFT) | Full control over architecture, cross-attention, streaming-ready |
-| 2026-06-25 | vocab_size=1024 per language | Small BPE vocab sufficient for MVP; can increase later |
+| 2026-06-25 | Use `len(tokenizer)` not `vocab_size` | Whisper special tokens (lang tags, timestamps) go beyond vocab_size — need 51865 not 50258 |
+| 2026-06-25 | Clamp decoder_input_ids | Collate sets padding to -100 for loss masking; must clamp before embedding lookup |
+
+---
+
+## Phase 5: Training Complete (2026-06-25)
+
+### Results
+- **Dataset:** FLEURS (Google) — 2,600 English, 1,200 Hindi
+- **Training:** 10 epochs, batch_size=16, LR=1e-3 on Colab T4
+- **Adapter size:** ~222MB per language (dominated by token embedding 51865×256)
+- **Files:** `models/adapters/en_best.pt`, `models/adapters/hi_best.pt`
+
+### Bugs Fixed During Colab Training
+1. `vocab_size=1024` → needed `len(tokenizer)=51865` (Whisper has 107 special tokens beyond vocab_size)
+2. `position_embedding` crash on CUDA — create on CPU then `.to(device)`
+3. `-100` label padding passed to embedding — must `clamp(min=0)` before lookup
+4. Python 3.14 + dill incompatibility with `datasets` library — training only works on Colab (Python 3.12)
+5. Storing audio arrays in JSONL blew up RAM — switched to WAV files decoded on-the-fly
 
 ---
 
 ## Current Status
 
-🟢 **Phase 2 complete** — Model implemented and tested on MPS
-🟡 **Phase 3 next** — Data pipeline and first training run
+🟢 **Phase 1-4 complete** — Architecture, data, training all working
+🟡 **Phase 5 next** — Evaluation (WER) and real data (Common Voice)
 
 ---
 
 ## What's Next
 
-1. Test data loading (stream from HuggingFace datasets)
-2. Do a short training run on M4 (1 epoch, 100 samples) to verify gradient flow
-3. Then move to Colab for full training
+1. **Evaluate WER** on FLEURS test set using both adapters
+2. **Switch to Common Voice** for real training data (larger, more diverse)
+3. **Optimize adapter size** — current 222MB is too large (embedding is the bottleneck)
+4. **HuggingFace release** — model card, demo, integration
+5. **Add more languages** — Tamil, Telugu, Bengali, Marathi
