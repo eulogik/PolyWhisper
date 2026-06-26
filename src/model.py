@@ -13,10 +13,11 @@ class AdapterConfig:
     adapter_layers: int = 2
     adapter_heads: int = 4
     adapter_ffn_dim: int = 1024
-    vocab_size: int = 1024
-    max_target_positions: int = 256
+    vocab_size: int = 51865
+    max_target_positions: int = 128
     dropout: float = 0.1
     rank: int = 8
+    tie_embeddings: bool = True
 
 
 class LowRankAdapter(nn.Module):
@@ -153,9 +154,12 @@ class LanguageAdapter(nn.Module):
         self.layers = nn.ModuleList([
             AdapterLayer(config, encoder_dim) for _ in range(config.adapter_layers)
         ])
-        self.output_proj = nn.Linear(config.adapter_hidden_size, config.vocab_size)
+        self.output_proj = nn.Linear(config.adapter_hidden_size, config.vocab_size, bias=False)
         self.norm = nn.LayerNorm(config.adapter_hidden_size)
         self.dropout = nn.Dropout(config.dropout)
+
+        if config.tie_embeddings:
+            self.output_proj.weight = self.token_embedding.weight
 
     def forward(self, encoder_output, decoder_input_ids, encoder_mask=None, decoder_mask=None):
         x = self.token_embedding(decoder_input_ids)
@@ -234,7 +238,7 @@ class PolyWhisper(nn.Module):
         encoder_output = self.whisper.model.encoder(audio_features).last_hidden_state
 
         decoder_start = torch.tensor(
-            [[self.processor.tokenizer.eos_token_id]],
+            [[self.processor.tokenizer.bos_token_id]],
             device=audio_features.device,
         ).repeat(audio_features.size(0), 1)
 
@@ -266,6 +270,15 @@ class PolyWhisper(nn.Module):
             "encoder": sum(p.numel() for p in self.whisper.model.encoder.parameters() if p.requires_grad),
         }
 
+    def get_adapter_size_mb(self, lang: str = None):
+        """Get size of adapter(s) in MB."""
+        if lang:
+            params = sum(p.numel() for p in self.adapters[lang].parameters())
+            return params * 4 / (1024 * 1024)
+        else:
+            params = sum(p.numel() for p in self.adapters.parameters())
+            return params * 4 / (1024 * 1024)
+
     def save_adapters(self, path: str):
         state = {
             "adapters": {name: adapter.state_dict() for name, adapter in self.adapters.items()},
@@ -274,6 +287,23 @@ class PolyWhisper(nn.Module):
             "config": self.config,
         }
         torch.save(state, path)
+
+    def save_adapter(self, lang: str, path: str):
+        torch.save({
+            "adapter": self.adapters[lang].state_dict(),
+            "language_id": self.language_id_head.state_dict(),
+            "lang": lang,
+            "config": self.config,
+        }, path)
+
+    def load_adapter(self, path: str, device: str = "cpu"):
+        state = torch.load(path, map_location=device, weights_only=False)
+        lang = state["lang"]
+        if lang not in self.adapters:
+            self.adapters[lang] = LanguageAdapter(state["config"], self.whisper.config.d_model).to(device)
+        self.adapters[lang].load_state_dict(state["adapter"])
+        self.language_id_head.load_state_dict(state["language_id"])
+        return lang
 
     def load_adapters(self, path: str, device: str = "cpu"):
         state = torch.load(path, map_location=device, weights_only=False)
