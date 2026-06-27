@@ -88,6 +88,8 @@ def check_runtime(start_time):
 # ============ DEVICE ============
 if torch.cuda.is_available():
     DEVICE = "cuda"
+elif torch.backends.mps.is_available():
+    DEVICE = "mps"
 else:
     DEVICE = "cpu"
 log(f"Device: {DEVICE}")
