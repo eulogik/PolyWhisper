@@ -7,3 +7,4 @@ models/
 .DS_Store
 .env
 .env
+polywhisper_output/
