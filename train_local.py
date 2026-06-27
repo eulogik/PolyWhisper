@@ -312,7 +312,7 @@ class HinglishDataset(Dataset):
         from datasets import load_dataset
         log(f"  Downloading ujs/hinglish...")
         try:
-            ds = load_dataset("ujs/hinglish", split=self.split, streaming=True)
+            ds = load_dataset("ujs/hinglish", split=self.split, streaming=True, trust_remote_code=True)
             log(f"  Using ujs/hinglish")
         except Exception as e:
             log(f"  ujs/hinglish failed: {e}")
