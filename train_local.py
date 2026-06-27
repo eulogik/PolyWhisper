@@ -226,122 +226,72 @@ def get_lr(step, warmup=WARMUP_STEPS):
 
 # ============ DATA ============
 import soundfile as sf
+from datasets import load_dataset
 
-class CommonVoiceLocal(Dataset):
-    def __init__(self, lang, split="train"):
+def resample(audio, orig_sr):
+    if orig_sr != 16000:
+        import librosa
+        audio = librosa.resample(np.array(audio, dtype=np.float32), orig_sr=orig_sr, target_sr=16000)
+    return np.array(audio, dtype=np.float32)
+
+def process_sample(audio_array, sr, text, adir, idx):
+    audio = resample(audio_array, sr)
+    if len(audio) < 1600 or len(audio) > int(30.0 * 16000):
+        return None
+    text = text.strip()
+    if not text or len(text) < 3:
+        return None
+    wav_path = adir / f"{idx:06d}.wav"
+    sf.write(str(wav_path), audio, 16000)
+    return {"wav": str(wav_path), "text": text}
+
+
+class AudioDataset(Dataset):
+    def __init__(self, name, lang, split, max_samples, text_key, audio_key="audio"):
+        self.name = name
         self.lang = lang
-        self.split = split
-        self.cache = DATA_DIR / f"cv_{lang}_{split}.json"
-        self.adir = DATA_DIR / f"audio_{lang}_{split}"
+        self.cache = DATA_DIR / f"{name}_{lang}_{split}.json"
+        self.adir = DATA_DIR / f"audio_{name}_{lang}"
         self.adir.mkdir(parents=True, exist_ok=True)
-        self.data = self._load()
+        self.data = self._load(split, max_samples, text_key, audio_key)
 
-    def _load(self):
+    def _load(self, split, max_samples, text_key, audio_key):
         if self.cache.exists():
-            log(f"  Cached {self.lang}/{self.split}")
+            log(f"  Cached {self.name}/{self.lang}/{split}")
             return json.load(open(self.cache))
 
-        from datasets import load_dataset
-        cfg_map = {"en": "en", "hi": "hi"}
-        log(f"  Downloading Common Voice {self.lang}...")
+        log(f"  Downloading {self.name} {self.lang}...")
         ds = None
-        for repo in ["mozilla-foundation/common_voice_17_0", "fsicoli/common_voice_17_0"]:
-            try:
-                ds = load_dataset(
-                    repo, cfg_map[self.lang],
-                    split=self.split, streaming=True, trust_remote_code=True,
-                )
-                log(f"  Using {repo}")
-                break
-            except Exception as e:
-                log(f"  {repo} failed: {e}")
+
+        if self.name == "librispeech":
+            ds = load_dataset("openslr/librispeech_asr", "clean", split=split, streaming=True)
+        elif self.name == "fleurs":
+            ds = load_dataset("google/fleurs", self.lang, split=split, streaming=True)
+        elif self.name == "hinglish":
+            ds = load_dataset("ujs/hinglish", split=split, streaming=True, trust_remote_code=True)
 
         if ds is None:
-            log(f"  WARNING: Could not load {self.lang}, skipping")
+            log(f"  WARNING: Could not load {self.name}/{self.lang}")
             return []
 
         recs = []
-        for i, item in enumerate(tqdm(ds, desc=f"  {self.lang}")):
-            if i >= MAX_SAMPLES_PER_LANG:
+        for i, item in enumerate(tqdm(ds, desc=f"  {self.name}/{self.lang}")):
+            if i >= max_samples:
                 break
             try:
-                audio = item["audio"]["array"]
-                sr = item["audio"]["sampling_rate"]
-                if sr != 16000:
-                    import librosa
-                    audio = librosa.resample(np.array(audio, dtype=np.float32), orig_sr=sr, target_sr=16000)
-                audio = np.array(audio, dtype=np.float32)
-                if len(audio) < 1600 or len(audio) > int(30.0 * 16000):
-                    continue
-                text = item["sentence"].strip()
-                if not text or len(text) < 3:
-                    continue
-                wav_path = self.adir / f"{i:06d}.wav"
-                sf.write(str(wav_path), audio, 16000)
-                recs.append({"wav": str(wav_path), "text": text.lower() if self.lang == "en" else text})
+                a = item[audio_key]
+                if isinstance(a, dict):
+                    audio_array, sr = a["array"], a["sampling_rate"]
+                else:
+                    audio_array, sr = a["array"], a["sampling_rate"]
+                result = process_sample(audio_array, sr, item[text_key], self.adir, len(recs))
+                if result:
+                    recs.append(result)
             except Exception:
                 continue
 
         json.dump(recs, open(self.cache, "w"))
         log(f"  Saved {len(recs)} samples")
-        return recs
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, i):
-        r = self.data[i]
-        a, _ = sf.read(r["wav"])
-        return {"audio": a, "text": r["text"]}
-
-
-class HinglishDataset(Dataset):
-    def __init__(self, split="train"):
-        self.lang = "hinglish"
-        self.split = split
-        self.cache = DATA_DIR / f"hinglish_{split}.json"
-        self.adir = DATA_DIR / f"audio_hinglish"
-        self.adir.mkdir(parents=True, exist_ok=True)
-        self.data = self._load()
-
-    def _load(self):
-        if self.cache.exists():
-            log(f"  Cached hinglish/{self.split}")
-            return json.load(open(self.cache))
-
-        from datasets import load_dataset
-        log(f"  Downloading ujs/hinglish...")
-        try:
-            ds = load_dataset("ujs/hinglish", split=self.split, streaming=True, trust_remote_code=True)
-            log(f"  Using ujs/hinglish")
-        except Exception as e:
-            log(f"  ujs/hinglish failed: {e}")
-            return []
-
-        recs = []
-        for i, item in enumerate(tqdm(ds, desc="  hinglish")):
-            if i >= MAX_SAMPLES_HINGLISH:
-                break
-            try:
-                audio = item["audio"]["array"]
-                sr = item["audio"]["sampling_rate"]
-                if sr != 16000:
-                    import librosa
-                    audio = librosa.resample(np.array(audio, dtype=np.float32), orig_sr=sr, target_sr=16000)
-                audio = np.array(audio, dtype=np.float32)
-                if len(audio) < 1600 or len(audio) > int(30.0 * 16000):
-                    continue
-                text = item["sentence"].strip()
-                if not text or len(text) < 3:
-                    continue
-                wav_path = self.adir / f"{i:06d}.wav"
-                sf.write(str(wav_path), audio, 16000)
-                recs.append({"wav": str(wav_path), "text": text})
-            except Exception:
-                continue
-
-        json.dump(recs, open(self.cache, "w"))
-        log(f"  Saved {len(recs)} hinglish samples")
         return recs
 
     def __len__(self):
@@ -438,14 +388,16 @@ log("="*60)
 log("Loading datasets...")
 train_sets = {}
 test_sets = {}
+DATASET_CONFIG = {
+    "en": ("librispeech", "en", "text", "audio", "train.100", "test"),
+    "hi": ("fleurs", "hi_in", "transcription", "audio", "train", "test"),
+    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "train", "test"),
+}
 for lang in LANGUAGES:
     log(f"Loading {lang}...")
-    if lang == "hinglish":
-        train_sets[lang] = HinglishDataset("train")
-        test_sets[lang] = HinglishDataset("test")
-    else:
-        train_sets[lang] = CommonVoiceLocal(lang, "train")
-        test_sets[lang] = CommonVoiceLocal(lang, "test")
+    name, lang_code, text_key, audio_key, train_split, test_split = DATASET_CONFIG[lang]
+    train_sets[lang] = AudioDataset(name, lang_code, train_split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
+    test_sets[lang] = AudioDataset(name, lang_code, test_split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
     log(f"  {lang}: {len(train_sets[lang])} train, {len(test_sets[lang])} test")
 
 state = load_state()
