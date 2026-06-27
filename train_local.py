@@ -6,7 +6,7 @@ Features:
   - Heartbeat file (proves it's alive)
   - Log file with full history
   - Mixed precision (fp16) for speed
-  - 4 languages: en, hi, ta, te
+  - 3 languages: en, hi, hinglish
   - LR scheduler for better convergence
   - Memory monitoring
   - ETA tracking
@@ -31,7 +31,7 @@ from torch.utils.data import Dataset, DataLoader
 # ============ CONFIG ============
 WHISPER_MODEL = "openai/whisper-base"
 WHISPER_EXPECTED_LEN = 3000
-LANGUAGES = ["en", "hi", "ta", "te"]
+LANGUAGES = ["en", "hi", "hinglish"]
 NUM_EPOCHS = 10
 BATCH_SIZE = 8
 LR = 5e-4
@@ -44,6 +44,7 @@ AD_HEADS = 4
 AD_FFN = 1024
 AD_RANK = 16
 MAX_SAMPLES_PER_LANG = 100000
+MAX_SAMPLES_HINGLISH = 25000
 SAVE_EVERY = 5
 MAX_RUNTIME_HOURS = 38  # leave 2hr buffer
 
@@ -241,7 +242,7 @@ class CommonVoiceLocal(Dataset):
             return json.load(open(self.cache))
 
         from datasets import load_dataset
-        cfg_map = {"en": "en", "hi": "hi", "ta": "ta", "te": "te"}
+        cfg_map = {"en": "en", "hi": "hi"}
         log(f"  Downloading Common Voice {self.lang}...")
         ds = None
         for repo in ["mozilla-foundation/common_voice_17_0", "fsicoli/common_voice_17_0"]:
@@ -283,6 +284,64 @@ class CommonVoiceLocal(Dataset):
 
         json.dump(recs, open(self.cache, "w"))
         log(f"  Saved {len(recs)} samples")
+        return recs
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, i):
+        r = self.data[i]
+        a, _ = sf.read(r["wav"])
+        return {"audio": a, "text": r["text"]}
+
+
+class HinglishDataset(Dataset):
+    def __init__(self, split="train"):
+        self.lang = "hinglish"
+        self.split = split
+        self.cache = DATA_DIR / f"hinglish_{split}.json"
+        self.adir = DATA_DIR / f"audio_hinglish"
+        self.adir.mkdir(parents=True, exist_ok=True)
+        self.data = self._load()
+
+    def _load(self):
+        if self.cache.exists():
+            log(f"  Cached hinglish/{self.split}")
+            return json.load(open(self.cache))
+
+        from datasets import load_dataset
+        log(f"  Downloading ujs/hinglish...")
+        try:
+            ds = load_dataset("ujs/hinglish", split=self.split, streaming=True)
+            log(f"  Using ujs/hinglish")
+        except Exception as e:
+            log(f"  ujs/hinglish failed: {e}")
+            return []
+
+        recs = []
+        for i, item in enumerate(tqdm(ds, desc="  hinglish")):
+            if i >= MAX_SAMPLES_HINGLISH:
+                break
+            try:
+                audio = item["audio"]["array"]
+                sr = item["audio"]["sampling_rate"]
+                if sr != 16000:
+                    import librosa
+                    audio = librosa.resample(np.array(audio, dtype=np.float32), orig_sr=sr, target_sr=16000)
+                audio = np.array(audio, dtype=np.float32)
+                if len(audio) < 1600 or len(audio) > int(30.0 * 16000):
+                    continue
+                text = item["sentence"].strip()
+                if not text or len(text) < 3:
+                    continue
+                wav_path = self.adir / f"{i:06d}.wav"
+                sf.write(str(wav_path), audio, 16000)
+                recs.append({"wav": str(wav_path), "text": text})
+            except Exception:
+                continue
+
+        json.dump(recs, open(self.cache, "w"))
+        log(f"  Saved {len(recs)} hinglish samples")
         return recs
 
     def __len__(self):
@@ -365,7 +424,6 @@ def save_state(state):
 def save_best(state):
     lang = state["lang"]
     p = ADAPTER_DIR / f"{lang}_best.pt"
-    torch.save({lang: model.adapters[lang].load_state_dict}, str(p))  # placeholder
     torch.save({lang: model.adapters[lang].state_dict()}, str(p))
 
 # ============ TRAINING ============
@@ -382,8 +440,12 @@ train_sets = {}
 test_sets = {}
 for lang in LANGUAGES:
     log(f"Loading {lang}...")
-    train_sets[lang] = CommonVoiceLocal(lang, "train")
-    test_sets[lang] = CommonVoiceLocal(lang, "test")
+    if lang == "hinglish":
+        train_sets[lang] = HinglishDataset("train")
+        test_sets[lang] = HinglishDataset("test")
+    else:
+        train_sets[lang] = CommonVoiceLocal(lang, "train")
+        test_sets[lang] = CommonVoiceLocal(lang, "test")
     log(f"  {lang}: {len(train_sets[lang])} train, {len(test_sets[lang])} test")
 
 state = load_state()
