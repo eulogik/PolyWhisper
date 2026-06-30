@@ -29,10 +29,13 @@ from transformers import WhisperProcessor, WhisperForConditionalGeneration
 from torch.utils.data import Dataset, DataLoader
 
 # ============ CONFIG ============
+import os
+os.environ["HF_TOKEN"] = "[REDACTED-HF-TOKEN]"
+
 WHISPER_MODEL = "openai/whisper-base"
 WHISPER_EXPECTED_LEN = 3000
 LANGUAGES = ["en", "hi", "hinglish"]
-NUM_EPOCHS = 10
+NUM_EPOCHS = 20
 BATCH_SIZE = 8
 LR = 5e-4
 WEIGHT_DECAY = 0.01
@@ -43,10 +46,10 @@ AD_LAYERS = 3
 AD_HEADS = 4
 AD_FFN = 1024
 AD_RANK = 16
-MAX_SAMPLES_PER_LANG = 100000
+MAX_SAMPLES_PER_LANG = 10000
 MAX_SAMPLES_HINGLISH = 25000
 SAVE_EVERY = 5
-MAX_RUNTIME_HOURS = 38  # leave 2hr buffer
+MAX_RUNTIME_HOURS = 999
 
 # ============ PATHS ============
 SAVE_DIR = Path("./polywhisper_output")
@@ -132,7 +135,10 @@ class SelfAttn(nn.Module):
         k, v = self.k(x), self.v(x) + self.va(x)
         def rs(t): return t.view(B, T, self.h, self.dh).transpose(1, 2)
         q, k, v = rs(q), rs(k), rs(v)
-        a = self.drop(torch.softmax((q @ k.transpose(-2, -1)) / self.sc, dim=-1))
+        scores = (q @ k.transpose(-2, -1)) / self.sc
+        mask = torch.triu(torch.ones(T, T, device=x.device, dtype=scores.dtype), diagonal=1).bool()
+        scores = scores.masked_fill(mask, float('-inf'))
+        a = self.drop(torch.softmax(scores, dim=-1))
         return self.o((a @ v).transpose(1, 2).contiguous().view(B, T, -1))
 
 class CrossAttn(nn.Module):
@@ -260,21 +266,27 @@ class AudioDataset(Dataset):
             log(f"  Cached {self.name}/{self.lang}/{split}")
             return json.load(open(self.cache))
 
-        log(f"  Downloading {self.name} {self.lang}...")
+        log(f"  Downloading {self.name} {self.lang} ({split})...")
         ds = None
 
-        if self.name == "librispeech":
-            ds = load_dataset("openslr/librispeech_asr", "clean", split=split, streaming=True)
-        elif self.name == "fleurs":
-            ds = load_dataset("google/fleurs", self.lang, split=split, streaming=True)
-        elif self.name == "hinglish":
-            ds = load_dataset("ujs/hinglish", split=split, streaming=True, trust_remote_code=True)
+        try:
+            if self.name == "librispeech":
+                ds = load_dataset("openslr/librispeech_asr", "clean", split=split, streaming=True)
+            elif self.name == "fleurs":
+                ds = load_dataset("google/fleurs", self.lang, split=split, streaming=True)
+            elif self.name == "hinglish":
+                ds = load_dataset("ujs/hinglish", split=split, streaming=True, trust_remote_code=True)
+        except Exception as e:
+            log(f"  FAILED to load {self.name}/{self.lang}: {e}")
+            return []
 
         if ds is None:
             log(f"  WARNING: Could not load {self.name}/{self.lang}")
             return []
 
         recs = []
+        stall_time = 0
+        last_count = 0
         for i, item in enumerate(tqdm(ds, desc=f"  {self.name}/{self.lang}")):
             if i >= max_samples:
                 break
@@ -290,7 +302,19 @@ class AudioDataset(Dataset):
             except Exception:
                 continue
 
-        json.dump(recs, open(self.cache, "w"))
+            # Stall detection: if no new samples in 60s, abort
+            if i > 0 and i % 50 == 0:
+                if len(recs) == last_count:
+                    stall_time += 30
+                    if stall_time > 60:
+                        log(f"  STALL detected at {i} items, aborting download. Got {len(recs)} samples.")
+                        break
+                else:
+                    stall_time = 0
+                last_count = len(recs)
+
+        if len(recs) > 0:
+            json.dump(recs, open(self.cache, "w"))
         log(f"  Saved {len(recs)} samples")
         return recs
 
@@ -349,8 +373,10 @@ def load_state():
     if STATE_FILE.exists():
         try:
             st = json.load(open(STATE_FILE))
-            if st.get("opt"):
-                opt.load_state_dict(st["opt"])
+            opt_file = str(STATE_FILE) + ".opt.pt"
+            if Path(opt_file).exists():
+                opt_state = torch.load(opt_file, map_location=DEVICE, weights_only=True)
+                opt.load_state_dict(opt_state["opt"])
             lang = st["lang"]
             ep = st["epoch"]
             ckpt = ADAPTER_DIR / f"{lang}_ep{ep}_last.pt"
@@ -369,7 +395,9 @@ def save_state(state):
     ep = state["epoch"]
     ckpt = ADAPTER_DIR / f"{lang}_ep{ep}_last.pt"
     torch.save({n: a.state_dict() for n, a in model.adapters.items()}, str(ckpt))
-    json.dump(state, open(STATE_FILE, "w"), indent=2)
+    state_to_save = {k: v for k, v in state.items() if k != "opt"}
+    json.dump(state_to_save, open(STATE_FILE, "w"), indent=2)
+    torch.save({"opt": state["opt"]}, str(STATE_FILE) + ".opt.pt")
 
 def save_best(state):
     lang = state["lang"]
@@ -426,6 +454,8 @@ try:
                 state["step"] = 0
                 state["current_key"] = state_key
                 state["phase"] = "train"
+                state["lang"] = lang
+                state["epoch"] = ep
 
             # ---- TRAINING ----
             if state["phase"] == "train":
