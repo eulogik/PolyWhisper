@@ -86,12 +86,19 @@ Audio (16kHz) → Log-Mel Spectrogram (80 bins, 3000 frames)
 
 ---
 
-## Phase 3: Data Pipeline (2026-06-25 to 2026-06-28)
+## Phase 3: Data Pipeline (2026-06-25 to 2026-07-02)
 
 ### Datasets (final selection)
 - **English**: LibriSpeech (openslr/librispeech_asr, clean) — 10K train, 1K test
-- **Hindi**: FLEURS (google/fleurs, hi_in) — 2K train, 417 test
+- **Hindi**: IndicVoices-ST (ai4bharat/IndicVoices-ST, hindi) — 10K train (filtered from 54K), test from FLEURS (417)
 - **Hinglish**: ujs/hinglish — 10K train, 3K test
+
+### Hindi Upgrade: FLEURS (2K) → IndicVoices-ST (54K)
+- FLEURS Hindi only has ~2K train samples (dataset limitation, not selection)
+- IndicVoices-ST has 54,562 Hindi samples across 44K hours of 13 Indian languages
+- Quality filter: `alignment_score > 0.8` removes noisy samples
+- Gated dataset — requires HF login + contact info acceptance (done 2026-07-02)
+- Test set kept as FLEURS (cached, 417 samples) for consistent benchmarking
 
 ### Why not Common Voice 17?
 - Both repos broken on HuggingFace Hub ("doesn't contain any data files" / "Dataset scripts no longer supported")
@@ -113,6 +120,7 @@ Audio (16kHz) → Log-Mel Spectrogram (80 bins, 3000 frames)
 - 20 epochs, batch_size=8, LR=5e-4 with warmup
 - AdamW optimizer with weight_decay=0.01
 - MPS on M4 Mac Mini
+- Hindi training data: IndicVoices-ST (filtered, 10K) + FLEURS (2K) replaced by IndicVoices-ST alone
 
 **Results:**
 
@@ -275,6 +283,7 @@ Currently blocked on IndicVoices-ST (gated). Future training should pursue licen
 | 2026-07-02 | Keep hinglish as 3rd language | Needed for Voice-Bharat India market; pipeline works |
 | 2026-07-02 | Whisper Base is better for MVP | 680K-hr pretraining quality > custom Conformer size savings; defer encoder to Phase 2 |
 | 2026-07-02 | FLEURS Hindi 2K is dataset limit, not selection | Need IndicVoices-ST (gated) or ULCA for 10K+ |
+| 2026-07-02 | Switch Hindi train to IndicVoices-ST (54K samples) | Quality filter alignment_score > 0.8; keep FLEURS for test benchmark |
 
 ---
 
