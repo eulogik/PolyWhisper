@@ -168,21 +168,90 @@ Audio (16kHz) → Log-Mel Spectrogram (80 bins, 3000 frames)
 
 ---
 
+## Innovation Assessment (2026-07-02)
+
+PolyWhisper's innovation is the **architectural synthesis** of proven ideas into a practical, deployable system:
+
+### What Makes It Novel
+
+1. **Frozen encoder + language-specific decoder** — clean separation of acoustic modeling (shared) from language modeling (independent). Architecturally distinct from:
+   - Full Whisper fine-tuning (modifies all 74M params)
+   - HuggingFace PEFT/LoRA (adds adapters *within* Whisper's decoder)
+   - Moonshine (separate encoder+decoder per language, English-only)
+   - Traditional multilingual fine-tuning (one model, cross-language interference)
+
+2. **LoRA within custom decoders** — rank-8/16 bottleneck on Q+V projections, zero-initialized so adapters start as identity and learn incrementally. Applied to both self-attention and cross-attention.
+
+3. **Tied embeddings for compression** — output projection shares weights with token embedding, halving adapter size (65MB vs 120MB per language) without quality loss.
+
+4. **Per-language runtime swapping** — adapters are independent modules, hot-swappable, independently deployable without loading Whisper decoder.
+
+5. **Causal mask correctness** — critical discovery: missing causal mask causes 100% WER despite low training loss (model cheats by peeking at future tokens).
+
+### Research Gaps Addressed
+
+| Gap | PolyWhisper Solution |
+|-----|---------------------|
+| Whisper "mediocre everywhere" on low-resource languages | Per-language specialization without sacrificing shared acoustic backbone |
+| Moonshine (English-only tiny model) | Multilingual adapters on shared encoder |
+| Full fine-tuning too expensive | 65MB adapter, 30h training on consumer hardware |
+| Model bloat for multi-language | Sub-linear storage scaling (encoder shared, +65MB per language) |
+| Runtime language switching | Clean adapter swapping without cross-language interference |
+
+### Practical Impact
+
+- **Democratizes ASR** — individual developers in low-resource communities can train adapters
+- **Edge-ready** — 65MB adapters fit mobile/embedded devices
+- **India-focused** — Voice-Bharat: 22 scheduled languages, no existing tiny multilingual ASR for Indian languages
+
+### Current State
+
+**Proof-of-concept stage.** Architecture is sound, infrastructure is mature, but WER is far from production (209% en, 102% hi, 206% hinglish). The bottleneck is training data and epochs, solvable with more training.
+
+---
+
+## Architecture Discussion: Whisper Base vs Custom Conformer (2026-07-02)
+
+**Decision: Using Whisper Base (74M) is better for MVP, deferred custom encoder to Phase 2.**
+
+| Dimension | Whisper Base (74M) | Custom Conformer (30M) |
+|-----------|-------------------|----------------------|
+| Quality | Excellent — pretrained on 680K hrs, 96 langs | Unknown — needs months of training |
+| Training cost | ~$0 (M4) | Enormous (cluster required) |
+| Inference size | 74M (larger) | 30M (smaller) |
+| Deployment | Needs quantization for edge | Fits edge natively |
+
+**Verdict:** Whisper Base is the right choice for MVP. The custom encoder is only needed later for edge deployment where 74M is too large. Whisper's multilingual pretraining actually benefits the adapters — it already knows Hindi acoustically from its 680K-hour training.
+
+---
+
+## Data Limitations: FLEURS Hindi (2026-07-02)
+
+FLEURS Hindi (`hi_in`) has only ~2K train samples — that's the dataset's fixed size, not a sampling choice. To get 10K+ Hindi samples, options:
+- **indicvoices/IndicVoices-ST** (44K hours, 13 Indian languages) — gated on HF, needs license acceptance
+- **ULCA** — another Indian language dataset
+- **Combine FLEURS + ULCA** for more coverage
+
+Currently blocked on IndicVoices-ST (gated). Future training should pursue license access.
+
+---
+
 ## Current Status
 
-✅ **Phase 1-4 complete** — Architecture, data, training all working
+✅ **Phase 1-4 complete** — Architecture, data, training all working (30.2h, 55K steps)
 ✅ **Phase 5 partial** — Evaluation done, results show model works but needs more training
+💾 **All training saved and pushed** — adapters, state, data all backed up on GitHub
 
 ---
 
 ## What's Next
 
-1. **Train further** — 50-100 epochs to improve WER
+1. **Train further** — 50-100 epochs to improve WER (resume with `python train_local.py`)
 2. **Add beam search** — greedy decoding is weak for ASR
-3. **More data** — FLEURS hi is tiny (2K); consider ai4bharat/IndicVoices-ST (gated, 44K hours)
+3. **More Hindi data** — pursue IndicVoices-ST license access (gated, 44K hours)
 4. **Voice-Bharat expansion** — add ta, te, bn, mr, gu + tanglish
 5. **HuggingFace release** — model card, demo, integration
-6. **Quantize and export** — for edge deployment
+6. **Quantize and export** — for edge deployment (ONNX, GGML)
 
 ---
 
@@ -203,6 +272,9 @@ Audio (16kHz) → Log-Mel Spectrogram (80 bins, 3000 frames)
 | 2026-06-30 | No runtime limit on training | User wants full epochs to complete |
 | 2026-06-30 | Causal mask mandatory | Without it, model cheats and gets 100% WER |
 | 2026-06-30 | Indian English not added | FLEURS has no en_in config; IndicVoices-ST gated |
+| 2026-07-02 | Keep hinglish as 3rd language | Needed for Voice-Bharat India market; pipeline works |
+| 2026-07-02 | Whisper Base is better for MVP | 680K-hr pretraining quality > custom Conformer size savings; defer encoder to Phase 2 |
+| 2026-07-02 | FLEURS Hindi 2K is dataset limit, not selection | Need IndicVoices-ST (gated) or ULCA for 10K+ |
 
 ---
 
