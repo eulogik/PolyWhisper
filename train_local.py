@@ -276,6 +276,8 @@ class AudioDataset(Dataset):
                 ds = load_dataset("google/fleurs", self.lang, split=split, streaming=True)
             elif self.name == "hinglish":
                 ds = load_dataset("ujs/hinglish", split=split, streaming=True, trust_remote_code=True)
+            elif self.name == "indicvoices_st":
+                ds = load_dataset("ai4bharat/IndicVoices-ST", "indic2en", split=split, streaming=True, token=os.environ["HF_TOKEN"])
         except Exception as e:
             log(f"  FAILED to load {self.name}/{self.lang}: {e}")
             return []
@@ -291,6 +293,9 @@ class AudioDataset(Dataset):
             if i >= max_samples:
                 break
             try:
+                # Quality filter for IndicVoices-ST
+                if self.name == "indicvoices_st" and item.get("alignment_score", 0) < 0.8:
+                    continue
                 a = item[audio_key]
                 if isinstance(a, dict):
                     audio_array, sr = a["array"], a["sampling_rate"]
@@ -416,16 +421,22 @@ log("="*60)
 log("Loading datasets...")
 train_sets = {}
 test_sets = {}
-DATASET_CONFIG = {
-    "en": ("librispeech", "en", "text", "audio", "train.100", "test"),
-    "hi": ("fleurs", "hi_in", "transcription", "audio", "train", "test"),
-    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "train", "test"),
+TRAIN_CONFIG = {
+    "en": ("librispeech", "en", "text", "audio", "train.100"),
+    "hi": ("indicvoices_st", "hindi", "text", "chunked_audio_filepath", "hindi"),
+    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "train"),
+}
+TEST_CONFIG = {
+    "en": ("librispeech", "en", "text", "audio", "test"),
+    "hi": ("fleurs", "hi_in", "transcription", "audio", "test"),
+    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "test"),
 }
 for lang in LANGUAGES:
     log(f"Loading {lang}...")
-    name, lang_code, text_key, audio_key, train_split, test_split = DATASET_CONFIG[lang]
-    train_sets[lang] = AudioDataset(name, lang_code, train_split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
-    test_sets[lang] = AudioDataset(name, lang_code, test_split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
+    name, lang_code, text_key, audio_key, split = TRAIN_CONFIG[lang]
+    train_sets[lang] = AudioDataset(name, lang_code, split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
+    name, lang_code, text_key, audio_key, split = TEST_CONFIG[lang]
+    test_sets[lang] = AudioDataset(name, lang_code, split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
     log(f"  {lang}: {len(train_sets[lang])} train, {len(test_sets[lang])} test")
 
 state = load_state()
