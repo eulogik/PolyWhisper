@@ -284,6 +284,7 @@ Currently blocked on IndicVoices-ST (gated). Future training should pursue licen
 | 2026-07-02 | Whisper Base is better for MVP | 680K-hr pretraining quality > custom Conformer size savings; defer encoder to Phase 2 |
 | 2026-07-02 | FLEURS Hindi 2K is dataset limit, not selection | Need IndicVoices-ST (gated) or ULCA for 10K+ |
 | 2026-07-02 | Switch Hindi train to IndicVoices-ST (54K samples) | Quality filter alignment_score > 0.8; keep FLEURS for test benchmark |
+| 2026-07-02 | Resume training with 48h run target | NUM_EPOCHS=80, batch=8, IndicVoices-ST Hindi data |
 
 ---
 
