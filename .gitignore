@@ -1,10 +1,20 @@
-.venv/
+# secrets / env
+.env
+
+# macOS
+.DS_Store
+
+# artifacts: checkpoints, audio caches, logs, derived data
+# (polywhisper_output is a symlink to an external SSD; result snapshots live in results/)
+polywhisper_output
+
+# old model checkpoints
+models/
+
+# stray redirects / scratch
+nohup.log
+
+# python
 __pycache__/
 *.pyc
-data/
-models/
-*.pt
-.DS_Store
-.env
-.env
-polywhisper_output/
+.venv/

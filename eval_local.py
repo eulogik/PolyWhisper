@@ -28,6 +28,7 @@ AD_RANK = 16
 MAX_NEW_TOKENS = 128
 MAX_SAMPLES = 50
 BATCH_SIZE = 8
+UNFREEZE_LAYERS = [4, 5]
 
 # ============ PATHS ============
 SAVE_DIR = Path("./polywhisper_output")
@@ -145,6 +146,11 @@ class PolyWhisper(nn.Module):
         self.whisper = WhisperForConditionalGeneration.from_pretrained(WHISPER_MODEL)
         for p in self.whisper.model.encoder.parameters():
             p.requires_grad = False
+        for p in self.whisper.model.decoder.parameters():
+            p.requires_grad = False
+        for i in UNFREEZE_LAYERS:
+            for p in self.whisper.model.encoder.layers[i].parameters():
+                p.requires_grad = True
         self.adapters = nn.ModuleDict({l: LangAdapter() for l in LANGUAGES})
     def encode(self, feat):
         return self.whisper.model.encoder(feat).last_hidden_state
@@ -156,6 +162,10 @@ class PolyWhisper(nn.Module):
         for n, s in st.items():
             if n in self.adapters:
                 self.adapters[n].load_state_dict(s)
+        if '_encoder' in st:
+            for k, v in st['_encoder'].items():
+                idx = int(k)
+                self.whisper.model.encoder.layers[idx].load_state_dict(v)
 
 print("Loading model...")
 model = PolyWhisper().to(DEVICE)
@@ -178,17 +188,19 @@ if not loaded:
 model.eval()
 
 # ============ GENERATION (autoregressive with causal mask) ============
+START_TOKEN = 50258  # <|startoftranscript|>, NOT tok.bos_token_id (50257=<|endoftext|>)
+
 @torch.no_grad()
 def generate(model, audio_feat, lang, max_len=MAX_NEW_TOKENS, temperature=1.0, top_k=50, rep_penalty=1.3):
     """Greedy decoding with repetition penalty and top-k sampling."""
     enc = model.encode(audio_feat)
     device = audio_feat.device
-    dec_ids = torch.tensor([[tok.bos_token_id]], device=device)
+    dec_ids = torch.tensor([[START_TOKEN]], device=device)
     for _ in range(max_len):
         logits = model.adapters[lang](enc, dec_ids)
         next_logits = logits[:, -1, :] / temperature
 
-        # Repetition penalty: reduce logits for already-generated tokens
+        # Repetition penalty
         if rep_penalty != 1.0:
             seen = set(dec_ids[0].cpu().tolist())
             for t in seen:
@@ -208,13 +220,56 @@ def generate(model, audio_feat, lang, max_len=MAX_NEW_TOKENS, temperature=1.0, t
             break
     return tok.decode(dec_ids[0].cpu().tolist(), skip_special_tokens=True)
 
+@torch.no_grad()
+def generate_beam(model, audio_feat, lang, beam_width=5, max_len=MAX_NEW_TOKENS, rep_penalty=1.2):
+    """Beam search decoding with repetition penalty."""
+    enc = model.encode(audio_feat)
+    device = audio_feat.device
+    beams = [(torch.tensor([[START_TOKEN]], device=device), 0.0)]
+
+    for step in range(max_len):
+        candidates = []
+        for seq, score in beams:
+            if seq.size(1) > 1 and seq[0, -1].item() == tok.eos_token_id:
+                candidates.append((seq, score))
+                continue
+
+            logits = model.adapters[lang](enc, seq)
+            next_logits = logits[:, -1, :].clone()
+
+            # Repetition penalty
+            seen = set(seq[0].cpu().tolist())
+            for t in seen:
+                if next_logits[0, t] > 0:
+                    next_logits[0, t] /= rep_penalty
+                else:
+                    next_logits[0, t] *= rep_penalty
+
+            probs = torch.log_softmax(next_logits, dim=-1)
+            top_k_probs, top_k_idx = probs.topk(beam_width, dim=-1)
+
+            for k in range(beam_width):
+                new_seq = torch.cat([seq, top_k_idx[:, k:k+1]], dim=1)
+                new_score = score + top_k_probs[0, k].item()
+                candidates.append((new_seq, new_score))
+
+        if not candidates:
+            break
+
+        beams = sorted(candidates, key=lambda x: x[1], reverse=True)[:beam_width]
+
+        if all(b[0, -1].item() == tok.eos_token_id for b, _ in beams):
+            break
+
+    return tok.decode(beams[0][0][0].tolist(), skip_special_tokens=True)
+
 # ============ TEST DATA ============
 def load_test_data(lang):
     """Load cached test data from training - exact filename match only."""
     cache_map = {
         "en": ["librispeech_en_test.json"],
         "hi": ["fleurs_hi_in_test.json"],
-        "hinglish": ["hinglish_hinglish_test.json"],
+        "hinglish": ["mucs_hinglish_hinglish_test.json"],
     }
     files = cache_map.get(lang, [])
     data = []
@@ -295,7 +350,7 @@ for lang in LANGUAGES:
 
         try:
             feat = process_audio(wav_path)
-            hyp_text = generate(model, feat, lang)
+            hyp_text = generate_beam(model, feat, lang, beam_width=5)
 
             references.append(ref_text)
             hypotheses.append(hyp_text)
