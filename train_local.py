@@ -30,14 +30,15 @@ from torch.utils.data import Dataset, DataLoader
 
 # ============ CONFIG ============
 import os
-os.environ["HF_TOKEN"] = "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"
+os.environ.setdefault("HF_TOKEN", "")
 
 WHISPER_MODEL = "openai/whisper-base"
 WHISPER_EXPECTED_LEN = 3000
 LANGUAGES = ["en", "hi", "hinglish"]
-NUM_EPOCHS = 80
+NUM_EPOCHS = 29
 BATCH_SIZE = 8
 LR = 5e-4
+ENCODER_LR = 1e-5
 WEIGHT_DECAY = 0.01
 WARMUP_STEPS = 100
 MAX_LABEL_LEN = 256
@@ -47,7 +48,8 @@ AD_HEADS = 4
 AD_FFN = 1024
 AD_RANK = 16
 MAX_SAMPLES_PER_LANG = 10000
-MAX_SAMPLES_HINGLISH = 25000
+MAX_SAMPLES_HINGLISH = 52800
+UNFREEZE_LAYERS = [4, 5]
 SAVE_EVERY = 5
 MAX_RUNTIME_HOURS = 999
 
@@ -204,6 +206,11 @@ class PolyWhisper(nn.Module):
         self.whisper = WhisperForConditionalGeneration.from_pretrained(WHISPER_MODEL)
         for p in self.whisper.model.encoder.parameters():
             p.requires_grad = False
+        for p in self.whisper.model.decoder.parameters():
+            p.requires_grad = False
+        for i in UNFREEZE_LAYERS:
+            for p in self.whisper.model.encoder.layers[i].parameters():
+                p.requires_grad = True
         self.adapters = nn.ModuleDict({l: LangAdapter() for l in LANGUAGES})
     def encode(self, feat):
         return self.whisper.model.encoder(feat).last_hidden_state
@@ -215,13 +222,24 @@ class PolyWhisper(nn.Module):
         for n, s in st.items():
             if n in self.adapters:
                 self.adapters[n].load_state_dict(s)
+        if '_encoder' in st:
+            for k, v in st['_encoder'].items():
+                idx = int(k)
+                self.whisper.model.encoder.layers[idx].load_state_dict(v)
+    def get_encoder_state(self):
+        return {str(i): self.whisper.model.encoder.layers[i].state_dict() for i in UNFREEZE_LAYERS}
 
 log("Loading model...")
 model = PolyWhisper().to(DEVICE)
-params = [p for p in model.parameters() if p.requires_grad]
+enc_params = [p for p in model.whisper.model.encoder.parameters() if p.requires_grad]
+ad_params = [p for p in model.adapters.parameters() if p.requires_grad]
+params = [
+    {"params": enc_params, "lr": ENCODER_LR},
+    {"params": ad_params, "lr": LR},
+]
 opt = torch.optim.AdamW(params, lr=LR, weight_decay=WEIGHT_DECAY)
 trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
-log(f"Trainable params: {trainable/1e6:.1f}M")
+log(f"Trainable params: {trainable/1e6:.1f}M (encoder: {sum(p.numel() for p in enc_params)/1e6:.1f}M, adapters: {sum(p.numel() for p in ad_params)/1e6:.1f}M)")
 
 # ============ LR SCHEDULER ============
 def get_lr(step, warmup=WARMUP_STEPS):
@@ -229,6 +247,15 @@ def get_lr(step, warmup=WARMUP_STEPS):
         return LR * step / warmup
     progress = (step - warmup) / max(1, 10000 - warmup)
     return LR * max(0.1, 0.5 * (1 + math.cos(math.pi * progress)))
+
+# Scheduled sampling: linear decay from 0.1 to 0 over SS_EPOCHS epochs
+SS_START_EPOCH = 57
+SS_EPOCHS = 15
+def get_ss_prob(ep):
+    if ep < SS_START_EPOCH or ep >= SS_START_EPOCH + SS_EPOCHS:
+        return 0.0
+    progress = (ep - SS_START_EPOCH) / SS_EPOCHS
+    return 0.1 * (1 - progress)
 
 # ============ DATA ============
 import soundfile as sf
@@ -274,8 +301,8 @@ class AudioDataset(Dataset):
                 ds = load_dataset("openslr/librispeech_asr", "clean", split=split, streaming=True)
             elif self.name == "fleurs":
                 ds = load_dataset("google/fleurs", self.lang, split=split, streaming=True)
-            elif self.name == "hinglish":
-                ds = load_dataset("ujs/hinglish", split=split, streaming=True, trust_remote_code=True)
+            elif self.name == "mucs_hinglish":
+                ds = load_dataset("dianavdavidson/MUCS-Hinglish-traintestblindsplit", split=split, streaming=True)
             elif self.name == "indicvoices_st":
                 ds = load_dataset("ai4bharat/IndicVoices-ST", "indic2en", split=split, streaming=True, token=os.environ["HF_TOKEN"])
         except Exception as e:
@@ -349,11 +376,16 @@ class Collator:
         lbls = []
         for item in batch:
             toks = self.proc.tokenizer(
-                item["text"], padding="max_length", max_length=self.max_lbl, truncation=True
+                item["text"], padding="max_length", max_length=self.max_lbl, truncation=True,
+                return_tensors="pt"
             )
-            lbls.append(toks["input_ids"])
+            ids = toks["input_ids"][0].tolist()
+            attn = toks["attention_mask"][0].tolist()
+            real_len = sum(attn)
+            for i in range(real_len, self.max_lbl):
+                ids[i] = -100
+            lbls.append(ids)
         lbls = torch.tensor(lbls, dtype=torch.long)
-        lbls[lbls == tok.pad_token_id] = -100
         return {"feats": feats, "lbls": lbls}
 
 
@@ -375,31 +407,46 @@ def new_state():
     }
 
 def load_state():
-    if STATE_FILE.exists():
+    # Always load best adapter checkpoints first (from previous runs)
+    for l in LANGUAGES:
+        bp = ADAPTER_DIR / f"{l}_best.pt"
+        if bp.exists():
+            model.load_ckpt(str(bp))
+            log(f"  Loaded adapter: {l}")
+        else:
+            log(f"  WARNING: No adapter for {l}, will train from scratch")
+
+    if not STATE_FILE.exists():
+        log("  No state file, starting fresh (epoch 0)")
+        return new_state()
+
+    try:
+        st = json.load(open(STATE_FILE))
+    except Exception as e:
+        log(f"  WARNING: Corrupt state JSON, starting fresh: {e}")
+        return new_state()
+
+    # Try to load optimizer state; skip if incompatible (e.g. param group change)
+    opt_file = str(STATE_FILE) + ".opt.pt"
+    if Path(opt_file).exists():
         try:
-            st = json.load(open(STATE_FILE))
-            opt_file = str(STATE_FILE) + ".opt.pt"
-            if Path(opt_file).exists():
-                opt_state = torch.load(opt_file, map_location=DEVICE, weights_only=True)
-                opt.load_state_dict(opt_state["opt"])
-            lang = st["lang"]
-            ep = st["epoch"]
-            ckpt = ADAPTER_DIR / f"{lang}_ep{ep}_last.pt"
-            if ckpt.exists():
-                model.load_ckpt(str(ckpt))
-                log(f"  Loaded: {ckpt.name}")
-            log(f"  Resumed: {st['phase']} {st['lang']} epoch {st['epoch']} step {st['step']}")
-            return st
+            opt_state = torch.load(opt_file, map_location=DEVICE, weights_only=True)
+            opt.load_state_dict(opt_state["opt"])
+            log("  Loaded optimizer state")
         except Exception as e:
-            log(f"  WARNING: Corrupt state file, starting fresh: {e}")
-    return new_state()
+            log(f"  Optimizer state incompatible ({e}), starting fresh optimizer")
+
+    st["step"] = 0
+    st["phase"] = "train"
+    log(f"  Resuming from epoch {st['epoch']} lang {st['lang']}")
+    return st
 
 def save_state(state):
     state["opt"] = opt.state_dict()
     lang = state["lang"]
     ep = state["epoch"]
     ckpt = ADAPTER_DIR / f"{lang}_ep{ep}_last.pt"
-    torch.save({n: a.state_dict() for n, a in model.adapters.items()}, str(ckpt))
+    torch.save({lang: model.adapters[lang].state_dict(), '_encoder': model.get_encoder_state()}, str(ckpt))
     state_to_save = {k: v for k, v in state.items() if k != "opt"}
     json.dump(state_to_save, open(STATE_FILE, "w"), indent=2)
     torch.save({"opt": state["opt"]}, str(STATE_FILE) + ".opt.pt")
@@ -407,7 +454,7 @@ def save_state(state):
 def save_best(state):
     lang = state["lang"]
     p = ADAPTER_DIR / f"{lang}_best.pt"
-    torch.save({lang: model.adapters[lang].state_dict()}, str(p))
+    torch.save({lang: model.adapters[lang].state_dict(), '_encoder': model.get_encoder_state()}, str(p))
 
 # ============ TRAINING ============
 log("="*60)
@@ -424,19 +471,20 @@ test_sets = {}
 TRAIN_CONFIG = {
     "en": ("librispeech", "en", "text", "audio", "train.100"),
     "hi": ("indicvoices_st", "hindi", "text", "chunked_audio_filepath", "hindi"),
-    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "train"),
+    "hinglish": ("mucs_hinglish", "hinglish", "transcript", "audio", "train"),
 }
 TEST_CONFIG = {
     "en": ("librispeech", "en", "text", "audio", "test"),
     "hi": ("fleurs", "hi_in", "transcription", "audio", "test"),
-    "hinglish": ("hinglish", "hinglish", "sentence", "audio", "test"),
+    "hinglish": ("mucs_hinglish", "hinglish", "transcript", "audio", "test"),
 }
 for lang in LANGUAGES:
     log(f"Loading {lang}...")
+    max_samples = MAX_SAMPLES_HINGLISH if lang == "hinglish" else MAX_SAMPLES_PER_LANG
     name, lang_code, text_key, audio_key, split = TRAIN_CONFIG[lang]
-    train_sets[lang] = AudioDataset(name, lang_code, split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
+    train_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key)
     name, lang_code, text_key, audio_key, split = TEST_CONFIG[lang]
-    test_sets[lang] = AudioDataset(name, lang_code, split, MAX_SAMPLES_PER_LANG, text_key, audio_key)
+    test_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key)
     log(f"  {lang}: {len(train_sets[lang])} train, {len(test_sets[lang])} test")
 
 state = load_state()
@@ -497,22 +545,46 @@ try:
                         lbls = batch["lbls"].to(DEVICE)
 
                         # Set LR
-                        for pg in opt.param_groups:
-                            pg["lr"] = get_lr(total_steps_done)
+                        sched_lr = get_lr(total_steps_done)
+                        opt.param_groups[0]["lr"] = ENCODER_LR * min(1.0, sched_lr / LR)
+                        opt.param_groups[1]["lr"] = sched_lr
 
                         if USE_FP16:
-                            with torch.amp.autocast("cuda"):
-                                logits = model(feats, lbls[:, :-1], lang)
-                                loss = nn.functional.cross_entropy(
-                                    logits.reshape(-1, VOCAB_SIZE), lbls[:, 1:].reshape(-1), ignore_index=-100
-                                )
+                            ss_prob = get_ss_prob(ep)
+                            if ss_prob > 0:
+                                enc_out = model.encode(feats)
+                                with torch.no_grad():
+                                    tf_logits = model.adapters[lang](enc_out, lbls[:, :-1])
+                                    pred_tokens = tf_logits.argmax(dim=-1)
+                                mix_mask = torch.rand_like(lbls[:, :-1].float()) < ss_prob
+                                mix_mask[:, :2] = False
+                                mixed_input = torch.where(mix_mask, pred_tokens, lbls[:, :-1])
+                                with torch.amp.autocast("cuda"):
+                                    logits = model.adapters[lang](enc_out, mixed_input)
+                            else:
+                                with torch.amp.autocast("cuda"):
+                                    logits = model(feats, lbls[:, :-1], lang)
+                            loss = nn.functional.cross_entropy(
+                                logits.reshape(-1, VOCAB_SIZE), lbls[:, 1:].reshape(-1), ignore_index=-100
+                            )
                             scaler.scale(loss).backward()
                             scaler.unscale_(opt)
                             nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                             scaler.step(opt)
                             scaler.update()
                         else:
-                            logits = model(feats, lbls[:, :-1], lang)
+                            ss_prob = get_ss_prob(ep)
+                            if ss_prob > 0:
+                                enc_out = model.encode(feats)
+                                with torch.no_grad():
+                                    tf_logits = model.adapters[lang](enc_out, lbls[:, :-1])
+                                    pred_tokens = tf_logits.argmax(dim=-1)
+                                mix_mask = torch.rand_like(lbls[:, :-1].float()) < ss_prob
+                                mix_mask[:, :2] = False
+                                mixed_input = torch.where(mix_mask, pred_tokens, lbls[:, :-1])
+                                logits = model.adapters[lang](enc_out, mixed_input)
+                            else:
+                                logits = model(feats, lbls[:, :-1], lang)
                             loss = nn.functional.cross_entropy(
                                 logits.reshape(-1, VOCAB_SIZE), lbls[:, 1:].reshape(-1), ignore_index=-100
                             )
