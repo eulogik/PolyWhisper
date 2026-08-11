@@ -370,7 +370,7 @@ if __name__ == "__main__":
                 lbls.append(full)
                 if labels is not None:
                     ll = [1] * len(self.forced_prefix)  # prefix tokens: hi (label 1 = hi)
-                    ll += [1 if lab == "en" else 0 for lab in labels]
+                    ll += [1 - lab for lab in labels]  # align_labels: 1=en,0=hi -> router: 1=hi,0=en
                     ll = ll[:self.max_lbl]
                     while len(ll) < self.max_lbl:
                         ll.append(-100)

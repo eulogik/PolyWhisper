@@ -109,11 +109,11 @@ def main():
                         model(feats, hyp_tokens[:-1].unsqueeze(0))
                 w = model._router_weights
                 if w is not None:
-                    n = min(len(labels), w.shape[1] - 1)
+                    n = min(len(labels), w.shape[1] - 4)
                     if n > 0:
-                        w_s = w[0, 1 : 1 + n]
+                        w_s = w[0, 4 : 4 + n]
                         pred = w_s.argmax(-1)
-                        lab = labels[:n]
+                        lab = 1 - labels[:n]  # align_labels 1=en -> router 1=hi
                         valid = lab != -100
                         if valid.any():
                             w_ag = (pred[valid] == lab[valid]).sum().item()
