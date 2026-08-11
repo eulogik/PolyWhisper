@@ -7,7 +7,7 @@ this run produces the "no routing" control: a fixed hook forces w = 0.5 for
 every token after the model's own embed hook computes router weights.
 
 Run: .venv/bin/python eval_static5050.py
-Output: polywhisper_output/eval_static5050_samples.json
+Output: polywhisper_output/eval_static5050_v5_samples.json
 """
 
 import json
@@ -41,8 +41,8 @@ def main():
     model.add_language("en")
     model.add_language("hi")
     model._install_expert_hooks()
-    model.load_adapter("en", str(ADAPTER_DIR / "en_router_best_v4.pt"))
-    model.load_adapter("hi", str(ADAPTER_DIR / "hi_router_best_v4.pt"))
+    model.load_adapter("en", str(ADAPTER_DIR / "en_router_best_v5.pt"))
+    model.load_adapter("hi", str(ADAPTER_DIR / "hi_router_best_v5.pt"))
 
     def fixed_hook(mod, inp, out):
         B, S = out.shape[0], out.shape[1]
@@ -91,12 +91,12 @@ def main():
     cer_pct = err_c / max(1, len(records)) * 100
     f_wer_pct = err_fw / max(1, tot_fw) * 100
     log("=" * 60)
-    log(f"Static 50/50 mix (v4 experts): WER {wer_pct:.1f}%  FuzzyWER {f_wer_pct:.1f}%  CER {cer_pct:.1f}%")
+    log(f"Static 50/50 mix (v5 experts): WER {wer_pct:.1f}%  FuzzyWER {f_wer_pct:.1f}%  CER {cer_pct:.1f}%")
     log("=" * 60)
 
     json.dump({"wer": wer_pct, "fuzzy_wer": f_wer_pct, "cer": cer_pct, "samples": samples},
-              open(SAVE_DIR / "eval_static5050_samples.json", "w"), indent=1, ensure_ascii=False)
-    log(f"Saved: {SAVE_DIR / 'eval_static5050_samples.json'}")
+              open(SAVE_DIR / "eval_static5050_v5_samples.json", "w"), indent=1, ensure_ascii=False)
+    log(f"Saved: {SAVE_DIR / 'eval_static5050_v5_samples.json'}")
 
 
 if __name__ == "__main__":

@@ -21,9 +21,9 @@ RESULTS_DIR = Path("results")
 ORTHO_JSON = SAVE_DIR / "data" / "hinglish_codeswitch_test_ortho.json"
 
 RESULT_FILES = {
-    "router": RESULTS_DIR / "eval_router_samples.json",
+    "router": RESULTS_DIR / "eval_router_v5_samples.json",
     "vanilla": RESULTS_DIR / "eval_vanilla_samples.json",
-    "static5050": SAVE_DIR / "eval_static5050_samples.json",
+    "static5050": SAVE_DIR / "eval_static5050_v5_samples.json",
 }
 
 
