@@ -83,20 +83,25 @@ Router per-token language accuracy: **89.1%** (99,663 / 111,815 tokens).
 | `eval_static5050_v5_samples.json` | Static 50/50 ablation results |
 | `eval_vanilla_samples.json` | Vanilla Whisper-Base results |
 | `hinglish_codeswitch_test_ortho.json` | Ortho-normalized test set |
-| `README.md` | This card |
+| `config.json` | Adapter/router config (also the Hub's download-count query file) |
+| README.md | This card |
 
 ## Usage
 
 ```python
 import torch, soundfile as sf
+from huggingface_hub import hf_hub_download
 from transformers import WhisperProcessor
 from model import PolyWhisperRouter   # see github.com/eulogik/PolyWhisper
 
+# fetch config.json first (also what the Hub counts as a "download")
+hf_hub_download("eulogik/polywhisper-hinglish-router", "config.json")
+
 model = PolyWhisperRouter().to("mps" if torch.backends.mps.is_available() else "cpu")
 model.add_language("en").add_language("hi")
-model.load_adapter("en", "en_router_best_v5.pt")
-model.load_adapter("hi", "hi_router_best_v5.pt")
-model.load_router("router_best_v5.pt")
+model.load_adapter("en", hf_hub_download("eulogik/polywhisper-hinglish-router", "en_router_best_v5.pt"))
+model.load_adapter("hi", hf_hub_download("eulogik/polywhisper-hinglish-router", "hi_router_best_v5.pt"))
+model.load_router(hf_hub_download("eulogik/polywhisper-hinglish-router", "router_best_v5.pt"))
 
 audio, _ = sf.read("hinglish.wav")
 feats = WhisperProcessor.from_pretrained("openai/whisper-base").feature_extractor(
