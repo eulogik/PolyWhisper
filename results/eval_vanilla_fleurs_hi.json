@@ -1,0 +1,2509 @@
+{
+ "wer": 89.09121239047539,
+ "fuzzy_wer": 82.11462872659467,
+ "cer": 89.45386915234674,
+ "samples": [
+  {
+   "ref": "कुछ अणुओं में अस्थिर केंद्रक होता है जिसका मतलब यह है कि उनमें थोड़े या बिना किसी झटके से टूटने की प्रवृत्ति होती है",
+   "hyp": "کچھ عالموں میں آسٹھ کینڈра کوتا ہے جس کا مطلب یا ہا کہ ان میں تھوڑے یا بھی نہ کسی جھت کے سے ٹھٹھنے کی پرگتی ہوتی ہے",
+   "wer": 0.9655172413793104,
+   "cer": 0.9655172413793104
+  },
+  {
+   "ref": "ग्रीनलैंड को बहुत कम जगह बसाया गया था नॉर्स सगास में वे कहते हैं कि एरिक रेड हत्या के लिए आइसलैंड से निर्वासित किया गया था और आगे पश्चिम की यात्रा करते समय ग्रीनलैंड मिला जिसे ग्रीनलैंड नाम दिया गया",
+   "hyp": "Greenland got very low ground, North-Sagasam has said that Eric Redhaktia had been provided with ice lends and Greenland got the green land which was named as Greenland.",
+   "wer": 0.8131313131313131,
+   "cer": 0.8131313131313131
+  },
+  {
+   "ref": "ऐसी कोई वैश्विक परिभाषा नहीं है जिसके लिए निर्मित सामान एंटीक होते हैं कुछ कर एजेंसियां 100 साल से पुराने सामान को एंटीक के तौर पर परिभाषित करती हैं",
+   "hyp": "Aishikowi waasik parivasha nahi hai, jiske le nirvith saman antik hote hai, kuchkar agensia, sahu saal se puraane saman ko antik ke torpar parivashit karthi hai.",
+   "wer": 0.9662162162162162,
+   "cer": 0.9662162162162162
+  },
+  {
+   "ref": "टेलीविजन रिपोर्टों में प्लांट से निकलने वाला सफेद धुआं दिखाया गया है",
+   "hyp": "Television Repotomai plantse, Nikarlenewala, Safe, Dhumat, Dhyagaya, Gahair",
+   "wer": 0.9558823529411765,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "इंटरनेट पर यह खोज शत्रुतापूर्ण पर्यावरण पाठ्यक्रम के लिए अक्सर आपको एक स्थानीय कंपनी का पता प्रदान करेगी",
+   "hyp": "Internet Paryyekhoj Satruta Purn Paryavaran Partikram, K.A.K.R.A.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.P.",
+   "wer": 0.9423076923076923,
+   "cer": 0.9423076923076923
+  },
+  {
+   "ref": "अपनी सरकार के अलावा आप अन्य देशों की सरकारों की सलाह ले सकते हैं हालांकि उनकी सलाह उनके नागरिकों को ध्यान में रखकर दी जाती हैं",
+   "hyp": "اپنی سرکار کے لواب انی دیشو کی سرکاروں کی سلا لے سکتے ہیں حلاکی ان کی سلا ان کے ناظگری کو دھان میں رکھل دی جاتی ہے",
+   "wer": 0.8650793650793651,
+   "cer": 0.8650793650793651
+  },
+  {
+   "ref": "प्राचीनकाल से ही लोग सोने चांदी और तांबे जैसे रासायनिक तत्वों के बारे में ही जानकारी रखते हैं क्योंकि इन्हें प्रकृति में मूल स्वरूप में ढूंढा जा सकता है और इन्हें प्राथमिक उपकरणों के ज़रिए ढूंढना अपेक्षाकृत आसान है",
+   "hyp": "Praa Chin Kals Sehi Loke Soni Chadi & Tambeja Se Rasa Inik Tatbho Ge Bhaare Mehi Jankar Iri Raktai, Kikki Inhe Prakriti Me Mool Swari Me Duna Chasak Pahai & Inhe Prat Me Kup Karna Ke Zadhiye Duna Apeksha Krith Asan Hai",
+   "wer": 0.9719626168224299,
+   "cer": 0.9719626168224299
+  },
+  {
+   "ref": "इसे केमिकल का ph कहा जाता है आप लाल गोभी के जूस का इस्तेमाल करके एक संकेतक बना सकते हैं",
+   "hyp": "अचे क्यामिकल का पहश काःाथा आप लाल पूवी के जुझ को स्तमाल कर के अगसन के तक बनाशकते है",
+   "wer": 0.9080459770114943,
+   "cer": 0.9080459770114943
+  },
+  {
+   "ref": "सबसे नज़दीकी सिरे पर क्रस्ट की मोटाई करीब 70 किलोमीटर है और सबसे दूर के सिरे पर यह 100 किलोमीटर है",
+   "hyp": "sapsi najdi ke siri par krst ki motai karim 7 km hai.",
+   "wer": 0.5408163265306123,
+   "cer": 0.5408163265306123
+  },
+  {
+   "ref": "यह संबंधित है लेकिन आम तौर पर इसमें अल्पाइन शैली की स्की टूरिंग या माउंटेनीयरिंग शामिल नहीं होती है जिसे खड़े इलाकों में किया जाता है और जिसके लिए बहुत कड़ी स्की और बूट की ज़रूरत होती है",
+   "hyp": "یا سمند تھا ہے لیکن ہم تور پر اس میں آلپائن شہلے کی اس کی طوریگ یا ماؤنٹینیرن سامل نہیں ہوتی ہے جسے کھڑے علاقوں میں کیا جاتا ہے اور جس کے لیے بہت کریس کی اور بھٹ کی جنگڑ ہوتی ہے",
+   "wer": 0.8763440860215054,
+   "cer": 0.8763440860215054
+  },
+  {
+   "ref": "पुरुषों के स्टैंडिंग सुपर-जी में ऑस्ट्रेलिया के मिशेल गौरले ग्यारहवें स्थान पर रहे चेक प्रतियोगी ओल्डरिच जेलिनेक पुरुषों के सिटिंग सुपर-जी में सोलहवें स्थान पर रहे",
+   "hyp": "Purshoke Standing Super G Me Australia Ke Michelle Gawr Le Ghar Me Sthan Pah Rhe Check Pratiyogi Aldrich Jallinek Purshoke Sitting Super G Me Sthan Pah Rhe",
+   "wer": 0.9079754601226994,
+   "cer": 0.9079754601226994
+  },
+  {
+   "ref": "केवल दो हफ़्तों में अमेरिकियों और फ़्री फ़्रेंच बलों ने दक्षिणी फ़्रांस को मुक्त कर दिया था और जर्मनी की ओर बढ़ रहे थे",
+   "hyp": "Kaval 2 H.A.M. & F.F.B.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D",
+   "wer": 0.923728813559322,
+   "cer": 0.923728813559322
+  },
+  {
+   "ref": "ms बीमारी केंद्रीय तंत्रिका तंत्र पर असर करती है जिसमें दिमाग स्पाइनल कॉर्ड और ऑप्टिक नर्व शामिल हैं",
+   "hyp": "MS Bimari Kendriye Tantrikat Tantrapper Asarkarti hai, Jisme Dimang Ispinal Quad or Optic Nerva Shyamil hai.",
+   "wer": 0.94,
+   "cer": 0.94
+  },
+  {
+   "ref": "हर कोई समाज से जुड़ा होता है और ट्रांसपोर्ट सिस्टम का उपयोग करता है लगभग सभी लोग ट्रांसपोर्ट सिस्टम के बारे में शिकायत करते हैं",
+   "hyp": "Khairkwai Samajse Jula Huta hai aur transport system kaupyokar tha hai. Lakhbhak Sabhi Lok Transport System ke baare mein Shikayat Karthi hai.",
+   "wer": 0.9763779527559056,
+   "cer": 0.9763779527559056
+  },
+  {
+   "ref": "एक पूरी तरह से विकसित एथलीट की तरह बाघ चढ़ाई कर सकता है हालाँकि अच्छी तरह से नहीं तैर सकता है बड़ी दूरी तक छलांग लगा सकता है और एक शक्तिशाली मनुष्य के पाँच गुना बल के साथ खींच सकता है",
+   "hyp": "1.5% Bikasit ethliyat kii taraha bhaag charaay karsakta hai hala ke achi tarahaar sai nahi. Tear sakta hai. Badi duri tak chhalang laga sakta hai.",
+   "wer": 0.7431693989071039,
+   "cer": 0.7431693989071039
+  },
+  {
+   "ref": "विशेष रूप से सवाना पर बेहतरीन अफ़्रीकी वन्य जीवन को संपूर्ण रूप से देखने के लिए आमतौर पर सफ़ारी शब्द का उपयोग किया जाता है",
+   "hyp": "Vishesh Rupse savana par bhehtarin Afriki, 1 na jeevan ko sampoon Rupse, dhikne ke liyam toar par safari sabd ka upiyog kya jata hai.",
+   "wer": 0.9590163934426229,
+   "cer": 0.9590163934426229
+  },
+  {
+   "ref": "गंभीर मौसम किसी भी खतरनाक मौसमी घटना के लिए वर्गीय शब्द है जिसमें नुकसान गंभीर सामाजिक व्यवधान या मानव जीवन की हानि की संभावना है",
+   "hyp": "گمبیر موسم کسی بھی ختمناک موسمی گٹنہ کے لیے ورگی یہ سب دھ ہے جس میں نکسان گمبیر ساماجک ویبداہن یا مانف جیوان کی حانی کی سمباہنا ہے",
+   "wer": 0.9069767441860465,
+   "cer": 0.9069767441860465
+  },
+  {
+   "ref": "हालांकि यह अकेला नहीं है प्रयोग करना और प्रयोग एक ऐसा परीक्षण होता है जिसका इस्तेमाल करके एक या इससे ज़्यादा संभावित परिकल्पनाओं को ख़त्म करने सवाल करने और अवलोकन करने से भी वैज्ञानिक शोध को मार्गदर्शन मिलता है",
+   "hyp": "hala kiya yaakila nahi hai prayokkarna aur prayokya kiya ek ek sa parikshan hood tha hai, jis ka xtimal karni ae kiya, ice jaada sambhavit parikal parau ko khatbo karni ke sawal karni aur ablokan karni sehi begyaniksood ko marg dalshan hila.",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "कैल्शियम और पोटैशियम जैसे तत्वों को धातु माना जाता है बेशक चांदी और सोने जैसी धातुएं भी हैं",
+   "hyp": "KLCM Roportya CM, JSE TATVO KODATU MANA JATA, BESAK, CHANDY & SONE JSE TATVE BHAE",
+   "wer": 0.8791208791208791,
+   "cer": 0.8791208791208791
+  },
+  {
+   "ref": "हॉट चॉकलेट बेल्जियम के मानकों पर बनी है फलों का जूस महंगा है लेकिन बहुत अच्छा है",
+   "hyp": "Khot chocolate, belgim ki manakao par banti hai. Faluka juice, mango hai, leikin bahu da chahi.",
+   "wer": 0.975,
+   "cer": 0.975
+  },
+  {
+   "ref": "जिस समय घटनाएँ हुई उसके युग को सामान्य रूप से यूरोप के इतिहास में 11वीं 12वीं और 13वीं सदी ad 1000-1300 में यूरोपियन इतिहास के उच्च मध्य युग की अवधि के रूप में बताया जाता है",
+   "hyp": "दिष्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्वाने अप्व",
+   "wer": 0.5549132947976878,
+   "cer": 0.5549132947976878
+  },
+  {
+   "ref": "कुछ लोगों ये सोचते थे की कि वह सही था लेकिन बहुत से लोग इसके विपरीत मानते थे; की सौर मंडल सूर्य और यहां तक कि अन्य सितारों सहित पृथ्वी के चारों और चक्कर लगता था ।",
+   "hyp": "Kuch logye soshte tha ki, ki ye sahi tha, lekin bahos te logye ske viprit mante tha ki sor mandal furiye, aur yeha tak ki, anesitare sahit prithvi ki, 4 ho chakka lagata tha.",
+   "wer": 0.9506172839506173,
+   "cer": 0.9506172839506173
+  },
+  {
+   "ref": "यदि आप केवल शिपबोर्ड भ्रमण का उपयोग करके किनारे तक जाते हैं तो आपको एक अलग वीज़ा की आवश्यकता नहीं होगी 2009 तक",
+   "hyp": "यह दिभी यह लग वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ वाँ व",
+   "wer": 0.8909090909090909,
+   "cer": 0.8909090909090909
+  },
+  {
+   "ref": "यहूदी और गैर-यहूदी की तरह अभी भी ऐसे कई पुरुष और महिलाएं जीवित हैं जो उस समय बचने में सफल रहे और कई जिनके प्रियजनों को मार दिया गया या उनके मरने तक उनसे काम करवाया गया",
+   "hyp": "یہ ہوتی اور گیہ یہ ہوتی کی طرح, ابھی بھی ایسے کئی پوروش اور مہلای جیویت ہیں جو اس سمیں بچنے میں سفل ہر ہے اور کئی جن کے پریہ جنوں کو مارد دیا گیا یا ان کے مرنے تک ان سے کام کروائیا گیا",
+   "wer": 0.9640718562874252,
+   "cer": 0.9640718562874252
+  },
+  {
+   "ref": "इटैलियन भी रोज़ाना इस्तेमाल होने वाली भाषा है जिसे राज्य में काम करने वाले अधिकांश लोग उपयोग में लाते हैं जबकि लेटिन का धार्मिक रस्मों में इस्तेमाल किया जाता है",
+   "hyp": "İtalyan bhi rhozana istemal khune wali bhaasha hai. Jise raj me kaam karne wale adhikanslo upiog me lahti hai. Japp ki latin ka dharmi krasmu me istemal kia jhat tha hai.",
+   "wer": 0.925,
+   "cer": 0.93125
+  },
+  {
+   "ref": "लोग यह अनुमान नहीं लगा सकते हैं कि घर लौटने वाले यात्रियों के लिए धैर्य और समझ भी आवश्यक है",
+   "hyp": "Lohia Numan cannot lie that the people who are going to return to the city are brave and intelligent.",
+   "wer": 0.9120879120879121,
+   "cer": 0.9120879120879121
+  },
+  {
+   "ref": "उन्होंने अफवाहों को राजनीतिक बकवास और मूर्खतापूर्ण कहा",
+   "hyp": "امھنے نقواکہ رجنی تک بکوہ سور مکتب مکاہا",
+   "wer": 0.7222222222222222,
+   "cer": 0.7222222222222222
+  },
+  {
+   "ref": "इंटरनेट लोगों और अंतर-परस्पर संचार दोनों के तत्वों को मिलाता है",
+   "hyp": "Internet, Lugham & Interpraspa Sanja, Dhanu Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geetatnau Geet",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "तकनीकी निर्धारण की ज़्यादातर व्याख्याएं दो सामान्य विचारों के बारे में बताती हैं तकनीकी विकास पर सांस्कृतिक या राजनीतिक असर का कोई भी प्रभाव नहीं पड़ता है और परिणामस्वरूप सामाजिक रूप से अनुकूलित होने के बजाय वह तकनीक निहित समाजों को प्रभावित करती है",
+   "hyp": "Taktniki Nidharan ki Zalatarwya kyi hai, 2 Saman Nevi Charo ke baare mein bhaatati hai, Taktniki Vikas prasan skeirti kiya Rajniti ka asr ka koi bhi par bhao nahi parta hai, aur Parnam Saurup Samajik Rup se Anukhulith hone ke bhajayi, aur Taktniki Taktniki knihth Samajon ko par bhabit kirti hai.",
+   "wer": 0.9598393574297188,
+   "cer": 0.9598393574297188
+  },
+  {
+   "ref": "केवल दो हफ़्तों में अमेरिकियों और फ़्री फ़्रेंच बलों ने दक्षिणी फ़्रांस को मुक्त कर दिया था और जर्मनी की ओर बढ़ रहे थे",
+   "hyp": "Keval 2 Haptom, Amrikiya & Free French Balloon, Tachin Fars,",
+   "wer": 0.4830508474576271,
+   "cer": 0.4830508474576271
+  },
+  {
+   "ref": "यूनिवर्सिटी ऑफ़ डंडी के प्रोफ़ेसर पामेला फ़र्ग्यूसन लिखते हैं अगर संदिग्धों के फ़ोटो आदि प्रकाशित होते हैं तो पत्रकारों को यह ख़तरनाक मार्ग पर चलना लगता है",
+   "hyp": "University of Dundee's Professor Pamela, Filmarsan, Likhti hai, Agar Sandhik, 2 Ki Photo Adi prakashit hoti hai, to Patrakaro ko ye, Khatana, Marg Parchal na Lakhta hai.",
+   "wer": 0.9612903225806452,
+   "cer": 0.9612903225806452
+  },
+  {
+   "ref": "उनका सिंगापुर के उप-प्रधान मंत्री वोंग कान सेंग ने स्वागत किया और उन्होंने सिंगापुर के प्रधानमंत्री ली सिएन लूंग के साथ व्यापार और आतंकवाद के मामले पर बातचीत की",
+   "hyp": "Unka singapu te upra dan matri vong pan sen ne suagat kya. Or unge singapu te upra dan matri li si en lung ki stat biapar oratang kwaat ke mamle per ba chit ki.",
+   "wer": 0.96875,
+   "cer": 0.96875
+  },
+  {
+   "ref": "विखंडन बम इस सिद्धांत पर काम करता है कि कई प्रोटॉन और न्यूट्रॉन वाले एक नाभिक को एक साथ रखने के लिए ऊर्जा लगती है",
+   "hyp": "vikhandanbham, اس siddhant par karm karta hai ki kai proton aur neutron wale ek na bhi kko ek saat rakni ke liye urja lagi hai.",
+   "wer": 0.9823008849557522,
+   "cer": 0.9823008849557522
+  },
+  {
+   "ref": "ऐसा माना जाता है कि पेरिस के निवासी अहंकारी असभ्य और अभिमानी होते हैं",
+   "hyp": "Hesamana jata hai ki Paris ke nivasi ahankari asabde aur abhimani hotay hai.",
+   "wer": 0.9420289855072463,
+   "cer": 0.9420289855072463
+  },
+  {
+   "ref": "1963 में बांध बनने के बाद मौसमी बाढ़ जो पूरे नदी में तलछट फैला देगी वह रुक गई थी",
+   "hyp": "1,930,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,830,",
+   "wer": 0.9125,
+   "cer": 0.9125
+  },
+  {
+   "ref": "यह ऑरोरा बोरेलिस को देखने का एक अच्छा अवसर प्रदान करता है क्योंकि आकाश में उस समय अंधकार सा ही रहेगा",
+   "hyp": "یہ Aarora Boralis کو دیکھنے کا اچھا بسے فردان کرتا ہے کیوں کی اکاش میں اس سے میں انگکار ساہی رہے گا",
+   "wer": 0.97,
+   "cer": 0.97
+  },
+  {
+   "ref": "यह शहर देश के बाकी शहरों से अलग है क्योंकि यह किसी अफ्रीकी शहर की बजाय अरब शहर लगता है",
+   "hyp": "or shahar desh ke baaki shareo se alak hai, kyuki ye kisi afri ki shahar ki bhajaay Arab-shahar laktah hai",
+   "wer": 0.9418604651162791,
+   "cer": 0.9418604651162791
+  },
+  {
+   "ref": "पुलिस अधीक्षक चंद्र शेखर सोलंकी ने कहा कि आरोपी ढके हुए चेहरे के साथ अदालत में पेश हुए थे",
+   "hyp": "Pulis Adhi Chakchand Shrekar, Solanki, nha kaha ki Arupi dhake huye Chhade, ke saad Adhalas mein, Pesh huye te.",
+   "wer": 0.9438202247191011,
+   "cer": 0.9438202247191011
+  },
+  {
+   "ref": "ज़्यादा परंपरागत चर्चों में ईस्टर सप्ताहांत में शनिवार रात को ईस्टर विजिल का आयोजन किया जाता है जिसमें लोग क्रिस के पुनर्जन्म का उत्सव मनाने के लिए आधी रात के समय उत्सव मनाना शुरू करते हैं",
+   "hyp": "Jada Prampragat Charchu May, Insta Sabthahan May Saniwar Rath ko Istir Vizil kaayajan kya jata hai, Jismay Lok Krikske Punjernan ka Utsav Manana ke liya Adhi Rath ke Sama Utsav Manana Suru Karthi hai.",
+   "wer": 0.9574468085106383,
+   "cer": 0.9574468085106383
+  },
+  {
+   "ref": "29 वर्षीय डॉ मलार बालासुब्रमण्यम सिनसिनाटी के उत्तर में लगभग 15 मील की दूरी पर एक उपनगर ब्लू ऐश ओहियो में मिले जो एक टी-शर्ट और अंडरवियर में सड़क के किनारे बहुत अधिक नशे की हालत में जमीन पर पड़े थे",
+   "hyp": "Utti Swarsia Dr Malal Balasubramaniam, Sen Senati ki Uttar me Lakhbhak Pandra Meel ki Duri par ek Upnagar Blue Age Ohiya Meelai, Choo ek Tishat aur Underyarmi, Sadab ke kinaare, Bhaut Adik NaShay ki Halat me, Chhameen par Padeh tha.",
+   "wer": 0.9543147208121827,
+   "cer": 0.9543147208121827
+  },
+  {
+   "ref": "बाद में उन्हें कैम्ब्रिज में एडेनब्रुक के अस्पताल में स्थानांतरित कर दिया गया",
+   "hyp": "بعد میں اُنے کامريج میں اِدن بروک کے اُس پتال میں ستان ناندرت کر دیا گیا",
+   "wer": 0.8701298701298701,
+   "cer": 0.8701298701298701
+  },
+  {
+   "ref": "तीसरी शताब्दी ईसा पूर्व में मिस्रियों द्वारा निर्मित ग्रेट पिरामिड मृत फिरौन का सम्मान करने के लिए निर्मित कई बड़ी पिरामिड संरचनाओं में से एक है",
+   "hyp": "30 ھPurwamay Miss Riyadhwara Nirmit, Great Pyramid Mirit Phiron, Kairi Nirmit, Kairi Pairamit Sanjhar Nau,",
+   "wer": 0.7222222222222222,
+   "cer": 0.7222222222222222
+  },
+  {
+   "ref": "महिलाएं यह अनुशंसा की जाती है कि कोई भी महिला यात्री वास्तविक वैवाहिक स्थिति के बावजूद कहती है कि वह विवाहित है",
+   "hyp": "Mahalaya, ya Anushansha ki Jati hai ki koi bhi Mahalaya, Drivastavik Vivaik Siti ke Bavajudkahi ki vavivayet hai.",
+   "wer": 0.9819819819819819,
+   "cer": 0.9819819819819819
+  },
+  {
+   "ref": "भवनों की परेड जिसने हांगकांग की स्कायलाइन को चमचमाते बार चार्ट की तरह बनाया है उसने विक्टोरिया हार्बर के पानी की मौज़ूदगी को देखने लायक बनाया है",
+   "hyp": "Bhavna's parade, which has created the skyline of Hong Kong, is made like a chart. He has created the layout of the water of Victoria Harbour.",
+   "wer": 0.9444444444444444,
+   "cer": 0.9444444444444444
+  },
+  {
+   "ref": "गंभीर मौसम किसी भी खतरनाक मौसमी घटना के लिए वर्गीय शब्द है जिसमें नुकसान गंभीर सामाजिक व्यवधान या मानव जीवन की हानि की संभावना है",
+   "hyp": "Gambir Maasam, Kishibi Khatarnath Maasamigatna, Varygye Shabdha, Nukshan, Gambir Samajip, Pyaugthan or Manojirvan Ki Hane,",
+   "wer": 0.9224806201550387,
+   "cer": 0.9224806201550387
+  },
+  {
+   "ref": "स्प्रिंगबोक्स के लिए इसने पांच-मैचों की हार का सिलसिला समाप्त कर दिया",
+   "hyp": "Spring Box Kale 5 Manchokhi Har",
+   "wer": 0.4492753623188406,
+   "cer": 0.4492753623188406
+  },
+  {
+   "ref": "लोग अब कंप्यूटर स्क्रीन पर संदेश लिखते हैं शार्पनर का उपयोग करने की आवश्यकता नहीं पड़ती",
+   "hyp": "People, you can write down the computer screen on the screen, and the operator's experience is not possible.",
+   "wer": 0.9540229885057471,
+   "cer": 0.9540229885057471
+  },
+  {
+   "ref": "हांगकांग द्वीप हांगकांग के क्षेत्र को उसका नाम देता है और यह वह स्थान है जिसे कई पर्यटक मुख्य केंद्र बिंदु मानते हैं",
+   "hyp": "Hong Kong Dweep, Hong Kong's Chitrakoos' name is called and this is the western, which many Priyattaq, are called the Kinder Vindu.",
+   "wer": 0.9741379310344828,
+   "cer": 0.9741379310344828
+  },
+  {
+   "ref": "तीसरी शताब्दी ईसा पूर्व में मिस्रियों द्वारा निर्मित ग्रेट पिरामिड मृत फिरौन का सम्मान करने के लिए निर्मित कई बड़ी पिरामिड संरचनाओं में से एक है",
+   "hyp": "3. Satabdi, Isapurva, Misriyodhara, Nirmid, Great Pyramid, Mruth Firon, Nirmid Kaibaripiramid, Sanrajnaumese, 1.",
+   "wer": 0.75,
+   "cer": 0.75
+  },
+  {
+   "ref": "जैसे-जैसे ग्रीक का ज्ञान घटता गया पश्चिम ने खुद को अपनी ग्रीक दार्शनिक और वैज्ञानिक जड़ों से कटा हुआ पाया",
+   "hyp": "جیسے جیسے گریک کا گیان گھتتا گیا پسٹیم نے خود کو اپنی گریک دارسنک اور ویگیانک جروس سے قطا ہوا پایا",
+   "wer": 0.9047619047619048,
+   "cer": 0.9047619047619048
+  },
+  {
+   "ref": "यह शहर देश के बाकी शहरों से अलग है क्योंकि यह किसी अफ्रीकी शहर की बजाय अरब शहर लगता है",
+   "hyp": "Yo, Shair, Dej Ke Baakhi Shairo se ala ghiya, Khiya ki, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khiya, Khi",
+   "wer": 0.9069767441860465,
+   "cer": 0.9069767441860465
+  },
+  {
+   "ref": "प्राचीन संस्कृतियों और जनजातियों ने दूध बाल मांस और चमड़े को अपनी आसान पहुंच में बनाए रखना शुरू कर दिया",
+   "hyp": "Prachandh Santskurya Thio, Janjati Thio Ne, Dhu Baal Manse & Chamre Co,",
+   "wer": 0.6504854368932039,
+   "cer": 0.6504854368932039
+  },
+  {
+   "ref": "समाजीकरण के महत्व को स्पष्ट करने के लिए इस्तेमाल किए जाने वाले सबसे आम तरीकों में से कुछ बच्चों के दुर्भाग्यपूर्ण मामलों को आकर्षित करना है जो बड़े होने के दौरान वयस्कों द्वारा उपेक्षित नहीं बल्कि उपेक्षा दुर्भाग्य या दुर्व्यवहार के माध्यम से होते थे",
+   "hyp": "Samaji Karan ke Mahatu ko ispast karne, ke liye istimal kiya jane wale sabse am tariko mein, se kuch bachyo ke durbhaagye purimamlou ko akarsit karna hain. Jo bade hone ke davran waes ko dwarra upek shit nahi balki, upek cha durbhaagye cha durwewar ke madem se hotehte.",
+   "wer": 0.972,
+   "cer": 0.972
+  },
+  {
+   "ref": "अक्टूबर में शुरू हुए व्यापक शासन विरोधी प्रदर्शनों के लिए आयोग का गठन मार्टेली की प्रतिक्रिया स्वरूप हुआ था",
+   "hyp": "October Commissioners, Biapak Shasan Virodhi Pradeshano, Aayoka Ghatan, Martin Mutheli, Kiprati Kriya Swarookh,",
+   "wer": 0.9813084112149533,
+   "cer": 0.9813084112149533
+  },
+  {
+   "ref": "एक सामान्य लोकप्रिय डिनर विशेष रूप से गर्मी के मौसम में पा एम्बे ओली है ब्रेड के साथ ऑलिव ऑयल टमाटर और कोई भी उपलब्ध रुचिकर सामग्री जैसे पनीर ट्यूना मछली आदि",
+   "hyp": "1 samaa ne loke priyadiner, vise shrupp se garmi ke masamme pa mme oli hai, bheet ke saad oli woyl, tamater, aur koi bhe uplabd, ruchi ka saamagri, jase paneer, juna machli adi.",
+   "wer": 0.9554140127388535,
+   "cer": 0.9554140127388535
+  },
+  {
+   "ref": "चीज़ों पर कुछ बनाकर या खरोंच कर इस जगह को नुक़सान न पहुंचाएं",
+   "hyp": "Thisos, kuch banaakar, yakharoch kuru, nukhsan na puhchain.",
+   "wer": 0.9166666666666666,
+   "cer": 0.9166666666666666
+  },
+  {
+   "ref": "यूरोप एक ऐसा महाद्वीप है जो अपेक्षाकृत छोटा है लेकिन इसमें कई स्वतंत्र देश हैं सामान्य परिस्थिति में कई देशों की यात्रा करने का मतलब कई बार वीज़ा आवेदन और पासपोर्ट कंट्रोल की प्रक्रिया से गुज़रना है",
+   "hyp": "Europe is a such a kind of movement, which is a small part of Europe. But in this, many countries in the society have many countries to deal with. It means that many times, we have to go to Abedan and passport control in Pakistan.",
+   "wer": 0.9595959595959596,
+   "cer": 0.9595959595959596
+  },
+  {
+   "ref": "महिलाएं यह अनुशंसा की जाती है कि कोई भी महिला यात्री वास्तविक वैवाहिक स्थिति के बावजूद कहती है कि वह विवाहित है",
+   "hyp": "Mayla ya Anshunsa ki Jati hai ki koi ki Mayla yaatri vastavik vivaaya ke siti ke bhaavjud keti hai ki vivaaya tha hai",
+   "wer": 0.918918918918919,
+   "cer": 0.918918918918919
+  },
+  {
+   "ref": "उनका सिंगापुर के उप-प्रधान मंत्री वोंग कान सेंग ने स्वागत किया और उन्होंने सिंगापुर के प्रधानमंत्री ली सिएन लूंग के साथ व्यापार और आतंकवाद के मामले पर बातचीत की",
+   "hyp": "ان کا سنگا پور کے او پڑھان منتری وہ ان کان سنگ نے سواجت کیا اور انہوں نے سنگا پور کے پڑھان منتری لیس یین لنکسات ویپار اور آتنکواد کے مامل پر بات چید کی",
+   "wer": 0.925,
+   "cer": 0.925
+  },
+  {
+   "ref": "इसलिए यह माना जा रहा है कि नोटेशन को सिर्फ़ एक लेबल के रूप में जोड़ा गया था",
+   "hyp": "اس ل یہ یہ منا جا رہا ہے کہ Notation کو صرف 1 Lv. ke Rupme joda ga yata",
+   "wer": 0.9066666666666666,
+   "cer": 0.9066666666666666
+  },
+  {
+   "ref": "आपके हाथों की नमी बाहरी परतों के साथ क्रिया करेगी जो अजीब महसूस करेगी और एक तरह का आवरण बनाएगी",
+   "hyp": "آپ کے ہاتھوں کی نمی بہری پڑھوں کے ساتھ کریہ کرے گی جو اجی میں سوس کرے گی اور ایک طرح کا آورن بنائی گی",
+   "wer": 0.9468085106382979,
+   "cer": 0.9468085106382979
+  },
+  {
+   "ref": "ऐसी कोई वैश्विक परिभाषा नहीं है जिसके लिए निर्मित सामान एंटीक होते हैं कुछ कर एजेंसियां 100 साल से पुराने सामान को एंटीक के तौर पर परिभाषित करती हैं",
+   "hyp": "kuhi vashvik paribhasha nahi hai, nirmit saman antikh ho te hai, kuch kar aginzia so saal se purane saman ko antikh ke toer per bhaashit kirti hai.",
+   "wer": 0.9594594594594594,
+   "cer": 0.9594594594594594
+  },
+  {
+   "ref": "सबसे नज़दीकी सिरे पर क्रस्ट की मोटाई करीब 70 किलोमीटर है और सबसे दूर के सिरे पर यह 100 किलोमीटर है",
+   "hyp": "satsan asdi ki shire par krist ki motai karib 7 km satsan asdi ki shire par satsan asdi ki shire par krist ki motai karib 7 km satsan asdi ki shire par satsan asdi ki shire par krist ki motai karib 7 km satsan asdi ki shire par krist ki motai karib 7 km satsan asdi ki shire par satsan asdi ki shire par krist ki motai karib 7 km satsan asdi ki shire par krist",
+   "wer": 0.9591836734693877,
+   "cer": 0.9591836734693877
+  },
+  {
+   "ref": "लोग अब कंप्यूटर स्क्रीन पर संदेश लिखते हैं शार्पनर का उपयोग करने की आवश्यकता नहीं पड़ती",
+   "hyp": "Low Up Computer Screen Pursandesh Likthai Hai Shokner Kaupio Karni Ki Aavashaktan Hai Prati",
+   "wer": 0.9425287356321839,
+   "cer": 0.9425287356321839
+  },
+  {
+   "ref": "चांद की सतह चट्टानों और धूल से बनी है चांद की बाहरी परत को क्रस्ट कहते हैं",
+   "hyp": "Chant ki zathachattano aur Dhul se bani hai, Chant ki Bahri Pratko krast kethi hai.",
+   "wer": 0.9864864864864865,
+   "cer": 0.9864864864864865
+  },
+  {
+   "ref": "हमारे ग्रह की नदियों से महासागरों में जाने वाले पानी का 20% हिस्सा अमेज़न से आता है",
+   "hyp": "ہمارے گریھکی ندیوں سے مہسا گرومی جانی والہ پانی کا 20% حسا امیزن سے آتا ہے",
+   "wer": 0.8313253012048193,
+   "cer": 0.8313253012048193
+  },
+  {
+   "ref": "सुंदरबन दुनिया का सबसे बड़ा तटीय मैंग्रोव क्षेत्र है जो तट से बांग्लादेशी और भारतीय पहाड़ी क्षेत्र में 80 किमी 50 मील तक फैला हुआ है।",
+   "hyp": "Sunderban, Dünya, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, Sunderban, S",
+   "wer": 0.9548872180451128,
+   "cer": 0.9548872180451128
+  },
+  {
+   "ref": "इसी तरह पुरुषों के लिए घुटनों को ढंकने वाले ट्राउज़र पहनना ज़रूरी है",
+   "hyp": "buyeri",
+   "wer": 0.08823529411764706,
+   "cer": 0.08823529411764706
+  },
+  {
+   "ref": "पुरुषों को दृढ़ता से नकारें और अपनी बात पर बेहिचक अड़ी रहें सांस्कृतिक अंतरों के होने या नहीं होने से यह सही नहीं हो जाता!",
+   "hyp": "Prusham ko dhritha sa nakaray aur apni baat par behichak arirahin sanskirtik antarok ke ho ne ya nae hoone se yeh sahi nae hojata.",
+   "wer": 0.9672131147540983,
+   "cer": 0.9672131147540983
+  },
+  {
+   "ref": "यहूदी और गैर-यहूदी की तरह अभी भी ऐसे कई पुरुष और महिलाएं जीवित हैं जो उस समय बचने में सफल रहे और कई जिनके प्रियजनों को मार दिया गया या उनके मरने तक उनसे काम करवाया गया",
+   "hyp": "Yahu Di and Gaya, Yahu Di, kitarai, abhi via, aise kai purushar mahilayi jeevithan, jo ussamayi, bachne mein sappal rai hai, aur kai, jin ke priyap, jannu ko maardiya gaya, yaa, unke marne taku, unke sa, kaam karayaya raya.",
+   "wer": 0.9640718562874252,
+   "cer": 0.9640718562874252
+  },
+  {
+   "ref": "बाघ की दहाड़ किसी शेर की तेज़ आवाज़ वाली दहाड़ की तरह नहीं होती है लेकिन उसकी बंधी हुई चिल्लाने जैसी होती है",
+   "hyp": "باغ کی دہار کسی شیر کی تیز آوازواری دہار کی طرح نہیں ہوتی ہے لیکن اس کی بندی ہوئی چلاہنے جسی ہوتی ہے",
+   "wer": 0.8888888888888888,
+   "cer": 0.8888888888888888
+  },
+  {
+   "ref": "अस्पताल में काम करते हुए लिगिन्स ने अपने खाली समय के दौरान समय से पहले प्रसव की जांच शुरू कर दी",
+   "hyp": "hospo dal میں کام کرتے ہو بhoi, Ligings na پ نے khaleh samay ke doran samay se bhele prasab ki dhan shurukardhi.",
+   "wer": 0.9894736842105263,
+   "cer": 0.9894736842105263
+  },
+  {
+   "ref": "यह खोज पक्षियों में पंखों के विकास की पूरी जानकारी भी प्रदान करती है",
+   "hyp": "Yer koj pakshio me panko ke vikaz ki puri jaankari vi pradhan karti hai.",
+   "wer": 0.9558823529411765,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "हालांकि यह अकेला नहीं है प्रयोग करना और प्रयोग एक ऐसा परीक्षण होता है जिसका इस्तेमाल करके एक या इससे ज़्यादा संभावित परिकल्पनाओं को ख़त्म करने सवाल करने और अवलोकन करने से भी वैज्ञानिक शोध को मार्गदर्शन मिलता है",
+   "hyp": "Hala ki yaha ke la nahi hai prayu karna upeo ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek ek",
+   "wer": 0.9285714285714286,
+   "cer": 0.9285714285714286
+  },
+  {
+   "ref": "हालांकि डायनासोर के पंखों के शाफ्ट पूरी तरह से विकसित नहीं होते हैं और उन्हें रैचिस कहा जाता है लेकिन उनके पंखों में बार्ब्स और बार्बुल्स जैसी अन्य खूबियां होती हैं शोधकर्ताओं ने अनुमान लगाया है कि डायनासोर की अन्य खूबियों की तरह शायद रैचिस भी बाद में विकसित हुए होंगे",
+   "hyp": "Halanghi, Dainasur ke Pangkho, ke Shaft puri tarayi se viksit nahi ho te hai aur unehe, Rachik kaa jaa tha hai. Likkin unke Pangkho me, Babars aur Babulars jaasi, Annikhubia ho te hai. Shokkar tha ho ke Anumar lagaya jaa tha hai, ki Dainasur ki Annikhubia ho ki tarayi, Shaayid, Rachik phi baad mein viksit hoe hai hoe hai.",
+   "wer": 0.9701492537313433,
+   "cer": 0.9701492537313433
+  },
+  {
+   "ref": "अटलांटिक तूफ़ान मौसम का दसवां तूफ़ान उपोष्णकटिबंधीय तूफ़ान जेरी आज अटलांटिक महासागर में बना है",
+   "hyp": "Attlantic Tufan, Mausam Kadaswa Tufan Uppos na Katibandliya Tufan Jairi, Aaj Atlantik Mahashagar Me Bana",
+   "wer": 0.9787234042553191,
+   "cer": 0.9787234042553191
+  },
+  {
+   "ref": "कोई सुनामी की चेतावनी जारी नहीं की गई है और जकार्ता भूभौतिकी एजेंसी के अनुसार कोई सुनामी की चेतावनी जारी भी नहीं की जाएगी क्योंकि भूकंप 6.5 की आवश्यकता को पूरा नहीं करता था",
+   "hyp": "Khoi Sunami Ki Chetavani Jari Nehi Ki Gayi Hai Aur Jagata Buppodi Ki Ajansi Ki Anusaar Khoi Sunami Ki Chetavani Jari Nehi Ki Jai Ki Om Ki Vukam 6.5 Ki Aav Shaktak Oopura Nehi Karthadha",
+   "wer": 0.9593023255813954,
+   "cer": 0.9593023255813954
+  },
+  {
+   "ref": "अंत में कई ऐसी छोटी बिल्लियाँ लूज़ पेट कैट्स सहित हैं जो कीट रोडंट्स छिपकलियों और पक्षियों जैसे कई छोटे जीवों को खाती हैं",
+   "hyp": "Antme, tai asi chhoti billia, loose paid cats sahid, hai, jokki, rodans chup kaliyo, aur pakshiyo jasi kai chhoti jivon ko khati hai.",
+   "wer": 0.9669421487603306,
+   "cer": 0.9669421487603306
+  },
+  {
+   "ref": "सामान के ट्रांसपोर्ट के लिए जहाज़ों का इस्तेमाल करना समुद्रों के एक सिरे से दूसरे सिरे तक बड़ी मात्रा में लोगों और सामान को लाने और ले जाने का बहुत ज़्यादा प्रभावी तरीका है",
+   "hyp": "Shaman ke transport ke liye jhajo ka istemal karna, Samudro ke ek siri siddhu sre sre, Tak badyi baatra me logo aur Shaman ko lane aur le jane ka bhaud siada krabhavi tarika hai.",
+   "wer": 0.9651162790697675,
+   "cer": 0.9651162790697675
+  },
+  {
+   "ref": "जिसके परिणामस्वरूप मंच पर कलाकार गांजे भरी सिगरटें पीते हैं और ये थिएटर खुद दर्शकों को भी इसमें साथ शामिल होने के लिए प्रेरित करते हैं",
+   "hyp": "Jiske palnaam swarup manch par kala kar ghanje bari sigred, pita hai aur ye theater khut darsha ko kobi, ismesad chhaamil hone ke liye prerit kar taha hai.",
+   "wer": 0.9626865671641791,
+   "cer": 0.9626865671641791
+  },
+  {
+   "ref": "अगर आपने फ़िल्म नेशनल ट्रेज़र देखी है तो आपको लगेगा कि स्वतंत्रता के घोषणा-पत्र के पीछे एक ख़ज़ाने का नक्शा लिखा गया था",
+   "hyp": "Agar, you have seen your film National Treasure. So you will feel that a person's face was written by a ghost of a ghost.",
+   "wer": 0.9327731092436975,
+   "cer": 0.9327731092436975
+  },
+  {
+   "ref": "कहा जाता है कि वह 20 साल की उम्र में ही जीर्ण हो गया था एक बयान में बीबर ने कहा हांलांकि मैं मौजूद नहीं था और न ही सीधे इस दुखद दुर्घटना से जुड़ा हुआ था मेरी संवेदनाएं और प्रार्थनाएं पीड़ित के परिवार के साथ हैं",
+   "hyp": "کہa jata hai ki bae 20-al ki umr mehi jeen nhoho gaa tha, ek bhajan me bhiberne kaa hala ki me mojhud nae tha, nae seede iss dukad durgatna se jula hoa tha, meeri sambheed nae aur prat nae pedeet ke parivar ke saath hai.",
+   "wer": 0.9428571428571428,
+   "cer": 0.9428571428571428
+  },
+  {
+   "ref": "यह संबंधित है लेकिन आम तौर पर इसमें अल्पाइन शैली की स्की टूरिंग या माउंटेनीयरिंग शामिल नहीं होती है जिसे खड़े इलाकों में किया जाता है और जिसके लिए बहुत कड़ी स्की और बूट की ज़रूरत होती है",
+   "hyp": "Sambantitriya Likinantoprasu me alphaintsa luki skiy tu me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me nga mefra me",
+   "wer": 0.9731182795698925,
+   "cer": 0.9731182795698925
+  },
+  {
+   "ref": "बेशक इस परंपरा के पीछे ईसाई धर्मशास्त्र के स्पष्टीकरण दिए जाते हैं लेकिन एक प्री-क्रिश्चयन स्प्रिंग और फ़र्टिलिटी रस्म भी हो सकती है",
+   "hyp": "بیشک اس پر براکھ کے پیچھے ایسائی دھرم شاہستر کے سپرشٹی کرندیے جاتے ہیں لیکن ایک پریکریشچن سپرنگ اور فرٹیلٹی رسم بھی ہو سکتی ہے",
+   "wer": 0.9090909090909091,
+   "cer": 0.9090909090909091
+  },
+  {
+   "ref": "जो भी ऊंचाई या पहाड़ी दर्रे पर गाड़ी चलाने जा रहा है उसे हिम बर्फ या ठंड के तापमान की संभावना के विचार को मन में रखना चाहिए",
+   "hyp": "Jopi ucaiya pahadi, Darrepaar gadi chalamne jaraa hai, Usehim bharfya thand ke tabman ki sambhabna ke vichar ko manmi raktna chaiye.",
+   "wer": 0.9512195121951219,
+   "cer": 0.9512195121951219
+  },
+  {
+   "ref": "वहीं स्पेक्ट्रम का दूसरा सिरा कोई व्यक्ति किसी ऐसे अपिरिचित व्यक्ति का रूप लेता है जिसे लगता है कि उसे टीम में सब कुछ बदल देना चाहिए और उसे अपने हिसाब से बनाना चाहिए",
+   "hyp": "Vahe ispatram ka dosra sira, koi vetti, kisi aise aaparichit vetti ka rup lehta hai, jise lakta hai ki usat team mein sabkut bha dha na jaiye, aur ushe aapne hi saap se bha na na jaiye.",
+   "wer": 0.9575757575757575,
+   "cer": 0.9575757575757575
+  },
+  {
+   "ref": "किया गया अधिकांश काम सैद्धांतिक था लेकिन सैजिटेरियस गैलेक्सी से बने ऑब्ज़र्वेशन को सिम्युलेट करने के लिए प्रोग्राम को लिखा गया था",
+   "hyp": "کیا گیا گیاٹ کھنچ کم سے دھنتک تھا لیکن سیجیٹیریس گلیکسی سے بھنی عبجرویشن کو سیمیلیٹ کرنگی لیے پرگرام کو لکھا گیا تھا",
+   "wer": 0.875968992248062,
+   "cer": 0.875968992248062
+  },
+  {
+   "ref": "गंभीर मौसम किसी भी खतरनाक मौसमी घटना के लिए वर्गीय शब्द है जिसमें नुकसान गंभीर सामाजिक व्यवधान या मानव जीवन की हानि की संभावना है",
+   "hyp": "Gambir Mozam, Ketarnak Mozumi, Ketnau, Vargeesh Abhdaya, Gambir Samajik, Vyavadhan, or Manav Jiwan,",
+   "wer": 0.7441860465116279,
+   "cer": 0.7441860465116279
+  },
+  {
+   "ref": "अलगाव और पुनर्संयोजन भिन्नता प्रत्येक पीढ़ी के साथ दो पूलों के बीच आगे-पीछे होती रहती है",
+   "hyp": "Álgam & Poonar Sainujan, Binnata Prati Pidi ke Saad, 2 Pulao ke Biji, Aagye Piji khutirahti hai.",
+   "wer": 0.9431818181818182,
+   "cer": 0.9431818181818182
+  },
+  {
+   "ref": "पौधों से सबसे आसानी से मिलने वाले संसाधनों में पत्तियों और फलियों में मिलने वाले प्रोटीन होते लेकिन हम जैसे प्राइमेट्स के लिए उसे पकाए बिना पचाना मुश्किल होता है",
+   "hyp": "Poodha se sapsa aasane se milnewal e sansadhanu mein patiyo aur phaliyo mein milnewal e protin hote. Lekin, ham je se primates ke liye, use pakai bina, paja na muskil hote hai.",
+   "wer": 0.9565217391304348,
+   "cer": 0.9565217391304348
+  },
+  {
+   "ref": "लेकिन भूमध्य रेखा के कुछ ही डिग्री उत्तर में मौजूद  अत्यधिक उष्णकटिबंध” में होने की वजह से आपको गर्मी हमेशा और तेज़ धूप जब आसमान साफ़ हो जो कि ज़्यादातर होता है का सामना करना पड़ेगा",
+   "hyp": "لیکن بھومترے کھا کہ کچھے دکری اتر میں موجود اتیدھے گھا اشنگ کرٹی بند میں ہونی کی وجہ سے آپ کو گرمی ہمےشا اور تیستھوپ جب آسمن ساف ہو جو کی زادتر ہوتا ہے کہ سامنہ کرنا پڑے گا",
+   "wer": 0.8895027624309392,
+   "cer": 0.8895027624309392
+  },
+  {
+   "ref": "पौधे फ़ोटोसिंथेसिस द्वारा सूर्य से अपना भोजन बनाते हैं वह छाया भी देते हैं",
+   "hyp": "चाया पीखाशावाशावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावावा",
+   "wer": 0.918918918918919,
+   "cer": 0.918918918918919
+  },
+  {
+   "ref": "जियानकार्लो फिशिचेला ने अपनी कार पर नियंत्रण खो दिया और शुरू करने के कुछ समय बाद ही दौड़ समाप्त कर दी",
+   "hyp": "Geongarlo fishi chela ne apne kar par ne antran khodia,",
+   "wer": 0.5346534653465347,
+   "cer": 0.5346534653465347
+  },
+  {
+   "ref": "साई के साथ-साथ सभी संज्ञा शब्द हमेशा अंग्रेज़ी के बड़े अक्षर से ही शुरू होते हैं भले ही वे वाक्य के बीच में ही क्यों न हों",
+   "hyp": "Saik Saak Saat Saabhi Sange Shabdha Misha Angrizi ke Bade Akshar Saihi Shuruwotayin Balehi Vewakke Ke Bich Mahi Kya Nao",
+   "wer": 0.9508196721311475,
+   "cer": 0.9508196721311475
+  },
+  {
+   "ref": "1889 में यह बंदरगाह कुख्यात नौसैनिक गतिरोध का ठिकाना था उस समय जर्मनी अमेरिका और ब्रिटेन के सात जहाजों ने इस बंदरगाह से जाने से इनकार कर दिया था",
+   "hyp": "1819-1919.",
+   "wer": 0.041666666666666664,
+   "cer": 0.041666666666666664
+  },
+  {
+   "ref": "अमेरिकी जिमनास्टिक्स संयुक्त राज्य ओलंपिक समिति के पत्र का समर्थन करता है साथ ही सभी एथलीटों को एक सुरक्षित माहौल देने के लिए ओलंपिक परिवार के होने की अहमियत स्वीकार करता है",
+   "hyp": "Amriki Gymnastics, Sanyu, Traj, Ulampik Samiti ke Patrakasamartan Karthay, Saat hi Sabhi Atleto ko ek Surachit Mahal Dheene ke Lampik Parivar ke Hone ki Ahmiyat ko Shivkar Karthay",
+   "wer": 0.976878612716763,
+   "cer": 0.976878612716763
+  },
+  {
+   "ref": "यह कहते हुए कि वे चीन के आर्थिक उत्पादन के आधार पर बनाए जाएंगे उन्होंने कटौती के लिए कोई आंकड़ा निर्धारित नहीं किया",
+   "hyp": "یہاں کہتے ہوئے وی چین کے آرتیک اتپادن کے آظہر پر بنائے جائیں گے, انہوں نے قتوثی کیلے کوئی آقلا نظہرہدت نہیں کیا",
+   "wer": 0.9217391304347826,
+   "cer": 0.9217391304347826
+  },
+  {
+   "ref": "ये ज़्यादातर रेत के तट हैं जहां तैरना सुरक्षित माना जाता है इनमें से ज़्यादातर में पोहुकुटावा पेड़ों की छाया रहती है",
+   "hyp": "یہ جادa dar red ki tatt hai, jaha, tel na surak siddhmana jata hai, in me se jadata dar me poh kudba peh do kip chha pa rahi thi hai.",
+   "wer": 0.9827586206896551,
+   "cer": 0.9827586206896551
+  },
+  {
+   "ref": "यह शहर अफ़्रीका के कुछ सबसे सस्ते पहाड़ी गोरिल्ला ट्रेकिंग के साथ ही नायरागोंगो ज्वालामुखी की चढ़ाई करने का बेस भी है",
+   "hyp": "Yo Sharif, Africa ke kuttsapse sastepali, Gorilla trekking ke saath hi, naaravongo, jwala mukhi ki chadai karnayaka, base bi hai.",
+   "wer": 0.9572649572649573,
+   "cer": 0.9572649572649573
+  },
+  {
+   "ref": "मध्य युग के अंत में पश्चिमी यूरोप ने अपनी शैली विकसित करना शुरू कर दिया धर्मयुद्ध के परिणामस्वरूप उस समय के सबसे बड़े विकास में से एक लोगों ने कपड़ों को बांधने के लिए बटन का उपयोग करना शुरू किया",
+   "hyp": "Madayukke ant me pastim yurup ne apne shali vixit karna shuru kar diya ayin. Dharmayut ke pand nam shuru pu pu suame ke subse bade vikas me se ek logun ne kaplo ka baan. Hindi ne kali ye. Batan ka upi o karna shuru kia.",
+   "wer": 0.9742268041237113,
+   "cer": 0.9742268041237113
+  },
+  {
+   "ref": "शेर प्राइड नामक बड़े समूहों में रहने वाली सबसे बड़ी सामाजिक बिल्लियां हैं",
+   "hyp": "Sair Pride Nam ke bada Samu me rehena wali sabse bodhi samajik bhi liya hai",
+   "wer": 0.9726027397260274,
+   "cer": 0.9726027397260274
+  },
+  {
+   "ref": "उनके पैरों में पपड़ियां और पंजे हैं वे अंडे देते हैं और वे किसी टी-रेक्स की तरह अपने दो पीछे वाले पैरों पर चलते हैं",
+   "hyp": "veende , vekeke se teerex , 2 peach sewa le peerom",
+   "wer": 0.40869565217391307,
+   "cer": 0.40869565217391307
+  },
+  {
+   "ref": "अगर आपने फ़िल्म नेशनल ट्रेज़र देखी है तो आपको लगेगा कि स्वतंत्रता के घोषणा-पत्र के पीछे एक ख़ज़ाने का नक्शा लिखा गया था",
+   "hyp": "اگر آپ نے فلم نشنل تریزر دیکھی ہے تو آپ کو لگی کا کی سفتنتر تا کی خوشنا پتر کے پیچھے ایک خزانی کا نقشا لکھا گیا تھا",
+   "wer": 0.9411764705882353,
+   "cer": 0.9411764705882353
+  },
+  {
+   "ref": "लड़ाई के आख़िरी दो सालों में पहले के साथी अब दुश्मन बन गए थे और शीत युद्ध की शुरुआत हो चुकी थी",
+   "hyp": "Ladai ke akri 2 salo mepale ke saati abdushman bangayethi aur shi tiyudde ki shiruvat hoch ki thi",
+   "wer": 0.925531914893617,
+   "cer": 0.925531914893617
+  },
+  {
+   "ref": "यह वह जगह है जहां ब्रिटिश उपनिवेशवादियों ने अपना बनाया और इसलिए अगर आप इस जगह के औपनिवेशिक अतीत के सबूतों को ढूंढ रहे हैं तो यह एक अच्छी जगह है",
+   "hyp": "یہ வیجھ جگہ ہے جہاں British Upni Wesh Wadiyuni اپنا بنایا اور اسلی اگر آپ اس چگہ کی Upni Weshik اتیت کے سبوتوں کو دونڈ رہے ہیں تو یہ ایک اچھی جگہ ہے",
+   "wer": 0.9440559440559441,
+   "cer": 0.9440559440559441
+  },
+  {
+   "ref": "आप गोमा के आस-पास घूमने के लिए बोडा-बोडा मोटरसाइकिल टैक्सी ले सकते हैं. छोटी सैर के लिए आम तौर पर स्थानीय किराया करीब 500 कांगोलीज़ फ़्रैंक लगता है",
+   "hyp": "Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma & Goma",
+   "wer": 0.9183673469387755,
+   "cer": 0.9183673469387755
+  },
+  {
+   "ref": "आमतौर पर आप हमेशा पर्यटकों और बेचने वालों की आवाज़ सुनते हैं ध्वनि और प्रकाश की कहानी स्टोरी बुक जैसी है",
+   "hyp": "Amtore Parabha Meshapareta Pooa Bheechne Waloo Ki Awaas Suntay hai, Dvani and Prakash Ki Kahani Story Book Jasi Hai",
+   "wer": 0.9615384615384616,
+   "cer": 0.9615384615384616
+  },
+  {
+   "ref": "यातायात बहाव दो बिंदुओं के बीच व्यक्तिगत चालकों और वाहनों की गतिविधि और एक दूसरे के साथ की जाने वाली पारस्परिक क्रिया का अध्ययन है",
+   "hyp": "Yata Yat Bahag, 2 Binduom ke Bheech, Vectigat Chalako, aur Vahno ki Gati Vidhi aur 1 Dhu Sreke saat ki Janewadi, Parasparik Kriya ka Adhyayan hai.",
+   "wer": 0.9923076923076923,
+   "cer": 0.9923076923076923
+  },
+  {
+   "ref": "यूएसए जिमनास्टिक्स और यूएसओसी का एक ही लक्ष्य है एथलीटों को सुरक्षित सकारात्मक और सशक्त वातावरण में अपने सपनों का अनुसरण करने के लिए जिमनास्टिक्स और अन्य लोगों के खेल को जितना संभव हो सके उतना सुरक्षित बनाना",
+   "hyp": "USH Gymnastics & USOSI 1 hila chhe atleto ko surachid sakaaratmak aur sasak tuwata varar me apne sakno ka anushanar karni kiliye gymno, Gymnastics & Anilowu ke gheel ko jitna samba ho sakhe utna surachid banana.",
+   "wer": 0.9710144927536232,
+   "cer": 0.9710144927536232
+  },
+  {
+   "ref": "यहूदी और गैर-यहूदी की तरह अभी भी ऐसे कई पुरुष और महिलाएं जीवित हैं जो उस समय बचने में सफल रहे और कई जिनके प्रियजनों को मार दिया गया या उनके मरने तक उनसे काम करवाया गया",
+   "hyp": "Yaudi & Gaya, Yaudi & Gaya, abhi bhi ase, kai purish maila hai jee vith hai, jo ussam hai bachne mein saffal rai hai aur kai jee jee neko maar diya gaya ya, na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na na",
+   "wer": 0.9101796407185628,
+   "cer": 0.9101796407185628
+  },
+  {
+   "ref": "सन 1976 तक माचू पिचू के तीस प्रतिशत हिस्से का जीर्णोद्धार कर दिया गया था और जीर्णोद्धार का कार्य आज तक जारी है",
+   "hyp": "Sanun 1906-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-1930-",
+   "wer": 0.9181818181818182,
+   "cer": 0.9181818181818182
+  },
+  {
+   "ref": "1966 से सुंदरबन वन्यजीव अभ्यारण बन गया है और एक आकलन के अनुसार इस इलाके में अब लगभग 400 रॉयल बंगाल टाइगर्स और लगभग 30,000 चीतल हैं",
+   "hyp": "1906-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911-1911",
+   "wer": 0.9384615384615385,
+   "cer": 0.9384615384615385
+  },
+  {
+   "ref": "तुर्की के राष्ट्रपति रजब तैयब इरदुगान के साथ ट्रंप की फ़ोन पर चर्चा होने के बाद घोषणा की गई थी",
+   "hyp": "Turki Ke Rashpati Rajabtayak Urdoan ke Saad Ram Ki Phon Parcharcha Phonik Abhaat Khosna Ki Geet",
+   "wer": 0.9893617021276596,
+   "cer": 0.9893617021276596
+  },
+  {
+   "ref": "उत्तर की ओर के बड़े क्षेत्र में आबादी बहुत ही कम है और कुछ इलाकों में तो लगभग कोई इंसानी आबादी नहीं है",
+   "hyp": "Uttar ki oer ke bade shetra me abadi, Bhoodhi karm hai, Arkuch ilakumet lagbha, Koi insani abadi hai, Jai nahi.",
+   "wer": 0.9411764705882353,
+   "cer": 0.9411764705882353
+  },
+  {
+   "ref": "अमेरिकी जिमनास्टिक्स संयुक्त राज्य ओलंपिक समिति के पत्र का समर्थन करता है साथ ही सभी एथलीटों को एक सुरक्षित माहौल देने के लिए ओलंपिक परिवार के होने की अहमियत स्वीकार करता है",
+   "hyp": "Amar ki Jinnastik, Syuq, Teraaj, Olympic Samiti ke patra ka Samarthan kartha hai Saat hi Sabhi ethleto ko ik sirakshat mahal deenne ke liye Olympic Parivar ke huni ki Amiak Swikar kartha hai",
+   "wer": 0.9595375722543352,
+   "cer": 0.9595375722543352
+  },
+  {
+   "ref": "नेक्स्टजेन प्रणाली बारे में एफएए का दावा है कि इससे विमान को छोटे मार्गों से उड़ाना और हर साल लाखों गैलन ईंधन बचाना संभव होगा और इससे कार्बन उत्सर्जन में भी कमी आएगी",
+   "hyp": "Next, Janeparnali may FAAKADAWA, ki issi vimana ko chhote margunse urana aur harsalaakhu galen indhan machana sambhawoha aur issi karvan utsarjan may bhi kami aayi ki.",
+   "wer": 0.9454545454545454,
+   "cer": 0.9454545454545454
+  },
+  {
+   "ref": "कंफेडेरशन के अनुच्छेद के तहत क्रांतिकारी युद्ध के दौरान तेरह राज्यों ने पहली बार एक कमजोर केंद्रीय सरकार का गठन किया जिसमें कांग्रेस इसका एकमात्र घटक थी",
+   "hyp": "Khamfei Dhrashan ke Amitshet ke Tahat Kranti Kari Utt ke Daran, 13 Rajya se peli baar ek Khamzor ke Inveh Sargarh ka Ghatan kia, jis mein Kongres, iska ek maatra Ghatak ki.",
+   "wer": 0.9473684210526315,
+   "cer": 0.9473684210526315
+  },
+  {
+   "ref": "मनोविज्ञान सहित विज्ञान के सभी मामलों पर अरस्तू के विचारों को स्वीकार किया जाता है",
+   "hyp": "Manu Vigyan Saith Vigyan ke Sabi Maamlo Pair Arstust ke Vicharho ko Swikar Kiya Jata Hai",
+   "wer": 0.975609756097561,
+   "cer": 0.975609756097561
+  },
+  {
+   "ref": "जिस समय घटनाएँ हुई उसके युग को सामान्य रूप से यूरोप के इतिहास में 11वीं 12वीं और 13वीं सदी ad 1000-1300 में यूरोपियन इतिहास के उच्च मध्य युग की अवधि के रूप में बताया जाता है",
+   "hyp": "جس سمہے گٹنائیں ہوئی اس کے یوپ کو سمانے روپ سے یوروپ کے اتیحاس میں یاروی باروی اور تیروی سدی ایڈی ٹاؤزنٹو ٹاؤڑھ دینھاڈ میں یوروپیہ نتیحاس کے اچھے مدےیو کی ابدی کے روپ میں بتایا جاتا ہے",
+   "wer": 0.9595375722543352,
+   "cer": 0.9595375722543352
+  },
+  {
+   "ref": "उसी महीने एक अन्य विमान मशहद के एक रनवे से आगे निकल गया और एक दीवार से टकरा गया जिसमें सत्रह की मौत हो गई",
+   "hyp": "اسی محینے ایک انیا ویمان مشہد کے ایک رنمے سے آگی نکل گیا اور ایک دیوار سے تک را گیا جس میں سترا کی موت ہو گئی",
+   "wer": 0.9333333333333333,
+   "cer": 0.9333333333333333
+  },
+  {
+   "ref": "हर कोई समाज से जुड़ा होता है और ट्रांसपोर्ट सिस्टम का उपयोग करता है लगभग सभी लोग ट्रांसपोर्ट सिस्टम के बारे में शिकायत करते हैं",
+   "hyp": "Khur koi samaj se juda khutta hai aur transport system ka upiyog kar tha hai lagbha gha sabhi loga transport system ke baare me shikayat kar te hai.",
+   "wer": 0.9606299212598425,
+   "cer": 0.9606299212598425
+  },
+  {
+   "ref": "लूना को साथी पहलवानों ने भी श्रद्धांजलि दी",
+   "hyp": "Lona Kusati Pailwanone Bhish Rathanjali Di",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "सड़कों पर ज़्यादा दुर्घटना की वजह बहुत ज़्यादा कार ओनरशिप है जिससे शरीर में हुई टूट-फूट को सुधारने के लिए हेल्थकेयर में नई तकनीकों के आविष्कार को बढ़ावा मिला है",
+   "hyp": "Sir ko paar ziyadad hukatna ki vajap, pohaad ziyadakkar, honaar ship hai, jis se shereer mein hui tuuth futko, sudharni ki liye, hirth kair mein, nei tekni ko ke aviskar ko bhaarwa mila hai.",
+   "wer": 0.975,
+   "cer": 0.975
+  },
+  {
+   "ref": "1963 में बांध बनने के बाद मौसमी बाढ़ जो पूरे नदी में तलछट फैला देगी वह रुक गई थी",
+   "hyp": "1903-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913-1913",
+   "wer": 0.9125,
+   "cer": 0.9125
+  },
+  {
+   "ref": "कीटविज्ञानियों द्वारा बग शब्द का उपयोग कीटों के इस समूह के लिए एक औपचारिक तौर पर किया जाता है",
+   "hyp": "Keat Vigyaninu Dwara Bhaag Shabdhika Upio Keatun ke Is Samu ke leik Upchharik Tor Par Kiya Jata",
+   "wer": 0.946236559139785,
+   "cer": 0.946236559139785
+  },
+  {
+   "ref": "1920 के दशक के दौरान ज़्यादातर नागरिकों और देशों में शांतिवाद और अलगाव का नज़रिया प्रचलित था",
+   "hyp": "1920-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10-10",
+   "wer": 0.8804347826086957,
+   "cer": 0.8804347826086957
+  },
+  {
+   "ref": "यू.एस. कॉर्प्स ऑफ़ इंजीनियर्स ने अंदाजा लगाया कि 6 इंच बारिश पहले से क्षतिग्रस्त बांधों को तोड़ सकती है",
+   "hyp": "US Corpse of Engineers Nihandaja Lakhaya ki Chhe Inchbarish Peli se Chhati Grasth Badham ko tord sakti hai.",
+   "wer": 0.970873786407767,
+   "cer": 0.970873786407767
+  },
+  {
+   "ref": "विशेष रूप से यह दावा किया जाता है कि किसी व्यक्ति की सूक्ष्म अभिव्यक्तियों की सही व्याख्या करके यह समझा सकता है कि वह झूठ बोल रहा है या नहीं",
+   "hyp": "Vise srubhze yaw dhawakya jata hai ki ki sviyakti ki sokshna abhivyakti yaw ki sahi viyakya karnayakkar ne kkar kaya samja saktah hai ki wa jyurt bol raha hai ya na hi",
+   "wer": 0.9357142857142857,
+   "cer": 0.9357142857142857
+  },
+  {
+   "ref": "ब्लॉग से छात्र लेखन में सुधार करने में भी मदद मिल सकती है जहां छात्र अपने ब्लॉग अनुभव की शुरुआत अक्सर बेतरतीब व्याकरण और वर्तनी के साथ करते हैं वहीं दर्शकों की मौजूदगी से इसमें आम तौर पर बदलाव आता है",
+   "hyp": "Bolog سے چhaatar lekan میں tudadkarne me bhi madad me sakhthi hai. Jahaatar apne bolog Anubha ki surwaat akhsar, betaar teev, vayakaran aur vartani ke saatkar te hai. Vahidarsakum ki mozhodgi se isme amtore par bhaadlao aata hai.",
+   "wer": 0.9798994974874372,
+   "cer": 0.9798994974874372
+  },
+  {
+   "ref": "इसके शुरुआती दिनों में इस शो को केवल लंबे समय तक चलने वाली इंटरनेट रेडियो साइट toginet रेडियो टॉक रेडियो पर केंद्रित एक साइट पर फ़ीचर किया गया था",
+   "hyp": "اس کے s Commission",
+   "wer": 0.12413793103448276,
+   "cer": 0.12413793103448276
+  },
+  {
+   "ref": "हालांकि यह सच नहीं है हालांकि दस्तावेज़ के पीछे कुछ लिखा हुआ है लेकिन यह कोई ख़ज़ाने का नक्शा नहीं है",
+   "hyp": "Hala ki yasach na hi hai hala ki dastavit ke pichak khusli khau hai, leke niya koi khuzne ka naksa na hi hai.",
+   "wer": 0.9504950495049505,
+   "cer": 0.9504950495049505
+  },
+  {
+   "ref": "अधिकांश छोटे द्वीप स्वतंत्र राष्ट्र हैं या फ़्रांस से संबंधित हैं और लग्ज़री बीच रिसॉर्ट के रूप में जाने जाते हैं",
+   "hyp": "Adhikansh, Chote Dweep, Swatantra, Rastra, Ya, France, Samandith and Glajri beach resort.",
+   "wer": 0.7522123893805309,
+   "cer": 0.7522123893805309
+  },
+  {
+   "ref": "मध्यपूर्व की गर्म जलवायु में घर उतना ज़रूरी नहीं था",
+   "hyp": "مدپوروی کی گر میں جلوائیوں میں گھر اتنا ضروری نہیں تھا",
+   "wer": 0.9803921568627451,
+   "cer": 0.9803921568627451
+  },
+  {
+   "ref": "चूंकि उनकी शुरुआती दिनों में प्रकाश प्रदूषण आज की तरह की समस्या नहीं थी वे आमतौर पर शहरों में या परिसरों में स्थित हैं जहां आधुनिक समय में निर्मित जगहों की तुलना में पहुंचना आसान होता हैं",
+   "hyp": "Choke, Onke Sruwati Dinu Me Prakas Pradeshan, Aaj Kitarakhi Samaashti, Veyam and Parshahra Meiya Parishar Measthi Tha, Jai Adunik Samay Menir Mejagahokhi Tulla Me Pauchan Aasan Huta",
+   "wer": 0.9358288770053476,
+   "cer": 0.9358288770053476
+  },
+  {
+   "ref": "फ़ोटोग्राफ़रों ने बाद में एक वृद्ध महिला की जगह ले ली क्योंकि उसे शौचालय जाना ज़रूरी था मेंडोज़ा को गोली मार दी गई थी",
+   "hyp": "Fotografero نے بعد میں ایک βرید محیلہ کی جگہ لی لی کیوں کی اسے شوچالہ جانہ ضروری تھا. Mendoza Kogoli ماردی گئی تھی.",
+   "wer": 0.9316239316239316,
+   "cer": 0.9316239316239316
+  },
+  {
+   "ref": "समाजीकरण के महत्व को स्पष्ट करने के लिए इस्तेमाल किए जाने वाले सबसे आम तरीकों में से कुछ बच्चों के दुर्भाग्यपूर्ण मामलों को आकर्षित करना है जो बड़े होने के दौरान वयस्कों द्वारा उपेक्षित नहीं बल्कि उपेक्षा दुर्भाग्य या दुर्व्यवहार के माध्यम से होते थे",
+   "hyp": "Samaji Karan ke Mahatva ko spasht karni ke liye, xtmal kiye, jane wale sabse am tari ko misi kojbhacho ke durbhaagipuun mamlou ko akarsit karna hai, ju badeh hoonne ke doaran, vaisa ko doara upekshit nahi, bal ki upekshat, durbhaagye ya durvya wahar ke madhyam se hodethe.",
+   "wer": 0.972,
+   "cer": 0.972
+  },
+  {
+   "ref": "वैज्ञानिक यह निष्कर्ष निकालने में सक्षम थे कि काला पदार्थ अन्य काले पदार्थ को उसी तरह प्रभावित करता है जिस तरह से आम पदार्थ करता है",
+   "hyp": "vegyani kiya nishkarsh nikalne mein saksamthe ki kala padhartan ni kala padhart khosi tara pravavit karta hai, jis tara se am padhart karta hai.",
+   "wer": 0.9618320610687023,
+   "cer": 0.9618320610687023
+  },
+  {
+   "ref": "ब्लॉगिंग एक ऐसा टूल है जो सहयोग को प्रेरित करता है और छात्रों को पारंपरिक स्कूल के दिन से बेहतर सीखने के लिए प्रोत्साहित करता है",
+   "hyp": "Blogging is an example, which is a tool which is used to improve the health of the students and helps them to learn better from school.",
+   "wer": 0.9296875,
+   "cer": 0.9296875
+  },
+  {
+   "ref": "वाइल्ड कार्ड खरीद लेना फ़ायदेमंद भी हो सकता है क्योंकि इससे आप दक्षिण अफ़्रीका के चुनिंदा पार्क या सभी दक्षिण अफ़्रीकी नेशनल पार्क देख सकते हैं",
+   "hyp": "Vile card khairil le na Fahide man vi ho saktah hai. Tuk ki iss se aap dhakshin afrika ke chuninda park ya sabhi dhakshin afrika national park dek saktah hai.",
+   "wer": 0.972027972027972,
+   "cer": 0.972027972027972
+  },
+  {
+   "ref": "अस्पताल ने संक्रमण नियंत्रण के लिए नियमों का पालन किया है इन नियमों में दूसरों के संभावित संक्रमण को रोकने के लिए रोगी को दूसरों से अलग करना शामिल है",
+   "hyp": "Ashpatal se Sakramag ni Antrunt karni ki liye niyamu ka palen ki haja ta hai. In niyamu me, Dhuusruk se sambhavit, Sakramagu rokne ki liye rogi se door alak karna shamil hai.",
+   "wer": 0.9798657718120806,
+   "cer": 0.9798657718120806
+  },
+  {
+   "ref": "जापान की परमाणु एजेंसी के अनुसार प्लांट में रेडियोधर्मी सीज़ियम और आयोडीन की पहचान की गई है",
+   "hyp": "JAPAN Ki Parmanu Agency Ke Anushar plant Me Radio Dharmish Sijiam and IODIN Ki Paachan Ki Gai Hai",
+   "wer": 0.967032967032967,
+   "cer": 0.967032967032967
+  },
+  {
+   "ref": "यह शहर अफ़्रीका के कुछ सबसे सस्ते पहाड़ी गोरिल्ला ट्रेकिंग के साथ ही नायरागोंगो ज्वालामुखी की चढ़ाई करने का बेस भी है",
+   "hyp": "Ya,Sahar Afrikake kuch sabse sasthe pahari Gorilla Tracking ke saath hi Naaira Gongo Jwala Mukri ki Chalai karnayaka bsp hai",
+   "wer": 0.9572649572649573,
+   "cer": 0.9572649572649573
+  },
+  {
+   "ref": "तुर्की के राष्ट्रपति रजब तैयब इरदुगान के साथ ट्रंप की फ़ोन पर चर्चा होने के बाद घोषणा की गई थी",
+   "hyp": "TURKI KERASH TRYPATI RADJAP TAYA VE, IDIGDUGAN, KESATH TRYM KEE FONE PAR CHARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA HONE KEE VARCHA",
+   "wer": 0.9680851063829787,
+   "cer": 0.9680851063829787
+  },
+  {
+   "ref": "ज़्यादा टैक्स वाले देशों में रहने वाले पर्यटक कभी-कभी खास तौर पर मादक पेय और तम्बाकू जैसे उत्पादों पर काफ़ी बचत कर सकते हैं",
+   "hyp": "Jada Tax Waale Dexu Me Rahne Waale Paritik, Kavi Kavi, Khastaur Parmadak Pai Aur, Tam Baakujay Se Uthpada Par Kaafi Bachad Kar Sakhayam",
+   "wer": 0.975609756097561,
+   "cer": 0.975609756097561
+  },
+  {
+   "ref": "1920 के दशक के दौरान ज़्यादातर नागरिकों और देशों में शांतिवाद और अलगाव का नज़रिया प्रचलित था",
+   "hyp": "1920's ke 10 kez aur anjadat danagri ka aur desu me saantibad aur alagav ka nazaria prachelit tha.",
+   "wer": 0.9021739130434783,
+   "cer": 0.9021739130434783
+  },
+  {
+   "ref": "अगर आप सर्दियों में उत्तरी बाटलिक को पार करते हैं तो आपको केबिन स्थान की जांच करनी होगी  क्योंकि क्योंकि जो लोग ज्यादा प्रभावित है उन्हें बर्फ से गुजरने पर काफी भयानक शोर महसूस होगा ।",
+   "hyp": "اگر آپ سدیوں میں اُتری بٹلک کو پار کرتے ہیں تو آپ کو کبین سان کی جاج کر نہیں ہوگی کیوں کیوں کی جو لوگ جیادہ پر بھا بھی تھے اُنے بھرف سے گزر نے پر کافی بھیانکس اور مسس ہوگا",
+   "wer": 0.8743169398907104,
+   "cer": 0.8743169398907104
+  },
+  {
+   "ref": "पुरुषों को दृढ़ता से नकारें और अपनी बात पर बेहिचक अड़ी रहें सांस्कृतिक अंतरों के होने या नहीं होने से यह सही नहीं हो जाता!",
+   "hyp": "Pursho Kodhradata Srinakari, & Aapni Bhaat Pair Phechak Adi Rai, Saaskritik Anter Ke Uphone Ya Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se, Ye Sahi Nahi Hone Se",
+   "wer": 0.9262295081967213,
+   "cer": 0.9262295081967213
+  },
+  {
+   "ref": "लक्खा सिंह ने छप्पन भोग भजन भी प्रस्तुत किया गायक राजू खंडेलवाल उनके साथ थे",
+   "hyp": "Lakhasigne Chhappan Bhog Bhajan Vhi Prasudh Kya, Gayak Raju Khandelwal Unke Saad Tha",
+   "wer": 0.96,
+   "cer": 0.96
+  },
+  {
+   "ref": "11:35 बजे अग्नि बचाव दल ने अंततः आग बुझा दी थी",
+   "hyp": "अगयारा पेपेपे वईनी बचाश दलने अन्तता भूजा दिती",
+   "wer": 0.8478260869565217,
+   "cer": 0.8478260869565217
+  },
+  {
+   "ref": "चुनिंदा रूट पर बड़ी कंपनियों के खुद के विमान हैं लेकिन अन्य रूट पर और छोटी फ़र्म के लिए यह एक समस्या है",
+   "hyp": "Channanda Root Pair, Vadi Company, Khoot Ke Viman hai, Likin, Ani Root Pair, and Chhoti Form ke liye, yeh ek samasya hai.",
+   "wer": 0.941747572815534,
+   "cer": 0.941747572815534
+  },
+  {
+   "ref": "हालांकि एआई में विज्ञान कथाओं का एक मज़बूत अर्थ होता है लेकिन एआई कंप्यूटर विज्ञान की एक बहुत ही अहम शाखा बनाता है जिसमें बर्ताव से निपटना किसी मशीन में सीखना और बुद्धिमान अनुकूलन शामिल है",
+   "hyp": "hala ki ai in vigyan kathaum ka ek masbhut arth hootah hai. Lekin ai computer vigyan ki ek bhauti arm shaka banata hai. Jis mein bartav se le patna kisi masin mein seekna. Aubudhimaan Anukulan shaman hai.",
+   "wer": 0.9468085106382979,
+   "cer": 0.9468085106382979
+  },
+  {
+   "ref": "महाराजा और महारानी के ख़िलाफ़ चीखते-चिल्लाते लोगों की भीड़ से घिरी एक गाड़ी में सफर करते हुए वे लोग पेरिस वापस आए",
+   "hyp": "Maharaja Armaana na ke khilap, chihe khne chilan, te, Logo ke fiit se kheri ek gady ke, sabhar karte huwe, warlog, Paris Bapas aay.",
+   "wer": 0.9203539823008849,
+   "cer": 0.9203539823008849
+  },
+  {
+   "ref": "जियानकार्लो फिशिचेला ने अपनी कार पर नियंत्रण खो दिया और शुरू करने के कुछ समय बाद ही दौड़ समाप्त कर दी",
+   "hyp": "जियान कारलोद्छिजिलाने एक पनी कार पर नियंद्रन कुदिया आचरोगरने कुदिया आचरोगरने कुदिया आचरोगरने कुदिया आचरोगरने कुद",
+   "wer": 0.693069306930693,
+   "cer": 0.693069306930693
+  },
+  {
+   "ref": "कहा जाता है कि वह 20 साल की उम्र में ही जीर्ण हो गया था एक बयान में बीबर ने कहा हांलांकि मैं मौजूद नहीं था और न ही सीधे इस दुखद दुर्घटना से जुड़ा हुआ था मेरी संवेदनाएं और प्रार्थनाएं पीड़ित के परिवार के साथ हैं",
+   "hyp": "Khaa Jata hai ki wa 20 salki umr mehi jeeveno hoa aadha, ek bhajan me bhiber nika haa halanki me mojud nehi tha, wa rei sidei ii dhukat durgatna se juda hoa tha, meri samadna hai aur pratna hai pirdit pairaar ke saath hai.",
+   "wer": 0.9619047619047619,
+   "cer": 0.9619047619047619
+  },
+  {
+   "ref": "द्वीप-समूह पेनिनसुला की उत्तर दिशा में 120 किमी दूर स्थित है विलास लास एस्ट्रेलास जैसे रिहायशी इलाके के साथ किंग ज़ॉर्ज सबसे बड़ा आइलैंड है",
+   "hyp": "Tip Samu Penin Sula Ke Uttar Disa Me XOBIS Ki Me Guru Siddhi Vila Slaas Estralas Jai Serae Raiyasi Kila Kha Ke Saad King Jhoor Sop Se Badae Lai Lai",
+   "wer": 0.9712230215827338,
+   "cer": 0.9712230215827338
+  },
+  {
+   "ref": "1963 में बांध बनने के बाद मौसमी बाढ़ जो पूरे नदी में तलछट फैला देगी वह रुक गई थी",
+   "hyp": "1937-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199-199",
+   "wer": 0.9,
+   "cer": 0.9
+  },
+  {
+   "ref": "सुंदरबन को यूनेस्को द्वारा विश्व धरोहर घोषित किया है जंगल का वह हिस्सा जो भारत में है उसको सुंदरबन नेशनल पार्क कहा जाता है",
+   "hyp": "Sunderbanu, UNAISCO, Dvaravis, Sudhvar, Gosit, Kiyagaya, Jangle, Kaba, Issa, Jubharat, UNAISCO, Sunderban, UNAISCO, Dvaravis, Sudhvar, Gosit, Kiyagaya, Jangle, Kaba, Issa, Jubharat, UNAISCO, Sunderban, UNAISCO, Dvaravis, Sudhvar, Gosit, Kiyagaya, Jangle, Kaba, Issa, Jub",
+   "wer": 0.9426229508196722,
+   "cer": 0.9426229508196722
+  },
+  {
+   "ref": "सन 1976 तक माचू पिचू के तीस प्रतिशत हिस्से का जीर्णोद्धार कर दिया गया था और जीर्णोद्धार का कार्य आज तक जारी है",
+   "hyp": "Saane Kazar, 960-1935, Jino Dwar, Kare, Commission",
+   "wer": 0.44545454545454544,
+   "cer": 0.44545454545454544
+  },
+  {
+   "ref": "ये जोड़े अपने बच्चे के लिए गोद लेने की योजना बनाने का विकल्प चुन सकते हैं",
+   "hyp": "यह जो दे पने बचजे कि लिए गोद लेने कि वोडने कि वोडना नहने का पचजन सकते है",
+   "wer": 0.7534246575342466,
+   "cer": 0.7534246575342466
+  },
+  {
+   "ref": "हालांकि यह अक्सर केवल एक गलत रूढ़िवादी धारणा होती है पेरिस में घुलने-मिलने का सबसे अच्छा तरीका अभी भी अपना सबसे अच्छा व्यवहार करना है किसी ऐसे व्यक्ति की तरह अभिनय करना जो  बिएन एलेव” अच्छी तरह से पला-बढ़ा हो। यह घुलने-मिलने को काफी आसान बना देगा।",
+   "hyp": "hala ki yaksar keval ek galat rudi vadi dharna hoti hai paris mein gulne milne ka sabse atshat tari ka abhi bhi aapna sabse atshha wa waar karna hai kisi aise vitti ki tarah bhi ne kaar na jhu bhein elayf pu ya gulne milne ko kaafi asaan bhanadhe ka",
+   "wer": 0.9595141700404858,
+   "cer": 0.9595141700404858
+  },
+  {
+   "ref": "इसी तरह पुरुषों के लिए घुटनों को ढंकने वाले ट्राउज़र पहनना ज़रूरी है",
+   "hyp": "Similarly, porusho is needed to cover the leaves with a cloth.",
+   "wer": 0.8970588235294118,
+   "cer": 0.8970588235294118
+  },
+  {
+   "ref": "उत्तरी मैरिएनस इमरजेंसी प्रबंधन कार्यलय की ओर से कहा गया कि राष्ट्र में नुकसान की कोई सूचना प्राप्त नहीं हुई थी",
+   "hyp": "Uttari Mercience Emergency Prabandhan Karyalai ki oor se kaha gaya ki Rashtra Menukshan ki koi sushana praapta nahi hui thi.",
+   "wer": 0.9819819819819819,
+   "cer": 0.9819819819819819
+  },
+  {
+   "ref": "अधिकांश आधुनिक अनुसंधान दूरबीनों में अनुकूल वायुमंडलीय परिस्थितियों के साथ दूरदराज के क्षेत्रों में काम करने के लिए बहुत सुविधाएं हैं",
+   "hyp": "Adikansh, Adunik Anusandhan, Dhur Pino, May Anukul, Vaya, Mandiliya, Parastitniya, Kesar, Dhur, Dharaj, Ketro, May, Karm, Karniya, Kiliya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, Vaya, Kesar, V",
+   "wer": 0.9398496240601504,
+   "cer": 0.9398496240601504
+  },
+  {
+   "ref": "कुछ क्षेत्रों में पानी को एक मिनट के लिए उबालना काफी होता है अन्य क्षेत्रों में कई मिनट तक उबलाने की आवश्यकता होती है",
+   "hyp": "khut se tome panikou ek minif ke kuliye ubal na kafi hotay panik se trome ka i minif taku balne kiya osi ke hotiye",
+   "wer": 0.9487179487179487,
+   "cer": 0.9487179487179487
+  },
+  {
+   "ref": "पपड़ी पतली होने के कारण आस-पास पर कई मारिया होंगी लावा के लिए सतह पर बढ़ना आसान था",
+   "hyp": "papri patli hune ke karan, aspas par kari maarya hune ki, lawa ke liye satapar burna asam tha",
+   "wer": 0.9390243902439024,
+   "cer": 0.9390243902439024
+  },
+  {
+   "ref": "एरोस्मिथ ने अपने दौरे के अपने शेष संगीत कार्यक्रमों को रद्द कर दिया है",
+   "hyp": "Airos' midneu apne dore ke, apne saits, sanghit kar ke mo kura dhikardhiya hai.",
+   "wer": 0.9428571428571428,
+   "cer": 0.9428571428571428
+  },
+  {
+   "ref": "माऊ आंदोलन द्वारा स्वतंत्रता के लिए आयोजित संघर्ष के दौरान नगर में एक शांतिपूर्ण सभा में प्रमुख तापुआ तामासेसे सेलोफ़ी तृतीय की हत्या हो गई",
+   "hyp": "MAU-Anduilandwara Satrantata ke Lee Ayujit Swangharsh ke Dharan, Nagar me ek Shanti Kool Saba me Pramuk Tapua, Tamase se, Sehlofi, Tritiyaki Hatya Hougai.",
+   "wer": 0.9424460431654677,
+   "cer": 0.9424460431654677
+  },
+  {
+   "ref": "असल में किसी को इसकी मौजूदगी का पता होने पर भी इसे ढूंढना बिल्कुल भी आसान नहीं है एक बार गुफ़ा में पहुंच जाने पर वहां आप एकदम अकेले हो जाते हैं",
+   "hyp": "Asal, kisi ko iski mojoodki ka pata hoonhe par bhi ishe dhoonna bhilkul bhi asaan nahi hai.",
+   "wer": 0.6083916083916084,
+   "cer": 0.6083916083916084
+  },
+  {
+   "ref": "रणनीति महत्वपूर्ण सैन्य और असैन्य आपूर्ति को काटते हुए प्रभावी साबित हुई हालांकि इस नाकाबंदी ने पिछले दो शताब्दियों के कई अंतरराष्ट्रीय समझौतों द्वारा आमतौर पर स्वीकृत अंतर्राष्ट्रीय कानून का उल्लंघन किया",
+   "hyp": "Rannitimha Thapurna, Sahane and Asan, Aapurthi, Karte, Prabhavi, Sabit, Hala, Nakawandis, Nepichle, Dos, Satavdhiyo, Antharastri, Zamjatadwara, Amtore, Swigrit, Antharastri, Kanun, Kaulangand, Kiyah.",
+   "wer": 0.9411764705882353,
+   "cer": 0.9411764705882353
+  },
+  {
+   "ref": "इंटरनेट लोगों और अंतर-परस्पर संचार दोनों के तत्वों को मिलाता है",
+   "hyp": "Internet, Logo & Interpours, Purs, Sancha, Dono, Tatton,",
+   "wer": 0.8412698412698413,
+   "cer": 0.8412698412698413
+  },
+  {
+   "ref": "बेशक इस परंपरा के पीछे ईसाई धर्मशास्त्र के स्पष्टीकरण दिए जाते हैं लेकिन एक प्री-क्रिश्चयन स्प्रिंग और फ़र्टिलिटी रस्म भी हो सकती है",
+   "hyp": "بے سک اس پرمپرگ کے پیچھے ایشای دھرمہ ساسٹرگ کے سبسٹی کرن دیا جاتے ہیں لیکن ایک پری کشچن, spring or fertility رسم بھی ہو سکتے ہیں",
+   "wer": 0.9621212121212122,
+   "cer": 0.9621212121212122
+  },
+  {
+   "ref": "बच्चों को कई वजहों से फ़ॉस्टर केयर में रखा जाता है जिनमें अनदेखी करना बुरा बर्ताव करना और यहां तक कि ज़बरदस्ती वसूली करना भी शामिल है",
+   "hyp": "Bacchos, kai vajhaw, sehi fastar keher mein rakha jata hai, jai mein ande ki karna, pura bhartaab karna, aoya aa yaha taki zabardasati vasuli karna bhi shamal hai.",
+   "wer": 0.9774436090225563,
+   "cer": 0.9774436090225563
+  },
+  {
+   "ref": "यातायात बहाव दो बिंदुओं के बीच व्यक्तिगत चालकों और वाहनों की गतिविधि और एक दूसरे के साथ की जाने वाली पारस्परिक क्रिया का अध्ययन है",
+   "hyp": "یا تا یات بہاف دو بندوں کے بیچ بیکتگہ چالکوں اور وہنوں کے ریگہت ویڈی اور ایک دوسری کے ساتھ کی جانے والی پیلس پر قریعگہ دین ہے",
+   "wer": 0.9153846153846154,
+   "cer": 0.9153846153846154
+  },
+  {
+   "ref": "इस प्रकार जब पेंसिल आई तो यह कई लोगों के लिए एक अच्छी दोस्त थी",
+   "hyp": "ज़ पेनसल ढी तो यह करी बों के ले का जी दोसत ती",
+   "wer": 0.6290322580645161,
+   "cer": 0.6290322580645161
+  },
+  {
+   "ref": "लूना को साथी पहलवानों ने भी श्रद्धांजलि दी",
+   "hyp": "Luna po saati pailwanonei bi sardhanjiliti",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "यदि आपको देश की सड़कों पर वाहन चलाने की आदत नहीं है तो अपने साथ यह जानकारी रखें : स्टीप ग्रेड्‍स पतली गलियाँ और ख़तरनाक मोड़",
+   "hyp": "यह दिष की सलको परवान जलानी कि यादत नहीं हैं तो वपने सात्या जान कारी नहीं जीव परद़्ी अगलिया आगतर नाक मुल",
+   "wer": 0.7983870967741935,
+   "cer": 0.7983870967741935
+  },
+  {
+   "ref": "ज़्यादा परंपरागत चर्चों में ईस्टर सप्ताहांत में शनिवार रात को ईस्टर विजिल का आयोजन किया जाता है जिसमें लोग क्रिस के पुनर्जन्म का उत्सव मनाने के लिए आधी रात के समय उत्सव मनाना शुरू करते हैं",
+   "hyp": "जाद परम परापार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपार परपा",
+   "wer": 0.5372340425531915,
+   "cer": 0.5372340425531915
+  },
+  {
+   "ref": "पपड़ी पतली होने के कारण आस-पास पर कई मारिया होंगी लावा के लिए सतह पर बढ़ना आसान था",
+   "hyp": "Pappadi Patli, Patli Hone ke Karar aas Paas Paas Paa Kaai Mariya Hone Ghi Lawa ke Lye Satay Paar Bhana Aasal Tha",
+   "wer": 0.975609756097561,
+   "cer": 0.975609756097561
+  },
+  {
+   "ref": "वर्तमान में जो कीड़े अपने पंखों को वापस नहीं मोड़ सकते हैं उनमें केवल ड्रैगनफ़्लाई और मेफलीज़ हैं",
+   "hyp": "Vartamal, Commissioners, Kirdi, Panko, Kowapas, Kavadragon Fly,",
+   "wer": 0.6288659793814433,
+   "cer": 0.6288659793814433
+  },
+  {
+   "ref": "ये पानी में जाने वाली किसी भी चीज़ पर भी हमला किया करते थे यहां तक कि टी रेक्स जैसे विशालकाय डायनासोर का भी कोई मुकाबला नहीं होगा",
+   "hyp": "यह पानी में जाने वाली किसी जीज पर वी हमलक्या करतेते यहा तक की पी विविविविविविविविविविविविविविविविविविविविविवि�",
+   "wer": 0.6201550387596899,
+   "cer": 0.6201550387596899
+  },
+  {
+   "ref": "विशेष रूप से यह दावा किया जाता है कि किसी व्यक्ति की सूक्ष्म अभिव्यक्तियों की सही व्याख्या करके यह समझा सकता है कि वह झूठ बोल रहा है या नहीं",
+   "hyp": "विसे शुर। यह दावा किया जाता है कि जी विक्ति की शुक्चमा विक्ति। कि सहीद्या क्या कर के यहा सम्द्या सकता है कि वहा जुण पूल्डा है यहा",
+   "wer": 0.7857142857142857,
+   "cer": 0.7857142857142857
+  },
+  {
+   "ref": "सुंदरबन को यूनेस्को द्वारा विश्व धरोहर घोषित किया है जंगल का वह हिस्सा जो भारत में है उसको सुंदरबन नेशनल पार्क कहा जाता है",
+   "hyp": "Sunderbanu Kuyuni, Skop, Dwara, Vishwundharo Hargushit, Jungal Ka Bhajsa, Jubharatmeh, Use Sundarban National Park, Kaha Jata Hai.",
+   "wer": 0.9508196721311475,
+   "cer": 0.9508196721311475
+  },
+  {
+   "ref": "गीज़ा में मौजूद ग्रेट पिरामिड सात अजूबा में से केवल एक है जो आज भी खड़ा है",
+   "hyp": "Gija may Mohujud great pyramid 7 Ajuba may say Keval aayi ki, Commission of the Kerala",
+   "wer": 0.9594594594594594,
+   "cer": 0.9594594594594594
+  },
+  {
+   "ref": "वर्चुअल स्कैफ़ोल्ड सॉफ़्टवेयर का ही अंदरूनी हिस्सा होते हैं और वे ऐसी प्रक्रियाओं पर सवाल उठाते हैं उनका संकेत देते हैं और उनके बारे में जानकारी देते हैं जो छात्र के लिए अकेले संभालने में चुनौती भरी होती हैं",
+   "hyp": "Vrtu al, its ke fold sort where ka, ek hi underuni hishsa hote hai. Aur huy ashi prickwiyam par shawal uthat hai, unka shankhe dhete hai aur unke baare mein jankari dhete hai, jo chhatr ke liye akale shamalne mein, chunauti hari hote hai.",
+   "wer": 0.9565217391304348,
+   "cer": 0.9565217391304348
+  },
+  {
+   "ref": "यह बीमारी सूअरों के कारण होती है जो बाद में मच्छरों के माध्यम से मनुष्यों में आती है",
+   "hyp": "یہ بیماری سواروں کے کارل ہوتے ہیں جو بال میں مچھروں کے مادم سے منششوں میں آجتی ہے",
+   "wer": 0.8571428571428571,
+   "cer": 0.8571428571428571
+  },
+  {
+   "ref": "2002 में गोमा को न्यिरगोंगो ज्वालामुखी ने लावा द्वारा नष्ट कर दिया गया था जिसने शहर की अधिकांश सड़कों विशेष रूप से शहर के बीच के भाग को दफन कर दिया था",
+   "hyp": "دواجر 2 میں گوموں کوی لیر گوم کو جوالموکی میں لاوادوارا نشت کر دیا گیا تھا جس نے سہر کی آدیقان شرکو ویسے سروب سے سہر کے بیچ کے بھاک کو دفن کر دیا تھا",
+   "wer": 0.9666666666666667,
+   "cer": 0.9666666666666667
+  },
+  {
+   "ref": "ऊपर साफ़ वातावरण सुंदर आसमान और आस-पास के कई पहाड़ों के अलावा और कुछ भी नहीं नज़र आता है इसलिए इस गुफ़ा के अंदर से दुनिया का छोटा सा हिस्सा ही देखा या सुना जा सकता है",
+   "hyp": "Uper Saaf, Wata Varan, Sundar, Asman & Aspaske kai Pahalo ke elawa, kuj bhi nahin aazar adha hai.",
+   "wer": 0.5602409638554217,
+   "cer": 0.5602409638554217
+  },
+  {
+   "ref": "केवल जर्म-लाइन कोशिकाओं में वृद्धि बच्चों तक पहुंच सकती है जबकि अन्य कहीं होने वाली वृद्धि से कोशिकाएं नष्ट हो सकती हैं या कैंसर हो सकता है",
+   "hyp": "जरम लें पसकाशा बपुझिट पुझिट पुझिटिट पुझिटिट आवना बपुझिटिट पुझिटिट पुझिटिट पुझिटिटिटिट पुझ",
+   "wer": 0.60431654676259,
+   "cer": 0.60431654676259
+  },
+  {
+   "ref": "मोसासौरस अपने समय का सबसे बड़ा शिकारी था इसलिए उसे अन्य मोसासौरस के अलावा किसी का भय नहीं था",
+   "hyp": "Mosa Sauras, Atne Samay, Ka Saba Sikarita, Use Anna Mosa Sauras, Ka Alava, Ke Sikam Bhai Nihita.",
+   "wer": 0.9456521739130435,
+   "cer": 0.9456521739130435
+  },
+  {
+   "ref": "10 00-11 00 बजे एमडीटी के बीच यार्ड में कैदियों द्वारा आग लगा दी गई थी",
+   "hyp": "10 سے 11 bha mdt ke bhi chiyad me ke diyodhwara ag lagadhi gayi thi.",
+   "wer": 0.8428571428571429,
+   "cer": 0.8428571428571429
+  },
+  {
+   "ref": "माना जाता है कि ईरान की ज़ाग्रोस पहाड़ियों में 10,000 साल पहले बकरी पालन की शुरुआत हुई थी",
+   "hyp": "மانہ جاتا ہے کہ ایران کے جگروس پہڑیوں میں 10,000 سال پہلے بھٹری پہلان کی سروبات ہوئی تھے۔",
+   "wer": 0.9325842696629213,
+   "cer": 0.9325842696629213
+  },
+  {
+   "ref": "अधिकांश छोटे द्वीप स्वतंत्र राष्ट्र हैं या फ़्रांस से संबंधित हैं और लग्ज़री बीच रिसॉर्ट के रूप में जाने जाते हैं",
+   "hyp": "Adhikaans, Chote Dwi, Ipas, Watantra, Rajkara or Frans, Sambandit and Luxly Beats Resort, Keroop, may go to the Rupi.",
+   "wer": 0.9646017699115044,
+   "cer": 0.9646017699115044
+  },
+  {
+   "ref": "उनका काम ऐसी गुणवत्ता और विस्तार के पहचान का है कि वह टिकट संग्रहकर्ताओं के बीच बहुत कम घरेलू नामों में से एक है कुछ उनके काम को अकेले बटोरने में माहिर हैं",
+   "hyp": "ان کا کام AC Gunwata aur Bistar ke Pahchan ka hai ki vaa tiket sangraha kartao ke bhi chbhaat kaum gharalu naamolb mein se ek hai kuch unke kaum ko akhel e bhaatur ne mein maher hai.",
+   "wer": 0.9612903225806452,
+   "cer": 0.9612903225806452
+  },
+  {
+   "ref": "1537 में असूनचिओन की स्थापना के बाद से पैराग्वे अपने स्वदेशी चरित्र और पहचान को बनाए रखने में कामयाब रहा है",
+   "hyp": "1500 s.a.t.s.me asun chi-on kistapna ke baat se peragve apne swadeshi charitra otta chan ko banai rakne me kamiab raha hai.",
+   "wer": 0.9345794392523364,
+   "cer": 0.9345794392523364
+  },
+  {
+   "ref": "दुर्घटना के बाद गिब्सन को अस्पताल पहुंचाया गया लेकिन कुछ ही समय बाद उनकी मृत्यु हो गई",
+   "hyp": "Durgatna ke baad kebsan ko aspatal pahun chaya gaia, lekhi kochi samayabat, unki mriti ho bhai.",
+   "wer": 0.9529411764705882,
+   "cer": 0.9529411764705882
+  },
+  {
+   "ref": "ब्लॉग से छात्र लेखन में सुधार करने में भी मदद मिल सकती है जहां छात्र अपने ब्लॉग अनुभव की शुरुआत अक्सर बेतरतीब व्याकरण और वर्तनी के साथ करते हैं वहीं दर्शकों की मौजूदगी से इसमें आम तौर पर बदलाव आता है",
+   "hyp": "Blogs 8-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-",
+   "wer": 0.5829145728643216,
+   "cer": 0.5829145728643216
+  },
+  {
+   "ref": "डुवैल जो विवाहित है और उसके दो वयस्क बच्चे हैं उसने मिलर पर बड़ा असर नहीं किया जिस से कहानी संबंधित है",
+   "hyp": "Dwell, jo vivaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid, jo dvaid,",
+   "wer": 0.9313725490196079,
+   "cer": 0.9313725490196079
+  },
+  {
+   "ref": "प्रदर्शन चालू होने के पाँच मिनट में हवा शुरू हो जाती है लगभग एक मिनट बाद हवा 70 किमी/घंटा तक पहुँच रही है... फिर बारिश आती है लेकिन इतनी तेज़ और इतनी बड़ी बूँदें कि यह आपकी त्वचा को सुई की तरह चुभती है फिर आकाश से ओले गिरते हैं लोग घबराते हैं चिल्लाते हैं और अफरातफरी मच जाती है।",
+   "hyp": "Pradeshan Chaluu Honeke 5 Minutes May Aava Suruhojati Honeke 5 Minutes May Aava Sattar Kilometer Prati Khantat Takpahat Rahi Honeke 5 Minutes May Aava Suruhojati Honeke 5 Minutes May Aava Sattar Kilometer Prati Khantat Takpahat Rahi Honeke 5 Minutes May Aava Sattar Kilometer Prati Khantat Takpahat Rahi Honeke 5 Minutes May Aava Suruhojati Hone",
+   "wer": 0.9605734767025089,
+   "cer": 0.9605734767025089
+  },
+  {
+   "ref": "रोलैंडो मेंडोज़ा ने अपनी m16 राइफल से पर्यटकों के ऊपर फायर किया",
+   "hyp": "अूले वाने तो जाना पुव पान जिज दूपाँ ज़ाँ ज़ाँ ज़ाँ पुव पाने पुव पाने पुव पाने पुव पाने पुव पाने पुव पा",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "रोम में अलग-अलग जगहों पर कई बड़े टेलीविज़न स्क्रीन लगाए गए ताकि लोग समारोह देख सकें",
+   "hyp": "Room may alaqalak jaga par, kai, bade televisions screen lakagay, ta ki log samarhaa dhiksakay.",
+   "wer": 0.9759036144578314,
+   "cer": 0.9759036144578314
+  },
+  {
+   "ref": "पिछले हफ्ते meti ने घोषणा की कि apple ने 34 ओवरहीटिंग के मामले सामने आये है  जिसे कंपनी ने गंभीरता से नहीं लिया ।",
+   "hyp": "Pichal afthe METI ngeosuna ki, ki Apple na Chonthis Overhitting ke maa Malay saamne hai hai, Jai Sae Kampani nae Kampirta se nahi liya.",
+   "wer": 0.9823008849557522,
+   "cer": 0.9823008849557522
+  },
+  {
+   "ref": "मस्तिष्क विकृति और व्यवहार के बीच संबंध अनुसंधान में वैज्ञानिकों का समर्थन करते हैं",
+   "hyp": "Masthis, Vikriti & Wevhar ki Bichamband Anusandh Sadan & Wehgani Goa Samarthan Karthi",
+   "wer": 0.9397590361445783,
+   "cer": 0.9397590361445783
+  },
+  {
+   "ref": "कंफेडेरशन के अनुच्छेद के तहत क्रांतिकारी युद्ध के दौरान तेरह राज्यों ने पहली बार एक कमजोर केंद्रीय सरकार का गठन किया जिसमें कांग्रेस इसका एकमात्र घटक थी",
+   "hyp": "KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KANFEDRATION KAN",
+   "wer": 0.9868421052631579,
+   "cer": 0.9868421052631579
+  },
+  {
+   "ref": "बच्चों को कई वजहों से फ़ॉस्टर केयर में रखा जाता है जिनमें अनदेखी करना बुरा बर्ताव करना और यहां तक कि ज़बरदस्ती वसूली करना भी शामिल है",
+   "hyp": "बचचचो कहीं वचचावचाव से बास्दर के नहीं वर वचावचावचावचावचावचावचावचावचावचावचावचावचावचावचावचा�",
+   "wer": 0.5488721804511278,
+   "cer": 0.5488721804511278
+  },
+  {
+   "ref": "यूरोप एक ऐसा महाद्वीप है जो अपेक्षाकृत छोटा है लेकिन इसमें कई स्वतंत्र देश हैं सामान्य परिस्थिति में कई देशों की यात्रा करने का मतलब कई बार वीज़ा आवेदन और पासपोर्ट कंट्रोल की प्रक्रिया से गुज़रना है",
+   "hyp": "Europe is a society which is a small country but many countries are in this but many countries are in this country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is a country which is",
+   "wer": 0.9797979797979798,
+   "cer": 0.9797979797979798
+  },
+  {
+   "ref": "वैज्ञानिकों को यह समझने की उम्मीद है कि ग्रह कैसे बनते हैं खासकर पृथ्वी कैसे बनी चूंकि धूमकेतु पृथ्वी से बहुत पहले टकरा चुके थे",
+   "hyp": "veg dhyani ko kuiye samajne ki umeed hai ki kriye kye se manthi hai kaas ka prithvi kye se bani, chun ki dhum ke tu prithvi se bhaat paili takra chukit hai.",
+   "wer": 0.9606299212598425,
+   "cer": 0.9606299212598425
+  },
+  {
+   "ref": "टेलीविजन रिपोर्टों में प्लांट से निकलने वाला सफेद धुआं दिखाया गया है",
+   "hyp": "Terevision, Repoto ke May plant, May Nikal Neh, Jane Valla, Safet Duak, Tdhikhaya Gaya",
+   "wer": 0.9558823529411765,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "पुलिस अधीक्षक चंद्र शेखर सोलंकी ने कहा कि आरोपी ढके हुए चेहरे के साथ अदालत में पेश हुए थे",
+   "hyp": "Police Dixak Chandrasekar Solanki,",
+   "wer": 0.38202247191011235,
+   "cer": 0.38202247191011235
+  },
+  {
+   "ref": "रूमानियत में सांस्कृतिक नियतिवाद का बड़ा तत्व था जो गोएथे फिच्ते और श्लेगल जैसे लेखकों से लिया गया",
+   "hyp": "Ruma ni yat mein sanskruti ki niyativad ka bada mohatwadha. Jyog ghoi te, fi chite, o slé kan jé jé jé, le kko se liya ga ya.",
+   "wer": 0.9795918367346939,
+   "cer": 0.9795918367346939
+  },
+  {
+   "ref": "उपग्रह को एक रॉकेट से अंतरिक्ष में भेजा गया था वैज्ञानिक अंतरिक्ष में दूरबीनों का उपयोग करते हैं क्योंकि पृथ्वी का वायुमंडल हमारे कुछ प्रकाश और दृश्य को अशुद्ध करता है",
+   "hyp": "Upgrade ko ek rockets sa antrikshmi bhi jagayata, vagannik antrikshmi door bino ka upiyo karta hai ki prithvika vayumandal hama rey kuch prakash aur trishik ko asud kar sakta hai.",
+   "wer": 0.9640718562874252,
+   "cer": 0.9640718562874252
+  },
+  {
+   "ref": "जितनी कम चिंता उतनी ज़्यादा सकारात्मक जीवन ऊर्जा का संचार हर इंसान परम शांति और संतोष पा सकता है",
+   "hyp": "جتنی کم چینتا اتنی زیادہ سکراتمک جیوان اُڑھا کا سنچار، ہر انسان پرمشانتی اور سنتوش پاسکتا ہے.",
+   "wer": 0.9479166666666666,
+   "cer": 0.9479166666666666
+  },
+  {
+   "ref": "बीसवीं सदी के शोध से पता चला है कि आनुवंशिक भिन्नता के दो पूल हैं छुपा हुआ और अभिव्यक्त",
+   "hyp": "20 sadi ke sodh se pata chala hai ki Anu Vanshika bhinne ta ko do pul hai, Shupa hua aur abhi viyat",
+   "wer": 0.9655172413793104,
+   "cer": 0.9655172413793104
+  },
+  {
+   "ref": "स्कीइंग मार्ग को एक हाईकिंग लंबी पैदल यात्रा मार्ग जैसा ही सोचें।",
+   "hyp": "Skying Marco, 1 Hiking, Lamby Pedal Yadra, Mark Chhezahi Suji",
+   "wer": 0.9230769230769231,
+   "cer": 0.9230769230769231
+  },
+  {
+   "ref": "बच्चों को कई वजहों से फ़ॉस्टर केयर में रखा जाता है जिनमें अनदेखी करना बुरा बर्ताव करना और यहां तक कि ज़बरदस्ती वसूली करना भी शामिल है",
+   "hyp": "Bachchung کو کی وجھوں سے پاسترکیر میں رکھا جاتا ہے جن میں ان دیکھی کرنا بھرا بڑھا کرنا اور یہاں تکی جبر دستی و سولی کرنا بھی ساہمیل ہے",
+   "wer": 0.9172932330827067,
+   "cer": 0.9172932330827067
+  },
+  {
+   "ref": "एंटरटेनमेंट न्यूज़ वेबसाइट tmz का मानना है कि फ़ोटोग्राफर ने अपना वाहन सेपुलवेडा बुलेवार्ड की दूसरी तरफ रोका था और सड़क पार करने और जारी रखने से पहले पुलिस स्टॉप की फ़ोटो लेने की कोशिश की कैलिफोर्निया हाईवे पेट्रोल पुलिस अधिकारी ने ट्रैफिक स्टॉप का संचालन करते हुए उसे रोकने के लिए दो बार आदेश दिया",
+   "hyp": "Entertaining News website TMZ Ka Manna hai ki Photographer Neh Aapna Wahan, Supal Veda Bholavard ki Dhuksri Tharaf Rokadha, Sardak Paar Karne, Jari Ratne se Phele Polistok ki Photo Lene ki Koshishik ki, California Highway Patrol Policadikari Neh Trafik Stop ka Sanjalin kratthi o se Ropni gale do ba Raadhej Dheya",
+   "wer": 0.959731543624161,
+   "cer": 0.959731543624161
+  },
+  {
+   "ref": "यह रिपोर्ट इराक के प्रति प्रशासन की वर्तमान नीति के लगभग सभी पहलुओं के प्रति बेहद आलोचनात्मक है और यह इसकी दिशा में तत्काल परिवर्तन का आग्रह करती है",
+   "hyp": "یا ربوٹ ایراپ کے پرٹی پرساسن کی ورتمان نہیں تھیگے لگگا سبی پہلووں کی پرٹی بھیہد آلوش ناتمک ہے اور یا اس کی دیشامن تتکال پر ورتم کا آگرہ کرتی ہے",
+   "wer": 0.9324324324324325,
+   "cer": 0.9324324324324325
+  },
+  {
+   "ref": "प्राकृतिक वातावरण में पौधे सबसे अच्छे दिखते हैं इसलिए सिर्फ एक नमूने को भी हटाने के प्रलोभन को रोकें",
+   "hyp": "Prakrutik batawal may podhe sabse atchidhe dikhet tehe, ictliya sif ek namunye ko bhiya hada ni ke prolobhan ko rokeye.",
+   "wer": 0.97,
+   "cer": 0.97
+  },
+  {
+   "ref": "मार्टेली ने कल नौ सदस्यों के एक नए अनंतिम चुनाव परिषद cep में शपथ ली",
+   "hyp": "Mahatthali naikal 9-7-10-1-9 Antimchuna Parishad, CEP-Meshapathli.",
+   "wer": 0.8970588235294118,
+   "cer": 0.8970588235294118
+  },
+  {
+   "ref": "हालांकि टुबर्क्युलोसिस वाले लोगों के पूरे समूह में एक्सडीआर-टीबी का प्रतिशत अभी भी कम है दक्षिण अफ़्रीका में किसी भी विशेष समय पर कुल 330,000 लोगों में से 6,000 संक्रमित हैं",
+   "hyp": "HALANG Ke TURB QLSS WALI LONGUIN Ke PURESAMMUM ME X DRTB CA PRATSAT ABI BIKAM HAY DAKCHIN AFRICA ME KESSIBI VISSE SOMEPAR KULTIN LAK THE SHAJAR LONGUIMES SE CHEHJAR SANGKRAMIT HAYAN",
+   "wer": 0.9710982658959537,
+   "cer": 0.9710982658959537
+  },
+  {
+   "ref": "ओलिवर सैक्स ने अपने पेपर द प्रेसिडेंट स्पीच में संकेत दिया कि कैसे जो लोग दिमागी नुकसान के कारण भाषण को समझ नहीं पाते हैं फिर भी वे ईमानदारी का सही आकलन कर पाते हैं",
+   "hyp": "Olibert Saxe نے اپنی پیپر دہ پیسیڈنٹ اسپیٹ میں سنکے دیا کی کیسے جو لوگ دیماکی نکسان کی کاریڈ بھا سویڈ کو سمجھ نہیں پاتے ہیں. پھر بیوے ایمانداری کا سحی آکلن کر پاتے ہیں.",
+   "wer": 0.9695121951219512,
+   "cer": 0.9695121951219512
+  },
+  {
+   "ref": "जैसे-जैसे ग्रीक का ज्ञान घटता गया पश्चिम ने खुद को अपनी ग्रीक दार्शनिक और वैज्ञानिक जड़ों से कटा हुआ पाया",
+   "hyp": "Chess Commission, Grik, Kaganangatta, Gaya, Basti Mnekutko, Apt Grik, Darsanig and Vigna, Kjaro, Kata Hoha Paya.",
+   "wer": 0.9714285714285714,
+   "cer": 0.9714285714285714
+  },
+  {
+   "ref": "सामान के ट्रांसपोर्ट के लिए जहाज़ों का इस्तेमाल करना समुद्रों के एक सिरे से दूसरे सिरे तक बड़ी मात्रा में लोगों और सामान को लाने और ले जाने का बहुत ज़्यादा प्रभावी तरीका है",
+   "hyp": "Saaman ki transport ki liye jahad juukau istmal karna samudru ki liye sire se dhursre siret tak, barimatra me logo aur Saaman ko lane aur le jane ka bohot, zadab abhavitari ka hai.",
+   "wer": 0.9593023255813954,
+   "cer": 0.9593023255813954
+  },
+  {
+   "ref": "प्लिटवाइस नेशनल पार्क घने जंगल से घिरा है जहां मुख्य रूप से बीच स्प्रूस और फ़र के पेड़ लगे हुए हैं और यहां अल्पाइन और भूमध्य वनस्पति मिलती हैं",
+   "hyp": "PLITWISE National Park Ghani junglowse ghhe ra hai, jhamu ki roodh se beech, spruce and fur ke paid lage huye,",
+   "wer": 0.7535211267605634,
+   "cer": 0.7535211267605634
+  },
+  {
+   "ref": "लेकिन उन पक्षियों के बारे में बहुत सी चीजें हैं जो अभी भी डायनासोर जैसे दिखते हैं",
+   "hyp": "Lekin un pakshis ke baare me bhoot si chi ze hai, jo abhi bhi dhain osol, jasi dikti hai.",
+   "wer": 0.9259259259259259,
+   "cer": 0.9259259259259259
+  },
+  {
+   "ref": "लीक के अनुसार दस्तावेज़ सीमा विवाद को संदर्भित करेगा जो फ़िलिस्तीन 1967 के मध्यपूर्व युद्ध से पहले सीमाओं के आधार पर चाहता है",
+   "hyp": "Lik Ke Anusaad, Dastavay Sima Vivaat, Kursan Dharmit, Karega, Jofilasthin 1967 Ke Maadja Puri, Vyudhse, Pelle Simao Ke Adhar, Parchata, Haya,",
+   "wer": 0.96,
+   "cer": 0.96
+  },
+  {
+   "ref": "रोम में अलग-अलग जगहों पर कई बड़े टेलीविज़न स्क्रीन लगाए गए ताकि लोग समारोह देख सकें",
+   "hyp": "Roam may alag alag jaghoopar,kai bade telewizan screen lagaay gaya,taki,log smart ho dexaking",
+   "wer": 0.9879518072289156,
+   "cer": 0.9879518072289156
+  },
+  {
+   "ref": "यह डिवाइस को हवा में मूव करके खिलाड़ियों को एक्शन और मूवमेंट कंट्रोल करने की अनुमति देगा",
+   "hyp": "dvc ko hawa me muukar ke hilario ko action or movement, control karnay ki anumati dega",
+   "wer": 0.9545454545454546,
+   "cer": 0.9545454545454546
+  },
+  {
+   "ref": "हालांकि शेंगेन ज़ोन इस मामले में कुछ हद तक एक देश की तरह काम करता है",
+   "hyp": "hala ki shinghen jaun ismamle mi kuchhaatta ke dheesh ki tara karm kar ta hai",
+   "wer": 0.9558823529411765,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "अपनी सरकार के अलावा आप अन्य देशों की सरकारों की सलाह ले सकते हैं हालांकि उनकी सलाह उनके नागरिकों को ध्यान में रखकर दी जाती हैं",
+   "hyp": "اپنی سرکار کی علاوہ آپ اینڈ دیشو کی سرکاروں کی سلا لے سکتے ہیں حالا کی ان کی سلا ان کے ناگری کو دھیان میں رکھ دی جاتی ہے",
+   "wer": 0.8809523809523809,
+   "cer": 0.8809523809523809
+  },
+  {
+   "ref": "उनकी अनुशासित रक्षा गेंदबाजी की कला और टीम के अच्छे काम ने उन्हें बाहर खड़ा कर दिया और अब यह साफ हो गया था की ये टीम टक्कर देगी",
+   "hyp": "Onki Anushaasit Raksha, Gain Bazi ki Kala & Team ke Acheh Kaam Neh, Onki Bhar Kharadiyya & Abheh Saaf Houga Tha Ki, Ye Team Takkar Deke",
+   "wer": 0.952755905511811,
+   "cer": 0.952755905511811
+  },
+  {
+   "ref": "उन्होंने आगे कहा कि हालांकि उन्हें ऐसे दायित्व लेने के लिए नहीं कहा जाना चाहिए जो उनके विकास के चरण जिम्मेदारी और क्षमताओं से परे हैं",
+   "hyp": "انhohne aaghe kaha ki hala ki, انhohne aesidai to lene ke liye nahi kaha jaanachahye, jo unke vikas ki charan chim midari aur kshamta ose parehe",
+   "wer": 0.9473684210526315,
+   "cer": 0.9473684210526315
+  },
+  {
+   "ref": "एरोस्मिथ ने अपने दौरे के अपने शेष संगीत कार्यक्रमों को रद्द कर दिया है",
+   "hyp": "Airosmith نے اپنے دورے کے اپنے شیش سنگیت کاری کرموں کو رد کر دیا ہے",
+   "wer": 0.9285714285714286,
+   "cer": 0.9285714285714286
+  },
+  {
+   "ref": "वैज्ञानिक यह निष्कर्ष निकालने में सक्षम थे कि काला पदार्थ अन्य काले पदार्थ को उसी तरह प्रभावित करता है जिस तरह से आम पदार्थ करता है",
+   "hyp": "vayagani kiyah nishkarth nikalne me saksham tha ki kala padarth anni kala padarth ko usi tara prabhabit kirta hai, jis tara se am padarth kirta hai.",
+   "wer": 0.9694656488549618,
+   "cer": 0.9694656488549618
+  },
+  {
+   "ref": "वर्तमान सीनेटर और अर्जेंटीना की प्रथम महिला क्रिस्टीना फ़र्नांडीज़ डी किर्चनेर ने कल शाम ब्यूनस आयर्स से 50 किलोमीटर 31 मील दूर शहर ला प्लाटा में अपने राष्ट्रपति पद की उम्मीदवारी की घोषणा की",
+   "hyp": "Vartamant, Senator & Argentina Pratam Mehla, Kristina Fernandes D, Kirchner, Neh, Kalsham, Buenos Aires, Pachas Kilometer, Kattis, Meal, Dhu, Shehra, La Plata, Meh, Apti Patipad, Kiyomidwari, Kihoshna Ki.",
+   "wer": 0.9578947368421052,
+   "cer": 0.9578947368421052
+  },
+  {
+   "ref": "उनका ऊष्मीय व्यवहार पृथ्वी की बड़ी गुफाओं जैसा स्थिर नहीं है जो अक्सर काफी स्थिर तापमान बनाए रखती हैं लेकिन यह जमीन के इन गहरे छेद के अनुरूप है,” यूनाइटेड स्टेट्स जियोलॉजिकल सर्वे यूएसजीएस की भूगर्भीय टीम और फ्लैगस्टाफ एरिजोना में स्थित उत्तरी एरिजोना विश्वविद्यालय के ग्लेन कुशिंग ने कहा।",
+   "hyp": "ان کا اُشمی ویوار پر ٹھوی کی بڑی گفاؤن جیسٹھ نہیں ہے جو اخصر کافی استطت تاپمان بڑای رفتی ہیں لیکن یا جمین کے انگیاری چھیت کے ان روپ ہے یونیٹی ریستٹس جیوالوجکل سروے کی بھو گربی اٹیم اور فلاگستف آری جون",
+   "wer": 0.671280276816609,
+   "cer": 0.671280276816609
+  },
+  {
+   "ref": "कुछ क्षेत्रों में पानी को एक मिनट के लिए उबालना काफी होता है अन्य क्षेत्रों में कई मिनट तक उबलाने की आवश्यकता होती है",
+   "hyp": "Kuchshetra maipani ko ek minut ke le uballa kaafi hoodah hai, Anjshetra maipi hoodhe kai minutak uballa ne ki haavishakta hoodhe hai.",
+   "wer": 0.9658119658119658,
+   "cer": 0.9658119658119658
+  },
+  {
+   "ref": "लक्खा सिंह ने छप्पन भोग भजन भी प्रस्तुत किया गायक राजू खंडेलवाल उनके साथ थे",
+   "hyp": "Lakhasig Ne Chhappanbho Bhajan Bhi Prasthut Ki Yag Raju Khundilwalum Khe Saate",
+   "wer": 0.9466666666666667,
+   "cer": 0.9466666666666667
+  },
+  {
+   "ref": "विलासिता के एक उपरिकेंद्र होने के लिए इसको लगभग 400 a.d से  1100 a.d तक जाना गया।",
+   "hyp": "Vilaasita ke upri kendra huni ke liye, اسko lagbhaag 480 se gyara su 80 tak janagaya.",
+   "wer": 0.9506172839506173,
+   "cer": 0.9506172839506173
+  },
+  {
+   "ref": "स्कैफ़ोल्डिंग सीखने की एक विधि नहीं है बल्कि ऐसे लोगों को मददगार होती है जो किसी नई चीज़ को सीख रहे हों जैसे नया कंप्यूटर प्रोग्राम चलना या एक नया प्रोजेक्ट शुरू करना",
+   "hyp": "अचके दोओखी नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नहीं नही",
+   "wer": 0.6445783132530121,
+   "cer": 0.6445783132530121
+  },
+  {
+   "ref": "ब्रह्मांड की सभी वस्तुएं पदार्थ से बनी हैं सारे पदार्थ सूक्ष्तम कणों से बनें हैं जिन्हें अणु कहा जाता है",
+   "hyp": "Bramhan ki Sabhi Vastuay Padharth se bane hai, Saare Pradharth Sukshtam Karo se bane hai, Jini Anuka, Kaha Jata hai.",
+   "wer": 0.9423076923076923,
+   "cer": 0.9423076923076923
+  },
+  {
+   "ref": "साई के साथ-साथ सभी संज्ञा शब्द हमेशा अंग्रेज़ी के बड़े अक्षर से ही शुरू होते हैं भले ही वे वाक्य के बीच में ही क्यों न हों",
+   "hyp": "Saik Saat Saat Saat Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad Saad",
+   "wer": 0.9590163934426229,
+   "cer": 0.9590163934426229
+  },
+  {
+   "ref": "जिसके परिणामस्वरूप मंच पर कलाकार गांजे भरी सिगरटें पीते हैं और ये थिएटर खुद दर्शकों को भी इसमें साथ शामिल होने के लिए प्रेरित करते हैं",
+   "hyp": "जिसके परिनाम सोरुव मच पर खलाकार बारी सीگरेदे पीते है आपर ये तीर वह दरसको कोपी जे साद सामल होने के परेरीत करते है",
+   "wer": 0.6940298507462687,
+   "cer": 0.6940298507462687
+  },
+  {
+   "ref": "असल में फील्ड ट्रिप साझा करना यात्रा पर विचार करने और भविष्य की कक्षाओं के साथ अनुभव करने का एक शानदार तरीका है",
+   "hyp": "Asaalmi Fiori Trips, Aajakarna, Yatra, Anubhav, Bhabhishek, Kachhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav, Anubhav",
+   "wer": 0.963963963963964,
+   "cer": 0.963963963963964
+  },
+  {
+   "ref": "उदाहरण के लिए नॉर्थ कैरोलिना के बेनेट स्कूल के हज़ारों स्टूडेंट्स हर साल राज्य की राजधानी की अपनी यात्रा के बारे में एक वेबसाइट डिज़ाइन करते हैं वेबसाइट हर साल फिर से तैयार की जाती है लेकिन कुछ पुराने वर्ज़न्स को स्क्रेपबुक के रूप में इस्तेमाल करने के लिए ऑनलाइन रखा जाता है",
+   "hyp": "Udharan kehliye, not Carolina ke Benet School ke hazaru student, her salraj ki Rajdani ki, apni atra kehbare mein.",
+   "wer": 0.4051094890510949,
+   "cer": 0.4051094890510949
+  },
+  {
+   "ref": "ये सिद्धांत देखते हैं कि कुछ लोगों के बारे में ऐसी कौन-सी बातें हैं जो उन्हें वही चीज़ें करने के लिए कहती हैं जो वे चाहते हैं और उनके माहौल की कौनसी सी बाते हैं जो वे उन्हें कुछ चीज़ें करने या नहीं करने के लिए कहती हैं",
+   "hyp": "یہاں سدھانتا دیکھتے ہیں کہ کچھ لوگوں کی بارے میں ایسی کون سے باتے ہیں جو وہی چیچ کرنے کے لئے کہتی ہے وہ وہی چاہتے ہیں اور ان کے محل کو کون سے بھی باتے ہیں جو وہیے کچھ چیچھوں کرنے یا نہیں کرنے کے لئے کہتی ہے",
+   "wer": 0.9174311926605505,
+   "cer": 0.9174311926605505
+  },
+  {
+   "ref": "ज़्यादा परंपरागत चर्चों में ईस्टर सप्ताहांत में शनिवार रात को ईस्टर विजिल का आयोजन किया जाता है जिसमें लोग क्रिस के पुनर्जन्म का उत्सव मनाने के लिए आधी रात के समय उत्सव मनाना शुरू करते हैं",
+   "hyp": "جیادہ پرمپرагت چرچوں میں ایشٹر سپتہ ہند میں شنیوارات کو ایشٹر ویجل کا آیوجن کیا جاتا ہے جس میں لکریس کے پرنوجن کا اوٹسامنانی کے لیادیرات کے سمیوٹسامنانہ سرو کرتے ہیں",
+   "wer": 0.8617021276595744,
+   "cer": 0.8617021276595744
+  },
+  {
+   "ref": "यह तर्कसंगत लग रहा है क्योंकि ऐसा महसूस नहीं होता है कि पृथ्वी चल रही है है कि नहीं",
+   "hyp": "یہ ترک سنگت لگرہ ہے کیونکی ایسا محسوس نہیں ہوتا ہے کہ پر توی چل رہی ہے ہے کہ نہیں",
+   "wer": 0.9518072289156626,
+   "cer": 0.9518072289156626
+  },
+  {
+   "ref": "ये जोड़े अपने बच्चे के लिए गोद लेने की योजना बनाने का विकल्प चुन सकते हैं",
+   "hyp": "यह जो ते ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले ले",
+   "wer": 0.7945205479452054,
+   "cer": 0.7945205479452054
+  },
+  {
+   "ref": "मौजूद लोगों की संख्या इतनी बड़ी थी कि सेंट पीटर्स स्क्वायर में अंतिम संस्कार के लिए हर किसी के लिए पहुंच पाना मुमकिन नहीं था",
+   "hyp": "Mojud Logue, Sankya, Itni Bari Thi Ki Sand, Pitter Square, Antim Sanskar Ke Lye, Her Kisi Ke Lye, Pahuch Pana, Munki Nai Ka",
+   "wer": 0.9112903225806451,
+   "cer": 0.9112903225806451
+  },
+  {
+   "ref": "इस साल की शुरुआत में 53 साल के कुओमो ने अपना शासनकाल शुरू किया और पिछले महीने समलैंगिक विवाह को वैध बनाने वाले बिल पर हस्ताक्षर किए",
+   "hyp": "पिद्षाल के सुर्वाद में तप्दषाल के कुपोने वपना सासन काल सुर। पिद्ले महीं में समलांगें किबिशाव का बपिद्वनाने बाले पिल्पर",
+   "wer": 0.8244274809160306,
+   "cer": 0.8244274809160306
+  },
+  {
+   "ref": "अलगाव और पुनर्संयोजन भिन्नता प्रत्येक पीढ़ी के साथ दो पूलों के बीच आगे-पीछे होती रहती है",
+   "hyp": "Algao & Puneer Siyojan Bhinnita Pratik Pidi ke Saad, 2 Pula Ke Bij, Aagai Pichi khutirahti hai.",
+   "wer": 0.9318181818181818,
+   "cer": 0.9318181818181818
+  },
+  {
+   "ref": "जो भी ऊंचाई या पहाड़ी दर्रे पर गाड़ी चलाने जा रहा है उसे हिम बर्फ या ठंड के तापमान की संभावना के विचार को मन में रखना चाहिए",
+   "hyp": "جو بھی اچھای یا پہاڑی درری پر گاری چلانی جا رہا ہے اسے ہم برف یا ٹھنٹ کی تابن کی سمبھاگنا کی بیچھا رکھو من میرکنا چاہی ہے",
+   "wer": 0.959349593495935,
+   "cer": 0.959349593495935
+  },
+  {
+   "ref": "चांद की सतह चट्टानों और धूल से बनी है चांद की बाहरी परत को क्रस्ट कहते हैं",
+   "hyp": "Chant ki satay chattano aur dool se bani hai, Chant ki bahari Bharat ko krst kaya thay",
+   "wer": 0.9459459459459459,
+   "cer": 0.9459459459459459
+  },
+  {
+   "ref": "बाली में इस एजेंडे के अन्य विषयों में दुनिया के बचे हुए जंगलों को बचाने और ऐसी तकनीकों का आदान प्रदान करना का विषय शामिल है जिससे कि विकासशील देशों को कम प्रदूषणकारी तरीकों से आगे बढ़ने में मदद मिले",
+   "hyp": "baali mi iz agende ke anne wishe ho mein dunia ke baatse hoi jungle hoi baatchani wa aisee takni ko ka adhan pradhan karni ka wishe shamil hai, jise ki vikaashiyat eisho ko kam pradushan kari tari ko se aage bhandne me madat mele",
+   "wer": 0.9646464646464646,
+   "cer": 0.9646464646464646
+  },
+  {
+   "ref": "इसने हमें ट्रेन कार और इसी प्रकार के कई अन्य परिवहन के साधन दिए हैंं",
+   "hyp": "In this we train and provide many other services to the public.",
+   "wer": 0.8823529411764706,
+   "cer": 0.8823529411764706
+  },
+  {
+   "ref": "परिसर के किनारे ज़्यादातर इमारतें फिर से बनाई गई हैं ताकि पर्यटकों को बेहतर ढंग से पता चल सके कि वे मूल रूप में कैसी दिखाई देती थी",
+   "hyp": "Pairasar ki ki naare siaadatar imaad tefir se baanai gaayin hentake paritokho ko bhaihtar dhamse pata chale ki we mool rup mein kese dhighae dhighe.",
+   "wer": 0.9384615384615385,
+   "cer": 0.9384615384615385
+  },
+  {
+   "ref": "गीज़ा पठार  गीज़ा नेक्रोपोलिस” या मृतकों की मिस्र की घाटी में कई पिरामिड जिनमें से द ग्रेट पिरामिड सबसे बड़ा है कई छोटी कब्रें कई मंदिर और महान स्फिंक्स हैं",
+   "hyp": "Geiza Patar Geiza Necropolis Ya Amritko ki Misran ki Ghati may Kai Piramid, Kai Chhoti Kabre, Kai Mandir and Mahan Swings",
+   "wer": 0.7243589743589743,
+   "cer": 0.7243589743589743
+  },
+  {
+   "ref": "बुधवार के आयोजन के बाद कारपानेडो ने चैंपियनशिप में दो इंडिविज़ुअल रेस में हिस्सा लिया",
+   "hyp": "Boudhwar ke Ayujan ke baad, Karpa Nido ni Championship ni Doh Individuals Race ni Hisa Lia.",
+   "wer": 0.9764705882352941,
+   "cer": 0.9764705882352941
+  },
+  {
+   "ref": "मोसासौरस अपने समय का सबसे बड़ा शिकारी था इसलिए उसे अन्य मोसासौरस के अलावा किसी का भय नहीं था",
+   "hyp": "MOSA SOARAS ڈپنے سمائے کا سب سے بڑا شکھاڑی تھا اس لئے اسے انیا MOSA SOARAS ڈالاوہ کسی کا بھائے نہیں تھا",
+   "wer": 0.9565217391304348,
+   "cer": 0.9565217391304348
+  },
+  {
+   "ref": "इस साल की शुरुआत में 53 साल के कुओमो ने अपना शासनकाल शुरू किया और पिछले महीने समलैंगिक विवाह को वैध बनाने वाले बिल पर हस्ताक्षर किए",
+   "hyp": "اسaal کی شروعات میں Tripansaal کے Khoomo نے اپنا شاہسن کال شروع کیا اور پچھلے محینے سملنگے کویوہا کو ویرد منانیگ والے بل پر حسطاق شر کی",
+   "wer": 0.9618320610687023,
+   "cer": 0.9618320610687023
+  },
+  {
+   "ref": "एक बम गवर्नर जनरल के कार्यालय के बाहर फटा था",
+   "hyp": "1 BAM GAURNAL JARNAL KIKARYA LAY KI BAHAR FATASA",
+   "wer": 0.9090909090909091,
+   "cer": 0.9090909090909091
+  },
+  {
+   "ref": "वाहन को उसी दिन तकरीबन 1200 gmt के समय पर दुर्घटनास्थल से दूर ले जाया गया",
+   "hyp": "Vahan ko usiddin takriban bhaaraso GMT ke sami paar durgatna sthal se door leja ia gaya",
+   "wer": 0.9452054794520548,
+   "cer": 0.9452054794520548
+  },
+  {
+   "ref": "मध्य युग के अंत में पश्चिमी यूरोप ने अपनी शैली विकसित करना शुरू कर दिया धर्मयुद्ध के परिणामस्वरूप उस समय के सबसे बड़े विकास में से एक लोगों ने कपड़ों को बांधने के लिए बटन का उपयोग करना शुरू किया",
+   "hyp": "Madhya Yukke Antme Pusti Mi Yurup Neh Apni Saili Viksit Karna Suru Kar Diyaya Tarmayyut Ke Parinam Suru Pus Samay Ke Sapsi Badevi Kas Meh See Ek Lovon Ek Kapotko Bhanne Keliye Bhattan Kao Pyoksan Suru Kar Suru Kiyaya",
+   "wer": 0.9742268041237113,
+   "cer": 0.9742268041237113
+  },
+  {
+   "ref": "इसने हमें ट्रेन कार और इसी प्रकार के कई अन्य परिवहन के साधन दिए हैंं",
+   "hyp": "اس نے Hami train, car & this is the main vehicle of many different vehicles",
+   "wer": 0.9705882352941176,
+   "cer": 0.9705882352941176
+  },
+  {
+   "ref": "अभी भी प्राधिकारियों से सलाह लें सभी संकेतों का पालन करें और सुरक्षा चेतावनियों पर पूरा ध्यान दें",
+   "hyp": "A bb Pradi Kariosi Salali, sabi sange toka palan Karihur suraksa cetanio per pura diyan bb",
+   "wer": 0.9175257731958762,
+   "cer": 0.9175257731958762
+  },
+  {
+   "ref": "हालांकि धीमे कम्युनिकेशन चैनल की वजह से पश्चिम का रहन-सहन 25-30 साल पीछे जा सकता है",
+   "hyp": "na ki thieme communication channel ki vajra se pastim parahan sehen paatjas thiees saal pichha jao saat tha hai",
+   "wer": 0.9397590361445783,
+   "cer": 0.9397590361445783
+  },
+  {
+   "ref": "ms बीमारी केंद्रीय तंत्रिका तंत्र पर असर करती है जिसमें दिमाग स्पाइनल कॉर्ड और ऑप्टिक नर्व शामिल हैं",
+   "hyp": "MSB-Mari Kendria tanterka tanthropar asrkati hai, jisme dimaak spinal cord aur optic nerve shaman hai.",
+   "wer": 0.92,
+   "cer": 0.92
+  },
+  {
+   "ref": "इस प्रारूप सबसे सरल पूर्ण-संख्या अनुपात प्राप्त करने के लिए बारह से भाग देना के अभिमुखता अनुपात को इसलिए 3:2 कहा जाता है।",
+   "hyp": "iis prarup sab si sarar kuna sa kya anupat prapth karne ke liye bhaara sa bakdena ki abhimuta anupat ko iis liya tina bina bila mdoh kaha jata hai",
+   "wer": 0.9669421487603306,
+   "cer": 0.9669421487603306
+  },
+  {
+   "ref": "तूफान और बवंडर की तरह आंधी ओले भारी बारिश और जंगल की आग तीव्र मौसम का हिस्सा और असर हैं",
+   "hyp": "Tufan & Bhavandar Ki Tara & Di Aale Bhari Bhadish & Jangle Ki Aak Tiivra Moham Ka Hissa & Asar Hai",
+   "wer": 0.9080459770114943,
+   "cer": 0.9080459770114943
+  },
+  {
+   "ref": "नेक्स्टजेन प्रणाली बारे में एफएए का दावा है कि इससे विमान को छोटे मार्गों से उड़ाना और हर साल लाखों गैलन ईंधन बचाना संभव होगा और इससे कार्बन उत्सर्जन में भी कमी आएगी",
+   "hyp": "Next gen Pradani ke baale mein FAEKADawa hai ki issseve man ko chhote margo se udhana. Wa rhaar saal lahko galan indan majana sambhav hoga. Wa rhaar issse karban uth sarjan ne bi kamee aayi ki.",
+   "wer": 0.9696969696969697,
+   "cer": 0.9696969696969697
+  },
+  {
+   "ref": "लोकप्रिय खेलों में फ़ुटबॉल बास्केटबॉल वॉलीबॉल वाटर पोलो तलवारबाज़ी रग्बी साइकिलिंग आइस हॉकी रोलर हॉकी और एफ़ 1 मोटर रेसिंग शामिल हैं",
+   "hyp": "Lok Priya Khilu Me, Food Ball, Basket Ball, Wally Ball, Water Ballu, Talwar Bazi, Rabbi, Cycling, Ice Hockey, Roller Hockey, or F-1 Motor Racing Samil Hai.",
+   "wer": 0.9545454545454546,
+   "cer": 0.9545454545454546
+  },
+  {
+   "ref": "यह समुद्र के नीचे पतला और ऊंचे क्षेत्रों के नीचे मोटा होता है",
+   "hyp": "یہ Samudh ki ni Chapatla aur uche Shedro mein Nicha Mutah ho ta hai",
+   "wer": 0.9344262295081968,
+   "cer": 0.9344262295081968
+  },
+  {
+   "ref": "पुनर्निर्माण की कोशिश की स्पष्ट आलोचना वॉशिंगटन के कथित घनिष्ट लोगों को पुनर्निर्माण के ठेके दिए जाने पर केंद्रित रही है",
+   "hyp": "Puna Nirmann ki ko shish ki spasht aloch na Washington ke Kathit Ganesh to Lovoo ko Puna Nirmann ke tete dhe jaane par Kendrek rahi hai.",
+   "wer": 0.95,
+   "cer": 0.95
+  },
+  {
+   "ref": "ये सिद्धांत देखते हैं कि कुछ लोगों के बारे में ऐसी कौन-सी बातें हैं जो उन्हें वही चीज़ें करने के लिए कहती हैं जो वे चाहते हैं और उनके माहौल की कौनसी सी बाते हैं जो वे उन्हें कुछ चीज़ें करने या नहीं करने के लिए कहती हैं",
+   "hyp": "یہ سدھان دیکھتے ہیں کہ کچھ لوگوں کے بارے میں ایسی کنسی باتے ہیں جو اونی وحیشیزے کرنے کے لیے کہتے ہیں جو وہ چھاہتے ہیں اور اونکے محول کی کنسی باتے ہیں جو وہ اونی کچھ چیزے کرنے یا نہیں کرنے کے لیے کہتے ہیں",
+   "wer": 0.8944954128440367,
+   "cer": 0.8944954128440367
+  },
+  {
+   "ref": "याद रखें कि मुख्य स्टेज पर म्यूज़िक बंद हो जाने के बाद भी फ़ेस्टिवल के कुछ हिस्से ऐसे होंगे जो देर रात तक संगीत बजाते रहेंगे",
+   "hyp": "Yad Rakhye ki Mukhi Stage Pan music Bandha Foojaane ke baad bhi Fwaistival ke kuch hi she Aiseh Hone khe Chodhe Rath Tak Sangi Idbhajati Rhe Hone",
+   "wer": 0.9435483870967742,
+   "cer": 0.9435483870967742
+  },
+  {
+   "ref": "उनकी अनुशासित रक्षा गेंदबाजी की कला और टीम के अच्छे काम ने उन्हें बाहर खड़ा कर दिया और अब यह साफ हो गया था की ये टीम टक्कर देगी",
+   "hyp": "ان کی انுشா سے ترکشا, گیندبازی کی کلا, اور TEAM کے اچھے کام نے اُنے بہار کھڑا کر دیا, اور اب یہ ساہ ہو گیا تھا کہ یہ TEAM تک کر دے گی۔",
+   "wer": 0.937007874015748,
+   "cer": 0.937007874015748
+  },
+  {
+   "ref": "वेटिकन सिटी की जनसंख्या लगभग 800 है यह विश्व का सबसे कम जनसंख्या वाला सबसे छोटा स्वतंत्र राष्ट्र है",
+   "hyp": "Vettigan City Keygence Khealabh Bhak Aachohi, Yaviswaka Saba Pse Kong Jansagyavala Saba Pse Kortasvatantra, Rastrahhe",
+   "wer": 0.9595959595959596,
+   "cer": 0.9595959595959596
+  },
+  {
+   "ref": "आपके हाथों की नमी बाहरी परतों के साथ क्रिया करेगी जो अजीब महसूस करेगी और एक तरह का आवरण बनाएगी",
+   "hyp": "آپ کے ہاتھوں کی نمی بہری پڑھوں کے ساتھ قریع کرے گی جو اجیب محسوس کرے گی اور ایک طرح کا آورن بنائی گی",
+   "wer": 0.9680851063829787,
+   "cer": 0.9680851063829787
+  },
+  {
+   "ref": "रात के समय 150 और 200 के बीच प्रतियों बनती है  जिन्हे अब  डनलप ब्रॉडसाइड्स” के रूप में जाना जाता है।",
+   "hyp": "Ratt ke Samai 150-200 ke bich Pratiyo banti hai, jinnay ab, dun lab, brood sites ke rupe mein mana jata hai.",
+   "wer": 0.93,
+   "cer": 0.93
+  },
+  {
+   "ref": "लीक के अनुसार दस्तावेज़ सीमा विवाद को संदर्भित करेगा जो फ़िलिस्तीन 1967 के मध्यपूर्व युद्ध से पहले सीमाओं के आधार पर चाहता है",
+   "hyp": "لیکنسا ردستا وید سیما ویوات کو سندر بید کرے گا جو فیلستین اونیسو سوڑ ست کے مدپور بید دوس سے پہلے سیماو کے عظار پر چاہتا ہے",
+   "wer": 0.92,
+   "cer": 0.92
+  },
+  {
+   "ref": "11:35 बजे अग्नि बचाव दल ने अंततः आग बुझा दी थी",
+   "hyp": "Kerala Patalis Pajayarani Pachahadal Neh Anthata Haab Bhajadi P",
+   "wer": 0.9782608695652174,
+   "cer": 0.9782608695652174
+  },
+  {
+   "ref": "कैल्शियम और पोटैशियम जैसे तत्वों को धातु माना जाता है बेशक चांदी और सोने जैसी धातुएं भी हैं",
+   "hyp": "Kailashma potasham, jase tatwo kodhatu mana jata hai, be shakchandhi aur sone jase dhatwe bhi hai.",
+   "wer": 0.967032967032967,
+   "cer": 0.967032967032967
+  },
+  {
+   "ref": "वाइल्ड कार्ड खरीद लेना फ़ायदेमंद भी हो सकता है क्योंकि इससे आप दक्षिण अफ़्रीका के चुनिंदा पार्क या सभी दक्षिण अफ़्रीकी नेशनल पार्क देख सकते हैं",
+   "hyp": "Vide card, Khairil, Lehna, Fahide, Manbi,",
+   "wer": 0.2867132867132867,
+   "cer": 0.2867132867132867
+  },
+  {
+   "ref": "नींद की रुकावट आपके सामान्य नींद की अवधि के दौरान आपको जगाने की प्रक्रिया है और थोड़े समय बाद 10-60 मिनट यह चली जाती है ।",
+   "hyp": "Neendaki Rukawad, Aapke samanne neendaki abdhi ke dhoran, Aapko jaganne ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai, Aapko jagane ki prakliya hai",
+   "wer": 0.9669421487603306,
+   "cer": 0.9669421487603306
+  },
+  {
+   "ref": "यूरोप एक ऐसा महाद्वीप है जो अपेक्षाकृत छोटा है लेकिन इसमें कई स्वतंत्र देश हैं सामान्य परिस्थिति में कई देशों की यात्रा करने का मतलब कई बार वीज़ा आवेदन और पासपोर्ट कंट्रोल की प्रक्रिया से गुज़रना है",
+   "hyp": "Europe is a very big country but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many countries are very small but many",
+   "wer": 0.9696969696969697,
+   "cer": 0.9696969696969697
+  },
+  {
+   "ref": "यह कहने की कोई ज़रूरत नहीं कि यदि आप रोमांस लैंग्वेज़ जानते हैं तो आपके लिए पुर्तगाली सीखना आसान होगा",
+   "hyp": "یہ کہنے کی کوئیs ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھa ھ",
+   "wer": 0.9405940594059405,
+   "cer": 0.9405940594059405
+  },
+  {
+   "ref": "अभी भी प्राधिकारियों से सलाह लें सभी संकेतों का पालन करें और सुरक्षा चेतावनियों पर पूरा ध्यान दें",
+   "hyp": "ابھی بھی پرادی کاریوں سے سلالے, سبی سنکیتوں کا پالن کری اور سرکچہ چتاب دیوں پر پورا دھیان دے",
+   "wer": 0.9484536082474226,
+   "cer": 0.9484536082474226
+  },
+  {
+   "ref": "इटली के कई अन्य शहरों और दुनिया के बाकी हिस्सों में खासकर पोलैंड में इस तरह के सेटअप बनाए गए थे जिन्हें बड़ी संख्या में लोगों ने देखा था",
+   "hyp": "Idli ke kai anya sherun aur dunya ke baaki hishum mein khaskar poland mein, İt sara ke set up banai gaayethe, jine bari sankhyam e lugu nidhi kha tha.",
+   "wer": 0.9485294117647058,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "लेटन ने पीएम से मुलाकात के दौरान कंज़र्वेटिव पार्टी के पर्यावरण बिल में बदलाव के लिए कहा था अब कंज़र्वेटिव पार्टी के पर्यावरण बिल को पूरी तरह से फिर से लिखने के लिए कहा जा रहा है",
+   "hyp": "Lately, P.M. Simula kaat ke doaran, conservative party ke paria waran bill me batlaav ke li kaat tha. Abh kanzevative party ke paria waran bill ko, Puri tara se firdse likne ke li kaa jaaraha hai.",
+   "wer": 0.9438202247191011,
+   "cer": 0.9438202247191011
+  },
+  {
+   "ref": "यह रिपोर्ट इराक के प्रति प्रशासन की वर्तमान नीति के लगभग सभी पहलुओं के प्रति बेहद आलोचनात्मक है और यह इसकी दिशा में तत्काल परिवर्तन का आग्रह करती है",
+   "hyp": "یہاں REPORT IRAQ KEPRATI PRASASAN KIVARTAMAN NITI KELABBAKS SABHI PAHILMU KEPRATI BHEHED ALOCHANATMAKHES, اور یہاں اس کی Disham Etaatkal Paryvardhan کا آگرہ کرتی ہے.",
+   "wer": 0.9864864864864865,
+   "cer": 0.9864864864864865
+  },
+  {
+   "ref": "गोभी का जूस अम्लीय या आधारभूत क्षारीय रसायन के आधार पर रंग बदलता है",
+   "hyp": "Gowi Ka Jhoos Amliya Ya Adhar Bhut Shariya Rasayan Ka Adhar Patrang Vadalta hai",
+   "wer": 0.9552238805970149,
+   "cer": 0.9552238805970149
+  },
+  {
+   "ref": "चुनिंदा रूट पर बड़ी कंपनियों के खुद के विमान हैं लेकिन अन्य रूट पर और छोटी फ़र्म के लिए यह एक समस्या है",
+   "hyp": "Chuninda Root Pair, Badi Company Ok, Khut Ke Viman Hai, Lekin Anne Root Pair,",
+   "wer": 0.6990291262135923,
+   "cer": 0.6990291262135923
+  },
+  {
+   "ref": "चीर धाराएं समुद्र तट पर लगकर लौटने वाली लहरों का प्रवाह होता है अक्सर एक चट्टान या इसी तरह के पदार्थों पर",
+   "hyp": "CHEER DHARAE, SAMODER TUT, LATNE VALLE LERONS, ACCEE 1 CHATTAINYAH, EASY TARA KEPADHARTO PUR",
+   "wer": 0.8571428571428571,
+   "cer": 0.8571428571428571
+  },
+  {
+   "ref": "यह कहते हुए कि वे चीन के आर्थिक उत्पादन के आधार पर बनाए जाएंगे उन्होंने कटौती के लिए कोई आंकड़ा निर्धारित नहीं किया",
+   "hyp": "یہ کہتے ہوئے ki ve chil ke arti kutpadan ke adhar par banai jai ngke. Onani katroti ki liye kui yankara nidharit nahi ki yai.",
+   "wer": 0.9652173913043478,
+   "cer": 0.9652173913043478
+  },
+  {
+   "ref": "चुनिंदा रूट पर बड़ी कंपनियों के खुद के विमान हैं लेकिन अन्य रूट पर और छोटी फ़र्म के लिए यह एक समस्या है",
+   "hyp": "Chuninda Root Pro Bari Company O ke khut ke viman hai, Lekin unne Root Pro, Commissiona,",
+   "wer": 0.8155339805825242,
+   "cer": 0.8155339805825242
+  },
+  {
+   "ref": "सभी दक्षिण अफ्रीकी राष्ट्रीय उद्यानों के साथ ही पार्क में दैनिक संरक्षण और प्रवेश के लिए शुल्क लगता हैं",
+   "hyp": "Sabeed Aachchanafri ki Rashtiwad Dhanu ke Saati Parc Man Dhani Kshandachchanva Pravees Ki Lissurur Kulagta hai",
+   "wer": 0.9902912621359223,
+   "cer": 0.9902912621359223
+  },
+  {
+   "ref": "माना जाता है कि ईरान की ज़ाग्रोस पहाड़ियों में 10,000 साल पहले बकरी पालन की शुरुआत हुई थी",
+   "hyp": "Manajatahay ki Irang ki Zagros Pahadiomayi 10000-10000-Pahal Bakri Palan ki Shurwaat huithi.",
+   "wer": 0.9101123595505618,
+   "cer": 0.9101123595505618
+  },
+  {
+   "ref": "वाइल्ड कार्ड खरीद लेना फ़ायदेमंद भी हो सकता है क्योंकि इससे आप दक्षिण अफ़्रीका के चुनिंदा पार्क या सभी दक्षिण अफ़्रीकी नेशनल पार्क देख सकते हैं",
+   "hyp": "Viled Card Gharith Lera Fahide Man Bhi Ho Sakhta Hai,",
+   "wer": 0.36363636363636365,
+   "cer": 0.36363636363636365
+  },
+  {
+   "ref": "इसके शुरुआती दिनों में इस शो को केवल लंबे समय तक चलने वाली इंटरनेट रेडियो साइट toginet रेडियो टॉक रेडियो पर केंद्रित एक साइट पर फ़ीचर किया गया था",
+   "hyp": "اسے شروعاتی دن میں اسے شو کو کےول لنبے سمیتک چلنے والی انٹرنت ریڈیو سائٹ توگی نائٹ ریڈیو توک ریڈیو پر کےندرت ایک سائٹ پر فیچر کیا گیا تھا",
+   "wer": 0.9103448275862069,
+   "cer": 0.9103448275862069
+  },
+  {
+   "ref": "ये ज़्यादातर रेत के तट हैं जहां तैरना सुरक्षित माना जाता है इनमें से ज़्यादातर में पोहुकुटावा पेड़ों की छाया रहती है",
+   "hyp": "یہ جادатar red ki tatt hai, jahatair na surak siddhmana jatah hai, in me se jadatar me pohukudwap pedeo ka chayar rahithi hai.",
+   "wer": 0.9482758620689655,
+   "cer": 0.9482758620689655
+  },
+  {
+   "ref": "आप गोमा के आस-पास घूमने के लिए बोडा-बोडा मोटरसाइकिल टैक्सी ले सकते हैं. छोटी सैर के लिए आम तौर पर स्थानीय किराया करीब 500 कांगोलीज़ फ़्रैंक लगता है",
+   "hyp": "آپ goma ke aspas buhne ke liye boda boda motor cycle taxi leh sapte hai.",
+   "wer": 0.43537414965986393,
+   "cer": 0.43537414965986393
+  },
+  {
+   "ref": "राज्यपाल के कार्यालय ने बताया कि घायलों में से उन्नीस पुलिस अधिकारी थे",
+   "hyp": "Shah Chupalke Karyalayi ne bata ya ki, Ghayalo mein se, unni spulis adhikari thaay.",
+   "wer": 0.9571428571428572,
+   "cer": 0.9571428571428572
+  },
+  {
+   "ref": "मस्तिष्क विकृति और व्यवहार के बीच संबंध अनुसंधान में वैज्ञानिकों का समर्थन करते हैं",
+   "hyp": "Mastishk Vikriti & Vehwahar ke Veet Samband Anu Sadhan, May Vigyanikow ka Samarthhan karte hai.",
+   "wer": 0.9759036144578314,
+   "cer": 0.9759036144578314
+  },
+  {
+   "ref": "माऊ आंदोलन द्वारा स्वतंत्रता के लिए आयोजित संघर्ष के दौरान नगर में एक शांतिपूर्ण सभा में प्रमुख तापुआ तामासेसे सेलोफ़ी तृतीय की हत्या हो गई",
+   "hyp": "Mao Andholan Dwara Satrintata ke liye Ayujit Sanghars ke Dwaran Nagar me ek Shanti Poonu Sabha me Pramuk Tapua Tamo Se Se Selofi Twittia ki Hatia Huguay",
+   "wer": 0.9568345323741008,
+   "cer": 0.9568345323741008
+  },
+  {
+   "ref": "पहाड़ी इलाकों में ज़्यादा दुर्घटना हुई इसकी वजह आपसी दुश्मनी को माना जाता है",
+   "hyp": "Pahadi Lakhom , llaadha jagat nao hee ski vajasayap ski deeshmani ko mana jata hai",
+   "wer": 0.9473684210526315,
+   "cer": 0.9473684210526315
+  },
+  {
+   "ref": "मध्यपूर्व की गर्म जलवायु में घर उतना ज़रूरी नहीं था",
+   "hyp": "مدے پور وکی گر مجلوائیوں میں گھر اتنا ضروری نہیں تھا",
+   "wer": 0.9215686274509803,
+   "cer": 0.9215686274509803
+  },
+  {
+   "ref": "इसके मुंह के तालु में एक अतिरिक्त सेट के साथ ही 70 से ज़्यादा रेजर की तरह नुकीले दांतों से भरे इसके लंबे जबड़े थे जिसका अर्थ है कि उसके रास्ते से गुज़रने वाली किसी भी चीज़ के लिए कोई बचाव नहीं था",
+   "hyp": "اس ke muke talu mein ek atirit sep ke saadhi sattar se zadar reizar ke taray, mukhile dhan to se bhari, hiske lambe jabre tha, jis ka art hai ki uske raste se guzar ne wali kisi bhi chiis ke liye koi wachab nahi tha.",
+   "wer": 0.9692307692307692,
+   "cer": 0.9692307692307692
+  },
+  {
+   "ref": "अंडरवॉटर टोपोलॉजी के कारण कुछ गहरे सेक्शन्स में रिटर्न फ़्लो सांद्र होता है और यहां से गहरे पानी में तेज़ प्रवाह हो सकता है",
+   "hyp": "Under water topology make, some gheri sections return flow is standard and here gheri water can be used in water",
+   "wer": 0.8861788617886179,
+   "cer": 0.8861788617886179
+  },
+  {
+   "ref": "उन्होंने अफवाहों को राजनीतिक बकवास और मूर्खतापूर्ण कहा",
+   "hyp": "انہوں نے افوانوں کو راجنت کی بکواص اور مختلف ہون کہا",
+   "wer": 0.8703703703703703,
+   "cer": 0.8703703703703703
+  },
+  {
+   "ref": "अन्य नामांकनों में बेस्ट पिक्चर डायरेक्टर सिनेमेटोग्राफ़ी कॉस्ट्यूम डिज़ाइन फ़िल्म-संपादन मूल स्कोर प्रोडक्शन डिज़ाइन ध्वनि संपादन ध्वनि मिश्रण और ओरिजनल स्क्रीनप्ले शामिल हैं",
+   "hyp": "Anya Namankano Me Best Picture Director, Cinematography, Costume Design Film Sampadhan, Molescore, Production Design, Dhani Sampadhan, Dhani Misran, or Original Screenplay Shyamil Hai.",
+   "wer": 0.9657142857142857,
+   "cer": 0.9657142857142857
+  },
+  {
+   "ref": "सावधान रहें कि कपड़े को बहुत गर्म न होने दें जो सिकुड़न का कारण बन सकता है या बहुत गरम होने पर जल सकता है।",
+   "hyp": "Saudhanda hai ki Kapri ko bhaod Garma na hoonete, jo si kudni ka karan bhan sakta hai ya bhaod Garma hoonete, jhan sakta hai.",
+   "wer": 0.9716981132075472,
+   "cer": 0.9716981132075472
+  },
+  {
+   "ref": "कैलिफोर्निया के गवर्नर अर्नोल्ड श्वार्ज़नेगर ने कानून में एक बिल पर हस्ताक्षर किए जो नाबालिगों को हिंसक वीडियो गेम उन्हें बेचने या किराए पर देने से प्रतिबंध लगाता है",
+   "hyp": "கலی پھرنیا کے گبرنار اور نل سواجنے گر نے کانوں میں ایک بیل پر حتتا کر کیے جو نابا لی کو کے حینسک بھڑیو گیم انہیں بیچ نے یا کی رائپر دینے سے پرتبندھل لگایا ہے",
+   "wer": 0.9272727272727272,
+   "cer": 0.9272727272727272
+  },
+  {
+   "ref": "गोभी का जूस अम्लीय या आधारभूत क्षारीय रसायन के आधार पर रंग बदलता है",
+   "hyp": "Gobi ka juice amliya ya adhar bud rasayan ke adhar pa rang bha dhag tha hai",
+   "wer": 0.9402985074626866,
+   "cer": 0.9402985074626866
+  },
+  {
+   "ref": "हमारे ग्रह की नदियों से महासागरों में जाने वाले पानी का 20% हिस्सा अमेज़न से आता है",
+   "hyp": "our guide of the river, the water of the water in the mountains, is from the Amazon.",
+   "wer": 0.963855421686747,
+   "cer": 0.963855421686747
+  },
+  {
+   "ref": "हम पक्के तौर पर नहीं जानते हैं लेकिन इसकी कांटेदार जीभ हो सकती है इसके आहार में कछुए बड़ी मछली दूसरे मोसासॉर शामिल थे और ये एक नरभक्षी भी हो सकता है",
+   "hyp": "We do not know about the catch but its cutthroat can be a little bit bigger than the other one.",
+   "wer": 0.5945945945945946,
+   "cer": 0.5945945945945946
+  },
+  {
+   "ref": "तथा क्रांति के बाद व्यवसाय सभी पुरुष आवेदकों के लिए खुले थे जिसमें सबसे महत्त्वाकांक्षी और सफल होने वाले सफल हो सकते थे",
+   "hyp": "Tathatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatat",
+   "wer": 1.0,
+   "cer": 1.0
+  },
+  {
+   "ref": "उदाहरण के लिए नॉर्थ कैरोलिना के बेनेट स्कूल के हज़ारों स्टूडेंट्स हर साल राज्य की राजधानी की अपनी यात्रा के बारे में एक वेबसाइट डिज़ाइन करते हैं वेबसाइट हर साल फिर से तैयार की जाती है लेकिन कुछ पुराने वर्ज़न्स को स्क्रेपबुक के रूप में इस्तेमाल करने के लिए ऑनलाइन रखा जाता है",
+   "hyp": "Udaaran ke liye north Carolina ke Bennett school ke hajaru student shar shar raj ki razhani ki apni yatta ke baare mein ek website design kar te hai website hars alfils se tear ki jati hai, Likhi kuch purane versans ko scrapbook ke rupme samaal karne kli online rakhata hai",
+   "wer": 0.9817518248175182,
+   "cer": 0.9817518248175182
+  },
+  {
+   "ref": "आम शब्दों में जब प्रबंधक अपने पूर्व सहयोगियों का नेतृत्व करना शुरू करते हैं तो दो तरह के बर्ताव सामने आते हैं. स्पेक्ट्रम का एक सिरा  उन लड़कों में से एक” या लड़कियों में से एक बने रहने की कोशिश कर रहा है",
+   "hyp": "आदाँव़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ लग़ ल�",
+   "wer": 0.39705882352941174,
+   "cer": 0.39705882352941174
+  },
+  {
+   "ref": "शत्रुता फैलाने के तुरंत बाद ब्रिटेन ने जर्मनी की समुद्री घेराबंदी शुरू कर दी थी",
+   "hyp": "Shatturtha Failani ke Turan Bhaad-Britain Nejarmani ki Samudri Gheera Bandhi suru kar dee thi.",
+   "wer": 0.9746835443037974,
+   "cer": 0.9746835443037974
+  },
+  {
+   "ref": "यह ऑरोरा बोरेलिस को देखने का एक अच्छा अवसर प्रदान करता है क्योंकि आकाश में उस समय अंधकार सा ही रहेगा",
+   "hyp": "یہ آرورا بوریلیس کو دیکنی کا ایک اچھا افسر بردان کرتا ہے, کیو کی اکاش میں اسمیں اندکار ساہی رہے گا",
+   "wer": 0.88,
+   "cer": 0.88
+  },
+  {
+   "ref": "हालांकि यह सच नहीं है हालांकि दस्तावेज़ के पीछे कुछ लिखा हुआ है लेकिन यह कोई ख़ज़ाने का नक्शा नहीं है",
+   "hyp": "Halaki, this is not true Halaki, this is written in the description of Halaki, but this is not a story",
+   "wer": 0.9702970297029703,
+   "cer": 0.9702970297029703
+  },
+  {
+   "ref": "बाहरी द्वीपों पर क्रेडिट कार्ड शायद स्वीकार नहीं किए जाएंगे हालांकि ब्रिटिश और संयुक्त राज्य की मुद्रा स्वीकार्य होगी यह निर्धारित करने के लिए कि स्वीकार्य भुगतान विधि क्या है मालिकों से पहले ही पूछ लें",
+   "hyp": "Bhaaridhvipo per credit card siyaed suikar nahi ki yahaayi ge hala ki Pritish and Saiyutraj ki Mudra suikar hi hu ghi. Ya naidharad karni ki huye ki suikar hi bhuktan vidhi ki hain malikho se paha lehi pooh chle.",
+   "wer": 0.9603960396039604,
+   "cer": 0.9603960396039604
+  },
+  {
+   "ref": "बार्सिलोना की आधिकारिक भाषाएं कातलान और स्पेनिश हैं लगभग आधे लोग कातलान बोलना पसंद करते हैं एक बहुत बड़ी जनसंख्या में लोग इसे समझते हैं और लगभग हर कोई स्पेनिश जानता है",
+   "hyp": "Barsiluna ke Adhikarik Bhasa hai, Kathalan aur spenis hai, Lakhbhak Adhhe Lok, Kathalan bolna pashantkar te hai, ek bhaat bhaad bhaad jansingh ke hame, Lok, he se samas te hai aur Lakhbhak hai, koi spenis janta hai.",
+   "wer": 0.9640718562874252,
+   "cer": 0.9640718562874252
+  },
+  {
+   "ref": "फ़ोटोग्राफ़रों ने बाद में एक वृद्ध महिला की जगह ले ली क्योंकि उसे शौचालय जाना ज़रूरी था मेंडोज़ा को गोली मार दी गई थी",
+   "hyp": "Fotograpplerوں نے بعد میں ایک بری دمہلا کی جگہ لی کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کیوں کی",
+   "wer": 0.9316239316239316,
+   "cer": 0.9316239316239316
+  },
+  {
+   "ref": "विशेष रूप से सवाना पर बेहतरीन अफ़्रीकी वन्य जीवन को संपूर्ण रूप से देखने के लिए आमतौर पर सफ़ारी शब्द का उपयोग किया जाता है",
+   "hyp": "Bises Rupf se sawhana pa, behe tari, aapri ki bañajiban ko samppun na Rupf se dekne ke liye, amtore pa sapari sappdaka, ubiyo ki aajata hai.",
+   "wer": 0.9590163934426229,
+   "cer": 0.9590163934426229
+  },
+  {
+   "ref": "मध्य क्रम के बल्लेबाज सचिन तेंदुलकर और राहुल द्रविड़ ने अच्छा प्रदर्शन किया और शतकीय साझेदारी बनाई",
+   "hyp": "مدکرم کے بلیوال سچن تیندر کر اور رہل روڑ نے اچھا پر ذریشن کیا اور ستگی سالیداری بنائی",
+   "wer": 0.8469387755102041,
+   "cer": 0.8469387755102041
+  },
+  {
+   "ref": "ऐसा माना जाता है कि पेरिस के निवासी अहंकारी असभ्य और अभिमानी होते हैं",
+   "hyp": "ایسا مانا جاتا ہے کہ پیرس کی نیوازی اینکاری اصببی اور ابھی مانی ہوتے ہیں",
+   "wer": 0.927536231884058,
+   "cer": 0.927536231884058
+  },
+  {
+   "ref": "बच्चों के लिए बनी जगह में पिरामिड साउंड एंड लाइट शो सबसे दिलचस्प चीज़ों में से एक है",
+   "hyp": "Bachon ke liye bani jagah me piramid sound and light show, sabse dilchas pachizo me se ek hai.",
+   "wer": 0.9523809523809523,
+   "cer": 0.9523809523809523
+  },
+  {
+   "ref": "ऐसी संस्कृति को सभ्यता कहते हैं जो लोगों के एक बड़े समूह में साझा की जाती है यहां लोग आपसी सहयोग करते हुए समाज में रहते हैं और मिलकर काम करते हैं",
+   "hyp": "यह लिवाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाशाश",
+   "wer": 0.5724137931034483,
+   "cer": 0.5724137931034483
+  },
+  {
+   "ref": "इसके मुंह के तालु में एक अतिरिक्त सेट के साथ ही 70 से ज़्यादा रेजर की तरह नुकीले दांतों से भरे इसके लंबे जबड़े थे जिसका अर्थ है कि उसके रास्ते से गुज़रने वाली किसी भी चीज़ के लिए कोई बचाव नहीं था",
+   "hyp": "اس کے موقت طالو میں ایک اطررست کے ساتھ ہی ستر سے زادر ریزر کی طررنوکیلی دانتوں سے بھرے اس کے لنبے جبڑے تھے جس کا ارد ہے کہ اس کے راستے سے گزرنے والی کسی بھی چیس کے لیکن کوئی بچاہ نہیں تھا",
+   "wer": 0.9282051282051282,
+   "cer": 0.9282051282051282
+  },
+  {
+   "ref": "वर्चुअल स्कैफ़ोल्ड सॉफ़्टवेयर का ही अंदरूनी हिस्सा होते हैं और वे ऐसी प्रक्रियाओं पर सवाल उठाते हैं उनका संकेत देते हैं और उनके बारे में जानकारी देते हैं जो छात्र के लिए अकेले संभालने में चुनौती भरी होती हैं",
+   "hyp": "Vartules, Caps, Fold, Software, Kahi, Androoni, Hisa, Houta & Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe, Vahe",
+   "wer": 0.9420289855072463,
+   "cer": 0.9420289855072463
+  },
+  {
+   "ref": "अस्पताल में काम करते हुए लिगिन्स ने अपने खाली समय के दौरान समय से पहले प्रसव की जांच शुरू कर दी",
+   "hyp": "ASPATAL میں کام کرتے ہوئے لگنس نے اپنے خالی سماع کے دوران سماع سے پہلے پرسپ کی چانسو کر دیں",
+   "wer": 0.8736842105263158,
+   "cer": 0.8736842105263158
+  },
+  {
+   "ref": "मोहम्मद इस सांसारिक जीवन से परे मामलों में गहरी रुचि रखते थे। वे अक्सर चिंतन के लिए एक गुफा का उपयोग करते थे जिसे  नूर” प्रकाश के पर्वत पर  हीरा” के रूप में जाना जाता है।",
+   "hyp": "Mohamed, this Sansarik Jiwan, se pari mamlo mein Ghari Ruchi, Raktethe, ve Aksar Chintan ke liye ek Gufa ka Praiyoh karthethe, jise Nour ke parwad par Hira ke Ruh mein, Jana jata hai.",
+   "wer": 0.9647058823529412,
+   "cer": 0.9647058823529412
+  },
+  {
+   "ref": "उत्तर में यह क्षेत्र साहेल और दक्षिण और पश्चिम में अटलांटिक महासागर से घिरा है",
+   "hyp": "Uttarmehachatri Sahel and Dakshin and Pashchimme Atlantik Mahasagar Se Ghirahe",
+   "wer": 0.9743589743589743,
+   "cer": 0.9743589743589743
+  },
+  {
+   "ref": "अंडरवॉटर टोपोलॉजी के कारण कुछ गहरे सेक्शन्स में रिटर्न फ़्लो सांद्र होता है और यहां से गहरे पानी में तेज़ प्रवाह हो सकता है",
+   "hyp": "Underwater topology, some of the reasons for this are return flows of sand and water is required to be used here.",
+   "wer": 0.8699186991869918,
+   "cer": 0.8699186991869918
+  },
+  {
+   "ref": "चीज़ों पर कुछ बनाकर या खरोंच कर इस जगह को नुक़सान न पहुंचाएं",
+   "hyp": "Chijopur kuch bana karya krot kalli kalli kshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nukshan nuk",
+   "wer": 0.9666666666666667,
+   "cer": 0.9666666666666667
+  },
+  {
+   "ref": "यह समुद्र के नीचे पतला और ऊंचे क्षेत्रों के नीचे मोटा होता है",
+   "hyp": "यह समुदर के भ़िजे पतला भुदे नुदे नुदे मुदा हुता है",
+   "wer": 0.5901639344262295,
+   "cer": 0.5901639344262295
+  },
+  {
+   "ref": "मक्का के उत्तर में स्थित पहाड़ों में से एक के शीर्ष पर स्थित गुफा दुनिया के बाकी हिस्सों से पूरी तरह कटी हुई है",
+   "hyp": "Maha ki Uttar mesthit pahadom messe 1 ke shish pastit gufa dunia ki baaki isos se puri tara kati hui hai",
+   "wer": 0.9099099099099099,
+   "cer": 0.9099099099099099
+  },
+  {
+   "ref": "तूफ़ान कैटरीना के मद्देनज़र राहत और पुनर्निर्माण पर चल रहे लंबे विवाद से बहस छिड़ गई थी जिसमें कुछ राजकोषीय रूढ़िवादियों ने बुश की न्यू ऑरलियन्स डील का मज़ाक बनाया है",
+   "hyp": "تو fan ke tereena ke madden azar rahat aur puurnan nirman parchal rahe lambe vivaad se behez shurgaethi, jisne kuch raja ko siya ruri vadiye ho ne bush ki nu aur liyan stil ka mazak baan aaya hai",
+   "wer": 0.9457831325301205,
+   "cer": 0.9457831325301205
+  },
+  {
+   "ref": "अगर हमारे अपने पूर्वजों ने अपनी प्रोटीन की समस्या को कुछ हद तक उसी तरह सुलझाया तो हमें आश्चर्यचकित नहीं होना चाहिए जैसे कि आज के समय में चिंपाजी करते हैं",
+   "hyp": "اگر ہمارے اپنے پورواجوں نے اپنی پروٹین کی سمسسیگوں کو چھتھا کسی ترسل جائعا تو ہمیں آشچر چکت نہیں ہونا چاہیے جیسے کہ آج کے سمی میں چیپانجی کرتے ہیں",
+   "wer": 0.9019607843137255,
+   "cer": 0.9019607843137255
+  },
+  {
+   "ref": "सत्ताधारी दल साउथ वेस्ट अफ्रीका पीपल आर्गेनाइजेशन स्वापो ने संसदीय चुनाव में बहुमत पाया",
+   "hyp": "Sattadharidal Southwist of Rika People Organization, Swapu, Neh Sandsadhi Chnau May Bhuhamat Paya.",
+   "wer": 0.9655172413793104,
+   "cer": 0.9655172413793104
+  },
+  {
+   "ref": "अंत में कई ऐसी छोटी बिल्लियाँ लूज़ पेट कैट्स सहित हैं जो कीट रोडंट्स छिपकलियों और पक्षियों जैसे कई छोटे जीवों को खाती हैं",
+   "hyp": "Ant me, Kai aise chhoti billiya, Luz pet cat sahit hai, Jo kiiid rodent sship kaliyo aur pakshonu kai chhoti jeeva ko khatiyya.",
+   "wer": 0.9669421487603306,
+   "cer": 0.9669421487603306
+  },
+  {
+   "ref": "राज्यपाल के कार्यालय ने बताया कि घायलों में से उन्नीस पुलिस अधिकारी थे",
+   "hyp": "راجپال کے کاریہ لے نے بتایا کی گھائلوں میں سے انیس پولی سدیکاری تھے",
+   "wer": 0.9571428571428572,
+   "cer": 0.9571428571428572
+  },
+  {
+   "ref": "हम पक्के तौर पर नहीं जानते हैं लेकिन इसकी कांटेदार जीभ हो सकती है इसके आहार में कछुए बड़ी मछली दूसरे मोसासॉर शामिल थे और ये एक नरभक्षी भी हो सकता है",
+   "hyp": "Pakketgaatore praniya jantai hai, Lekin iski kante daar jeebho sakti hai. Iskhe ahar me kachwe, bady machili, dosire mongshahar samil thay, Commissiona, aur ye ek narbhakchi vhee ho shakta hai.",
+   "wer": 0.9527027027027027,
+   "cer": 0.9527027027027027
+  },
+  {
+   "ref": "बच्चों के लिए बनी जगह में पिरामिड साउंड एंड लाइट शो सबसे दिलचस्प चीज़ों में से एक है",
+   "hyp": "Bacchokili bani jaga me piramid sound & light show, subse dill chas bjizo me se ek hai.",
+   "wer": 0.9761904761904762,
+   "cer": 0.9761904761904762
+  },
+  {
+   "ref": "सड़कों पर ज़्यादा दुर्घटना की वजह बहुत ज़्यादा कार ओनरशिप है जिससे शरीर में हुई टूट-फूट को सुधारने के लिए हेल्थकेयर में नई तकनीकों के आविष्कार को बढ़ावा मिला है",
+   "hyp": "sardhkho pradzada durbhatna ki vajah bhozzada kar oonar shippe hai,",
+   "wer": 0.40625,
+   "cer": 0.40625
+  },
+  {
+   "ref": "कुछ अणुओं में अस्थिर केंद्रक होता है जिसका मतलब यह है कि उनमें थोड़े या बिना किसी झटके से टूटने की प्रवृत्ति होती है",
+   "hyp": "Kuch Anu may ashtar kindra khotah hai,",
+   "wer": 0.31896551724137934,
+   "cer": 0.31896551724137934
+  },
+  {
+   "ref": "पौधे ऑक्सीजन बनाते हैं जिसका उपयोग मनुष्य साँस लेने में करते हैं और वे कार्बन-डाइऑक्साइड लेते हैं जो मनुष्य साँस से छोड़ते हैं यानी साँस छोड़ते हैं",
+   "hyp": "Pauh de Oxine , । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । । ।",
+   "wer": 0.5986394557823129,
+   "cer": 0.5986394557823129
+  },
+  {
+   "ref": "जापान की परमाणु एजेंसी के अनुसार प्लांट में रेडियोधर्मी सीज़ियम और आयोडीन की पहचान की गई है",
+   "hyp": "JAPAN Ki Parmanu Ajnasi Ke Anusaar, PLAN TME RATU Dharmi, SEASYM & IODIN Ki Pahchan Ki Gai Hai",
+   "wer": 0.967032967032967,
+   "cer": 0.967032967032967
+  },
+  {
+   "ref": "यह समुद्र के नीचे पतला और ऊंचे क्षेत्रों के नीचे मोटा होता है",
+   "hyp": "yasamudra ke niye chaipatla aur uche shetroke niye chaimota ho ta hai",
+   "wer": 0.9508196721311475,
+   "cer": 0.9508196721311475
+  },
+  {
+   "ref": "कुंडलिनी योग के द्वारा कुंडलिनी ऊर्जा ज्ञान ऊर्जा को योग मुद्राओं श्वास अभ्यास मंत्रों और मानसदर्शन के माध्यम से जागृत किया जाता है।",
+   "hyp": "Kundalini Yoke Dwarah Kundalini Urja Kuh Yogumudrao, Shwas Abhiyas, Mantro and Man Dashan ke Madhyam se Jagrat kia jata hai.",
+   "wer": 0.9015151515151515,
+   "cer": 0.9015151515151515
+  },
+  {
+   "ref": "इटली के कई अन्य शहरों और दुनिया के बाकी हिस्सों में खासकर पोलैंड में इस तरह के सेटअप बनाए गए थे जिन्हें बड़ी संख्या में लोगों ने देखा था",
+   "hyp": "اٹلی کے کئی اڑنے سہروں اور دنیا کے باکی اس ومکھاست کر پولےڈ میں اس طرح کے سیٹھہ بنایا گئی تھے جنے بڑی سنکھا میں لوگ دیکھنے آتے تھے",
+   "wer": 0.9044117647058824,
+   "cer": 0.9044117647058824
+  },
+  {
+   "ref": "रॉस्बी संख्या जितनी छोटी होगी चुंबकीय उत्क्रमण के संबंध में तारा उतना ही कम सक्रिय होगा",
+   "hyp": "Rozbe Sankya je tni choti huge chimbakye utkraman ke samband mein taarautna hikam sankhurya hoge",
+   "wer": 0.9655172413793104,
+   "cer": 0.9655172413793104
+  },
+  {
+   "ref": "टुकड़ियों के पहुंचने से पहले 1800 के दशक से हैती का कभी-भी बीमारियों से जुड़ी समस्याओं से सामना नहीं हुआ था",
+   "hyp": "Tukriho ke pohchne se phele, 8.10.00 ke hete ka kabhi bhi bimmario se judi samasyao se samna nahi hoa tha.",
+   "wer": 0.9439252336448598,
+   "cer": 0.9439252336448598
+  },
+  {
+   "ref": "हुन ने इस्तीफा दे दिया है मंत्रिमंडल में उनकी जगह सांसद एड डेवी लेंगे सांसद नॉर्मन लैंब के व्यापार मंत्री बनने की उम्मीद है यह पद डेवी के मंत्रिमंडल में जाने की वजह से खाली हुई है",
+   "hyp": "Hulne, Istapa, Dejya hai, Manthrimandar mein, Unki jagaha, Sanjad, Eid, Devilne, Sanjad, Narman, Leimke, Bhappar, Manthri, Banne ki Umid hai, Yaha Pad, Devi ke Manthrimandar mein, Jhane ki Bhaja, Khali hui hai.",
+   "wer": 0.9608938547486033,
+   "cer": 0.9608938547486033
+  },
+  {
+   "ref": "सबसे पहले अधिकांश सवार हील और एक चिकनी काफी पतले तले वाले राइडिंग बूट्स पहनते हैं",
+   "hyp": "Sopsa, ki la Lufa, Sagar, Jil, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri, Nakhase, Pachyri",
+   "wer": 0.9135802469135802,
+   "cer": 0.9135802469135802
+  },
+  {
+   "ref": "हालांकि टुबर्क्युलोसिस वाले लोगों के पूरे समूह में एक्सडीआर-टीबी का प्रतिशत अभी भी कम है दक्षिण अफ़्रीका में किसी भी विशेष समय पर कुल 330,000 लोगों में से 6,000 संक्रमित हैं",
+   "hyp": "Hala Kituber Kaloces Waale Logo Ke Pures Samu Me XI Dasir RTV Kapratishat. Abhi Bikam Hai Daksha Na Fri Ka Me Kisi Bivishesh Samai Par Kulti Laapti Sajar Logo Me Se 6000 San Kramit Hai.",
+   "wer": 0.976878612716763,
+   "cer": 0.976878612716763
+  },
+  {
+   "ref": "सावधान रहें कि कपड़े को बहुत गर्म न होने दें जो सिकुड़न का कारण बन सकता है या बहुत गरम होने पर जल सकता है।",
+   "hyp": "Saadhani ki kapte ko bhoodgarm na hoonne de, ju si kudan ka karan baan saktah hai ya bhoodgarm hoonne baan jal saktah hai.",
+   "wer": 0.9245283018867925,
+   "cer": 0.9245283018867925
+  },
+  {
+   "ref": "स्कीइंग मार्ग को एक हाईकिंग लंबी पैदल यात्रा मार्ग जैसा ही सोचें।",
+   "hyp": "Ski Mar, Co-Eq, Hike, Lamby, Padalyatra, Mar, Kajayasahi, Soche",
+   "wer": 0.9230769230769231,
+   "cer": 0.9230769230769231
+  },
+  {
+   "ref": "यह खोज पक्षियों में पंखों के विकास की पूरी जानकारी भी प्रदान करती है",
+   "hyp": "Yeha koch papshiyo me panko ke pikas ki puri jankari bhi pradhan kardhi hai.",
+   "wer": 1.0,
+   "cer": 1.0
+  },
+  {
+   "ref": "हालांकि गोमा यथोचित सुरक्षित है लेकिन गोमा के बाहर जाते समय उत्तर किवु प्रांत में चल रही लड़ाई की स्थिति को समझ लेना चाहिए",
+   "hyp": "halaan ki goma yatho chit surakshi thay, lekin goma ke bahar jati same uttar ki vupraant me chal rahi ladaaikis hiti ko samaj lena chahiye.",
+   "wer": 0.9590163934426229,
+   "cer": 0.9590163934426229
+  },
+  {
+   "ref": "इसलिए यह माना जा रहा है कि नोटेशन को सिर्फ़ एक लेबल के रूप में जोड़ा गया था",
+   "hyp": "اس لیے یہ مانا جارہ ہے کہ نوٹیشن کو صرف ایک لیبل کی روپ میں جوڑا گیا تھا",
+   "wer": 0.92,
+   "cer": 0.92
+  },
+  {
+   "ref": "सावधान रहें कि कपड़े को बहुत गर्म न होने दें जो सिकुड़न का कारण बन सकता है या बहुत गरम होने पर जल सकता है।",
+   "hyp": "Saadhan rahi ki kapre ko bhohoot garam na hone de. Choo sikurne ka karan bhan sagta hai ya bhohoot garam hone pa jeal sagta hai.",
+   "wer": 0.9622641509433962,
+   "cer": 0.9622641509433962
+  },
+  {
+   "ref": "हालांकि शेंगेन ज़ोन इस मामले में कुछ हद तक एक देश की तरह काम करता है",
+   "hyp": "hala ki shengen zoon in this manle may aig hatta ki aig deish ki tara karm kar ta hai",
+   "wer": 0.9558823529411765,
+   "cer": 0.9558823529411765
+  },
+  {
+   "ref": "बीसवीं सदी के शोध से पता चला है कि आनुवंशिक भिन्नता के दो पूल हैं छुपा हुआ और अभिव्यक्त",
+   "hyp": "اس vi sadi ke sot se pata charta hai ki Anon sik vi biyinta ke doa pul hai chupa owa aur abhi viyant",
+   "wer": 0.9195402298850575,
+   "cer": 0.9195402298850575
+  },
+  {
+   "ref": "वाइल्डलाइफ़ हैबिटेंट्स के रूप में काम करने वाली रेती और तटों को बनाने के लिए गाद ज़रूरी थी",
+   "hyp": "Widener Life Habitants Ki Rup Commission",
+   "wer": 0.4111111111111111,
+   "cer": 0.4111111111111111
+  },
+  {
+   "ref": "उत्तरी मैरिएनस इमरजेंसी प्रबंधन कार्यलय की ओर से कहा गया कि राष्ट्र में नुकसान की कोई सूचना प्राप्त नहीं हुई थी",
+   "hyp": "Utdhary Marigainess Emergenci Prabandhankar Rya le ki ose kaha ga ya ki rashtrume nuksan ki ko isocha prap nahi hui hai.",
+   "wer": 0.972972972972973,
+   "cer": 0.972972972972973
+  },
+  {
+   "ref": "वर्चुअल टीमों को भी परंपरागत टीमों की तरह ही उत्कृष्टता के समान मानकों पर रखा जाता है लेकिन उनमें बारीक अंतर होते हैं",
+   "hyp": "Varsul Timukubhi param paragat Timukhi tarahahi uttakrushkutake saman manukubher rakhajata hai. Lekin unmebarik antar hota hai.",
+   "wer": 0.9829059829059829,
+   "cer": 0.9829059829059829
+  },
+  {
+   "ref": "प्राचीन चीन में अलग-अलग समय अवधि दिखाने का एक अनूठा तरीका था चीन का प्रत्येक चरण या प्रत्येक परिवार जो सत्ता में था एक ख़ास राजवंश था",
+   "hyp": "Prachin, Chin, Me, Alak, Alak Samay, Afti, Dikhanika, Ek Anuta, Thariqa, Chin Kapratthit, Charan, Pratthit Parivar, Jho Satamitha, Ek khas Raj Manjtha.",
+   "wer": 0.9624060150375939,
+   "cer": 0.9624060150375939
+  },
+  {
+   "ref": "ब्रह्मांड की सभी वस्तुएं पदार्थ से बनी हैं सारे पदार्थ सूक्ष्तम कणों से बनें हैं जिन्हें अणु कहा जाता है",
+   "hyp": "Bramar ki Sabhi Vastuva Padarth se Bani hai, Sare Padarth se Sukshtru Karnu se Bani hai, Jini Anu kaha Jata hai.",
+   "wer": 0.9615384615384616,
+   "cer": 0.9615384615384616
+  },
+  {
+   "ref": "हालांकि धीमे कम्युनिकेशन चैनल की वजह से पश्चिम का रहन-सहन 25-30 साल पीछे जा सकता है",
+   "hyp": "hala ki dhimae communication channel ki vajra se pastim karahan sehan patchis this saal pichhe jhaasakta hai.",
+   "wer": 0.9518072289156626,
+   "cer": 0.9518072289156626
+  },
+  {
+   "ref": "कैसाब्लांका मोरक्को में खरीदारी करने के लिए सबसे कम दिलचस्प स्थानों में से एक है",
+   "hyp": "kaisab langkam aur akhweme khairidari karni ke liye sabse kam dalchastanu me se ek hai",
+   "wer": 0.975,
+   "cer": 0.975
+  },
+  {
+   "ref": "पिरामिडों पर दृश्य प्रदर्शित किए जाते हैं और विभिन्न पिरामिड दिखाए जाते हैं",
+   "hyp": "Piraamindu Patrasya Pradhasit kiya jata hai aur vibhin piramind dikaya jata hai.",
+   "wer": 1.0,
+   "cer": 1.0
+  },
+  {
+   "ref": "बाद में उन्हें कैम्ब्रिज में एडेनब्रुक के अस्पताल में स्थानांतरित कर दिया गया",
+   "hyp": "بعد میں اُنے کامبرج میں ایڈن بروک کے اصفتال میں اِس تھانا انترِت کر دیگیا",
+   "wer": 0.9090909090909091,
+   "cer": 0.9090909090909091
+  },
+  {
+   "ref": "आपिया समोआ की राजधानी है यह शहर उपोलू द्वीप पर है और इसकी आबादी 40,000 से भी कम है",
+   "hyp": "Aapya Samoa ki Rajdhani hai yeh shahar upaloodwipaar hai aur iski abadi 40,000 se bhi kum hai.",
+   "wer": 0.9512195121951219,
+   "cer": 0.9512195121951219
+  },
+  {
+   "ref": "ये कभी-कभी पारिवारिक भीड़भाड़ वाले समुद्रतट हैं जहां किनारों पर कई दुकानों की एक अच्छी श्रृंखला है तैरना सुरक्षित है",
+   "hyp": "یہ Kabhi Kabhi Parivarik Veerpal Gale Samudatat, jaha kinaropak kai dhukano kye ka kchi shrankla hai, tayagna surat chit hai.",
+   "wer": 0.9741379310344828,
+   "cer": 0.9741379310344828
+  },
+  {
+   "ref": "बुधवार के आयोजन के बाद कारपानेडो ने चैंपियनशिप में दो इंडिविज़ुअल रेस में हिस्सा लिया",
+   "hyp": "Bhoodhwar ki Ayujan ke baad, Karpane Do, Ney Champion Shipk mey, 2 Individuals Race mehisalya.",
+   "wer": 0.9647058823529412,
+   "cer": 0.9647058823529412
+  },
+  {
+   "ref": "वहीं दूसरी ओर कई देशों में ठंडी और बर्फ़ भरी परिस्थितियां होना आम बात है और ट्रैफ़िक पूरे साल ज़्यादातर बिना रुकावट चलता रहता है",
+   "hyp": "Vahindu, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu Sri, Dhu S",
+   "wer": 0.8984375,
+   "cer": 0.8984375
+  },
+  {
+   "ref": "अगर हमारे अपने पूर्वजों ने अपनी प्रोटीन की समस्या को कुछ हद तक उसी तरह सुलझाया तो हमें आश्चर्यचकित नहीं होना चाहिए जैसे कि आज के समय में चिंपाजी करते हैं",
+   "hyp": "Agar, our own protein system has been affected by some of our problems. So, we should not be affected by the problems we have. As we are doing today, we are doing a lot of work.",
+   "wer": 0.9411764705882353,
+   "cer": 0.9411764705882353
+  },
+  {
+   "ref": "1966 से सुंदरबन वन्यजीव अभ्यारण बन गया है और एक आकलन के अनुसार इस इलाके में अब लगभग 400 रॉयल बंगाल टाइगर्स और लगभग 30,000 चीतल हैं",
+   "hyp": "1996 ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے ھے",
+   "wer": 0.9076923076923077,
+   "cer": 0.9076923076923077
+  },
+  {
+   "ref": "वाहन को उसी दिन तकरीबन 1200 gmt के समय पर दुर्घटनास्थल से दूर ले जाया गया",
+   "hyp": "وہان کو اسی دین تکریبا 1200 GMT K-Samepur, Durkartna Sthal سے دور لے جائے گیا.",
+   "wer": 0.7808219178082192,
+   "cer": 0.7808219178082192
+  },
+  {
+   "ref": "जापान की परमाणु एजेंसी के अनुसार प्लांट में रेडियोधर्मी सीज़ियम और आयोडीन की पहचान की गई है",
+   "hyp": "JAPAN Ki Paramanu Agency KANUSAR PLANT ME REDIO DIRMI CGM OR IODIN Ki PASHAAN Ki GAYE",
+   "wer": 0.8901098901098901,
+   "cer": 0.8901098901098901
+  },
+  {
+   "ref": "उनके पंख और उड़ने की वजह से कई लोग उनको डायनासोर नहीं मानते",
+   "hyp": "Unke punk, aur urne ki vajasikai, log unko dainashore nahi mante.",
+   "wer": 0.9661016949152542,
+   "cer": 0.9661016949152542
+  },
+  {
+   "ref": "अगर आप सर्दियों में उत्तरी बाटलिक को पार करते हैं तो आपको केबिन स्थान की जांच करनी होगी  क्योंकि क्योंकि जो लोग ज्यादा प्रभावित है उन्हें बर्फ से गुजरने पर काफी भयानक शोर महसूस होगा ।",
+   "hyp": "اگر آپ سردیونوں اُطری باتل کا کو پار کرتے ہیں تو آپ کو کےبین استان کی جانچ کرنی ہوگی کیوں کہ جو لوگ جیادہ پراوابی تھے اُنہ برف سے گجرنی پر کافی بہینک سور میں سو سوگا",
+   "wer": 0.8579234972677595,
+   "cer": 0.8579234972677595
+  },
+  {
+   "ref": "रूमानियत में सांस्कृतिक नियतिवाद का बड़ा तत्व था जो गोएथे फिच्ते और श्लेगल जैसे लेखकों से लिया गया",
+   "hyp": "Rumaniyat Commissiona Sanskriti Kniyati Vatka Bada Tattootha, Jog Goethe, Fichute, and Slegal, like Lekho, Seilya Gaya.",
+   "wer": 0.9693877551020408,
+   "cer": 0.9693877551020408
+  },
+  {
+   "ref": "जिस कारण दो मछली की प्रजातियां विलुप्त हो गई हैं और अन्य दो लुप्तप्राय हो गई हैं जिसमें हंपबैक चूब भी शामिल है",
+   "hyp": "2 Ṣi Ṣi Ṣi Ṣi Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ Ṣ",
+   "wer": 0.7454545454545455,
+   "cer": 0.7454545454545455
+  },
+  {
+   "ref": "किया गया अधिकांश काम सैद्धांतिक था लेकिन सैजिटेरियस गैलेक्सी से बने ऑब्ज़र्वेशन को सिम्युलेट करने के लिए प्रोग्राम को लिखा गया था",
+   "hyp": "کیا گیا ڑکامسکام سیدھانتک تھا ڑکن سیجیٹیریس گیالیکسی سے بھنے آبزویشن کو سیمیلیٹ کرنی کے لیے پرگام کو لکھا گیا تھا",
+   "wer": 0.8372093023255814,
+   "cer": 0.8372093023255814
+  },
+  {
+   "ref": "सभ्यता शब्द लैटिन सिविलिस से आया है जिसका अर्थ है नागरिक लैटिन सिविस से संबंधित है जिसका अर्थ है नागरिक और सिवितास जिसका अर्थ है शहर या शहर-राज्य और वह एक तरह से समाज के आकार को भी परिभाषित करता है",
+   "hyp": "Sabhdha Shabh Lattan Sivilis se aayah hai, Jiska Arthhenaagrik, Lattan Sivis se Samandhith hai, Jiska Arthhenaagrik, Aur Sivitas Jiska Arthha Sheher Ya Sheher Raji aur Bhehe一 Tharase Samaj ki akar kubhi paribhashit karta hai.",
+   "wer": 0.949238578680203,
+   "cer": 0.949238578680203
+  },
+  {
+   "ref": "पौधे फ़ोटोसिंथेसिस द्वारा सूर्य से अपना भोजन बनाते हैं वह छाया भी देते हैं",
+   "hyp": "Podeh Photo Synthesis Dwarasuri Sei Aapna Bhujan Bhanathayi Vahay Chaya Bheetayi",
+   "wer": 0.972972972972973,
+   "cer": 0.972972972972973
+  },
+  {
+   "ref": "इसी तरह से शेंगेन का वीज़ा होने पर आपको शेंगेन सदस्य देशों के लिए अलग-अलग वीज़ा का आवदेन नहीं देना पड़ता है जिससे समय पैसे और कागज़ी कार्रवाई की बचत होती है",
+   "hyp": "اسی طرح سے شینگین کا வیزہ ہونے پر آپ کو شینگین سدس سے تیشوں کے لئے الگ الگ ویزہ کا آویدہ نہیں دینہ پڑھتا ہے جس سے سمائیں پیسے اور کاغزی کروائی کی بچت ہوتی ہے",
+   "wer": 0.8974358974358975,
+   "cer": 0.8974358974358975
+  },
+  {
+   "ref": "उत्तर में यह क्षेत्र साहेल और दक्षिण और पश्चिम में अटलांटिक महासागर से घिरा है",
+   "hyp": "Uttar Maya Chhetra Sahel aur Dachshun aur Pashim mein Atelantik Mahadagar",
+   "wer": 0.9230769230769231,
+   "cer": 0.9230769230769231
+  },
+  {
+   "ref": "वर्तमान में जो कीड़े अपने पंखों को वापस नहीं मोड़ सकते हैं उनमें केवल ड्रैगनफ़्लाई और मेफलीज़ हैं",
+   "hyp": "अचर तमान में जो कीडे पनको को वाँस नहीं मुर सब पे है नहीं केवल पराँन वलाय आपने हैं",
+   "wer": 0.7938144329896907,
+   "cer": 0.7938144329896907
+  },
+  {
+   "ref": "गोभी का जूस अम्लीय या आधारभूत क्षारीय रसायन के आधार पर रंग बदलता है",
+   "hyp": "GOBHIKA JUUS AMLIA یا ADHAR BHOOT SHARIA Rasain ke ADHAR PAR RANG BADALTA HAE",
+   "wer": 0.9552238805970149,
+   "cer": 0.9552238805970149
+  },
+  {
+   "ref": "शेरों का समूह वयस्क नर के साथ-साथ तीस से ज़्यादा मादा और शावकों के साथ एक से तीन तक का बना होता है",
+   "hyp": "Shereo ka Samu Waayas Knar ke Saad Saad Teas Te Jada Maada aur Shao Koon ke Saad 1-3 Taka Bana Huta Haa",
+   "wer": 0.9795918367346939,
+   "cer": 0.9795918367346939
+  },
+  {
+   "ref": "उदाहरण के लिए दुनिया में सबसे ज़्यादा इस्तेमाल होने वाला फ़ोटोग्राफ़ी फ़ॉर्मेट 35mm है यह एनालॉग फिल्म दौर के आखिर में काफी प्रचलित था",
+   "hyp": "Uda Haran ke liye, dunyame sapsi zadha istmal hunevala, fotografi format, 5th is MM he, yeha analog, firme dorki aakir mi khafi prachali titha.",
+   "wer": 0.9477611940298507,
+   "cer": 0.9477611940298507
+  },
+  {
+   "ref": "अरस्तू एक दार्शनिक ने सिद्ध किया कि सब कुछ एक या चार तत्वों के मिश्रण से बना है वे पृथ्वी जल वायु और अग्नि थे",
+   "hyp": "Arastu, 1 Daashnik, Nesidh Dhikya ki, Saab, Kuch, A, Kya, 4 Tatmukhe, Mishnan, Se, Bana, Haya, Vey, Pratvi, Jal, Vaiyur, Agni, Hath,",
+   "wer": 0.908256880733945,
+   "cer": 0.908256880733945
+  },
+  {
+   "ref": "इंटर-डिस्ट्रिक्ट बस स्टेशन जो नदी के उस पार है से दिन भर बसें चलती हैं हालांकि ज़्यादातर खास कर पूर्व और जाकार/बुमतांग की ओर जाने वाली बसें सुबह 06:30 और 07:30 के बीच जाती हैं",
+   "hyp": "Inter District bus station, which is near Nadi, is a day-to-day bus in Chaudh to the village, the village is a village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village of the village",
+   "wer": 0.9371428571428572,
+   "cer": 0.9371428571428572
+  },
+  {
+   "ref": "जैसे चांद पृथ्वी पर एक खिंचाव पैदा कर ज्वार-भाटे का कारण बनता है वैसे ही मिल्की वे भी धनु आकाशगंगा पर एक बल लगाता है",
+   "hyp": "Jai Se Chan Prutvi Pari ki Chau Pida Karth Chwar Parthika Karan Bantahay Vesahi Mil Ki Vibhi Tanung Aakas Nanga Pari 1 Ball Laga Tha",
+   "wer": 0.9741379310344828,
+   "cer": 0.9741379310344828
+  },
+  {
+   "ref": "चूंकि उनकी शुरुआती दिनों में प्रकाश प्रदूषण आज की तरह की समस्या नहीं थी वे आमतौर पर शहरों में या परिसरों में स्थित हैं जहां आधुनिक समय में निर्मित जगहों की तुलना में पहुंचना आसान होता हैं",
+   "hyp": "Chuki, unki suruati dhino me prakas padusan aaj ki tara ki, samasya nahi thi, ve am tarpa sahro meya pari sahro meyati thi hai, jaha adhunik samay me nirmin chagau ki tulla me pahunchana aasan hootaha hai.",
+   "wer": 0.9518716577540107,
+   "cer": 0.9518716577540107
+  },
+  {
+   "ref": "वहीं स्पेक्ट्रम का दूसरा सिरा कोई व्यक्ति किसी ऐसे अपिरिचित व्यक्ति का रूप लेता है जिसे लगता है कि उसे टीम में सब कुछ बदल देना चाहिए और उसे अपने हिसाब से बनाना चाहिए",
+   "hyp": "Vahin ispectrum sira koi vakti kisi aaparichit vakti ka rup le tha hai, jise lakta hai ki ushe team mein sabkoch bhaal dhe na chahi hai aur ushe apne hisaap se bhaana chahi hai.",
+   "wer": 0.9393939393939394,
+   "cer": 0.9393939393939394
+  },
+  {
+   "ref": "बाघ की दहाड़ किसी शेर की तेज़ आवाज़ वाली दहाड़ की तरह नहीं होती है लेकिन उसकी बंधी हुई चिल्लाने जैसी होती है",
+   "hyp": "Bap's Dhahad kisi shaykh ki tezavāzwali Dhahad kitara nahi mutiye, lekin uski badi hui chalane jasi mutiye.",
+   "wer": 0.8796296296296297,
+   "cer": 0.8796296296296297
+  },
+  {
+   "ref": "आपिया समोआ की राजधानी है यह शहर उपोलू द्वीप पर है और इसकी आबादी 40,000 से भी कम है",
+   "hyp": "ابھیا سموہ کی رہدھانی ہے یہ سہر اپولو دیپ پر ہے اور اس کی ابعدی چالدس ہجار سے بھی کم ہے",
+   "wer": 0.8780487804878049,
+   "cer": 0.8780487804878049
+  },
+  {
+   "ref": "मनोविज्ञान सहित विज्ञान के सभी मामलों पर अरस्तू के विचारों को स्वीकार किया जाता है",
+   "hyp": "Manu Vigyan Sahit, Vigyan ke sabhi mamlo par aarastu ke vicharam ko svikar kiyajata hai.",
+   "wer": 0.975609756097561,
+   "cer": 0.975609756097561
+  },
+  {
+   "ref": "पहाड़ी इलाकों में ज़्यादा दुर्घटना हुई इसकी वजह आपसी दुश्मनी को माना जाता है",
+   "hyp": "Pahadi Lakomin, Jadadur Ghatna hui, hiske vajashe haapsi Dushmani kumana jaga hai.",
+   "wer": 0.9736842105263158,
+   "cer": 0.9736842105263158
+  },
+  {
+   "ref": "तूफान और बवंडर की तरह आंधी ओले भारी बारिश और जंगल की आग तीव्र मौसम का हिस्सा और असर हैं",
+   "hyp": "Tufan & Bounder, Indhi, Ole, Bahari, Baharish & Jungle, Agati Vri Mousam, Hisa & Sir,",
+   "wer": 0.9195402298850575,
+   "cer": 0.9195402298850575
+  },
+  {
+   "ref": "बाली में इस एजेंडे के अन्य विषयों में दुनिया के बचे हुए जंगलों को बचाने और ऐसी तकनीकों का आदान प्रदान करना का विषय शामिल है जिससे कि विकासशील देशों को कम प्रदूषणकारी तरीकों से आगे बढ़ने में मदद मिले",
+   "hyp": "Balimi, iis agenda ki anneavishya me dunya ke bachhe huye jungbulho ko bhajani, aur asi teknikko ka adhan badaan karne ka vishesh amil hai. Jiski vikaz jeer desho ko kam pradushan kari tarikko se agi bhajne me madad me le.",
+   "wer": 0.9595959595959596,
+   "cer": 0.9595959595959596
+  },
+  {
+   "ref": "याद रखें कि मुख्य स्टेज पर म्यूज़िक बंद हो जाने के बाद भी फ़ेस्टिवल के कुछ हिस्से ऐसे होंगे जो देर रात तक संगीत बजाते रहेंगे",
+   "hyp": "यहाद तर के की मुके श्व़़़ पर मुझिटिबन बनदो जाने के बाद पेश़़़् के कुचिस से एसे होंगे ज़े नापतक संगिड बप़़़़़",
+   "wer": 0.7258064516129032,
+   "cer": 0.7258064516129032
+  },
+  {
+   "ref": "लेकिन उन पक्षियों के बारे में बहुत सी चीजें हैं जो अभी भी डायनासोर जैसे दिखते हैं",
+   "hyp": "Lekin un pakshiho ke baare me bhaat si cheese hai, jo abhi bhi dinasor, jai se dikta hai.",
+   "wer": 0.9135802469135802,
+   "cer": 0.9135802469135802
+  },
+  {
+   "ref": "ज़्यादा टैक्स वाले देशों में रहने वाले पर्यटक कभी-कभी खास तौर पर मादक पेय और तम्बाकू जैसे उत्पादों पर काफ़ी बचत कर सकते हैं",
+   "hyp": "Ziaadha Txwalideshwamir Rehniwale Priyatak, Kabhi Kabhi Khasthor Parh Madag Pei & Tambakhu, like Uttpadum Parhka Feet Bachatkar Sakti Hai",
+   "wer": 0.959349593495935,
+   "cer": 0.959349593495935
+  },
+  {
+   "ref": "शेर प्राइड नामक बड़े समूहों में रहने वाली सबसे बड़ी सामाजिक बिल्लियां हैं",
+   "hyp": "Sair fried namok, Bade Samoom, Maharene Bade, Sabse Bade, Samajik Biliya.",
+   "wer": 0.9726027397260274,
+   "cer": 0.9726027397260274
+  },
+  {
+   "ref": "पिछले हफ्ते meti ने घोषणा की कि apple ने 34 ओवरहीटिंग के मामले सामने आये है  जिसे कंपनी ने गंभीरता से नहीं लिया ।",
+   "hyp": "Pichle Havte, METI, NG, Hushna ki ki Apple Neh Chauthes Overheating ke Maamli Saamnei hai, Jee Se Company Neh Gambhirta Se Neh India.",
+   "wer": 0.9823008849557522,
+   "cer": 0.9823008849557522
+  },
+  {
+   "ref": "यह सेवा आमतौर पर शिपिंग कम्पनी इस्तेमाल करती है जिसमें विहार योग्य छोटे जहाज भी शामिल हैं इसके साथ ही वे अभियान जिनमें रिमोट डेटा और वौइस् सेवाओं की ज़रुरत पड़ती है",
+   "hyp": "saba amtore per shipping company is tamal karthi hai, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan, jhaj bhi samil hai, sati ve bhyan,",
+   "wer": 0.9817073170731707,
+   "cer": 0.9817073170731707
+  },
+  {
+   "ref": "वेटिकन सिटी की जनसंख्या लगभग 800 है यह विश्व का सबसे कम जनसंख्या वाला सबसे छोटा स्वतंत्र राष्ट्र है",
+   "hyp": "Vetticon City Jansankya Lakhbha Ghatsoh, vishwaka Saptam Jansankya Vala Saptam Jhatsoh Tathar Raraashtra",
+   "wer": 0.98989898989899,
+   "cer": 0.98989898989899
+  },
+  {
+   "ref": "जितनी कम चिंता उतनी ज़्यादा सकारात्मक जीवन ऊर्जा का संचार हर इंसान परम शांति और संतोष पा सकता है",
+   "hyp": "Jitni Khamchinta utni zada sabharatmak jeevan urja ka sanchar har insan param shantiya santhosh paasakta hai.",
+   "wer": 0.9895833333333334,
+   "cer": 0.9895833333333334
+  },
+  {
+   "ref": "लेटन ने पीएम से मुलाकात के दौरान कंज़र्वेटिव पार्टी के पर्यावरण बिल में बदलाव के लिए कहा था अब कंज़र्वेटिव पार्टी के पर्यावरण बिल को पूरी तरह से फिर से लिखने के लिए कहा जा रहा है",
+   "hyp": "Laten in PM s. ke dauran, Kanjervati Party ke pariyavaran bilmain, Badalav ke liye kahat tha, Abh Kanjervati Party ke pariyavaran bilko, puri tara se, Firs se liye ke liye kahat jaaraha hai.",
+   "wer": 0.9719101123595506,
+   "cer": 0.9719101123595506
+  },
+  {
+   "ref": "ऐसी संस्कृति को सभ्यता कहते हैं जो लोगों के एक बड़े समूह में साझा की जाती है यहां लोग आपसी सहयोग करते हुए समाज में रहते हैं और मिलकर काम करते हैं",
+   "hyp": "यह लिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिवाशिव",
+   "wer": 0.5793103448275863,
+   "cer": 0.5793103448275863
+  },
+  {
+   "ref": "चीर धाराएं समुद्र तट पर लगकर लौटने वाली लहरों का प्रवाह होता है अक्सर एक चट्टान या इसी तरह के पदार्थों पर",
+   "hyp": "Chir dhairaayu Samudratat Par lagkar Lotne wali lehrungka prvah hootah hai, Aksar ek chataniya isi tarake padarth ho par",
+   "wer": 0.9904761904761905,
+   "cer": 0.9904761904761905
+  }
+ ]
+}
