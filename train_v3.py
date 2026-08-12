@@ -38,7 +38,7 @@ MAX_SAMPLES_HINGLISH = 42000
 MAX_SAMPLES_EN = 28539  # full LibriSpeech train.100
 
 START_TOKEN = 50257
-LANG_TOKENS = {"en": 50259, "hi": 50276, "hinglish": 50276}
+LANG_TOKENS = {"en": 50259, "hi": 50276, "hinglish": 50276, "ta": 50287, "te": 50299, "bn": 50302, "mr": 50320}
 TASK_TOKEN = 50359
 NO_TIME_TOKEN = 50363
 BOS_EOS = 50257
@@ -563,11 +563,19 @@ TRAIN_CONFIG = {
     "en": ("librispeech", "en", "text", "audio", "train.100"),
     "hi": ("indicvoices_st", "hindi", "text", "chunked_audio_filepath", "hindi"),
     "hinglish": ("mucs_hinglish", "hinglish", "transcript", "audio", "train"),
+    "ta": ("indicvoices_st", "tamil", "text", "chunked_audio_filepath", "tamil"),
+    "te": ("indicvoices_st", "telugu", "text", "chunked_audio_filepath", "telugu"),
+    "bn": ("indicvoices_st", "bengali", "text", "chunked_audio_filepath", "bengali"),
+    "mr": ("indicvoices_st", "marathi", "text", "chunked_audio_filepath", "marathi"),
 }
 TEST_CONFIG = {
     "en": ("librispeech", "en", "text", "audio", "test"),
     "hi": ("fleurs", "hi_in", "transcription", "audio", "test"),
     "hinglish": ("mucs_hinglish", "hinglish", "transcript", "audio", "test"),
+    "ta": ("fleurs", "ta_in", "transcription", "audio", "test"),
+    "te": ("fleurs", "te_in", "transcription", "audio", "test"),
+    "bn": ("fleurs", "bn_in", "transcription", "audio", "test"),
+    "mr": ("fleurs", "mr_in", "transcription", "audio", "test"),
 }
 for lang in LANGUAGES:
     log(f"Loading {lang}...")

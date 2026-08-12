@@ -23,13 +23,21 @@ def log(msg):
     print(f"[{log_ts}] {msg}", flush=True)
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-json", type=str, default=str(DATA_DIR / "hinglish_codeswitch_test_ortho.json"))
+    parser.add_argument("--use-cache", action="store_true", default=False)
+    parser.add_argument("--language", type=str, default="hi")
+    parser.add_argument("--out", type=str, default=str(SAVE_DIR / "eval_vanilla_samples.json"))
+    A = parser.parse_args()
+
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     log(f"Device: {device}")
     proc = WhisperProcessor.from_pretrained(WHISPER_MODEL)
     model = WhisperForConditionalGeneration.from_pretrained(WHISPER_MODEL).to(device)
     model.eval()
 
-    records = json.load(open(DATA_DIR / "hinglish_codeswitch_test_ortho.json"))
+    records = json.load(open(A.test_json))
     log(f"Test samples: {len(records)}")
 
     tot_w, tot_c, err_w, err_c = 0, 0, 0, 0
@@ -45,8 +53,8 @@ def main():
                 pad = torch.zeros(B, C, 3000 - T, dtype=feats.dtype)
                 feats = torch.cat([feats, pad], dim=-1)
             feats = feats[:, :, :3000].to(device)
-            out = model.generate(feats, max_new_tokens=128, num_beams=1, use_cache=True,
-                                 language="hi", task="transcribe")
+            out = model.generate(feats, max_new_tokens=128, num_beams=1, use_cache=A.use_cache,
+                                 language=A.language, task="transcribe")
             hyp = proc.decode(out[0], skip_special_tokens=True).strip()
             ref = r["text"].strip()
 
@@ -72,7 +80,7 @@ def main():
     log("=" * 60)
 
     json.dump({"wer": wer_pct, "fuzzy_wer": f_wer_pct, "cer": cer_pct, "samples": samples},
-              open(SAVE_DIR / "eval_vanilla_samples.json", "w"), indent=1, ensure_ascii=False)
+              open(A.out, "w"), indent=1, ensure_ascii=False)
     log(f"Saved per-sample results: {SAVE_DIR / 'eval_vanilla_samples.json'}")
 
 if __name__ == "__main__":
