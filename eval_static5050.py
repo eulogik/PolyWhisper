@@ -58,7 +58,11 @@ def main():
 
     with torch.no_grad():
         for i, r in enumerate(records):
-            audio, _ = sf.read(r["wav"])
+            try:
+                audio, _ = sf.read(r["wav"])
+            except Exception as e:
+                log(f"  [skip {i}] missing audio {r['wav']}: {e}")
+                continue
             feats = processor.feature_extractor(
                 [audio], sampling_rate=16000, return_tensors="pt", padding=True
             )["input_features"]
