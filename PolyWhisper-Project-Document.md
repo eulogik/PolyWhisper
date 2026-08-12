@@ -646,4 +646,31 @@ PolyWhisper represents a **massive opportunity** in the tiny ASR space:
 
 ---
 
-*Document prepared June 2026.*
+## Update (August 2026) — Code-Switch Router Research & Release
+
+**Milestone:** the code-switch routing architecture is now validated with correct labels (v5).
+
+**Benchmarks** (3,129-utterance code-switched Hinglish test set, ortho-normalized):
+
+| System | WER | FuzzyWER | CER | Hallucinations |
+|---|---|---|---|---|
+| **PolyWhisper v5 router** | **58.8%** | **57.3%** | **57.9%** | **13** |
+| Vanilla Whisper-Base | 66.6% | 63.3% | 67.5% | 279 |
+| Static 50/50 expert mix | 72.1% | 70.4% | 71.1% | 655 |
+
+Routing value: **+13.3 WER pts** vs static mixing, **+7.8 vs vanilla**. Router per-token
+language accuracy 89.1%.
+
+**Key lesson documented:** the v4 router's language labels were silently collapsed by an
+int-vs-string comparison bug — routing was never actually tested until the labels were fixed
+and v5 was retrained (see LIVING.md Phase 10).
+
+**Released publicly (MIT), by Eulogik:**
+- GitHub: https://github.com/eulogik/PolyWhisper — README with benchmarks, press kit in `press/`
+- Hugging Face: https://huggingface.co/eulogik/polywhisper-hinglish-router — model card + weights
+- Release `v1.0.0` with checkpoint + eval bundles
+
+**Next (paper-track):** whisper-small/medium/large baselines, v5 router introspection,
+significance tests, second language pair (Tamil-English / Bengali-English).
+
+*Document updated August 2026.*

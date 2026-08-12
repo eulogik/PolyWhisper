@@ -496,3 +496,54 @@ per-projection hook: out = base(x) + w_en·Δen(x) + w_hi·Δhi(x)
 4. **B4**: router eval (`eval_router.py`) vs hinglish 50.0% baseline
 5. **A4**: on-device packaging (coremltools/onnx not installed)
 6. **A4**: on-device CoreML/ONNX packaging
+
+---
+
+# Phase 10: Code-Switch Router Research — v4/v5 (2026-08-06 → 2026-08-12)
+
+## The bug that changed everything
+
+While introspecting v4's router weights, we discovered the router language labels were
+**silently broken**: the collator compared int labels against the string `"en"`, so every
+content-token label collapsed to `0`. The v4 router therefore trained to route *everything*
+through the English expert — the per-token routing hypothesis had **never actually been tested**.
+The v4 "win" was, in effect, an en-expert-only model.
+
+## Fix & v5
+
+- `train_router.py`: `ll += [1 - lab for lab in labels]` (correct 1=hi convention)
+- `eval_router.py`: correct `w[0, 4:4+n]` alignment + label convention
+- Full v5 chain re-run (A1→A2→P1→P2, tag `_v5`) — watcher orchestrated, crash-safe, resumable
+
+## v5 results (3,129-utterance ortho test)
+
+| System | WER | FuzzyWER | CER | Hallucinations (run≥4) |
+|---|---|---|---|---|
+| **v5 router** | **58.8%** | **57.3%** | **57.9%** | **13** |
+| Vanilla Whisper-Base | 66.6% | 63.3% | 67.5% | 279 |
+| Static 50/50 mix | 72.1% | 70.4% | 71.1% | 655 |
+
+- Routing value: **+13.3 WER pts** over static 50/50, **+7.8** over vanilla
+- Router per-token language accuracy: **89.1%** (99,663/111,815)
+- cs-split: +8.1 pts on code-switched utterances; +5.0 on non-CS
+- P2 epoch val: loss 0.85, router_acc 99.7%
+
+## The honest picture
+
+- Absolute WER (~59%) is far from SOTA — the contribution is *parameter efficiency + routing*,
+  not raw accuracy. Large models (whisper-large, Indic SOTA) would do far better.
+- Missing for a paper: whisper-small/medium/large baselines, v5 routing introspection heatmaps,
+  statistical significance tests, a second language pair.
+- Missing for release (now done): SEO/AEO docs, model card, GitHub release, HF model repo.
+
+## Release (2026-08-12)
+
+- GitHub: `eulogik/PolyWhisper` — MIT, README with benchmarks/tables/FAQ, release `v1.0.0`
+- Hugging Face: `eulogik/polywhisper-hinglish-router` — model card, checkpoints, eval JSONs
+- Created by **Eulogik** (org on both platforms)
+
+## Current Status
+
+✅ **v5 router validated** — real per-token routing, +7.8 vs vanilla, +13.3 vs static mix
+✅ **Docs & release** — README, model card, GitHub release, HF model repo
+🔄 **Next (paper prep)**: baselines (small/medium/large), v5 introspection, significance tests
