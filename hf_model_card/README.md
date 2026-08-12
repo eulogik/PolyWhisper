@@ -45,9 +45,6 @@ model-index:
     - type: fuzzy-wer
       value: 57.3
       name: FuzzyWER
-extra_gated_fields:
-  Purpose: null
-  Other: null
 ---
 # PolyWhisper Hinglish Router
 
