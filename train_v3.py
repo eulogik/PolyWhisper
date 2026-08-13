@@ -61,7 +61,7 @@ parser.add_argument("--mask-lang", type=str, default="",
                     help="Train only on tokens of this lang (en|hi) from the labeled hinglish set")
 parser.add_argument("--tag", type=str, default="",
                     help="Filename suffix for checkpoints/state, e.g. _v4 (no clobber)")
-ARGS = parser.parse_args()
+ARGS = parser.parse_known_args()[0]
 BATCH_SIZE = ARGS.batch_size
 
 LANGUAGES = [l.strip() for l in ARGS.langs.split(",")]
