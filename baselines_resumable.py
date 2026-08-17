@@ -31,7 +31,7 @@ from pathlib import Path
 
 import torch
 import soundfile as sf
-from huggingface_hub import hf_hub_download, upload_file, HfApi
+from huggingface_hub import hf_hub_download, HfApi
 from datasets import load_dataset
 from transformers import WhisperProcessor, WhisperForConditionalGeneration
 
@@ -107,10 +107,14 @@ def save_state(state, repo_id, local_dir):
     state["last_update"] = datetime.now().isoformat()
     local_path = local_dir / STATE_FILE
     json.dump(state, open(local_path, "w"), indent=2)
-    upload_file(path_or_fileobj=str(local_path),
-                path_in_repo=STATE_FILE,
-                repo_id=repo_id, repo_type="model",
-                commit_message=f"state update: {len(state['completed'])} completed")
+    api = HfApi()
+    api.upload_file(
+        path_or_fileobj=str(local_path),
+        path_in_repo=STATE_FILE,
+        repo_id=repo_id,
+        repo_type="model",
+        commit_message=f"state update: {len(state['completed'])} completed",
+    )
 
 
 def save_and_upload(result, repo_id, local_dir):
@@ -120,10 +124,14 @@ def save_and_upload(result, repo_id, local_dir):
     filename = f"baselines_{size}_{lang}.json"
     local_path = local_dir / filename
     json.dump(result, open(local_path, "w"), indent=1, ensure_ascii=False)
-    upload_file(path_or_fileobj=str(local_path),
-                path_in_repo=filename,
-                repo_id=repo_id, repo_type="model",
-                commit_message=f"baseline {size}/{lang}: WER={result['wer']:.1f} CER={result['cer']:.1f}")
+    api = HfApi()
+    api.upload_file(
+        path_or_fileobj=str(local_path),
+        path_in_repo=filename,
+        repo_id=repo_id,
+        repo_type="model",
+        commit_message=f"baseline {size}/{lang}: WER={result['wer']:.1f} CER={result['cer']:.1f}",
+    )
     print(f"  Uploaded: {filename}")
 
 
@@ -135,10 +143,14 @@ def save_summary(all_results, repo_id, local_dir):
     filename = f"baselines_summary_{size}.json"
     local_path = local_dir / filename
     json.dump(summary, open(local_path, "w"), indent=2)
-    upload_file(path_or_fileobj=str(local_path),
-                path_in_repo=filename,
-                repo_id=repo_id, repo_type="model",
-                commit_message=f"baseline {size} summary")
+    api = HfApi()
+    api.upload_file(
+        path_or_fileobj=str(local_path),
+        path_in_repo=filename,
+        repo_id=repo_id,
+        repo_type="model",
+        commit_message=f"baseline {size} summary",
+    )
     print(f"Summary: {filename}")
 
 
