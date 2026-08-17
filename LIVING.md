@@ -547,3 +547,60 @@ The v4 "win" was, in effect, an en-expert-only model.
 ✅ **v5 router validated** — real per-token routing, +7.8 vs vanilla, +13.3 vs static mix
 ✅ **Docs & release** — README, model card, GitHub release, HF model repo
 🔄 **Next (paper prep)**: baselines (small/medium/large), v5 introspection, significance tests
+
+---
+
+# Phase 11: Indic Language Extension — ta/te/bn/mr Experts (2026-08-12 → 2026-08-14)
+
+## Goal
+
+Second language pair for the paper: validate the "language-specific tiny experts on shared encoder" claim beyond Hinglish. Added 4 Indic languages — Tamil, Telugu, Bengali, Marathi.
+
+## Training
+
+- `train_v3.py` extended with `--langs` (multi-lang support), fp16 on MPS (~35% faster than fp32), batch-size resume guard, `parse_known_args` (import-safe)
+- Data: IndicVoices-ST (gated, HF token required) — 19-20K train samples/lang, FLEURS test sets (582 ta / 471 te / 911 bn / 1005 mr)
+- LoRA rank-16 on Whisper Base, 3 epochs, LR 1e-4
+- **Contention lesson**: launching te→bn→mr in parallel (pipeline bug: stale `TRAINING COMPLETE` in rotated log bypassed wait) caused 3-way MPS contention → 0.5 steps/s. Fixed: log rotation on launch + batch-size resume guard + sequential launches
+- te/bn v2: clean uncontended retrains (3.2h / 2.9h) after the contended runs
+
+## The headline finding: script confusion
+
+Vanilla whisper-base does not just *perform worse* on Indic languages — it produces the **wrong script entirely**:
+
+| Lang | Vanilla script-match rate | Pure expert script-match rate |
+|------|--------------------------|------------------------------|
+| ta   | 96.4%                    | 99.3%                        |
+| te   | **0.0%**                 | **92.6%**                    |
+| bn   | **0.0%**                 | **77.1%**                    |
+| mr   | **0.5%**                 | **99.8%**                    |
+
+Vanilla emits Urdu-Arabic text for te/bn/mr (0-0.5% of hyps even in the right script). The LoRA experts fix this almost completely.
+
+## Results (ortho-normalized, script-matched, max_new_tokens=256)
+
+Built `normalize_ortho.py` (per-script fold tables + script-match detection) — standard Indic ASR practice (cf. IndicWER): fold spelling variants to canonical form on both ref and hyp, score only script-matched clips.
+
+| Lang | Vanilla WER/CER | Pure WER/CER | Pure scr% |
+|------|----------------|--------------|-----------|
+| ta   | 92.0 / 41.7    | **73.9 / 25.6** | 99.3% |
+| te   | —              | 82.7 / 32.7  | 92.6% |
+| bn   | —              | 84.9 / 54.3  | 77.1% |
+| mr   | —              | **65.0 / 22.9** | 99.8% |
+
+- **256 vs 128 decode tokens**: removing the truncation cap cut CER 6-22 pts (te: 54.9→32.7)
+- CER 10-22 pts lower than the 128-token run for every language; script-match fixes the "impossible" vanilla numbers
+- Residual WER (65-85%) is the 39M-param ceiling on these languages, not a routing failure
+
+## Infrastructure
+
+- `run_detached.py`: detached launch (new session, survives parent death) + caffeinate sleep-proofing
+- `auto_pipeline.py` / `night_watch.py`: te→bn→mr chain, crash-tolerant supervisor with heartbeat
+- `fetch_testset.py`, `eval_lang_pure.py` (any lang/adapter), `wait_te_eval.py`, `run_evals_256.sh` (256-token re-eval suite)
+- Adapters: `adapters_v3/{ta,te,bn,mr}_best_{lang}.pt` (+ `_v2` for te/bn)
+- Results: `eval_*_fleurs.json`, `fleurs_normalized_results.json`
+
+## Status
+
+✅ **4 Indic experts trained + evaluated** — script-confusion finding documented, ortho-normalized 256-token results
+🔜 **Next**: README/model card update with Indic results; paper: baselines, introspection, significance tests
