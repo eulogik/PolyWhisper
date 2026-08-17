@@ -2,6 +2,10 @@
 language:
 - hi
 - en
+- ta
+- te
+- bn
+- mr
 license: mit
 library_name: pytorch
 pipeline_tag: automatic-speech-recognition
@@ -11,6 +15,10 @@ tags:
 - code-switching
 - hindi
 - english
+- tamil
+- telugu
+- bengali
+- marathi
 - asr
 - speech-recognition
 - lora
@@ -72,7 +80,31 @@ Speakers in India switch between Hindi and English mid-sentence (Hinglish). Sing
 
 Router per-token language accuracy: **89.1%** (99,663 / 111,815 tokens).
 
-## Files
+---
+
+## 🇮🇳 Indic language experts (2026-08 release)
+
+The same architecture — frozen Whisper-Base + per-language LoRA experts — extends to 4 more Indian languages without retraining the encoder. Experts trained on IndicVoices-ST (~19–20K clips each, 3 epochs, rank-16).
+
+**Key finding — script confusion**: vanilla Whisper-Base doesn't just perform worse on Indic languages, it emits the **wrong script entirely** (Urdu-Arabic text for Telugu/Bengali/Marathi):
+
+| Lang | Vanilla script-match | Expert script-match |
+|---|---|---|
+| Tamil (ta) | 96.4% | **99.3%** |
+| Telugu (te) | **0.0%** | **92.6%** |
+| Bengali (bn) | **0.0%** | **77.1%** |
+| Marathi (mr) | **0.5%** | **99.8%** |
+
+**Ortho-normalized FLEURS results** (script-matched scoring, 256 decode tokens, `normalize_ortho.py`):
+
+| Lang | Vanilla WER/CER | PolyWhisper WER/CER |
+|---|---|---|
+| ta | 92.0 / 41.7 | **73.9 / 25.6** |
+| te | — | 82.7 / 32.7 |
+| bn | — | 84.9 / 54.3 |
+| mr | — | **65.0 / 22.9** |
+
+## Files (Indic)
 
 | File | Contents |
 |---|---|
@@ -84,6 +116,8 @@ Router per-token language accuracy: **89.1%** (99,663 / 111,815 tokens).
 | `eval_vanilla_samples.json` | Vanilla Whisper-Base results |
 | `hinglish_codeswitch_test_ortho.json` | Ortho-normalized test set |
 | `config.json` | Adapter/router config (also the Hub's download-count query file) |
+| `ta_best_ta.pt` / `te_best_te_v2.pt` / `bn_best_bn_v2.pt` / `mr_best_mr.pt` | Indic LoRA experts (rank-16) |
+| `fleurs_normalized_results.json` | Ortho-normalized FLEURS scores (all 4 languages) |
 | README.md | This card |
 
 ## Usage

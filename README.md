@@ -136,6 +136,32 @@ print(processor.decode(out[0], skip_special_tokens=True).strip())
 
 ---
 
+## 🇮🇳 Indic language experts (Tamil · Telugu · Bengali · Marathi)
+
+PolyWhisper extends to any language without retraining the 74M encoder — per-language LoRA experts on shared Whisper-Base, trained on IndicVoices-ST (~19–20K clips, 3 epochs, rank-16).
+
+**The script-confusion finding**: vanilla Whisper-Base doesn't just *perform worse* on Indic languages — it produces the **wrong script entirely** (Urdu-Arabic output for Telugu/Bengali/Marathi):
+
+| Lang | Vanilla script-match | Pure expert script-match |
+|---|---|---|
+| ta (Tamil) | 96.4% | **99.3%** |
+| te (Telugu) | **0.0%** | **92.6%** |
+| bn (Bengali) | **0.0%** | **77.1%** |
+| mr (Marathi) | **0.5%** | **99.8%** |
+
+**Ortho-normalized results** (FLEURS test, script-matched scoring, 256 decode tokens):
+
+| Lang | Vanilla WER/CER | PolyWhisper WER/CER |
+|---|---|---|
+| ta | 92.0 / 41.7 | **73.9 / 25.6** |
+| te | — | 82.7 / 32.7 |
+| bn | — | 84.9 / 54.3 |
+| mr | — | **65.0 / 22.9** |
+
+Even the best vanilla scores are unreportable for te/bn/mr (0–0.5% of hypotheses in the correct script). The experts restore correct-script output and cut CER 10–22 points; residual WER is the 39M-parameter ceiling on these low-resource languages. Scoring uses `normalize_ortho.py` (per-script fold tables, cf. IndicWER) — results in `results/fleurs_normalized_results.json`.
+
+---
+
 ## 🧪 Reproduce the pipeline
 
 ```bash
@@ -178,7 +204,7 @@ Yes — training runs on Apple Silicon MPS (M4 16GB used here); inference is pla
 MIT — code, weights, and results are free to use commercially. Made by [Eulogik](https://github.com/eulogik).
 
 **What's next?**
-More language pairs (e.g., Tamil–English), orthography normalization for Devanagari, and bigger Hindi-expert capacity. See [Roadmap](#roadmap).
+Whisper-small/medium/large baselines, statistical significance tests, router introspection heatmaps, and ONNX/CoreML edge export. See [Roadmap](#roadmap).
 
 ---
 
@@ -186,8 +212,8 @@ More language pairs (e.g., Tamil–English), orthography normalization for Devan
 
 - [x] Hinglish MVP — v5 router beats vanilla +7.8 WER, static-mix +13.3 WER
 - [x] Per-token routing validated (router token accuracy 89.1%)
+- [x] Indic language experts — ta/te/bn/mr on shared encoder, script-confusion fixed
 - [ ] Whisper-small / medium / large baselines
-- [ ] Second language pair (Tamil–English, Bengali–English)
 - [ ] Orthography-normalized training references
 - [ ] Larger Hindi expert (52K cleaned hours, rank-32)
 - [ ] ONNX / CoreML edge export
