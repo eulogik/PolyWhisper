@@ -546,7 +546,9 @@ The v4 "win" was, in effect, an en-expert-only model.
 
 ✅ **v5 router validated** — real per-token routing, +7.8 vs vanilla, +13.3 vs static mix
 ✅ **Docs & release** — README, model card, GitHub release, HF model repo
-🔄 **Next (paper prep)**: baselines (small/medium/large), v5 introspection, significance tests
+✅ **Indic extension** — 5 languages, script-confusion fix, ortho-normalized 256-token results
+✅ **hi expert** — 38.5% WER / 14.4% CER (v5 encoder+decoder LoRA)
+🔄 **Paper prep**: baselines (Colab T4 for medium+large), introspection done, significance tests done
 
 ---
 
@@ -603,4 +605,37 @@ Built `normalize_ortho.py` (per-script fold tables + script-match detection) —
 ## Status
 
 ✅ **4 Indic experts trained + evaluated** — script-confusion finding documented, ortho-normalized 256-token results
-🔜 **Next**: README/model card update with Indic results; paper: baselines, introspection, significance tests
+✅ **hi expert trained** — 38.5% WER / 14.4% CER on FLEURS (v5 chain, encoder+decoder LoRA)
+✅ **Umbrella HF repo** — `eulogik/polywhisper` with all 8 expert checkpoints + evals
+✅ **v5 router introspection** — heatmap visualizations, aggregate diagnostics
+✅ **Significance tests** — bootstrap CI, significant for hi (p<0.001) and mr (p<0.001)
+
+---
+
+# Phase 12: Paper Prep & Release (2026-08-17)
+
+## What was done
+
+1. **Umbrella HF repo**: `eulogik/polywhisper` — 22 files (all expert checkpoints + all eval JSONs + normalized results + model card)
+2. **v5 introspection**: `analyze_routing_v5.py` → heatmap PNGs + routing diagnostics. Router weight separation is negative (-0.19) due to alignment issues between reference labels and decode positions — acknowledged limitation.
+3. **Significance tests**: `significance_tests.py` — bootstrap CI (10K resamples). hi: WER +0.7pp (p<0.001) ***; mr: +0.8pp (p<0.001) ***; ta/te/bn not significant on raw WER (script-mismatch makes paired tests meaningless for te/bn).
+4. **Baselines script**: `baselines_fleurs.py` — whisper-small/medium/large on FLEURS, Colab T4 ready.
+5. **All 5 languages scored**: ortho-normalized 256-token results in `fleurs_normalized_results.json`.
+
+## Colab vs local split
+
+| Task | Where | Time |
+|---|---|---|
+| Introspection | local (MPS) | ~8 min |
+| Significance tests | local (CPU) | ~30s |
+| baselines (small) | Colab T4 or local | ~30 min (T4) / ~2h (MPS) |
+| baselines (medium) | Colab T4 | ~45 min |
+| baselines (large) | Colab T4 | ~1h |
+| ONNX/CoreML export | local | ~1-2h |
+
+**Total Colab time for baselines: ~2.5 hours.** Local for everything else.
+
+## Status
+
+✅ **Paper-ready results**: 5 languages, ortho-normalized, significance-tested
+🔄 **Remaining**: Colab baselines (~2.5h), ONNX/CoreML export, optional: more languages
