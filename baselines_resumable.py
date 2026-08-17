@@ -35,6 +35,13 @@ from huggingface_hub import hf_hub_download, HfApi
 from datasets import load_dataset
 from transformers import WhisperProcessor, WhisperForConditionalGeneration
 
+# Suppress the harmless "max_new_tokens and max_length both set" advisory warning
+try:
+    from transformers.utils.logging import set_verbosity_error
+    set_verbosity_error()
+except Exception:
+    pass
+
 
 # ======================== CONFIG ========================
 
