@@ -238,6 +238,9 @@ def main():
     parser.add_argument("--device", default=None, help="force device: cuda/mps/cpu")
     args = parser.parse_args()
 
+    # flatten comma-separated langs (Colab passes "hi,ta,te,bn,mr" as one string)
+    args.langs = [l.strip() for item in args.langs for l in item.split(",") if l.strip()]
+
     if args.hf_token:
         HfApi(token=args.hf_token)  # validate token early
 
