@@ -235,12 +235,16 @@ def main():
     parser.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     parser.add_argument("--output-dir", default="baselines")
     parser.add_argument("--max-samples", type=int, default=0)
+    parser.add_argument("--device", default=None, help="force device: cuda/mps/cpu")
     args = parser.parse_args()
 
     if args.hf_token:
         HfApi(token=args.hf_token)  # validate token early
 
-    device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+    if args.device:
+        device = args.device
+    else:
+        device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     local_dir = Path(args.output_dir)
     local_dir.mkdir(parents=True, exist_ok=True)
 
