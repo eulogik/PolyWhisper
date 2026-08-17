@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--use-cache", action="store_true", default=False)
     parser.add_argument("--language", type=str, default="hi")
     parser.add_argument("--out", type=str, default=str(SAVE_DIR / "eval_vanilla_samples.json"))
+    parser.add_argument("--max-new-tokens", type=int, default=128)
     A = parser.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
@@ -53,7 +54,7 @@ def main():
                 pad = torch.zeros(B, C, 3000 - T, dtype=feats.dtype)
                 feats = torch.cat([feats, pad], dim=-1)
             feats = feats[:, :, :3000].to(device)
-            out = model.generate(feats, max_new_tokens=128, num_beams=1, use_cache=A.use_cache,
+            out = model.generate(feats, max_new_tokens=A.max_new_tokens, num_beams=1, use_cache=A.use_cache,
                                  language=A.language, task="transcribe")
             hyp = proc.decode(out[0], skip_special_tokens=True).strip()
             ref = r["text"].strip()

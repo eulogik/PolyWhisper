@@ -46,6 +46,7 @@ def main():
     A.add_argument("--adapter", required=True)
     A.add_argument("--test-json", required=True)
     A.add_argument("--out", required=True)
+    A.add_argument("--max-new-tokens", type=int, default=128)
     a = A.parse_args()
 
     records = json.load(open(a.test_json))
@@ -69,7 +70,7 @@ def main():
                 pad = torch.zeros(B, C, 3000 - T, dtype=feats.dtype)
                 feats = torch.cat([feats, pad], dim=-1)
             feats = feats[:, :, :3000].to(DEVICE)
-            out = model.generate(feats, lang=a.lang, max_new_tokens=128, num_beams=1,
+            out = model.generate(feats, lang=a.lang, max_new_tokens=a.max_new_tokens, num_beams=1,
                                  use_cache=False, task="transcribe")
             hyp = processor.decode(out[0], skip_special_tokens=True).strip()
             ref = r["text"].strip()
