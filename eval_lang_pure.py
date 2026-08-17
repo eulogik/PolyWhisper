@@ -47,12 +47,14 @@ def main():
     A.add_argument("--test-json", required=True)
     A.add_argument("--out", required=True)
     A.add_argument("--max-new-tokens", type=int, default=128)
+    A.add_argument("--encoder-lora", action="store_true",
+                   help="adapter was trained with encoder LoRA (e.g. hi_best_v5)")
     a = A.parse_args()
 
     records = json.load(open(a.test_json))
     log(f"Records: {len(records)} | expert: {a.adapter}")
 
-    model = PolyWhisperV3().to(DEVICE)
+    model = PolyWhisperV3(encoder_lora=a.encoder_lora).to(DEVICE)
     model.add_language(a.lang)
     model.load_adapter(a.lang, str(ADAPTERS / a.adapter))
     model.eval()

@@ -55,16 +55,20 @@ MARATHI = _fold(
     ("्", ""), ("़", ""), ("ँ", ""), ("ऽ", ""),
 )
 HINDI = _fold(
-    ("श", "स"), ("ष", "स"), ("क्ष", "कस"), ("ज्ञ", "गय"),
+    ("श", "स"), ("ष", "स"),
     ("ा", ""), ("ी", "ि"), ("ू", "ु"), ("ै", "े"), ("ौ", "ो"),
     ("्", ""), ("़", ""), ("ँ", ""), ("ऽ", ""),
 )
+# multi-char folds applied before the per-codepoint table
+HINDI_PRE = (("क्ष", "कस"), ("ज्ञ", "गय"))
 
 NORMS = {"ta": TAMIL, "te": TELUGU, "bn": BENGALI, "mr": MARATHI, "hi": HINDI}
 
 
 def normalize(text, table):
     text = unicodedata.normalize("NFC", text.strip())
+    for a, b in HINDI_PRE:
+        text = text.replace(a, b)
     out = text.translate(table)
     out = re.sub(r"\s+", " ", out).strip()
     return out
