@@ -639,3 +639,37 @@ Built `normalize_ortho.py` (per-script fold tables + script-match detection) —
 
 ✅ **Paper-ready results**: 5 languages, ortho-normalized, significance-tested
 🔄 **Remaining**: Colab baselines (~2.5h), ONNX/CoreML export, optional: more languages
+
+---
+
+# Phase 13: Colab Baselines Run (2026-08-17)
+
+## What was done
+
+1. **Fixed Colab GPU detection**: default `pip install torch` on Colab is sometimes CPU-only
+   (`torch.cuda.is_available() == False` on a T4). Fix: install from `cu121` index URL +
+   force `--device cuda` in `baselines_resumable.py`.
+2. **Fixed lang parsing**: Colab passed `hi,ta,te,bn,mr` as ONE string → script now
+   flattens comma-separated `--langs`.
+3. **`baselines_resumable.py`**: state persisted to HF (`baselines_state.json`) so a
+   disconnect resumes from last completed (size, lang). Each result uploads immediately.
+4. **`make_results_table.py`** (new): merges `fleurs_normalized_results.json` (our experts)
+   with baseline JSONs from HF into a paper-ready table + `paper_results_summary.json`.
+
+## Partial results (whisper-small, in progress)
+
+| Lang | Whisper-Base (vanilla) WER/CER | Whisper-Small WER/CER | PolyWhisper Expert WER/CER |
+|---|---|---|---|
+| HI | 131.3 / 136.9 | 69.8 / 38.2 | **38.6 / 14.6** (scr 100%) |
+| TA | 93.2 / 46.5 | 78.4 / 29.2 | **74.2 / 26.1** (scr 99%) |
+| TE | 185.6 / 170.6 | 129.3 / 122.6 | **91.9 / 50.2** (scr 93%) |
+| BN | 125.4 / 145.4 | (running) | **120.5 / 117.4** (scr 77%) |
+| MR | 130.4 / 137.4 | (running) | **65.0 / 23.0** (scr 100%) |
+
+Note: whisper-small also emits wrong-script output for te/bn (WER >100%), same failure mode
+our experts fix.
+
+## Status
+
+🔄 **Colab running**: small done (hi/ta/te), medium+large pending (~5h combined).
+   Re-run `make_results_table.py` after completion to fill the full table.
