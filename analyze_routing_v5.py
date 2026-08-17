@@ -41,7 +41,8 @@ ARGS = parser.parse_args()
 
 def load_model():
     model = PolyWhisperRouter().to(DEVICE)
-    model.add_language("en").add_language("hi")
+    model.add_language("en")
+    model.add_language("hi")
     model.load_adapter("en", ARGS.en_adapter)
     model.load_adapter("hi", ARGS.hi_adapter)
     model.load_router(ARGS.router)
@@ -62,10 +63,8 @@ def main():
     w_en_rows = []
 
     for i, r in enumerate(records):
-        audio_path = r.get("audio", "")
+        audio_path = r.get("wav", "")
         if not audio_path or not Path(audio_path).exists():
-            audio_path = SAVE_DIR / "data" / (r.get("audio_path") or "")
-        if not Path(audio_path).exists():
             continue
         audio, _ = sf.read(str(audio_path))
         feats = processor.feature_extractor([audio], sampling_rate=16000,
