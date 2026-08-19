@@ -338,17 +338,14 @@ def main():
 
         @staticmethod
         def _clean_dataset_cache(name, lang):
-            """Delete downloaded parquet slices for this dataset+lang (streaming cache, disposable)."""
+            """Nuke the whole datasets cache (streaming parquet, disposable). Safe: languages
+            load sequentially in one process, so nothing is in use when this runs."""
             try:
                 root = Path(os.environ.get(
                     "HF_DATASETS_CACHE", str(Path.home() / ".cache" / "huggingface" / "datasets")))
-                if not root.exists():
-                    return
-                for pat in (f"ai4bharat___indic_voices_st/*/*/{lang}",
-                            f"google___fleurs/{lang}"):
-                    for d in root.glob(pat):
-                        shutil.rmtree(d, ignore_errors=True)
-                        log(f"  Freed parquet cache: {d}")
+                if root.exists():
+                    shutil.rmtree(root, ignore_errors=True)
+                    log(f"  Freed datasets cache: {root}")
             except Exception:
                 pass
 
@@ -572,13 +569,19 @@ def main():
         for l in LANGUAGES:
             bp = ADAPTER_DIR / f"{l}_best{TAG}.pt"
             if bp.exists():
-                model.load_adapter(l, str(bp))
-                log(f"  Loaded best LoRA adapter: {l}")
+                try:
+                    model.load_adapter(l, str(bp))
+                    log(f"  Loaded best LoRA adapter: {l}")
+                except Exception as e:
+                    log(f"  Corrupt best adapter {bp.name}: {e}")
             else:
                 lp = ADAPTER_DIR / f"{l}_ep{cur_ep}_last{TAG}.pt"
                 if lp.exists():
-                    model.load_adapter(l, str(lp))
-                    log(f"  Loaded last LoRA adapter: {l} (epoch {cur_ep})")
+                    try:
+                        model.load_adapter(l, str(lp))
+                        log(f"  Loaded last LoRA adapter: {l} (epoch {cur_ep})")
+                    except Exception as e:
+                        log(f"  Corrupt last adapter {lp.name}: {e}")
                 else:
                     log(f"  No adapter for {l}")
         log(f"  Resuming epoch {st['epoch']} lang {st['lang']} step {st['step']}")
@@ -592,7 +595,9 @@ def main():
         lang = state["lang"]
         ep = state["epoch"]
         ckpt = ADAPTER_DIR / f"{lang}_ep{ep}_last{TAG}.pt"
-        model.save_adapter(lang, str(ckpt))
+        tmp = ckpt.with_suffix(".tmp")
+        model.save_adapter(lang, str(tmp))
+        os.replace(tmp, ckpt)
         state_to_save = {k: v for k, v in state.items()}
         json.dump(state_to_save, open(STATE_FILE, "w"), indent=2)
 

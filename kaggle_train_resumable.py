@@ -81,6 +81,9 @@ def upload_tree(dirname, remote_snapshot=None):
             continue
         if p.suffix not in (".pt", ".json"):
             continue
+        if not artifact_ok(p):
+            log(f"  SKIP upload {p} (corrupt/incomplete artifact)")
+            continue
         rel = f"{dirname}/{p.relative_to(local)}"
         try:
             if remote_snapshot is not None and rel in remote_snapshot:
@@ -97,10 +100,30 @@ def upload_tree(dirname, remote_snapshot=None):
 def remote_snapshot():
     """{path_in_repo: size} for all files in the HF repo ({} if unreachable)."""
     try:
-        info = api.model_info(REPO, files_metadata=True, repo_type="model")
-        return {s.rfilename: s.size for s in info.siblings}
+        from huggingface_hub import list_repo_tree
+        return {f.path: f.size for f in
+                list_repo_tree(REPO, recursive=True, expand=True, repo_type="model")}
     except Exception:
-        return {}
+        try:
+            info = api.model_info(REPO, files_metadata=True, repo_type="model")
+            return {s.rfilename: s.size for s in info.siblings}
+        except Exception:
+            return {}
+
+
+def artifact_ok(p):
+    """True if p is a complete, loadable artifact (rejects truncated saves)."""
+    try:
+        if p.suffix == ".pt":
+            import zipfile
+            return any(n.endswith("/data/0") for n in zipfile.ZipFile(p).namelist())
+        if p.suffix == ".json":
+            with open(p) as f:
+                j = json.load(f)
+            return isinstance(j, (dict, list)) and len(j) > 0
+    except Exception:
+        return False
+    return False
 
 
 def run_gpu(gpu, langs, save_dir):
@@ -130,9 +153,13 @@ def eval_lang(lang, save_dir):
         log(f"  [eval] {lang}: no cached fleurs test, skipping")
         return
     adapter = f"{lang}_best{TAG}.pt"
+    adapter_path = Path(save_dir) / "adapters_v3" / adapter
     out = f"{save_dir}/eval_{lang}_pure_fleurs.json"
     if Path(out).exists():
         log(f"  [eval] {lang}: already done")
+        return
+    if not adapter_path.exists() or not artifact_ok(adapter_path):
+        log(f"  [eval] {lang}: adapter missing/corrupt — skipping (was training interrupted?)")
         return
     cmd = [
         sys.executable, "eval_lang_pure.py",
@@ -172,6 +199,9 @@ def main():
     for gpu, d in SAVE_DIRS.items():
         fetch_remote(d)
 
+    log(f"Disk free before launch: {shutil.disk_usage('.')[2]/1e9:.1f} GB "
+        f"(audio ~3.4GB/lang; datasets cache is freed per language)")
+
     log("Launching 2 GPU jobs...")
     procs = {}
     for gpu, langs in LANG_SPLIT.items():
@@ -189,7 +219,23 @@ def main():
     for gpu, p in procs.items():
         code = p.wait()
         log(f"GPU {gpu} exited rc={code}")
+        if code != 0:
+            log(f"  >>> GPU {gpu} FAILED — run log tail:")
+            try:
+                for line in open(f"{SAVE_DIRS[gpu]}_run.log", errors="replace").read().splitlines()[-40:]:
+                    log(f"  | {line}")
+            except Exception as e:
+                log(f"  | (no run log: {e})")
+            try:
+                crash = Path(SAVE_DIRS[gpu]) / "crash_v3.log"
+                if crash.exists():
+                    log(f"  >>> GPU {gpu} crash_v3.log tail:")
+                    for line in crash.read_text(errors="replace").splitlines()[-25:]:
+                        log(f"  | {line}")
+            except Exception as e:
+                log(f"  | (no crash log: {e})")
     log("Both GPU jobs finished.")
+    log(f"Disk free now: {shutil.disk_usage('.')[2]/1e9:.1f} GB")
 
     snap = remote_snapshot()
     for gpu, d in SAVE_DIRS.items():
