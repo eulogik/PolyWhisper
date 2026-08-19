@@ -9,6 +9,7 @@ Outputs a markdown table + JSON summary.
 """
 import json
 import os
+import re
 from huggingface_hub import HfApi, hf_hub_download
 
 REPO = "eulogik/polywhisper"
@@ -48,6 +49,35 @@ def fmt(v):
     return f"{v:.1f}" if v is not None else "—"
 
 
+# --- offline script-match detection (reused from normalize_ortho.py) ---
+_SCRIPT_RANGES = {
+    "\u0900-\u097F": "hi", "\u0B80-\u0BFF": "ta",
+    "\u0C00-\u0C7F": "te", "\u0980-\u09FF": "bn",
+    "\u0600-\u06FF": "ar", "A-Za-z": "en",
+}
+_PATS = [(re.compile("[" + r + "]"), n) for r, n in _SCRIPT_RANGES.items()]
+
+
+def dom_script(s):
+    best, n = None, 0
+    for p, name in _PATS:
+        c = len(p.findall(s))
+        if c > n:
+            best, n = name, c
+    return best
+
+
+def baseline_script_match(b):
+    """Compute % of baseline samples whose hyp is in the ref's dominant script."""
+    if not b or "samples" not in b:
+        return None
+    matched = 0
+    for s in b["samples"]:
+        if dom_script(s.get("ref", "")) == dom_script(s.get("hyp", "")):
+            matched += 1
+    return 100.0 * matched / max(1, len(b["samples"]))
+
+
 def main():
     experts = load_experts()
     baselines = load_baselines()
@@ -71,11 +101,13 @@ def main():
         cells = [lang.upper()]
         # base vanilla
         cells.append(f"{fmt(van.get('wer'))}/{fmt(van.get('cer'))}")
-        # baselines
+        # baselines (with offline script-match in parens)
         for size in SIZES:
             b = baselines.get((size, lang))
             if b:
-                cells.append(f"{fmt(b['wer'])}/{fmt(b['cer'])}")
+                scr = baseline_script_match(b)
+                note = f" (scr {scr:.0f}%)" if scr is not None else ""
+                cells.append(f"{fmt(b['wer'])}/{fmt(b['cer'])}{note}")
             else:
                 cells.append("—/—")
         # our expert
