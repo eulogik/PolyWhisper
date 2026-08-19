@@ -27,6 +27,7 @@ import os
 os.environ.setdefault("HF_TOKEN", "")
 
 WHISPER_MODEL = "openai/whisper-base"
+MODEL_SIZES = {"base": "openai/whisper-base", "small": "openai/whisper-small"}
 WHISPER_EXPECTED_LEN = 3000
 BATCH_SIZE = 4
 WEIGHT_DECAY = 0.01
@@ -52,6 +53,12 @@ SS_START_PROB = 0.10
 # ============ ARGS ============
 parser = argparse.ArgumentParser()
 parser.add_argument("--langs", type=str, default="en")
+parser.add_argument("--model-size", type=str, default="", choices=["", "base", "small"],
+                    help="whisper backbone: base (default) or small")
+parser.add_argument("--max-samples", type=int, default=0,
+                    help="cap MAX_SAMPLES_PER_LANG (for quick validation runs)")
+parser.add_argument("--save-dir", type=str, default="polywhisper_output",
+                    help="output dir root (isolate parallel GPU runs)")
 parser.add_argument("--encoder-lora", action="store_true", help="Add LoRA to encoder attention too")
 parser.add_argument("--epochs", type=int, default=3)
 parser.add_argument("--lr", type=float, default=1e-4)
@@ -64,6 +71,11 @@ parser.add_argument("--tag", type=str, default="",
 ARGS = parser.parse_known_args()[0]
 BATCH_SIZE = ARGS.batch_size
 
+if ARGS.model_size:
+    WHISPER_MODEL = MODEL_SIZES[ARGS.model_size]
+if ARGS.max_samples:
+    MAX_SAMPLES_PER_LANG = ARGS.max_samples
+
 LANGUAGES = [l.strip() for l in ARGS.langs.split(",")]
 NUM_EPOCHS = ARGS.epochs
 LR = ARGS.lr
@@ -73,7 +85,7 @@ MASK_LANG = ARGS.mask_lang
 TAG = ARGS.tag
 
 # ============ PATHS ============
-SAVE_DIR = Path("./polywhisper_output")
+SAVE_DIR = Path(ARGS.save_dir)
 SAVE_DIR.mkdir(parents=True, exist_ok=True)
 ADAPTER_DIR = SAVE_DIR / "adapters_v3"
 ADAPTER_DIR.mkdir(exist_ok=True)
@@ -561,7 +573,7 @@ def main():
 
     # ============ TRAINING ============
     log("="*60)
-    log(f"PolyWhisper v3 Training — LoRA rank {RANK} on Whisper Base" + (" + encoder" if ENCODER_LORA else ""))
+    log(f"PolyWhisper v3 Training — LoRA rank {RANK} on {WHISPER_MODEL}" + (" + encoder" if ENCODER_LORA else ""))
     log(f"Languages: {LANGUAGES} | Epochs: {NUM_EPOCHS} | LR: {LR}")
     log(f"Batch size: {BATCH_SIZE}, SS from epoch {SS_START_EPOCH+1} (p={SS_START_PROB}->0)")
     log("="*60)

@@ -19,7 +19,7 @@ import soundfile as sf
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from train_v3 import PolyWhisperV3, DEVICE, processor, log  # noqa: E402
+from train_v3 import PolyWhisperV3, DEVICE, processor, log, MODEL_SIZES  # noqa: E402
 
 ADAPTERS = Path("polywhisper_output/adapters_v3")
 
@@ -47,14 +47,17 @@ def main():
     A.add_argument("--test-json", required=True)
     A.add_argument("--out", required=True)
     A.add_argument("--max-new-tokens", type=int, default=128)
+    A.add_argument("--model-size", type=str, default="base", choices=["base", "small"],
+                   help="backbone the adapter was trained on")
     A.add_argument("--encoder-lora", action="store_true",
                    help="adapter was trained with encoder LoRA (e.g. hi_best_v5)")
     a = A.parse_args()
 
     records = json.load(open(a.test_json))
-    log(f"Records: {len(records)} | expert: {a.adapter}")
+    log(f"Records: {len(records)} | expert: {a.adapter} | backbone: {a.model_size}")
 
-    model = PolyWhisperV3(encoder_lora=a.encoder_lora).to(DEVICE)
+    model = PolyWhisperV3(whisper_name=MODEL_SIZES[a.model_size],
+                          encoder_lora=a.encoder_lora).to(DEVICE)
     model.add_language(a.lang)
     model.load_adapter(a.lang, str(ADAPTERS / a.adapter))
     model.eval()
