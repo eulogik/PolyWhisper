@@ -27,6 +27,7 @@ from pathlib import Path
 REPO = "eulogik/polywhisper"
 LANG_SPLIT = {"gpu0": ["hi", "te", "bn"], "gpu1": ["ta", "mr"]}
 SAVE_DIRS = {"gpu0": "polywhisper_output_gpu0", "gpu1": "polywhisper_output_gpu1"}
+CUDA_IDX = {"gpu0": "0", "gpu1": "1"}
 EPOCHS = 3
 BATCH = 8
 TAG = "_prod"
@@ -57,18 +58,20 @@ def fetch_remote(dirname):
     for f in remote_files():
         if not f.startswith(dirname + "/"):
             continue
-        dest = local / Path(f).name
+        rel = f[len(dirname) + 1:]
+        dest = local / rel
         if dest.exists():
             continue
         try:
             p = hf_hub_download(repo_id=REPO, filename=f, repo_type="model")
+            dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(p, dest)
             log(f"  restored {f}")
         except Exception as e:
             log(f"  skip {f}: {e}")
 
 
-def upload_tree(dirname):
+def upload_tree(dirname, remote_snapshot=None):
     """Upload all .pt / .json artifacts in dirname to HF, if changed."""
     local = Path(dirname)
     if not local.exists():
@@ -78,12 +81,10 @@ def upload_tree(dirname):
             continue
         if p.suffix not in (".pt", ".json"):
             continue
-        rel = f"{dirname}/{p.name}"
+        rel = f"{dirname}/{p.relative_to(local)}"
         try:
-            if not remote_files() or rel in remote_files():
-                info = api.model_info(REPO, files_metadata=True, repo_type="model")
-                sizes = {s.rfilename: s.size for s in info.siblings}
-                if rel in sizes and sizes[rel] == p.stat().st_size:
+            if remote_snapshot is not None and rel in remote_snapshot:
+                if remote_snapshot[rel] == p.stat().st_size:
                     continue
             api.upload_file(path_or_fileobj=str(p), path_in_repo=rel,
                             repo_id=REPO, repo_type="model",
@@ -91,6 +92,15 @@ def upload_tree(dirname):
             log(f"  uploaded {rel}")
         except Exception as e:
             log(f"  upload fail {rel}: {e}")
+
+
+def remote_snapshot():
+    """{path_in_repo: size} for all files in the HF repo ({} if unreachable)."""
+    try:
+        info = api.model_info(REPO, files_metadata=True, repo_type="model")
+        return {s.rfilename: s.size for s in info.siblings}
+    except Exception:
+        return {}
 
 
 def run_gpu(gpu, langs, save_dir):
@@ -106,8 +116,8 @@ def run_gpu(gpu, langs, save_dir):
         "--max-runtime-hours", "10",
     ]
     env = dict(os.environ)
-    env["CUDA_VISIBLE_DEVICES"] = str(gpu)
-    log(f"GPU{gpu}: {cmd}")
+    env["CUDA_VISIBLE_DEVICES"] = CUDA_IDX[gpu]
+    log(f"GPU{gpu} (cuda:{CUDA_IDX[gpu]}): {cmd}")
     return subprocess.Popen(cmd, env=env,
                             stdout=open(f"{save_dir}_run.log", "a"),
                             stderr=subprocess.STDOUT)
@@ -115,7 +125,6 @@ def run_gpu(gpu, langs, save_dir):
 
 def eval_lang(lang, save_dir):
     """FLEURS test eval for one lang after training. Returns result json path."""
-    from train_v3 import LANG_TOKENS
     test_json = f"{save_dir}/data/fleurs_{lang}_in_test.json"
     if not Path(test_json).exists():
         log(f"  [eval] {lang}: no cached fleurs test, skipping")
@@ -129,6 +138,7 @@ def eval_lang(lang, save_dir):
         sys.executable, "eval_lang_pure.py",
         "--lang", lang, "--model-size", "small",
         "--adapter", adapter,
+        "--adapter-dir", f"{save_dir}/adapters_v3",
         "--test-json", test_json,
         "--out", out,
         "--max-new-tokens", "256", "--encoder-lora",
@@ -161,16 +171,18 @@ def main():
     log("Monitoring (uploading checkpoints to HF every 30s)...")
     while any(p.poll() is None for p in procs.values()):
         time.sleep(30)
+        snap = remote_snapshot()
         for d in SAVE_DIRS.values():
-            upload_tree(d)
+            upload_tree(d, snap)
 
     for gpu, p in procs.items():
         code = p.wait()
         log(f"GPU {gpu} exited rc={code}")
     log("Both GPU jobs finished.")
 
+    snap = remote_snapshot()
     for gpu, d in SAVE_DIRS.items():
-        upload_tree(d)
+        upload_tree(d, snap)
 
     log("Running FLEURS evals...")
     for gpu, langs in LANG_SPLIT.items():
@@ -181,7 +193,7 @@ def main():
                 log(f"  [eval] {lang} FAILED: {e}")
 
     for gpu, d in SAVE_DIRS.items():
-        upload_tree(d)
+        upload_tree(d, remote_snapshot())
 
     log("ALL DONE. Re-run make_results_table.py locally for the final table.")
 

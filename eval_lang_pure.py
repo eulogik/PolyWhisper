@@ -44,6 +44,8 @@ def main():
     A = argparse.ArgumentParser()
     A.add_argument("--lang", required=True)
     A.add_argument("--adapter", required=True)
+    A.add_argument("--adapter-dir", default="polywhisper_output/adapters_v3",
+                   help="dir containing the adapter (default polywhisper_output/adapters_v3)")
     A.add_argument("--test-json", required=True)
     A.add_argument("--out", required=True)
     A.add_argument("--max-new-tokens", type=int, default=128)
@@ -59,7 +61,7 @@ def main():
     model = PolyWhisperV3(whisper_name=MODEL_SIZES[a.model_size],
                           encoder_lora=a.encoder_lora).to(DEVICE)
     model.add_language(a.lang)
-    model.load_adapter(a.lang, str(ADAPTERS / a.adapter))
+    model.load_adapter(a.lang, str(Path(a.adapter_dir) / a.adapter))
     model.eval()
 
     tot_w, err_w = 0, 0
