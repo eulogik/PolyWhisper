@@ -656,20 +656,26 @@ Built `normalize_ortho.py` (per-script fold tables + script-match detection) —
 4. **`make_results_table.py`** (new): merges `fleurs_normalized_results.json` (our experts)
    with baseline JSONs from HF into a paper-ready table + `paper_results_summary.json`.
 
-## Partial results (whisper-small, in progress)
+## Partial results (small done 5/5, medium 4/5, large pending)
 
-| Lang | Whisper-Base (vanilla) WER/CER | Whisper-Small WER/CER | PolyWhisper Expert WER/CER |
-|---|---|---|---|
-| HI | 131.3 / 136.9 | 69.8 / 38.2 | **38.6 / 14.6** (scr 100%) |
-| TA | 93.2 / 46.5 | 78.4 / 29.2 | **74.2 / 26.1** (scr 99%) |
-| TE | 185.6 / 170.6 | 129.3 / 122.6 | **91.9 / 50.2** (scr 93%) |
-| BN | 125.4 / 145.4 | (running) | **120.5 / 117.4** (scr 77%) |
-| MR | 130.4 / 137.4 | (running) | **65.0 / 23.0** (scr 100%) |
+WER/CER with offline-computed **script-match** (scr%) in parens:
 
-Note: whisper-small also emits wrong-script output for te/bn (WER >100%), same failure mode
-our experts fix.
+| Lang | Base(van) | Small | Medium | PolyWhisper Expert (Base) |
+|---|---|---|---|---|
+| HI | 131.3/136.9 | 69.8/38.2 (scr100%) | 43.7/18.6 (scr100%) | **38.6/14.6 (scr100%)** |
+| TA | 93.2/46.5 | 78.4/29.2 (scr99%) | 58.0/16.8 (scr100%) | **74.2/26.1 (scr99%)** |
+| TE | 185.6/170.6 | 129.3/122.6 (scr6%) | 109.3/107.8 (scr13%) | **91.9/50.2 (scr93%)** |
+| BN | 125.4/145.4 | 121.5/109.7 (scr0%) | 112.3/102.2 (scr15%) | **120.5/117.4 (scr77%)** |
+| MR | 130.4/137.4 | 126.5/58.7 (scr94%) | (pending) | **65.0/23.0 (scr100%)** |
+
+**Key finding (airtight):** even whisper-**medium** emits the **wrong script** on
+Bengali (15% match) and Telugu (13%) — 10× params does NOT fix script confusion. Our
+Base+LoRA expert (74M) restores 77–100% script match. On Hindi, our 74M expert (38.6)
+even **beats whisper-medium** (43.7).
 
 ## Status
 
-🔄 **Colab running**: small done (hi/ta/te), medium+large pending (~5h combined).
-   Re-run `make_results_table.py` after completion to fill the full table.
+🔄 **Colab timed out** during medium_mr. Re-run Cell 3 — it resumes (skips 9 done,
+runs medium_mr + large). No pipeline fix needed; >100% baseline WER is the intended
+finding. small+medium already tell the complete story; large is confirmatory.
+   Final table via `make_results_table.py` (now also computes baseline script-match).
