@@ -15,6 +15,7 @@ import math
 import gc
 import time
 import sys
+import shutil
 import traceback
 from pathlib import Path
 from datetime import datetime
@@ -290,8 +291,8 @@ def main():
         text = text.strip()
         if not text or len(text) < 3:
             return None
-        wav_path = adir / f"{idx:06d}.wav"
-        sf.write(str(wav_path), audio, 16000)
+        wav_path = adir / f"{idx:06d}.flac"
+        sf.write(str(wav_path), audio, 16000, format="FLAC")
         return {"wav": str(wav_path), "text": text}
 
     class AudioDataset(Dataset):
@@ -322,6 +323,35 @@ def main():
             tl = text.lower()
             return any(kw in tl for kw in AudioDataset._TEMPLATE_KW)
 
+        @staticmethod
+        def _cache_valid(data):
+            """True if cached json points at existing audio (false after session death)."""
+            if not data:
+                return False
+            try:
+                if not Path(data[0]["wav"]).exists():
+                    return False
+                adir = Path(data[0]["wav"]).parent
+                return len(list(adir.iterdir())) >= int(len(data) * 0.9)
+            except Exception:
+                return False
+
+        @staticmethod
+        def _clean_dataset_cache(name, lang):
+            """Delete downloaded parquet slices for this dataset+lang (streaming cache, disposable)."""
+            try:
+                root = Path(os.environ.get(
+                    "HF_DATASETS_CACHE", str(Path.home() / ".cache" / "huggingface" / "datasets")))
+                if not root.exists():
+                    return
+                for pat in (f"ai4bharat___indic_voices_st/*/*/{lang}",
+                            f"google___fleurs/{lang}"):
+                    for d in root.glob(pat):
+                        shutil.rmtree(d, ignore_errors=True)
+                        log(f"  Freed parquet cache: {d}")
+            except Exception:
+                pass
+
         def _load(self, split, max_samples, text_key, audio_key):
             cleaned = DATA_DIR / f"{self.name}_{self.lang}_{split}_cleaned.json"
             if cleaned.exists():
@@ -331,25 +361,28 @@ def main():
             if self.cache.exists():
                 log(f"  Cached {self.name}/{self.lang}/{split}")
                 data = json.load(open(self.cache))
-                if len(data) > max_samples:
-                    log(f"  Truncating to {max_samples} (cached has {len(data)})")
-                    data = data[:max_samples]
-                seen = set()
-                deduped = []
-                removed_template = 0
-                for d in data:
-                    text = d["text"].strip()
-                    if "hinglish" in self.lang and self._is_template(text):
-                        removed_template += 1
-                        continue
-                    key = text.lower()
-                    if key not in seen:
-                        seen.add(key)
-                        deduped.append(d)
-                if removed_template or len(deduped) < len(data):
-                    log(f"  Cleaned: templates={removed_template} dedup={len(data)-len(deduped)-removed_template} -> {len(deduped)}")
-                    return deduped
-                return data
+                if not self._cache_valid(data):
+                    log(f"  Stale cache (audio missing) — re-downloading")
+                else:
+                    if len(data) > max_samples:
+                        log(f"  Truncating to {max_samples} (cached has {len(data)})")
+                        data = data[:max_samples]
+                    seen = set()
+                    deduped = []
+                    removed_template = 0
+                    for d in data:
+                        text = d["text"].strip()
+                        if "hinglish" in self.lang and self._is_template(text):
+                            removed_template += 1
+                            continue
+                        key = text.lower()
+                        if key not in seen:
+                            seen.add(key)
+                            deduped.append(d)
+                    if removed_template or len(deduped) < len(data):
+                        log(f"  Cleaned: templates={removed_template} dedup={len(data)-len(deduped)-removed_template} -> {len(deduped)}")
+                        return deduped
+                    return data
             log(f"  Downloading {self.name} {self.lang} ({split})...")
             ds = None
             try:
@@ -394,6 +427,7 @@ def main():
                     last_count = len(recs)
             if len(recs) > 0:
                 json.dump(recs, open(self.cache, "w"))
+                self._clean_dataset_cache(self.name, self.lang)
             log(f"  Saved {len(recs)} samples")
             return recs
 

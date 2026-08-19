@@ -150,12 +150,23 @@ def eval_lang(lang, save_dir):
     return out
 
 
+def clean_datasets_cache():
+    """Delete disposable datasets parquet cache (re-downloadable; frees GBs after a dead session)."""
+    root = Path(os.environ.get(
+        "HF_DATASETS_CACHE", str(Path.home() / ".cache" / "huggingface" / "datasets")))
+    if root.exists():
+        shutil.rmtree(root, ignore_errors=True)
+        log(f"Cleared disposable datasets cache: {root}")
+
+
 def main():
     HF_TOKEN = os.environ.get("HF_TOKEN", "")
     if not HF_TOKEN:
         log("WARNING: HF_TOKEN not set — cannot persist to HF. Add Kaggle secret 'HF_TOKEN'.")
     else:
         api.token = HF_TOKEN
+
+    clean_datasets_cache()
 
     log("Restoring state from HF...")
     for gpu, d in SAVE_DIRS.items():
