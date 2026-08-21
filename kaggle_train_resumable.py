@@ -140,7 +140,9 @@ def run_gpu(gpu, langs, save_dir):
     ]
     env = dict(os.environ)
     env["CUDA_VISIBLE_DEVICES"] = CUDA_IDX[gpu]
-    log(f"GPU{gpu} (cuda:{CUDA_IDX[gpu]}): {cmd}")
+    # isolate datasets cache per GPU to avoid 2× peak and rm race
+    env["HF_DATASETS_CACHE"] = f"/kaggle/working/hf_datasets_cache_{gpu}"
+    log(f"GPU{gpu} (cuda:{CUDA_IDX[gpu]}): {cmd}  HF_DATASETS_CACHE={env['HF_DATASETS_CACHE']}")
     return subprocess.Popen(cmd, env=env,
                             stdout=open(f"{save_dir}_run.log", "a"),
                             stderr=subprocess.STDOUT)
