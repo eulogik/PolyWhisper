@@ -48,7 +48,8 @@ def main():
                    help="dir containing the adapter (default polywhisper_output/adapters_v3)")
     A.add_argument("--test-json", required=True)
     A.add_argument("--out", required=True)
-    A.add_argument("--max-new-tokens", type=int, default=128)
+    A.add_argument("--max-new-tokens", type=int, default=256,
+                    help="max tokens to generate (256 for FLEURS; 128 truncates long utterances)")
     A.add_argument("--model-size", type=str, default="base", choices=["base", "small"],
                    help="backbone the adapter was trained on")
     A.add_argument("--encoder-lora", action="store_true",
