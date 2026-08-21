@@ -31,7 +31,8 @@ parser.add_argument("--router", type=str, default=str(ADAPTER_DIR / "router_best
 parser.add_argument("--en-adapter", type=str, default="")
 parser.add_argument("--hi-adapter", type=str, default="")
 parser.add_argument("--num-samples", type=int, default=0, help="0 = full test set")
-parser.add_argument("--max-new-tokens", type=int, default=128)
+parser.add_argument("--max-new-tokens", type=int, default=256,
+                         help="256 for FLEURS/long; 128 truncates")
 parser.add_argument("--beams", type=int, default=1)
 ARGS = parser.parse_args()
 

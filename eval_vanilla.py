@@ -29,7 +29,8 @@ def main():
     parser.add_argument("--use-cache", action="store_true", default=False)
     parser.add_argument("--language", type=str, default="hi")
     parser.add_argument("--out", type=str, default=str(SAVE_DIR / "eval_vanilla_samples.json"))
-    parser.add_argument("--max-new-tokens", type=int, default=128)
+    parser.add_argument("--max-new-tokens", type=int, default=256,
+                         help="256 for FLEURS (128 truncates long utterances)")
     A = parser.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")

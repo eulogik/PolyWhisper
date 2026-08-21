@@ -231,6 +231,9 @@ class PolyWhisperV3(nn.Module):
 
     def forward(self, feat, dec_ids, lang):
         self.set_language(lang)
+        # lbls contains -100 padding (ignore_index); decoder embedding cannot handle -100
+        if (dec_ids == -100).any():
+            dec_ids = torch.where(dec_ids == -100, torch.tensor(BOS_EOS, device=dec_ids.device), dec_ids)
         enc = self.whisper.model.encoder(feat).last_hidden_state
         dec_out = self.whisper.model.decoder(dec_ids, encoder_hidden_states=enc, output_hidden_states=False)
         return self.whisper.proj_out(dec_out.last_hidden_state)
@@ -727,24 +730,28 @@ def main():
                         if ss_prob > 0 and not USE_FP16:
                             enc = model.whisper.model.encoder(feats).last_hidden_state
                             with torch.no_grad():
-                                tf_logits = model.whisper.model.decoder(lbls[:, :-1], encoder_hidden_states=enc).last_hidden_state
+                                clean_in = torch.where(lbls[:, :-1] == -100, BOS_EOS, lbls[:, :-1])
+                                tf_logits = model.whisper.model.decoder(clean_in, encoder_hidden_states=enc).last_hidden_state
                                 tf_logits = model.whisper.proj_out(tf_logits)
                                 pred_tokens = tf_logits.argmax(dim=-1)
                             mix_mask = (torch.rand_like(lbls[:, :-1].float()) < ss_prob)
                             mix_mask[:, :2] = False
                             mixed_input = torch.where(mix_mask, pred_tokens, lbls[:, :-1])
+                            mixed_input = torch.where(mixed_input == -100, BOS_EOS, mixed_input)
                             logits = model.whisper.model.decoder(mixed_input, encoder_hidden_states=enc).last_hidden_state
                             logits = model.whisper.proj_out(logits)
                         elif ss_prob > 0 and USE_FP16:
                             with torch.amp.autocast(FP16_BACKEND):
                                 enc = model.whisper.model.encoder(feats).last_hidden_state
                                 with torch.no_grad():
-                                    tf_logits = model.whisper.model.decoder(lbls[:, :-1], encoder_hidden_states=enc).last_hidden_state
+                                    clean_in = torch.where(lbls[:, :-1] == -100, BOS_EOS, lbls[:, :-1])
+                                    tf_logits = model.whisper.model.decoder(clean_in, encoder_hidden_states=enc).last_hidden_state
                                     tf_logits = model.whisper.proj_out(tf_logits)
                                     pred_tokens = tf_logits.argmax(dim=-1)
                                 mix_mask = (torch.rand_like(lbls[:, :-1].float()) < ss_prob)
                                 mix_mask[:, :2] = False
                                 mixed_input = torch.where(mix_mask, pred_tokens, lbls[:, :-1])
+                                mixed_input = torch.where(mixed_input == -100, BOS_EOS, mixed_input)
                                 logits = model.whisper.model.decoder(mixed_input, encoder_hidden_states=enc).last_hidden_state
                                 logits = model.whisper.proj_out(logits)
                         elif USE_FP16:

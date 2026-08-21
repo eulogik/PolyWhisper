@@ -1,9 +1,12 @@
-torch>=2.0
+torch==2.12.1
 torchaudio
-transformers>=4.40
-datasets>=2.0
-soundfile
-librosa
+transformers==4.44.2
+datasets==3.1.0
+soundfile==0.14.0
+librosa==0.11.0
 huggingface_hub
 numpy
 scipy
+onnx==1.22.0
+onnxruntime==1.29.0
+onnxscript==0.7.1
