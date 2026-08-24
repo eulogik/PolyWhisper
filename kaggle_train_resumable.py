@@ -29,7 +29,9 @@ LANG_SPLIT = {"gpu0": ["hi", "te", "bn"], "gpu1": ["ta", "mr"]}
 SAVE_DIRS = {"gpu0": "polywhisper_output_gpu0", "gpu1": "polywhisper_output_gpu1"}
 CUDA_IDX = {"gpu0": "0", "gpu1": "1"}
 EPOCHS = 3
-BATCH = 8
+# T4 (14.5GB) OOMs at batch 8 with small+encLoRA @ seq 3000 (v6 run died at 65min,
+# both GPUs, in cross-attn k_proj hook). Batch 4 fits comfortably; ~0.6-1.0 steps/s.
+BATCH = 4
 TAG = "_prod"
 
 try:
@@ -72,7 +74,11 @@ def fetch_remote(dirname):
 
 
 def upload_tree(dirname, remote_snapshot=None):
-    """Upload all .pt / .json artifacts in dirname to HF, if changed."""
+    """Upload all .pt / .json artifacts in dirname to HF, if changed.
+    Rate-limit aware: HF free tier caps repo commits at 128/hour. The monitor
+    loop calls this every 30s; we only push files whose size actually changed
+    (snapshot check) AND back off when HF returns 429, so a 2-3h session stays
+    far below the cap while still persisting every checkpoint within minutes."""
     local = Path(dirname)
     if not local.exists():
         return
@@ -94,7 +100,25 @@ def upload_tree(dirname, remote_snapshot=None):
                             commit_message=f"ckpt {rel}")
             log(f"  uploaded {rel}")
         except Exception as e:
-            log(f"  upload fail {rel}: {e}")
+            msg = str(e)
+            if "429" in msg or "rate limit" in msg.lower():
+                # parse "Retry after N seconds" and sleep once (max 120s here;
+                # the outer 30s loop will retry on next tick)
+                import re as _re
+                m = _re.search(r"Retry after (\d+)", msg)
+                wait = min(int(m.group(1)) + 5, 120) if m else 60
+                log(f"  rate-limited on {rel}; sleeping {wait}s")
+                time.sleep(wait)
+                try:
+                    api.upload_file(path_or_fileobj=str(p), path_in_repo=rel,
+                                    repo_id=REPO, repo_type="model",
+                                    commit_message=f"ckpt {rel}")
+                    log(f"  uploaded {rel} (after backoff)")
+                    continue
+                except Exception as e2:
+                    log(f"  upload fail {rel} after backoff: {e2}")
+            else:
+                log(f"  upload fail {rel}: {msg[:200]}")
 
 
 def remote_snapshot():
@@ -217,6 +241,7 @@ def main():
         snap = remote_snapshot()
         for d in SAVE_DIRS.values():
             upload_tree(d, snap)
+            snap = remote_snapshot()  # refresh after each dir's uploads
 
     for gpu, p in procs.items():
         code = p.wait()
@@ -228,6 +253,15 @@ def main():
                     log(f"  | {line}")
             except Exception as e:
                 log(f"  | (no run log: {e})")
+            else:
+                # also mirror the run log to HF so a dead session is diagnosable
+                try:
+                    api.upload_file(path_or_fileobj=f"{SAVE_DIRS[gpu]}_run.log",
+                                    path_in_repo=f"{SAVE_DIRS[gpu]}_run.log",
+                                    repo_id=REPO, repo_type="model",
+                                    commit_message=f"runlog {gpu}")
+                except Exception:
+                    pass
             try:
                 crash = Path(SAVE_DIRS[gpu]) / "crash_v3.log"
                 if crash.exists():

@@ -790,6 +790,16 @@ def main():
                             total = 0.0
                             save_state(state)
                             update_heartbeat(f"v3 training {lang} ep{ep+1} step {steps}/{len(loader)} loss={avg:.4f}")
+                    except torch.OutOfMemoryError:
+                        log(f"\n  [step {steps}] CUDA OOM — emptying cache, skipping batch")
+                        log_crash("OOM (batch skipped)", traceback.format_exc())
+                        opt.zero_grad(set_to_none=True)
+                        if DEVICE == "cuda":
+                            torch.cuda.empty_cache()
+                        elif DEVICE == "mps":
+                            torch.mps.empty_cache()
+                        total = 0.0
+                        continue
                     except Exception as e:
                         tb = traceback.format_exc()
                         log(f"\n  CRASH during training: {e}")
