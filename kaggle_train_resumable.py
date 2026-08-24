@@ -73,15 +73,18 @@ def fetch_remote(dirname):
             log(f"  skip {f}: {e}")
 
 
-def upload_tree(dirname, remote_snapshot=None):
+_upload_times = {}  # rel path -> last successful upload time (throttle)
+
+
+def upload_tree(dirname, remote_snapshot=None, force=False):
     """Upload all .pt / .json artifacts in dirname to HF, if changed.
-    Rate-limit aware: HF free tier caps repo commits at 128/hour. The monitor
-    loop calls this every 30s; we only push files whose size actually changed
-    (snapshot check) AND back off when HF returns 429, so a 2-3h session stays
-    far below the cap while still persisting every checkpoint within minutes."""
+    - Skips files already on HF with identical size (snapshot check).
+    - Throttles per file to one upload / 10 min unless force=True (final push),
+      because HF free tier caps repo commits at 128/hour."""
     local = Path(dirname)
     if not local.exists():
         return
+    now = time.time()
     for p in sorted(local.rglob("*")):
         if not p.is_file():
             continue
@@ -95,42 +98,52 @@ def upload_tree(dirname, remote_snapshot=None):
             if remote_snapshot is not None and rel in remote_snapshot:
                 if remote_snapshot[rel] == p.stat().st_size:
                     continue
+            if not force and now - _upload_times.get(rel, 0) < 600:
+                continue  # throttled: uploaded recently, quota is precious
             api.upload_file(path_or_fileobj=str(p), path_in_repo=rel,
                             repo_id=REPO, repo_type="model",
                             commit_message=f"ckpt {rel}")
+            _upload_times[rel] = now
             log(f"  uploaded {rel}")
         except Exception as e:
             msg = str(e)
             if "429" in msg or "rate limit" in msg.lower():
-                # parse "Retry after N seconds" and sleep once (max 120s here;
-                # the outer 30s loop will retry on next tick)
                 import re as _re
                 m = _re.search(r"Retry after (\d+)", msg)
-                wait = min(int(m.group(1)) + 5, 120) if m else 60
+                wait = min(int(m.group(1)) + 5, 300) if m else 60
                 log(f"  rate-limited on {rel}; sleeping {wait}s")
                 time.sleep(wait)
                 try:
                     api.upload_file(path_or_fileobj=str(p), path_in_repo=rel,
                                     repo_id=REPO, repo_type="model",
                                     commit_message=f"ckpt {rel}")
+                    _upload_times[rel] = time.time()
                     log(f"  uploaded {rel} (after backoff)")
                     continue
                 except Exception as e2:
-                    log(f"  upload fail {rel} after backoff: {e2}")
+                    log(f"  upload fail {rel} after backoff: {str(e2)[:150]}")
             else:
                 log(f"  upload fail {rel}: {msg[:200]}")
 
 
 def remote_snapshot():
-    """{path_in_repo: size} for all files in the HF repo ({} if unreachable)."""
+    """{path_in_repo: size} for all BLOB files in the HF repo ({} if unreachable).
+    Note: list_repo_tree returns RepoFolder entries too (no .size) — filter them
+    out or the dict-comp raises AttributeError and the caller gets {}, which
+    disables skip-checks entirely and burns the commit quota."""
     try:
         from huggingface_hub import list_repo_tree
-        return {f.path: f.size for f in
-                list_repo_tree(REPO, recursive=True, expand=True, repo_type="model")}
+        out = {}
+        for f in list_repo_tree(REPO, recursive=True, expand=True, repo_type="model"):
+            size = getattr(f, "size", None)
+            if size is not None:
+                out[f.path] = size
+        return out
     except Exception:
         try:
             info = api.model_info(REPO, files_metadata=True, repo_type="model")
-            return {s.rfilename: s.size for s in info.siblings}
+            return {s.rfilename: s.size for s in info.siblings
+                    if getattr(s, "size", None) is not None}
         except Exception:
             return {}
 
@@ -235,13 +248,16 @@ def main():
         Path(d).mkdir(parents=True, exist_ok=True)
         procs[gpu] = run_gpu(gpu, langs, d)
 
-    log("Monitoring (uploading checkpoints to HF every 30s)...")
+    log("Monitoring (uploading checkpoints to HF every 30s, snapshot refreshed every 5 min)...")
+    last_snap = 0.0
+    snap = {}
     while any(p.poll() is None for p in procs.values()):
         time.sleep(30)
-        snap = remote_snapshot()
+        if time.time() - last_snap > 300:
+            snap = remote_snapshot()
+            last_snap = time.time()
         for d in SAVE_DIRS.values():
             upload_tree(d, snap)
-            snap = remote_snapshot()  # refresh after each dir's uploads
 
     for gpu, p in procs.items():
         code = p.wait()
@@ -275,7 +291,7 @@ def main():
 
     snap = remote_snapshot()
     for gpu, d in SAVE_DIRS.items():
-        upload_tree(d, snap)
+        upload_tree(d, snap, force=True)
 
     log("Running FLEURS evals...")
     for gpu, langs in LANG_SPLIT.items():
@@ -286,7 +302,7 @@ def main():
                 log(f"  [eval] {lang} FAILED: {e}")
 
     for gpu, d in SAVE_DIRS.items():
-        upload_tree(d, remote_snapshot())
+        upload_tree(d, remote_snapshot(), force=True)
 
     log("ALL DONE. Re-run make_results_table.py locally for the final table.")
 
