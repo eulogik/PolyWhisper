@@ -265,10 +265,15 @@ def main():
     log(f"Total trainable (LoRA): {total_lora/1e6:.2f}M params")
 
     # ============ LR SCHEDULER ============
-    def get_lr(step, warmup=WARMUP_STEPS, total_steps=100000):
+    # total_steps is unknown until datasets load; get_lr reads it live so the
+    # cosine actually decays across the real run (was hard-coded 100000 => no-op)
+    sched_total = {"steps": None}
+
+    def get_lr(step, warmup=WARMUP_STEPS):
+        total = sched_total["steps"] or 100000
         if step < warmup:
             return LR * step / warmup
-        progress = (step - warmup) / max(1, total_steps - warmup)
+        progress = (step - warmup) / max(1, total - warmup)
         return LR * max(0.05, 0.5 * (1 + math.cos(math.pi * progress)))
 
     def get_ss_prob(ep):
@@ -665,6 +670,12 @@ def main():
     state = load_state()
     start_time = time.time()
     total_steps_done = state.get("global_step", 0)
+
+    # real cosine horizon: all langs x epochs at current batch size
+    _total = sum(max(1, len(train_sets[l]) // BATCH_SIZE) for l in LANGUAGES
+                 if len(train_sets.get(l, [])) > 0) * NUM_EPOCHS
+    sched_total["steps"] = max(1000, _total)
+    log(f"  LR schedule: cosine over ~{_total} steps (was hard-coded 100000 -> no decay)")
 
     if state["lang"] not in LANGUAGES or state["epoch"] >= NUM_EPOCHS:
         log(f"  State ({state['lang']} ep{state['epoch']}) incompatible with this run "
