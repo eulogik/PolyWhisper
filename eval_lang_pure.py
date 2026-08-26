@@ -50,6 +50,10 @@ def main():
     A.add_argument("--out", required=True)
     A.add_argument("--max-new-tokens", type=int, default=256,
                     help="max tokens to generate (256 for FLEURS; 128 truncates long utterances)")
+    A.add_argument("--num-beams", type=int, default=1,
+                   help="beam width; KV-cache makes beam affordable (5 typical)")
+    A.add_argument("--no-cache", action="store_true",
+                   help="disable KV cache (8.7x slower; outputs verified identical)")
     A.add_argument("--model-size", type=str, default="base", choices=["base", "small"],
                    help="backbone the adapter was trained on")
     A.add_argument("--encoder-lora", action="store_true",
@@ -78,8 +82,9 @@ def main():
                 pad = torch.zeros(B, C, 3000 - T, dtype=feats.dtype)
                 feats = torch.cat([feats, pad], dim=-1)
             feats = feats[:, :, :3000].to(DEVICE)
-            out = model.generate(feats, lang=a.lang, max_new_tokens=a.max_new_tokens, num_beams=1,
-                                 use_cache=False, task="transcribe")
+            out = model.generate(feats, lang=a.lang, max_new_tokens=a.max_new_tokens,
+                                 num_beams=a.num_beams,
+                                 use_cache=not a.no_cache, task="transcribe")
             hyp = processor.decode(out[0], skip_special_tokens=True).strip()
             ref = r["text"].strip()
             w = compute_wer(ref, hyp)

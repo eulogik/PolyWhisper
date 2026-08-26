@@ -65,11 +65,22 @@ HINDI_PRE = (("क्ष", "कस"), ("ज्ञ", "गय"))
 NORMS = {"ta": TAMIL, "te": TELUGU, "bn": BENGALI, "mr": MARATHI, "hi": HINDI}
 
 
+def _strip_punct(s):
+    """Drop unicode punctuation (P*) and symbols (S*) incl. danda U+0964/65;
+    keep letters, marks, digits."""
+    return "".join(" " if unicodedata.category(ch)[:1] in ("P", "S") else ch
+                   for ch in s)
+
+
 def normalize(text, table):
     text = unicodedata.normalize("NFC", text.strip())
     for a, b in HINDI_PRE:
         text = text.replace(a, b)
     out = text.translate(table)
+    # strip punctuation on BOTH ref and hyp (cf. whisper BasicTextNormalizer,
+    # IndicWER): FLEURS refs carry danda/latin punct while model outputs don't —
+    # otherwise every dropped '।' counts as a word error
+    out = _strip_punct(out)
     out = re.sub(r"\s+", " ", out).strip()
     return out
 
