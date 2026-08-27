@@ -83,6 +83,7 @@ def transcribe(
     chunk_sec: float = 30.0,
     model: Optional[PolyWhisper] = None,
     language_probs: bool = False,
+    backend: str = "auto",
 ) -> TranscriptionResult:
     """Transcribe audio file or numpy array.
 
@@ -97,6 +98,7 @@ def transcribe(
         chunk_sec: chunk long audio into this many seconds.
         model: pre-loaded PolyWhisper instance (avoids re-loading).
         language_probs: if lang is None, return probs for all languages.
+        backend: "auto" (ONNX if available, else torch), "torch", or "onnx".
 
     Returns:
         TranscriptionResult with text, segments, and metadata.
@@ -108,6 +110,21 @@ def transcribe(
     else:
         audio = np.asarray(audio_input, dtype=np.float32)
         source = "<array>"
+
+    # Try ONNX backend first (no torch needed, faster on CPU)
+    use_onnx = backend in ("onnx", "auto") and device in ("auto", "cpu")
+    if use_onnx:
+        try:
+            from polywhisper.onnx_backend import OnnxBackend
+            from polywhisper.model import _get_processor
+            processor = _get_processor(backbone)
+            onnx = OnnxBackend(lang=lang or "hi")
+            text = onnx.transcribe(audio_input, processor, max_new_tokens=max_new_tokens,
+                                   num_beams=num_beams, language=lang)
+            segments = [Segment(text=text, start_sec=0.0, end_sec=len(audio) / TARGET_SR)]
+            return TranscriptionResult(text=text, lang=lang or "hi", segments=segments)
+        except (FileNotFoundError, ImportError):
+            pass  # fall through to torch backend
 
     m = _get_model(backbone, device, model)
 

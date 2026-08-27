@@ -68,8 +68,9 @@ def main():
     A.add_argument("--lang", required=True)
     A.add_argument("--out-dir", default="export/onnx")
     A.add_argument("--int8", action="store_true", help="also write int8-quantized onnx")
+    A.add_argument("--encoder-lora", action="store_true", help="adapter was trained with encoder LoRA (hi_v5)")
     A.add_argument("--spot-check", type=int, default=20,
-                   help="samples for e2e greedy check (uses FLEURS hi test json if present)")
+                    help="samples for e2e greedy check (uses FLEURS hi test json if present)")
     a = A.parse_args()
 
     out_dir = Path(a.out_dir)
@@ -79,7 +80,7 @@ def main():
     print(f"Loading {a.model_size} backbone + adapter {a.adapter} ...")
     t0 = time.time()
     model = PolyWhisperV3(whisper_name=MODEL_SIZES[a.model_size],
-                          encoder_lora=True).to("cpu").eval()
+                          encoder_lora=a.encoder_lora).to("cpu").eval()
     model.add_language(a.lang)
     model.load_adapter(a.lang, str(Path(a.adapter_dir) / a.adapter))
     model.set_language(a.lang)

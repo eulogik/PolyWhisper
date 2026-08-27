@@ -45,6 +45,7 @@ def cmd_transcribe(args):
         max_new_tokens=args.max_tokens,
         num_beams=args.beams,
         model=model,
+        backend=args.backend,
     )
     dt = time.time() - t0
 
@@ -146,6 +147,34 @@ def _fmt_srt(sec):
     return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
+def cmd_export(args):
+    from polywhisper.onnx_backend import export_language
+    from polywhisper.model import ADAPTER_REGISTRY, _adapter_search_paths
+
+    # Resolve adapter path
+    reg = ADAPTER_REGISTRY.get(args.lang)
+    if reg is None:
+        print(f"Unknown language: {args.lang}. Available: {list(ADAPTER_REGISTRY.keys())}")
+        return
+    fname = reg.get(args.variant, reg.get("prod", list(reg.values())[0])) if isinstance(reg, dict) else reg
+    adapter_path = None
+    for d in _adapter_search_paths():
+        p = d / fname
+        if p.exists():
+            adapter_path = p
+            break
+    if adapter_path is None:
+        print(f"Adapter not found: {fname}")
+        return
+
+    print(f"Exporting {args.lang} ({args.variant}) to ONNX...")
+    enc_path, dec_path = export_language(
+        args.lang, str(adapter_path), backbone=args.backbone,
+        out_dir=args.out_dir, int8=args.int8,
+    )
+    print(f"Done. Encoder: {enc_path}\nDecoder: {dec_path}")
+
+
 def main():
     p = argparse.ArgumentParser(
         prog="polywhisper",
@@ -164,6 +193,8 @@ def main():
     t.add_argument("--beams", type=int, default=1, help="Beam width")
     t.add_argument("--format", "-f", default="text", choices=["text", "json", "srt"],
                     help="Output format")
+    t.add_argument("--backend", default="auto", choices=["auto", "torch", "onnx"],
+                    help="Inference backend (auto: ONNX if available, else torch)")
     t.set_defaults(func=cmd_transcribe)
 
     # batch
@@ -177,6 +208,15 @@ def main():
     b.add_argument("--beams", type=int, default=1)
     b.add_argument("--output", "-o", default=None, help="Output JSON file")
     b.set_defaults(func=cmd_batch)
+
+    # export
+    e = sub.add_parser("export", help="Export language to ONNX (CPU inference)")
+    e.add_argument("--lang", "-l", required=True, help="Language to export")
+    e.add_argument("--variant", "-v", default="prod", help="Adapter variant")
+    e.add_argument("--backbone", "-b", default="small")
+    e.add_argument("--out-dir", "-o", default="export/onnx", help="Output directory")
+    e.add_argument("--int8", action="store_true", help="Also quantize to int8")
+    e.set_defaults(func=cmd_export)
 
     # languages
     sub.add_parser("languages", help="List available languages and adapters").set_defaults(func=cmd_languages)
