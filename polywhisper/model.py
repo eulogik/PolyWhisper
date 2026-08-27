@@ -31,10 +31,16 @@ ADAPTER_REGISTRY = {
     "ta": {"base": "ta_best_ta.pt", "prod": "ta_best_prod.pt"},
     "te": {"base": "te_best_te.pt", "prod": "te_best_prod.pt"},
     "bn": {"base": "bn_best_bn.pt", "prod": "bn_best_prod.pt"},
-    "mr": "mr_best_mr.pt",
+    "mr": {"base": "mr_best_mr.pt", "prod": "mr_best_prod.pt"},
 }
 
 AVAILABLE_LANGS = list(ADAPTER_REGISTRY.keys())
+
+
+def _get_processor(backbone="small"):
+    """Get WhisperProcessor for the given backbone."""
+    from transformers import WhisperProcessor
+    return WhisperProcessor.from_pretrained(f"openai/whisper-{backbone}")
 
 
 def _adapter_search_paths():
