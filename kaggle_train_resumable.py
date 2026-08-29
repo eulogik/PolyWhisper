@@ -28,7 +28,7 @@ REPO = "eulogik/polywhisper"
 LANG_SPLIT = {"gpu0": ["hi", "te", "bn"], "gpu1": ["ta", "mr"]}
 SAVE_DIRS = {"gpu0": "polywhisper_output_gpu0", "gpu1": "polywhisper_output_gpu1"}
 CUDA_IDX = {"gpu0": "0", "gpu1": "1"}
-EPOCHS = 3
+EPOCHS = 5  # increased from 3 — te/bn underfit at 3 epochs, real cosine now decays
 # T4 (14.5GB) OOMs at batch 8 with small+encLoRA @ seq 3000 (v6 run died at 65min,
 # both GPUs, in cross-attn k_proj hook). Batch 4 fits comfortably; ~0.6-1.0 steps/s.
 BATCH = 4
@@ -173,7 +173,8 @@ def run_gpu(gpu, langs, save_dir):
         "--encoder-lora",
         "--tag", TAG,
         "--save-dir", save_dir,
-        "--max-runtime-hours", "10",
+        "--max-runtime-hours", "11",
+        "--wer-eval-every", "500",
     ]
     env = dict(os.environ)
     env["CUDA_VISIBLE_DEVICES"] = CUDA_IDX[gpu]
@@ -191,13 +192,17 @@ def eval_lang(lang, save_dir):
     if not Path(test_json).exists():
         log(f"  [eval] {lang}: no cached fleurs test, skipping")
         return
-    adapter = f"{lang}_best{TAG}.pt"
-    adapter_path = Path(save_dir) / "adapters_v3" / adapter
+    # check for WER-based best checkpoint first, fall back to CE-based best
+    adapter_wer = f"{lang}_best_wer{TAG}.pt"
+    adapter_ce = f"{lang}_best{TAG}.pt"
+    adapter_path = Path(save_dir) / "adapters_v3"
+    adapter = adapter_wer if (adapter_path / adapter_wer).exists() else adapter_ce
+    adapter_full = adapter_path / adapter
     out = f"{save_dir}/eval_{lang}_pure_fleurs.json"
     if Path(out).exists():
         log(f"  [eval] {lang}: already done")
         return
-    if not adapter_path.exists() or not artifact_ok(adapter_path):
+    if not adapter_full.exists() or not artifact_ok(adapter_full):
         log(f"  [eval] {lang}: adapter missing/corrupt — skipping (was training interrupted?)")
         return
     cmd = [

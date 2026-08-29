@@ -51,6 +51,14 @@ SS_START_EPOCH = 0
 SS_EPOCHS = 3
 SS_START_PROB = 0.10
 
+# ============ SPEC AUGMENT ============
+SPEC_AUGMENT = True  # enabled by default; frequency + time masking on mel
+SPEC_FREQ_MASK = 27   # max freq bins to mask (27 = ~1/3 of 80 mel bins)
+SPEC_TIME_MASK = 40   # max time frames to mask (40 = ~1.3s at 100fps)
+SPEED_PERTURB = True  # enabled by default; 0.9x and 1.1x speed variants
+WER_SELECT = True     # WER-based checkpoint selection on held-out slice
+WER_EVAL_EVERY = 500  # evaluate WER every N steps
+
 # ============ ARGS ============
 parser = argparse.ArgumentParser()
 parser.add_argument("--langs", type=str, default="en")
@@ -69,6 +77,14 @@ parser.add_argument("--mask-lang", type=str, default="",
                     help="Train only on tokens of this lang (en|hi) from the labeled hinglish set")
 parser.add_argument("--tag", type=str, default="",
                     help="Filename suffix for checkpoints/state, e.g. _v4 (no clobber)")
+parser.add_argument("--no-spec-augment", action="store_true",
+                    help="Disable SpecAugment frequency+time masking")
+parser.add_argument("--no-speed-perturb", action="store_true",
+                    help="Disable speed perturbation (0.9x/1.1x)")
+parser.add_argument("--no-wer-select", action="store_true",
+                    help="Disable WER-based checkpoint selection")
+parser.add_argument("--wer-eval-every", type=int, default=500,
+                    help="Evaluate WER every N steps (for checkpoint selection)")
 ARGS = parser.parse_known_args()[0]
 BATCH_SIZE = ARGS.batch_size
 
@@ -84,6 +100,10 @@ MAX_RUNTIME_HOURS = ARGS.max_runtime_hours
 ENCODER_LORA = ARGS.encoder_lora
 MASK_LANG = ARGS.mask_lang
 TAG = ARGS.tag
+SPEC_AUGMENT = not ARGS.no_spec_augment
+SPEED_PERTURB = not ARGS.no_speed_perturb
+WER_SELECT = not ARGS.no_wer_select
+WER_EVAL_EVERY = ARGS.wer_eval_every
 
 # ============ PATHS ============
 SAVE_DIR = Path(ARGS.save_dir)
@@ -254,6 +274,52 @@ class PolyWhisperV3(nn.Module):
 
 
 
+def quick_wer(model, dataset, lang, n_samples=50, max_new_tokens=256):
+    """Quick WER eval on a small slice of the dataset. Returns WER % (0-100)."""
+    import unicodedata, re
+    model.eval()
+    model.set_language(lang)
+
+    # simple normalization (matches normalize_ortho)
+    def norm(t):
+        t = unicodedata.normalize("NFC", t.strip())
+        t = re.sub(r"[^\w\s\u0900-\u097F]|_", " ", t, flags=re.UNICODE)
+        return re.sub(r"\s+", " ", t).strip()
+
+    def wer(ref, hyp):
+        rw, hw = ref.split(), hyp.split()
+        if not rw:
+            return 1.0 if hw else 0.0
+        dp = [[0]*(len(hw)+1) for _ in range(len(rw)+1)]
+        for i in range(len(rw)+1): dp[i][0] = i
+        for j in range(len(hw)+1): dp[0][j] = j
+        for i in range(1, len(rw)+1):
+            for j in range(1, len(hw)+1):
+                dp[i][j] = min(dp[i-1][j]+1, dp[i][j-1]+1,
+                               dp[i-1][j-1]+(rw[i-1]!=hw[j-1]))
+        return dp[len(rw)][len(hw)] / len(rw)
+
+    indices = list(range(min(n_samples, len(dataset))))
+    total_w, total_e = 0, 0
+    with torch.no_grad():
+        for idx in indices:
+            r = dataset.data[idx]
+            audio, _ = sf.read(r["wav"])
+            feats = processor.feature_extractor([audio], sampling_rate=16000,
+                                                return_tensors="pt", padding=True)["input_features"]
+            if feats.shape[-1] < 3000:
+                feats = torch.cat([feats, torch.zeros(1, 80, 3000-feats.shape[-1], dtype=feats.dtype)], -1)
+            out = model.generate(feats.to(DEVICE), lang=lang, max_new_tokens=max_new_tokens,
+                                 num_beams=1, use_cache=True, task="transcribe")
+            hyp = processor.decode(out[0], skip_special_tokens=True).strip()
+            ref = norm(r["text"])
+            n = len(ref.split())
+            total_w += wer(ref, hyp) * n
+            total_e += n
+    model.train()
+    return 100 * total_w / max(1, total_e)
+
+
 def main():
     log("Building model...")
     model = PolyWhisperV3().to(DEVICE)
@@ -304,9 +370,10 @@ def main():
         return {"wav": str(wav_path), "text": text}
 
     class AudioDataset(Dataset):
-        def __init__(self, name, lang, split, max_samples, text_key, audio_key="audio"):
+        def __init__(self, name, lang, split, max_samples, text_key, audio_key="audio", training=False):
             self.name = name
             self.lang = lang
+            self.training = training
             self.cache = DATA_DIR / f"{name}_{lang}_{split}.json"
             self.adir = DATA_DIR / f"audio_{name}_{lang}"
             self.adir.mkdir(parents=True, exist_ok=True)
@@ -442,6 +509,13 @@ def main():
         def __getitem__(self, i):
             r = self.data[i]
             a, _ = sf.read(r["wav"])
+            # Speed perturbation: randomly slow down or speed up 0.9x/1.1x
+            if SPEED_PERTURB and self.training:
+                import random
+                speed = random.choice([0.9, 1.0, 1.0, 1.1])  # 50% clean, 25% each
+                if speed != 1.0:
+                    import resampy
+                    a = resampy.resample(a, 16000, int(16000 * speed))
             return {"audio": a, "text": r["text"]}
 
     class LabeledHinglishDataset(Dataset):
@@ -455,6 +529,41 @@ def main():
             r = self.data[i]
             a, _ = sf.read(r["wav"])
             return {"audio": a, "text": r["text"], "words": r["tokens"]}
+
+    @staticmethod
+    def spec_augment(feats):
+        """Apply SpecAugment: random frequency + time masking on mel features."""
+        if not SPEC_AUGMENT or feats.shape[0] == 0:
+            return feats
+        B, C, T = feats.shape
+        for b in range(B):
+            n_freq = torch.randint(0, SPEC_FREQ_MASK + 1, (1,)).item()
+            if n_freq > 0:
+                f0 = torch.randint(0, max(1, C - n_freq), (1,)).item()
+                feats[b, f0:f0+n_freq, :] = 0
+        for b in range(B):
+            n_time = torch.randint(0, SPEC_TIME_MASK + 1, (1,)).item()
+            if n_time > 0:
+                t0 = torch.randint(0, max(1, T - n_time), (1,)).item()
+                feats[b, :, t0:t0+n_time] = 0
+        return feats
+
+    def _apply_spec_augment(feats):
+        """Standalone SpecAugment (used by both Collator and MaskedCollator)."""
+        if not SPEC_AUGMENT or feats.shape[0] == 0:
+            return feats
+        B, C, T = feats.shape
+        for b in range(B):
+            n_freq = torch.randint(0, SPEC_FREQ_MASK + 1, (1,)).item()
+            if n_freq > 0:
+                f0 = torch.randint(0, max(1, C - n_freq), (1,)).item()
+                feats[b, f0:f0+n_freq, :] = 0
+        for b in range(B):
+            n_time = torch.randint(0, SPEC_TIME_MASK + 1, (1,)).item()
+            if n_time > 0:
+                t0 = torch.randint(0, max(1, T - n_time), (1,)).item()
+                feats[b, :, t0:t0+n_time] = 0
+        return feats
 
     class Collator:
         def __init__(self, proc, max_lbl, lang):
@@ -481,7 +590,7 @@ def main():
                 while len(full) < self.max_lbl:
                     full.append(-100)
                 lbls.append(full)
-            return {"feats": feats, "lbls": torch.tensor(lbls, dtype=torch.long)}
+            return {"feats": self.spec_augment(feats), "lbls": torch.tensor(lbls, dtype=torch.long)}
 
     class MaskedCollator:
         """Like Collator, but masks (-> -100) every subword whose word-level lang != mask_lang."""
@@ -544,7 +653,7 @@ def main():
                 while len(full) < self.max_lbl:
                     full.append(-100)
                 lbls.append(full)
-            return {"feats": feats, "lbls": torch.tensor(lbls, dtype=torch.long)}
+            return {"feats": _apply_spec_augment(feats), "lbls": torch.tensor(lbls, dtype=torch.long)}
 
     def make_loader(dataset, lang, batch_size=BATCH_SIZE, shuffle=True):
         if len(dataset) == 0:
@@ -662,9 +771,9 @@ def main():
         else:
             max_samples = MAX_SAMPLES_PER_LANG
         name, lang_code, text_key, audio_key, split = TRAIN_CONFIG[lang]
-        train_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key)
+        train_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key, training=True)
         name, lang_code, text_key, audio_key, split = TEST_CONFIG[lang]
-        test_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key)
+        test_sets[lang] = AudioDataset(name, lang_code, split, max_samples, text_key, audio_key, training=False)
         log(f"  {lang}: {len(train_sets[lang])} train, {len(test_sets[lang])} test")
 
     state = load_state()
@@ -801,6 +910,21 @@ def main():
                             total = 0.0
                             save_state(state)
                             update_heartbeat(f"v3 training {lang} ep{ep+1} step {steps}/{len(loader)} loss={avg:.4f}")
+                            # WER-based checkpoint selection
+                            if WER_SELECT and steps % WER_EVAL_EVERY == 0:
+                                try:
+                                    wer_score = quick_wer(model, test_sets[lang], lang,
+                                                         n_samples=50, max_new_tokens=256)
+                                    best_wer = state.get(f"best_wer_{lang}", 1e9)
+                                    log(f"  [WER eval] {lang}: {wer_score:.1f}% (best: {best_wer:.1f}%)")
+                                    if wer_score < best_wer:
+                                        state[f"best_wer_{lang}"] = wer_score
+                                        best_path = ADAPTER_DIR / f"{lang}_best_wer{TAG}.pt"
+                                        model.save_adapter(lang, best_path)
+                                        log(f"  [WER eval] New best! Saved {best_path.name}")
+                                    save_state(state)
+                                except Exception as e:
+                                    log(f"  [WER eval] failed: {e}")
                     except torch.OutOfMemoryError:
                         log(f"\n  [step {steps}] CUDA OOM — emptying cache, skipping batch")
                         log_crash("OOM (batch skipped)", traceback.format_exc())
