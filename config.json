@@ -2,7 +2,7 @@
   "model_type": "whisper",
   "architectures": ["WhisperForConditionalGeneration"],
   "task": "automatic-speech-recognition",
-  " languages": ["hi", "ta", "te", "bn", "mr"],
+  "languages": ["hi", "ta", "te", "bn", "mr"],
   "license": "apache-2.0",
   "base_model": "openai/whisper-small",
   "library_name": "transformers",
