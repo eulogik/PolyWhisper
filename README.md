@@ -26,7 +26,6 @@ tags:
   - automatic-speech-recognition
   - speech-to-text
   - indicspeech
-  - indicspeechrecognition
   - onnx
   - quantized
   - efficient-asr
@@ -57,52 +56,27 @@ model-index:
           - type: wer
             value: 60.4
             name: WER
-      - task:
-          type: automatic-speech-recognition
-          name: Speech Recognition
-        dataset:
-          name: FLEURS (Telugu)
-          type: google/fleurs
-          lang: te
-        metrics:
-          - type: wer
-            value: 105.7
-            name: WER
-      - task:
-          type: automatic-speech-recognition
-          name: Speech Recognition
-        dataset:
-          name: FLEURS (Bengali)
-          type: google/fleurs
-          lang: bn
-        metrics:
-          - type: wer
-            value: 196.3
-            name: WER
-      - task:
-          type: automatic-speech-recognition
-          name: Speech Recognition
-        dataset:
-          name: FLEURS (Marathi)
-          type: google/fleurs
-          lang: mr
-        metrics:
-          - type: wer
-            value: 167.3
-            name: WER
 ---
 
-# PolyWhisper — Efficient Multilingual Indic ASR
-
+[![GitHub](https://img.shields.io/badge/GitHub-PolyWhisper-181717?style=flat&logo=github)](https://github.com/eulogikdeveloper/PolyWhisper)
+[![HuggingFace Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-eulogik/polywhisper-ffd21e)](https://huggingface.co/eulogik/polywhisper)
+[![HuggingFace Space](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-Gradio-ff6b6b)](https://huggingface.co/spaces/EvolucentAI/polywhisper)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-model-yellow)](https://huggingface.co/eulogik/polywhisper)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch)](https://pytorch.org/)
+[![ONNX](https://img.shields.io/badge/ONNX-Runtime-orange?logo=onnx)](https://onnxruntime.ai/)
+
+# PolyWhisper — Efficient Multilingual Indic ASR
 
 **PolyWhisper** is an efficient multilingual Automatic Speech Recognition (ASR) system for **Indian languages**. It uses a **frozen Whisper backbone** with **per-language LoRA adapters** to achieve competitive accuracy at a fraction of the compute cost of full fine-tuning.
 
 ## What is PolyWhisper?
 
 PolyWhisper is a **lightweight, production-ready ASR model** for 5 major Indian languages: **Hindi, Tamil, Telugu, Bengali, and Marathi**. Unlike traditional approaches that fine-tune the entire model, PolyWhisper keeps the pretrained Whisper backbone frozen and trains small **LoRA adapters** (rank 16, ~14MB per language) that bolt onto the backbone at inference time.
+
+### Try the Demo
+
+🌐 **[Live Demo on HuggingFace Spaces](https://huggingface.co/spaces/EvolucentAI/polywhisper)** — upload audio or record from your microphone
 
 ### Key Features
 
