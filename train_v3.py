@@ -590,7 +590,7 @@ def main():
                 while len(full) < self.max_lbl:
                     full.append(-100)
                 lbls.append(full)
-            return {"feats": self.spec_augment(feats), "lbls": torch.tensor(lbls, dtype=torch.long)}
+            return {"feats": _apply_spec_augment(feats), "lbls": torch.tensor(lbls, dtype=torch.long)}
 
     class MaskedCollator:
         """Like Collator, but masks (-> -100) every subword whose word-level lang != mask_lang."""
