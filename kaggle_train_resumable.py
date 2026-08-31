@@ -236,6 +236,7 @@ def clean_audio_for_finished_langs():
     Kaggle's 20GB disk fills up with ~3.4GB/lang FLAC audio. By the time 3
     languages are done, disk is full. This frees ~3-7 GB per call.
     """
+    total_freed = 0
     for gpu, save_dir in SAVE_DIRS.items():
         state_path = Path(save_dir) / "training_state_v3_prod.json"
         if not state_path.exists():
@@ -265,13 +266,15 @@ def clean_audio_for_finished_langs():
                 size_mb = sum(f.stat().st_size for f in flac_dir.iterdir() if f.is_file()) / 1e6
                 shutil.rmtree(flac_dir, ignore_errors=True)
                 log(f"  Freed {size_mb:.0f}MB: {flac_dir.name} (lang done)")
+                total_freed += 1
             # Also clean FLEURS test audio for this lang (eval already done)
             fleurs_dir = audio_dir / f"audio_fleurs_{lang}"
             if fleurs_dir.exists():
                 size_mb = sum(f.stat().st_size for f in fleurs_dir.iterdir() if f.is_file()) / 1e6
                 shutil.rmtree(fleurs_dir, ignore_errors=True)
                 log(f"  Freed {size_mb:.0f}MB: {fleurs_dir.name} (eval done)")
-    return len(done_langs)
+                total_freed += 1
+    return total_freed
 
 
 def main():
