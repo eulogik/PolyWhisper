@@ -28,7 +28,7 @@ REPO = "eulogik/polywhisper"
 LANG_SPLIT = {"gpu0": ["hi", "te", "bn"], "gpu1": ["ta", "mr"]}
 SAVE_DIRS = {"gpu0": "polywhisper_output_gpu0", "gpu1": "polywhisper_output_gpu1"}
 CUDA_IDX = {"gpu0": "0", "gpu1": "1"}
-EPOCHS = 5  # increased from 3 — te/bn underfit at 3 epochs, real cosine now decays
+EPOCHS = 3  # reduced from 5 — Kaggle disk limit ~20GB; 3 epochs with v8 augments > 5 without
 # T4 (14.5GB) OOMs at batch 8 with small+encLoRA @ seq 3000 (v6 run died at 65min,
 # both GPUs, in cross-attn k_proj hook). Batch 4 fits comfortably; ~0.6-1.0 steps/s.
 BATCH = 4
@@ -230,6 +230,50 @@ def clean_datasets_cache():
         log(f"Cleared disposable datasets cache: {root}")
 
 
+def clean_audio_for_finished_langs():
+    """Delete FLAC audio for languages marked done in training state.
+    
+    Kaggle's 20GB disk fills up with ~3.4GB/lang FLAC audio. By the time 3
+    languages are done, disk is full. This frees ~3-7 GB per call.
+    """
+    for gpu, save_dir in SAVE_DIRS.items():
+        state_path = Path(save_dir) / "training_state_v3_prod.json"
+        if not state_path.exists():
+            continue
+        try:
+            state = json.load(open(state_path))
+        except Exception:
+            continue
+        # Collect finished languages from lang_done keys like "0_hi", "1_te", etc.
+        done_langs = set()
+        for key, val in state.get("lang_done", {}).items():
+            if val:
+                lang = key.split("_", 1)[1] if "_" in key else None
+                if lang:
+                    done_langs.add(lang)
+        # Also check if ALL epochs are done for a language
+        num_epochs = state.get("epoch", 0) + 1
+        for lang in done_langs.copy():
+            ep_keys = [f"{ep}_{lang}" for ep in range(num_epochs)]
+            if all(state.get("lang_done", {}).get(k, False) for k in ep_keys):
+                done_langs.add(lang)
+        # Delete FLAC audio for done languages
+        audio_dir = Path(save_dir) / "data"
+        for lang in done_langs:
+            flac_dir = audio_dir / f"audio_indicvoices_{lang}"
+            if flac_dir.exists():
+                size_mb = sum(f.stat().st_size for f in flac_dir.iterdir() if f.is_file()) / 1e6
+                shutil.rmtree(flac_dir, ignore_errors=True)
+                log(f"  Freed {size_mb:.0f}MB: {flac_dir.name} (lang done)")
+            # Also clean FLEURS test audio for this lang (eval already done)
+            fleurs_dir = audio_dir / f"audio_fleurs_{lang}"
+            if fleurs_dir.exists():
+                size_mb = sum(f.stat().st_size for f in fleurs_dir.iterdir() if f.is_file()) / 1e6
+                shutil.rmtree(fleurs_dir, ignore_errors=True)
+                log(f"  Freed {size_mb:.0f}MB: {fleurs_dir.name} (eval done)")
+    return len(done_langs)
+
+
 def main():
     HF_TOKEN = os.environ.get("HF_TOKEN", "")
     if not HF_TOKEN:
@@ -256,6 +300,7 @@ def main():
     log("Monitoring (uploading checkpoints to HF every 30s, snapshot refreshed every 5 min)...")
     last_snap = 0.0
     snap = {}
+    last_audio_clean = 0.0
     while any(p.poll() is None for p in procs.values()):
         time.sleep(30)
         if time.time() - last_snap > 300:
@@ -263,6 +308,10 @@ def main():
             last_snap = time.time()
         for d in SAVE_DIRS.values():
             upload_tree(d, snap)
+        # Clean FLAC audio for finished languages every 60s (frees disk)
+        if time.time() - last_audio_clean > 60:
+            clean_audio_for_finished_langs()
+            last_audio_clean = time.time()
 
     for gpu, p in procs.items():
         code = p.wait()
