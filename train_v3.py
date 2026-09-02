@@ -85,6 +85,9 @@ parser.add_argument("--no-wer-select", action="store_true",
                     help="Disable WER-based checkpoint selection")
 parser.add_argument("--wer-eval-every", type=int, default=500,
                     help="Evaluate WER every N steps (for checkpoint selection)")
+parser.add_argument("--augment-langs", type=str, default="",
+                    help="Comma-separated langs that get SpecAugment+speed perturb "
+                         "(empty = all langs; e.g. 'bn,mr' to augment only low-resource)")
 ARGS = parser.parse_known_args()[0]
 BATCH_SIZE = ARGS.batch_size
 
@@ -100,10 +103,13 @@ MAX_RUNTIME_HOURS = ARGS.max_runtime_hours
 ENCODER_LORA = ARGS.encoder_lora
 MASK_LANG = ARGS.mask_lang
 TAG = ARGS.tag
-SPEC_AUGMENT = not ARGS.no_spec_augment
-SPEED_PERTURB = not ARGS.no_speed_perturb
 WER_SELECT = not ARGS.no_wer_select
 WER_EVAL_EVERY = ARGS.wer_eval_every
+# Per-language augmentation: --augment-langs bn,mr means only bn/mr get SpecAugment+speed perturb
+if ARGS.augment_langs:
+    AUGMENT_LANGS = set(l.strip() for l in ARGS.augment_langs.split(","))
+else:
+    AUGMENT_LANGS = None  # None = all languages
 
 # ============ PATHS ============
 SAVE_DIR = Path(ARGS.save_dir)
@@ -819,6 +825,14 @@ def main():
 
                 log(f"  Setting LoRA to {lang}")
                 model.set_language(lang)
+                # Per-language augmentation toggle
+                if AUGMENT_LANGS is not None:
+                    _use_aug = lang in AUGMENT_LANGS
+                else:
+                    _use_aug = True
+                global SPEC_AUGMENT, SPEED_PERTURB
+                SPEC_AUGMENT = _use_aug and not ARGS.no_spec_augment
+                SPEED_PERTURB = _use_aug and not ARGS.no_speed_perturb
                 loader = make_loader(train_sets[lang], lang, batch_size=BATCH_SIZE)
                 if not loader:
                     state["lang_done"][done_key] = True
