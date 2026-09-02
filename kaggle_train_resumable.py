@@ -28,7 +28,7 @@ REPO = "eulogik/polywhisper"
 LANG_SPLIT = {"gpu0": ["hi", "te", "bn"], "gpu1": ["ta", "mr"]}
 SAVE_DIRS = {"gpu0": "polywhisper_output_gpu0", "gpu1": "polywhisper_output_gpu1"}
 CUDA_IDX = {"gpu0": "0", "gpu1": "1"}
-EPOCHS = 3  # reduced from 5 — Kaggle disk limit ~20GB; 3 epochs with v8 augments > 5 without
+EPOCHS = 5  # 5 epochs: hi/ta/te no-augment need more, bn/mr with augment benefit from more
 # T4 (14.5GB) OOMs at batch 8 with small+encLoRA @ seq 3000 (v6 run died at 65min,
 # both GPUs, in cross-attn k_proj hook). Batch 4 fits comfortably; ~0.6-1.0 steps/s.
 BATCH = 4
@@ -175,6 +175,7 @@ def run_gpu(gpu, langs, save_dir):
         "--save-dir", save_dir,
         "--max-runtime-hours", "11",
         "--wer-eval-every", "500",
+        "--augment-langs", "bn,mr",
     ]
     env = dict(os.environ)
     env["CUDA_VISIBLE_DEVICES"] = CUDA_IDX[gpu]
