@@ -1,0 +1,15 @@
+{
+  "id": "eulogikdevelopers/polywhisper-v9-per-lang-aug",
+  "title": "Polywhisper V9 Per Lang Aug",
+  "code_file": "polywhisper-v9-per-lang-aug.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}
