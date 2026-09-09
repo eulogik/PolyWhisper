@@ -185,13 +185,35 @@ print(result.segments)  # timestamped segments
 
 ## 🖥️ CPU-only inference (ONNX Runtime)
 
-Export INT8-quantized ONNX graphs (no PyTorch needed at inference):
+Export INT8-quantized ONNX graphs (no PyTorch, no GPU needed at inference):
 
 ```bash
 polywhisper export --lang hi --variant prod --int8
 ```
 
-Pre-exported graphs live under `export/onnx/` (`*_encoder.onnx`, `*_decoder.onnx`, plus `*_int8.onnx`). Parity-checked against PyTorch (max diff < 1e-3).
+Pre-exported v9 graphs live under `export/onnx/` on the [Hub](https://huggingface.co/eulogik/polywhisper/tree/main/export/onnx) — per language, fp32 + INT8:
+
+| Lang | Encoder (fp32 / INT8) | Decoder (fp32 / INT8) |
+|---|---|---|
+| hi | 358MB / 97MB | 784MB / 204MB |
+| ta | 358MB / 97MB | 784MB / 204MB |
+| te | 358MB / 97MB | 784MB / 204MB |
+| bn | 358MB / 97MB | 784MB / 204MB |
+| mr | 358MB / 97MB | 784MB / 204MB |
+
+Files are named `{lang}_{lang}_best_prod_{encoder,decoder}{,_int8}.onnx`. INT8 is ~4× smaller.
+
+**Verification:** fp32 ONNX vs PyTorch max diff < 1e-3 on all five languages (encoder + decoder). End-to-end greedy spot-checks (FLEURS audio, beam=1):
+
+| Lang | torch WER | ONNX INT8 WER |
+|---|---|---|
+| hi (10 samples) | 43.4% | 48.3% |
+| ta (5 samples) | 100.0% | 100.0% |
+| te (5 samples) | 100.0% | 101.6% |
+| bn (5 samples) | 104.9% | 118.7% |
+| mr (5 samples) | 82.9% | 89.4% |
+
+*Spot-checks are tiny (5–10 utterances) so single-sentence flips move the numbers; fp32 ONNX is at parity with torch. INT8 trades a few points for 4× smaller files.*
 
 ## 🏋️ Training recipe (reproducible)
 

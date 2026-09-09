@@ -18,3 +18,5 @@ nohup.log
 __pycache__/
 *.pyc
 .venv/
+# ONNX build artifacts (hosted on HF under export/onnx/)
+export/
