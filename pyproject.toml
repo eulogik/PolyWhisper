@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "polywhisper"
+version = "0.2.0"
+description = "Efficient multilingual Indic ASR via frozen Whisper + per-language LoRA"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Eulogik" },
+]
+keywords = [
+    "asr",
+    "speech-recognition",
+    "whisper",
+    "lora",
+    "indic",
+    "hindi",
+    "tamil",
+    "telugu",
+    "bengali",
+    "marathi",
+    "multilingual",
+    "onnx",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.30",
+    "numpy",
+    "soundfile",
+    "resampy",
+]
+
+[project.optional-dependencies]
+onnx = [
+    "onnxruntime>=1.16",
+    "onnx>=1.15",
+]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[project.scripts]
+polywhisper = "polywhisper.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/eulogik/PolyWhisper"
+Documentation = "https://github.com/eulogik/PolyWhisper#readme"
+Repository = "https://github.com/eulogik/PolyWhisper"
+Issues = "https://github.com/eulogik/PolyWhisper/issues"
+
+[tool.hatch.build.targets.sdist]
+include = ["polywhisper/"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["polywhisper/"]

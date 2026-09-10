@@ -20,3 +20,8 @@ __pycache__/
 .venv/
 # ONNX build artifacts (hosted on HF under export/onnx/)
 export/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
