@@ -5,7 +5,7 @@ language:
   - te
   - bn
   - mr
-license: apache-2.0
+license: mit
 library_name: transformers
 pipeline_tag: automatic-speech-recognition
 base_model: openai/whisper-small
@@ -99,7 +99,7 @@ model-index:
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-eulogik%2Fpolywhisper-ffd21e)](https://huggingface.co/eulogik/polywhisper)
 [![GitHub](https://img.shields.io/badge/GitHub-eulogik%2FPolyWhisper-181717?style=flat&logo=github)](https://github.com/eulogik/PolyWhisper)
 [![Release](https://img.shields.io/github/v/release/eulogik/PolyWhisper?label=release)](https://github.com/eulogik/PolyWhisper/releases)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch)](https://pytorch.org/)
 [![ONNX](https://img.shields.io/badge/ONNX-Runtime-orange?logo=onnx)](https://onnxruntime.ai/)
