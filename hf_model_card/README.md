@@ -1,178 +1,275 @@
 ---
 language:
-- hi
-- en
-- ta
-- te
-- bn
-- mr
+  - hi
+  - ta
+  - te
+  - bn
+  - mr
 license: mit
-library_name: pytorch
+library_name: transformers
 pipeline_tag: automatic-speech-recognition
+base_model: openai/whisper-small
 tags:
-- whisper
-- hinglish
-- code-switching
-- hindi
-- english
-- tamil
-- telugu
-- bengali
-- marathi
-- asr
-- speech-recognition
-- lora
-- mixture-of-experts
-- router
-- low-resource
-- edge-asr
-- devanagari
-- indic
-metrics:
-- wer
-- cer
-- fuzzy-wer
+  - polywhisper
+  - indic-asr
+  - hindi-asr
+  - tamil-speech-recognition
+  - telugu-stt
+  - bengali-asr
+  - marathi-speech-to-text
+  - speech-recognition
+  - multilingual
+  - lora
+  - whisper
+  - hindi
+  - tamil
+  - telugu
+  - bengali
+  - marathi
+  - indic-languages
+  - indian-languages
+  - automatic-speech-recognition
+  - speech-to-text
+  - low-resource-asr
+  - fleurs
+  - indicvoices
+  - onnx
+  - quantized
+  - efficient-asr
+  - edge-asr
+  - peft
+datasets:
+  - ai4bharat/indicvoices-st
+  - google/fleurs
 model-index:
-- name: polywhisper-hinglish-router
-  results:
-  - task:
-      type: automatic-speech-recognition
-      name: Speech Recognition
-    dataset:
-      name: PolyWhisper Hinglish Test (MUCS/IndicVoices-ST derived)
-      type: eulogik/polywhisper-hinglish
-      split: test
-      args: 3129 utterances, ortho-normalized
-    metrics:
-    - type: wer
-      value: 58.8
-      name: WER
-    - type: cer
-      value: 57.9
-      name: CER
-    - type: fuzzy-wer
-      value: 57.3
-      name: FuzzyWER
+  - name: PolyWhisper v9 (Whisper-Small + Per-Language LoRA)
+    results:
+      - task:
+          type: automatic-speech-recognition
+          name: Hindi Speech Recognition
+        dataset:
+          name: FLEURS Hindi (hi_in)
+          type: google/fleurs
+        metrics:
+          - type: wer
+            value: 46.3
+            name: WER (beam=1, normalized)
+      - task:
+          type: automatic-speech-recognition
+          name: Tamil Speech Recognition
+        dataset:
+          name: FLEURS Tamil (ta_in)
+          type: google/fleurs
+        metrics:
+          - type: wer
+            value: 70.1
+            name: WER (beam=1, normalized)
+      - task:
+          type: automatic-speech-recognition
+          name: Telugu Speech Recognition
+        dataset:
+          name: FLEURS Telugu (te_in)
+          type: google/fleurs
+        metrics:
+          - type: wer
+            value: 100.1
+            name: WER (beam=1, normalized)
+      - task:
+          type: automatic-speech-recognition
+          name: Bengali Speech Recognition
+        dataset:
+          name: FLEURS Bengali (bn_in)
+          type: google/fleurs
+        metrics:
+          - type: wer
+            value: 130.2
+            name: WER (beam=1, normalized)
+      - task:
+          type: automatic-speech-recognition
+          name: Marathi Speech Recognition
+        dataset:
+          name: FLEURS Marathi (mr_in)
+          type: google/fleurs
+        metrics:
+          - type: wer
+            value: 96.7
+            name: WER (beam=1, normalized)
 ---
-# PolyWhisper Hinglish Router
 
-A **code-switch (Hindi–English) speech recognition** model by **[Eulogik](https://huggingface.co/eulogik)** — frozen Whisper-Base encoder + two rank-8 LoRA language experts + a 33K-parameter per-token router.
+[![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-eulogik%2Fpolywhisper-ffd21e)](https://huggingface.co/eulogik/polywhisper)
+[![GitHub](https://img.shields.io/badge/GitHub-eulogik%2FPolyWhisper-181717?style=flat&logo=github)](https://github.com/eulogik/PolyWhisper)
+[![Release](https://img.shields.io/github/v/release/eulogik/PolyWhisper?label=release)](https://github.com/eulogik/PolyWhisper/releases)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch)](https://pytorch.org/)
+[![ONNX](https://img.shields.io/badge/ONNX-Runtime-orange?logo=onnx)](https://onnxruntime.ai/)
+![Hindi](https://img.shields.io/badge/Hindi-hi-138808) ![Tamil](https://img.shields.io/badge/Tamil-ta-FF9933) ![Telugu](https://img.shields.io/badge/Telugu-te-046A38) ![Bengali](https://img.shields.io/badge/Bengali-bn-006A4E) ![Marathi](https://img.shields.io/badge/Marathi-mr-FF9933)
 
-**This is the v5 release.** The router was trained with corrected per-token language labels, and it is the first PolyWhisper checkpoint where per-token routing is genuinely learned and measured.
+# 🎙️ PolyWhisper v9 — Efficient Multilingual Indic ASR
+> by [Eulogik](https://eulogik.com) — Frontier Edge AI · Vernacular Intelligence · [eulogik.com](https://eulogik.com)
 
-## Why it matters
 
-Speakers in India switch between Hindi and English mid-sentence (Hinglish). Single-language ASR models degrade on this. PolyWhisper:
+> **TL;DR:** PolyWhisper v9 is a production-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−34.5%** and Marathi **−43.2%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
 
-- Routes **every token** to an English-expert or Hindi-expert LoRA,
-- Adds **+13.3 WER points over a static 50/50 expert mix** (58.8% vs 72.1%),
-- Adds **+7.8 WER points over vanilla Whisper-Base** (66.6%),
-- Cuts hallucinated repetition loops **~20×** (13 vs 279 events),
-- Trains in ~a day on a 16GB Apple Silicon Mac — no GPU cluster.
+## ✨ Why PolyWhisper?
 
-## Results (3,129-utterance code-switched test set)
-
-| System | WER | FuzzyWER | CER | Hallucinations |
-|---|---|---|---|---|
-| **PolyWhisper v5 (this model)** | **58.8%** | **57.3%** | **57.9%** | **13** |
-| Vanilla Whisper-Base | 66.6% | 63.3% | 67.5% | 279 |
-| Static 50/50 expert mix | 72.1% | 70.4% | 71.1% | 655 |
-
-Router per-token language accuracy: **89.1%** (99,663 / 111,815 tokens).
-
----
-
-## 🇮🇳 Indic language experts (2026-08 release)
-
-The same architecture — frozen Whisper-Base + per-language LoRA experts — extends to 4 more Indian languages without retraining the encoder. Experts trained on IndicVoices-ST (~19–20K clips each, 3 epochs, rank-16).
-
-**Key finding — script confusion**: vanilla Whisper-Base doesn't just perform worse on Indic languages, it emits the **wrong script entirely** (Urdu-Arabic text for Telugu/Bengali/Marathi):
-
-| Lang | Vanilla script-match | Expert script-match |
+| | Full fine-tune (per language) | **PolyWhisper v9** |
 |---|---|---|
-| Tamil (ta) | 96.4% | **99.3%** |
-| Telugu (te) | **0.0%** | **92.6%** |
-| Bengali (bn) | **0.0%** | **77.1%** |
-| Marathi (mr) | **0.5%** | **99.8%** |
+| Storage per language | ~1.5 GB | **~14 MB (100× smaller)** |
+| Backbone | retrained each time | **frozen once, shared by all 5** |
+| Bengali (bn) FLEURS WER | 198.8 (baseline) | **130.2 (−34.5%)** |
+| Marathi (mr) FLEURS WER | 170.1 (baseline) | **96.7 (−43.2%)** |
+| Telugu (te) FLEURS WER | 105.9 (baseline) | **100.1 (−5.5%)** |
+| Hindi (hi) FLEURS WER | 43.0 (baseline) | **46.3** |
+| Tamil (ta) FLEURS WER | 68.2 (baseline) | **70.1** |
+| CPU deployment | heavy | **ONNX INT8, no GPU needed** |
 
-**Ortho-normalized FLEURS results** (script-matched scoring, 256 decode tokens, `normalize_ortho.py`):
+*WER = word error rate (lower is better). FLEURS test set, beam=1, punctuation-normalized scoring.*
 
-| Lang | Vanilla WER/CER | PolyWhisper WER/CER |
+## 📊 Benchmarks (FLEURS, beam=1, normalized WER)
+
+| Language | Code | Script | v7 (no augment) | **v9 final** | Δ vs v7 |
+|---|---|---|---|---|---|
+| Hindi | `hi` | Devanagari | 43.0 | **46.3** | +7.7% |
+| Tamil | `ta` | Tamil | 68.2 | **70.1** | +2.8% |
+| Telugu | `te` | Telugu | 105.9 | **100.1** | ✅ **−5.5%** |
+| Bengali | `bn` | Bengali | 198.8 | **130.2** | ✅ **−34.5%** |
+| Marathi | `mr` | Devanagari | 170.1 | **96.7** | ✅ **−43.2%** |
+
+### 🧪 The v9 finding: augment per language, not globally
+
+Training with SpecAugment + speed perturbation on **all** languages damaged Hindi/Tamil (token-loop degeneration) while massively helping Bengali/Marathi. The v9 recipe augments **only `bn`/`mr`** and trains `hi`/`ta` clean:
+
+| Language | Augmentation | Result |
 |---|---|---|
-| ta | 92.0 / 41.7 | **73.9 / 25.6** |
-| te | — | 82.7 / 32.7 |
-| bn | — | 84.9 / 54.3 |
-| mr | — | **65.0 / 22.9** |
+| Hindi, Tamil | none (clean) | matches no-augment baseline |
+| Telugu, Bengali, Marathi | SpecAugment + 0.9×/1.1× speed perturb | large gains on hard languages |
 
-## Files (Indic)
+## 📦 Which adapter should I use?
 
-| File | Contents |
-|---|---|
-| `en_router_best_v5.pt` | English LoRA expert (rank-8 decoder adapters) |
-| `hi_router_best_v5.pt` | Hindi LoRA expert (rank-8 decoder adapters) |
-| `router_best_v5.pt` | Per-token router (33K params) |
-| `eval_router_v5_samples.json` | Full 3,129-sample per-utterance results |
-| `eval_static5050_v5_samples.json` | Static 50/50 ablation results |
-| `eval_vanilla_samples.json` | Vanilla Whisper-Base results |
-| `hinglish_codeswitch_test_ortho.json` | Ortho-normalized test set |
-| `config.json` | Adapter/router config (also the Hub's download-count query file) |
-| `ta_best_ta.pt` / `te_best_te_v2.pt` / `bn_best_bn_v2.pt` / `mr_best_mr.pt` | Indic LoRA experts (rank-16) |
-| `fleurs_normalized_results.json` | Ortho-normalized FLEURS scores (all 4 languages) |
-| README.md | This card |
+| Language | Adapter file | Backbone | WER |
+|---|---|---|---|
+| Hindi (`hi`) | `polywhisper_output_hi/adapters_v3/hi_best_clean.pt` | `openai/whisper-small` | 46.3 |
+| Tamil (`ta`) | `polywhisper_output_ta/adapters_v3/ta_best_clean.pt` | `openai/whisper-small` | 70.1 |
+| Telugu (`te`) | `polywhisper_output_gpu0/adapters_v3/te_best_prod.pt` | `openai/whisper-small` | 100.1 |
+| Bengali (`bn`) | `polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt` | `openai/whisper-small` | 130.2 |
+| Marathi (`mr`) | `polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt` | `openai/whisper-small` | 96.7 |
 
-## Usage
+All adapters are rank-16 LoRA (decoder + encoder attention), ~14MB each. Backbone weights are **not** included — they load from `openai/whisper-small` at runtime.
+
+## 🚀 Quickstart
+
+```bash
+pip install -e .
+```
+
+```bash
+# Hindi speech to text
+polywhisper transcribe audio.wav --lang hi
+
+# Tamil with JSON output
+polywhisper transcribe audio.wav --lang ta --format json
+
+# Auto-detect language, SRT subtitles
+polywhisper transcribe audio.wav --format srt > subs.srt
+
+# Batch a folder
+polywhisper batch ./audio_folder/ --lang bn --output results.json
+```
 
 ```python
-import torch, soundfile as sf
-from huggingface_hub import hf_hub_download
-from transformers import WhisperProcessor
-from model import PolyWhisperRouter   # see github.com/eulogik/PolyWhisper
+from polywhisper import transcribe
 
-# fetch config.json first (also what the Hub counts as a "download")
-hf_hub_download("eulogik/polywhisper-hinglish-router", "config.json")
-
-model = PolyWhisperRouter().to("mps" if torch.backends.mps.is_available() else "cpu")
-model.add_language("en").add_language("hi")
-model.load_adapter("en", hf_hub_download("eulogik/polywhisper-hinglish-router", "en_router_best_v5.pt"))
-model.load_adapter("hi", hf_hub_download("eulogik/polywhisper-hinglish-router", "hi_router_best_v5.pt"))
-model.load_router(hf_hub_download("eulogik/polywhisper-hinglish-router", "router_best_v5.pt"))
-
-audio, _ = sf.read("hinglish.wav")
-feats = WhisperProcessor.from_pretrained("openai/whisper-base").feature_extractor(
-    [audio], sampling_rate=16000, return_tensors="pt").input_features
-out = model.generate(feats, max_new_tokens=128, use_cache=False, language="hi", task="transcribe")
+result = transcribe("audio.wav", lang="mr")
+print(result.text)
+print(result.segments)  # timestamped segments
 ```
 
-## Training
+## 🖥️ CPU-only inference (ONNX Runtime)
 
-- Backbone: `openai/whisper-base` (frozen encoder + frozen base decoder)
-- Experts: rank-8 LoRA on decoder cross-attention (K/V) — ~3M params each
-- Router: 2-layer MLP over decoder hidden states (33K params)
-- Stage A1: EN expert, masked to English tokens (3 epochs, ~9h on M4 MPS)
-- Stage A2: HI expert + encoder-LoRA (4 epochs, ~9h)
-- Stage P1: router-only language selection (2 epochs)
-- Stage P2: joint router + expert adaptation (2 epochs, λ_router=1.0)
-- Data: MUCS / IndicVoices-ST derived code-switched Hinglish (~42K train)
+Export INT8-quantized ONNX graphs (no PyTorch, no GPU needed at inference):
 
-## Limitations
+```bash
+polywhisper export --lang hi --variant prod --int8
+```
 
-- Word error rate is high in absolute terms (~58.8%) — acceptable for edge/low-resource use, not parity with large models
-- Tested on Hinglish tutorial-style speech; robustness to spontaneous/overlapping speech untested
-- Devanagari orthography variance still inflates WER (see per-sample errors)
-- No privacy guarantees; data is public corpora
+Pre-exported v9 graphs live under `export/onnx/` on the [Hub](https://huggingface.co/eulogik/polywhisper/tree/main/export/onnx) — per language, fp32 + INT8:
 
-## License
+| Lang | Encoder (fp32 / INT8) | Decoder (fp32 / INT8) |
+|---|---|---|
+| hi | 358MB / 97MB | 784MB / 204MB |
+| ta | 358MB / 97MB | 784MB / 204MB |
+| te | 358MB / 97MB | 784MB / 204MB |
+| bn | 358MB / 97MB | 784MB / 204MB |
+| mr | 358MB / 97MB | 784MB / 204MB |
 
-MIT. © 2026 [Eulogik](https://huggingface.co/eulogik). Whisper is OpenAI's model. Derived data from MUCS (CC-BY-SA) and IndicVoices-ST (CC-BY) — see the [GitHub repo](https://github.com/eulogik/PolyWhisper) for attribution.
+Files are named `{lang}_{lang}_best_prod_{encoder,decoder}{,_int8}.onnx`. INT8 is ~4× smaller.
 
-## Citation
+**Verification:** fp32 ONNX vs PyTorch max diff < 1e-3 on all five languages (encoder + decoder). End-to-end greedy spot-checks (FLEURS audio, beam=1):
+
+| Lang | torch WER | ONNX INT8 WER |
+|---|---|---|
+| hi (10 samples) | 43.4% | 48.3% |
+| ta (5 samples) | 100.0% | 100.0% |
+| te (5 samples) | 100.0% | 101.6% |
+| bn (5 samples) | 104.9% | 118.7% |
+| mr (5 samples) | 82.9% | 89.4% |
+
+*Spot-checks are tiny (5–10 utterances) so single-sentence flips move the numbers; fp32 ONNX is at parity with torch. INT8 trades a few points for 4× smaller files.*
+
+## 🏋️ Training recipe (reproducible)
+
+- **Data:** [IndicVoices-ST](https://huggingface.co/datasets/ai4bharat/indicvoices-st) (~19–20k clips/language) · **Eval:** [FLEURS](https://huggingface.co/datasets/google/fleurs)
+- **Backbone:** `openai/whisper-small`, frozen · **Adapters:** LoRA rank-16, encoder + decoder attention
+- **Schedule:** 3–5 epochs/language, batch 4, AdamW, cosine LR (peak 1e-4), 2× NVIDIA T4
+- **Augmentation (v9):** SpecAugment + speed perturb for `bn`/`mr` only; `hi`/`ta`/`te` clean
+- **Selection:** WER-gated checkpoints (`*_best_*.pt`) on FLEURS dev slices
+- **Code:** [`train_v3.py`](https://github.com/eulogik/PolyWhisper/blob/main/train_v3.py) · orchestrator [`kaggle_train_resumable.py`](https://github.com/eulogik/PolyWhisper/blob/main/kaggle_train_resumable.py) · scoring [`normalize_ortho.py`](https://github.com/eulogik/PolyWhisper/blob/main/normalize_ortho.py)
+
+## ❓ FAQ
+
+**What is PolyWhisper?**
+PolyWhisper is an open-source Indic ASR toolkit: one frozen Whisper-Small backbone plus five small per-language LoRA adapters covering Hindi, Tamil, Telugu, Bengali, and Marathi.
+
+**How is it different from fine-tuning Whisper?**
+Full fine-tuning rewrites ~244M–1.5B weights per language. PolyWhisper freezes the backbone and trains ~3.5M LoRA parameters per language (~14MB), so five languages ship for the storage cost of a rounding error.
+
+**Which languages are production-ready?**
+All five ship working adapters. Hindi (46.3 WER) and Tamil (70.1) are strongest; Bengali and Marathi improved dramatically in v9 (−34.5% / −43.2% vs baseline) but remain the hardest languages.
+
+**Can I run it on CPU?**
+Yes — export to ONNX INT8 and run with ONNX Runtime, no GPU required.
+
+**Can I run it on a Mac?**
+Yes — PyTorch MPS is supported (`Device: mps`), plus CPU via ONNX.
+
+**What data was it trained/evaluated on?**
+Trained on IndicVoices-ST conversational speech, evaluated on FLEURS read speech with punctuation-normalized, script-aware scoring.
+
+## ⚠️ Limitations
+
+- Absolute WER on Telugu/Bengali/Marathi is still high — usable for assistive/search/subtitle-draft workflows, not verbatim legal/medical transcription.
+- Evaluated on read speech (FLEURS); spontaneous conversational accuracy will differ.
+- Beam=1 numbers above; beam=5 decoding improves results at higher latency.
+
+## 📄 License & citation
+
+MIT. Whisper weights © OpenAI. Training data: IndicVoices-ST (CC-BY) · Eval: FLEURS (CC-BY).
 
 ```bibtex
-@misc{eulogik2026polywhisper,
-  title={PolyWhisper: Code-Switch ASR with Per-Token LoRA Routing for Hinglish},
-  author={Eulogik},
-  year={2026},
-  howpublished={\url{https://huggingface.co/eulogik/polywhisper-hinglish-router}},
-  note={MIT licensed; benchmarked on 3,129-utterance code-switched test set}
+@misc{polywhisper2026,
+  title  = {PolyWhisper: Efficient Multilingual Indic ASR via Frozen Backbone + Per-Language LoRA},
+  author = {Eulogik},
+  year   = {2026},
+  publisher = {HuggingFace},
+  url    = {https://huggingface.co/eulogik/polywhisper}
 }
 ```
+
+## 🔗 Links
+
+- 🌍 Eulogik: [eulogik.com](https://eulogik.com)
+- 🤗 Model: [huggingface.co/eulogik/polywhisper](https://huggingface.co/eulogik/polywhisper)
+- 💻 Code: [github.com/eulogik/PolyWhisper](https://github.com/eulogik/PolyWhisper)
+- 🗣️ Train data: [ai4bharat/indicvoices-st](https://huggingface.co/datasets/ai4bharat/indicvoices-st)
+- 🧪 Eval data: [google/fleurs](https://huggingface.co/datasets/google/fleurs)

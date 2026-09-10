@@ -1,101 +1,3 @@
----
-language:
-  - hi
-  - ta
-  - te
-  - bn
-  - mr
-license: mit
-library_name: transformers
-pipeline_tag: automatic-speech-recognition
-base_model: openai/whisper-small
-tags:
-  - polywhisper
-  - indic-asr
-  - hindi-asr
-  - tamil-speech-recognition
-  - telugu-stt
-  - bengali-asr
-  - marathi-speech-to-text
-  - speech-recognition
-  - multilingual
-  - lora
-  - whisper
-  - hindi
-  - tamil
-  - telugu
-  - bengali
-  - marathi
-  - indic-languages
-  - indian-languages
-  - automatic-speech-recognition
-  - speech-to-text
-  - low-resource-asr
-  - fleurs
-  - indicvoices
-  - onnx
-  - quantized
-  - efficient-asr
-  - edge-asr
-  - peft
-datasets:
-  - ai4bharat/indicvoices-st
-  - google/fleurs
-model-index:
-  - name: PolyWhisper v9 (Whisper-Small + Per-Language LoRA)
-    results:
-      - task:
-          type: automatic-speech-recognition
-          name: Hindi Speech Recognition
-        dataset:
-          name: FLEURS Hindi (hi_in)
-          type: google/fleurs
-        metrics:
-          - type: wer
-            value: 46.3
-            name: WER (beam=1, normalized)
-      - task:
-          type: automatic-speech-recognition
-          name: Tamil Speech Recognition
-        dataset:
-          name: FLEURS Tamil (ta_in)
-          type: google/fleurs
-        metrics:
-          - type: wer
-            value: 70.1
-            name: WER (beam=1, normalized)
-      - task:
-          type: automatic-speech-recognition
-          name: Telugu Speech Recognition
-        dataset:
-          name: FLEURS Telugu (te_in)
-          type: google/fleurs
-        metrics:
-          - type: wer
-            value: 100.1
-            name: WER (beam=1, normalized)
-      - task:
-          type: automatic-speech-recognition
-          name: Bengali Speech Recognition
-        dataset:
-          name: FLEURS Bengali (bn_in)
-          type: google/fleurs
-        metrics:
-          - type: wer
-            value: 130.2
-            name: WER (beam=1, normalized)
-      - task:
-          type: automatic-speech-recognition
-          name: Marathi Speech Recognition
-        dataset:
-          name: FLEURS Marathi (mr_in)
-          type: google/fleurs
-        metrics:
-          - type: wer
-            value: 96.7
-            name: WER (beam=1, normalized)
----
-
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-eulogik%2Fpolywhisper-ffd21e)](https://huggingface.co/eulogik/polywhisper)
 [![GitHub](https://img.shields.io/badge/GitHub-eulogik%2FPolyWhisper-181717?style=flat&logo=github)](https://github.com/eulogik/PolyWhisper)
 [![Release](https://img.shields.io/github/v/release/eulogik/PolyWhisper?label=release)](https://github.com/eulogik/PolyWhisper/releases)
@@ -106,6 +8,8 @@ model-index:
 ![Hindi](https://img.shields.io/badge/Hindi-hi-138808) ![Tamil](https://img.shields.io/badge/Tamil-ta-FF9933) ![Telugu](https://img.shields.io/badge/Telugu-te-046A38) ![Bengali](https://img.shields.io/badge/Bengali-bn-006A4E) ![Marathi](https://img.shields.io/badge/Marathi-mr-FF9933)
 
 # 🎙️ PolyWhisper v9 — Efficient Multilingual Indic ASR
+> by [Eulogik](https://eulogik.com) — Frontier Edge AI · Vernacular Intelligence · [eulogik.com](https://eulogik.com)
+
 
 > **TL;DR:** PolyWhisper v9 is a production-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−34.5%** and Marathi **−43.2%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
 
@@ -252,7 +156,7 @@ Trained on IndicVoices-ST conversational speech, evaluated on FLEURS read speech
 
 ## 📄 License & citation
 
-Apache 2.0. Whisper weights © OpenAI. Training data: IndicVoices-ST (CC-BY) · Eval: FLEURS (CC-BY).
+MIT. Whisper weights © OpenAI. Training data: IndicVoices-ST (CC-BY) · Eval: FLEURS (CC-BY).
 
 ```bibtex
 @misc{polywhisper2026,
@@ -266,6 +170,7 @@ Apache 2.0. Whisper weights © OpenAI. Training data: IndicVoices-ST (CC-BY) · 
 
 ## 🔗 Links
 
+- 🌍 Eulogik: [eulogik.com](https://eulogik.com)
 - 🤗 Model: [huggingface.co/eulogik/polywhisper](https://huggingface.co/eulogik/polywhisper)
 - 💻 Code: [github.com/eulogik/PolyWhisper](https://github.com/eulogik/PolyWhisper)
 - 🗣️ Train data: [ai4bharat/indicvoices-st](https://huggingface.co/datasets/ai4bharat/indicvoices-st)
