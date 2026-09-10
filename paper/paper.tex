@@ -37,7 +37,7 @@
 \noindent
 We present \poly, an efficient recipe for adapting OpenAI's Whisper model to Indic languages using per-language LoRA adapters over a frozen backbone.
 Our system targets five major Indian languages---Hindi, Tamil, Telugu, Bengali, and Marathi---collectively spoken by over one billion people.
-Rather than full fine-tuning (which requires $\sim$1.5\,GB per language), we train rank-16 LoRA adapters ($\sim$14\,MB each) on the decoder and encoder attention projections, preserving the pretrained acoustic knowledge of the Whisper-Small backbone (244\,M parameters).
+Rather than full fine-tuning (which requires $\sim$1.5\,GB per language), we train rank-16 LoRA adapters ($\sim$14\,MB each on disk) on the decoder and encoder attention projections, preserving the pretrained acoustic knowledge of the Whisper-Small backbone (244\,M parameters, $d_{\text{model}}{=}768$).
 
 We report one novel finding: \textbf{per-language augmentation asymmetry}.
 Applying SpecAugment and speed perturbation globally to all languages \emph{damaged} Hindi and Tamil performance (inducing token-loop degeneration) while substantially improving Bengali ($-34.5\%$ relative WER) and Marathi ($-43.2\%$).
@@ -65,8 +65,8 @@ Recent work has addressed this through full fine-tuning (\mbox{IndicConformer}~\
 These achieve strong results but require storing and distributing a separate full model copy per language and depend on significant compute.
 
 \poly\ takes a different approach: \textbf{freeze the backbone, train only the adapters}.
-We attach per-language LoRA (Low-Rank Adaptation~\cite{hu2022lora}) modules to the decoder and encoder attention projections of Whisper-Small, training approximately 14\,M parameters per language while keeping the 244\,M-parameter backbone entirely frozen.
-Five languages thus require only 70\,M additional parameters on top of a single shared backbone---roughly 30\% of the backbone's own size.
+We attach per-language LoRA (Low-Rank Adaptation~\cite{hu2022lora}) modules to the decoder and encoder attention projections of Whisper-Small, training approximately 3.5\,M parameters per language while keeping the 244\,M-parameter backbone entirely frozen.
+Five languages thus require only 17.7\,M additional parameters on top of a single shared backbone---roughly $7\%$ of the backbone's own size.
 
 \begin{figure}[t]
   \centering
@@ -91,20 +91,20 @@ The model achieves strong zero-shot performance on many languages but exhibits v
 The architecture is an encoder-decoder Transformer with 80-bin log-mel spectrogram input.
 
 \paragraph{Indic ASR systems.}
-IndicConformer~\cite{chiu2022indicconformer} trained a 600\,M-parameter Conformer on 50\,K+ hours of Indic speech, achieving FLEURS WERs of 14.5 (Hindi), 24.7 (Bengali), 35.2 (Tamil), 28.9 (Telugu), and 21.9 (Marathi).
-SraVaani~\cite{javed2024sravaani} further improved to 14.0, 19.8, 26.2, 25.1, and 19.7 using a similar Conformer.
-IndicWhisper~\cite{nandyala2025indicwhisper} fine-tuned Whisper Medium on Indic data, reporting 15.0 (Hindi), 20.9 (Bengali), 25.2 (Tamil), 25.4 (Telugu), and 20.5 (Marathi) on FLEURS.
+IndicConformer~\cite{ai4bharat2024indicconformer} trained a 600\,M-parameter Conformer on 50\,K+ hours of Indic speech, achieving FLEURS WERs of 14.5 (Hindi), 24.7 (Bengali), 35.2 (Tamil), 28.9 (Telugu), and 21.9 (Marathi).
+SraVaani~\cite{pulikodan2026sravaani} further improved to 14.0, 19.8, 26.2, 25.1, and 19.7 using a similar Conformer.
+IndicWhisper~\cite{bhogale2023vistaar} fine-tuned Whisper Medium on Indic data, reporting 15.0 (Hindi), 20.9 (Bengali), 25.2 (Tamil), 25.4 (Telugu), and 20.5 (Marathi) on FLEURS.
 These represent the current SOTA but require substantial compute and storage per language.
 
 \paragraph{Parameter-efficient fine-tuning (PEFT).}
 LoRA~\cite{hu2022lora} decomposes weight updates into low-rank factors, enabling adaptation with minimal parameters.
 QLoRA~\cite{dettmers2023qlora} combines this with quantization.
-Whisper-LoRA~\cite{rybakov2024whisperlora} explored LoRA on Whisper but focused on English.
+LoRA-Whisper~\cite{song2024lorawhisper} explored LoRA on Whisper but focused on English.
 We systematically apply LoRA to multiple Indic languages with a frozen backbone and find that augmentation must be language-specific.
 
 \paragraph{Edge and massively multilingual ASR.}
-MMS~\cite{pratap2023mms} scaled to 1,100+ languages; USM~\cite{zhang2023usm} to 300+ languages---impressive scaling efforts that remain large GPU-bound models.
-Our work complements these by enabling per-language deployment at $\sim$14\,MB per language with INT8 quantization.
+MMS~\cite{pratap2024mms} scaled to 1,100+ languages; USM~\cite{zhang2023usm} to 300+ languages---impressive scaling efforts that remain large GPU-bound models.
+Our work complements these by enabling per-language deployment at $\sim$14\,MB per language on disk with INT8 quantization.
 
 %================================================================
 \section{Method}
@@ -120,7 +120,7 @@ The entire encoder and decoder remain frozen (\texttt{requires\_grad=False}) thr
 \paragraph{Per-language LoRA adapters.}
 For each language we inject LoRA into every attention projection of both decoder and encoder:
 decoder self- and cross-attention (\texttt{q\_proj}, \texttt{k\_proj}, \texttt{v\_proj}, \texttt{out\_proj}; 8 projections/layer $\times$ 12 layers = 96 pairs) and encoder self-attention (4 projections/layer $\times$ 12 layers = 48 pairs).
-Each adapter is two low-rank matrices $A\in\mathbb{R}^{d\times r}$ and $B\in\mathbb{R}^{r\times d}$ with $d=512$ and $r=16$.
+Each adapter is two low-rank matrices $A\in\mathbb{R}^{d\times r}$ and $B\in\mathbb{R}^{r\times d}$ with $d{=}768$ (Whisper-Small's hidden dimension) and $r{=}16$.
 $B$ is zero-initialized so the adapter starts as identity:
 \begin{equation}
   W'x = Wx + BAx,
@@ -128,8 +128,8 @@ $B$ is zero-initialized so the adapter starts as identity:
 where $W$ is the frozen original projection.
 
 \paragraph{Parameter budget.}
-Each language adds $\sim$14\,M trainable parameters ($\sim$14\,MB on disk at FP32).
-Five adapters total 70\,M---about $29\%$ of the backbone.
+Each language adds $3.5$\,M trainable parameters ($\sim$14\,MB on disk at FP32 due to PyTorch serialization overhead).
+Five adapters total $17.7$\,M---about $7.3\%$ of the backbone.
 
 \paragraph{Runtime language switching.}
 Languages are switched via PyTorch forward hooks.
@@ -143,7 +143,7 @@ The data is conversational speech recorded in naturalistic conditions.
 \subsection{Evaluation}
 \label{sec:eval}
 
-All evaluation is on the FLEURS benchmark~\cite{conneau2023fleurs} (read speech, Wikipedia sentences).
+All evaluation is on the FLEURS benchmark~\cite{conneau2022fleurs} (read speech, Wikipedia sentences).
 We report word error rate (WER) with beam-$1$ greedy decoding and normalized scoring (lowercase, punctuation-stripped).
 All \poly\ WERs quoted in Tables~\ref{tab:main}--\ref{tab:ablation} and Figures~\ref{fig:wer}--\ref{fig:delta} are the values published in our Hugging Face model card and in \texttt{final\_summary.json} on \texttt{eulogik/polywhisper} (beam-$1$ unless noted); they agree with the raw eval artifacts \texttt{eval\_\{lang\}\_pure\_fleurs*.json} within rounding.
 
@@ -165,13 +165,12 @@ Our final recipe applies augmentation \emph{per-language} (Table~\ref{tab:aug}),
     \midrule
     Hindi (hi)  & No  & No  \\
     Tamil (ta)  & No  & No  \\
-    Telugu (te) & \multicolumn{2}{c}{Clean in the recommended recipe\footnotemark} \\
+    Telugu (te) & No  & No  \\
     Bengali (bn)& Yes & Yes \\
     Marathi (mr)& Yes & Yes \\
     \bottomrule
   \end{tabular}
 \end{table}
-\footnotetext{Telugu was held at the clean recipe (no augment) in the final best mix; augmentation variants showed no consistent gain. All v9 rows in Tables~\ref{tab:main}--\ref{tab:ablation} for Telugu are therefore identical under either column.}
 
 %================================================================
 \section{Experiments}
@@ -198,18 +197,18 @@ We trained three variants to isolate augmentation:
     \toprule
     System & Params & hi & ta & te & bn & mr \\
     \midrule
-    \poly\ v7 (no aug., beam-$1$)            & 244M+5$\times$14M & 43.0 & 68.2 & 105.9 & 198.8 & 170.1 \\
-    \poly\ v8 (global aug., beam-$5$)$^\dagger$ & 244M+5$\times$14M & 52.5 & 73.6 & 120.2 & 169.9 & 82.9  \\
-    \textbf{\poly\ v9 (sel., beam-$1$)} & \textbf{244M+5$\times$14M} & \textbf{46.3} & \textbf{70.1} & \textbf{100.1} & \textbf{130.2} & \textbf{96.7} \\
+    \poly\ v7 (no aug., beam-$1$)$^*$            & 244M+5$\times$3.5M & 43.0 & 68.2 & 105.9 & 198.8 & 170.1 \\
+    \poly\ v8 (global aug., beam-$5$)$^{\dagger,*}$ & 244M+5$\times$3.5M & 52.5 & 73.6 & 120.2 & 169.9 & 82.9  \\
+    \textbf{\poly\ v9 (sel., beam-$1$)} & \textbf{244M+5$\times$3.5M} & \textbf{46.3} & \textbf{70.1} & \textbf{100.1} & \textbf{130.2} & \textbf{96.7} \\
     \midrule
-    Whisper large-v2~\cite{radford2023robust} & 1.55B & 21.5 & 17.5 & $\sim$46.2 & $\sim$92.6 & 38.3 \\
-    IndicConformer~\cite{chiu2022indicconformer} & 600M & 14.5 & 35.2 & 28.9 & 24.7 & 21.9 \\
-    IndicWhisper~\cite{nandyala2025indicwhisper} & 769M & 15.0 & 25.2 & 25.4 & 20.9 & 20.5 \\
-    SraVaani-1.0~\cite{javed2024sravaani} & $\sim$600M & 14.0 & 26.2 & 25.1 & 19.8 & 19.7 \\
+    Whisper large-v2~\cite{radford2023robust} & 1.55B & 21.5 & 17.5 & $\sim$46.2 & $\sim$104.1 & 38.3 \\
+    IndicConformer~\cite{ai4bharat2024indicconformer} & 600M & 14.5 & 35.2 & 28.9 & 24.7 & 21.9 \\
+    IndicWhisper~\cite{bhogale2023vistaar} & 769M & 15.0 & 25.2 & 25.4 & 20.9 & 20.5 \\
+    SraVaani-1.0~\cite{pulikodan2026sravaani} & $\sim$600M & 14.0 & 26.2 & 25.1 & 19.8 & 19.7 \\
     \bottomrule
   \end{tabular}
   \vspace{1pt}
-  \caption*{\footnotesize $^\dagger$v8 was evaluated at beam-$5$; all other \poly\ rows are beam-$1$. The v8 vs v7 delta in Table~\ref{tab:ablation} is therefore not strictly apples-to-apples; we include it to show the global-augment effect observed during development.}
+  \caption*{\footnotesize $^\dagger$v8 was evaluated at beam-$5$; all other \poly\ rows are beam-$1$. $^*$v7 baseline for Telugu/Bengali/Marathi was not saved as a structured eval artifact; approximate values pending clean adapter retraining.}
 \end{table}
 
 Table~\ref{tab:main} and Figure~\ref{fig:wer} summarize the results.
@@ -245,6 +244,8 @@ What \poly\ provides is (i)~a single shared backbone with adapter swapping at $\
     v8 $\Delta$ vs v7$^\dagger$ & +21.6\% & +8.0\% & +13.5\% & $-$14.5\% & $-$51.2\% \\
     \bottomrule
   \end{tabular}
+  \vspace{1pt}
+  \caption*{\footnotesize $^\dagger$v8 was evaluated at beam-$5$; all other \poly\ rows are beam-$1$. The v8 vs v7 delta in Table~\ref{tab:ablation} is therefore not strictly apples-to-apples; we include it to show the global-augment effect observed during development. Additionally, the v7 baseline for Telugu/Bengali/Marathi was not saved as a structured eval artifact during development and is approximate; clean adapters for these languages will be retrained and re-evaluated to confirm these numbers.}
 \end{table}
 
 \begin{figure}[t]
@@ -257,9 +258,11 @@ What \poly\ provides is (i)~a single shared backbone with adapter swapping at $\
 \paragraph{Key observations (Table~\ref{tab:ablation}, Fig.~\ref{fig:delta}):}
 \begin{enumerate}[leftmargin=1.2em, itemsep=2pt]
   \item \textbf{Global augmentation hurts Hindi and Tamil.} Hindi $43.0\to52.5$ (+21.6\%) and Tamil $68.2\to73.6$ (+8.0\%) under global augment (cf.\ \S\ref{sec:degen}).
-  \item \textbf{Global augmentation helps Bengali and Marathi.} Bengali $198.8\to169.9$ ($-$14.5\%) and Marathi $170.1\to82.9$ ($-$51.2\%).
-  \item \textbf{Selective (v9) recovers Hindi/Tamil while retaining most Bengali/Marathi gains.} Hindi $46.3$ within $7.7\%$ of v7, Tamil $70.1$ within $2.8\%$, while Bengali/Marathi remain $-$34.5\%/$-$43.2\% better than v7.
+  \item \textbf{Global augmentation helps Bengali and Marathi.} Bengali $198.8\to169.9$ ($-$14.5\%) and Marathi $170.1\to82.9$ ($-$51.2\%).$^*$
+  \item \textbf{Selective (v9) recovers Hindi/Tamil while retaining most Bengali/Marathi gains.} Hindi $46.3$ within $7.7\%$ of v7, Tamil $70.1$ within $2.8\%$, while Bengali/Marathi remain $-$34.5\%/$-$43.2\% better than v7.$^*$
 \end{enumerate}
+\vspace{1pt}
+{\footnotesize $^*$v7 baseline for Telugu/Bengali/Marathi is approximate (see Table~\ref{tab:main} note).}
 
 \subsection{Why Selective Helps: Token-Loop Degeneration}
 \label{sec:degen}
@@ -268,7 +271,7 @@ Our most novel finding is the asymmetry itself.
 We hypothesize it arises from the interaction between augmentation noise and Whisper's autoregressive decoder.
 
 \paragraph{Token-loop degeneration.}
-When SpecAugment and speed perturbation are applied to Hindi and Tamil, the decoder occasionally enters degenerate states emitting repetitive loops, e.g.\ Hindi \texttt{``है है है है \ldots''} or Tamil \texttt{``அது அது \ldots''}.
+When SpecAugment and speed perturbation are applied to Hindi and Tamil, the decoder occasionally enters degenerate states emitting repetitive loops, e.g.\ Hindi ``\textit{hai hai hai hai\,...}'' or Tamil ``\textit{adhu adhu\,...}''.
 On held-out FLEURS audio this appears in an estimated 5--15\% of degenerated v8 outputs vs.\ $<$1\% without augmentation (manual inspection of $n\approx200$ samples per language).
 Noisy inputs push the decoder into low-likelihood regions where the conditional distribution collapses to repeating a high-frequency token.
 Bengali and Marathi, with more diverse token distributions, do not exhibit this mode under the same augmentation---likely due to Whisper's BPE partitioning (different token granularities induce different frequency dynamics).
@@ -359,8 +362,8 @@ larger backbones (Medium/Large), beam search $+$ shallow fusion with LMs, more l
 \section{Conclusion}
 %================================================================
 
-\poly\ provides a complete, reproducible recipe for efficient multilingual Indic ASR: freeze Whisper-Small, train per-language LoRA adapters ($\sim$14\,MB each), and---critically---apply augmentation \emph{per language}, not globally.
-The same augmentation that improves Bengali by 34.5\% degrades Hindi by 21.6\%, a divergence that demands language-aware recipes.
+\poly\ provides a complete, reproducible recipe for efficient multilingual Indic ASR: freeze Whisper-Small, train per-language LoRA adapters ($\sim$14\,MB each on disk), and---critically---apply augmentation \emph{per language}, not globally.
+Our preliminary results suggest the same augmentation that improves Bengali by 34.5\% degrades Hindi by 21.6\%, a divergence that demands language-aware recipes; clean baselines for all five languages are being confirmed via retraining.
 We release all code, adapters, eval artifacts, and a PyPI package, plus 20 ONNX graphs on the Hub, to lower the barrier for Indic ASR and to provide a baseline for efficient speech adaptation.
 
 %================================================================
