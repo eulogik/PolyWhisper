@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "polywhisper"
-version = "0.2.0"
+version = "0.2.1"
 description = "Efficient multilingual Indic ASR via frozen Whisper + per-language LoRA"
 readme = "README.md"
 license = "MIT"
@@ -61,7 +61,7 @@ dev = [
 polywhisper = "polywhisper.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/eulogik/PolyWhisper"
+Homepage = "https://eulogik.com"
 Documentation = "https://github.com/eulogik/PolyWhisper#readme"
 Repository = "https://github.com/eulogik/PolyWhisper"
 Issues = "https://github.com/eulogik/PolyWhisper/issues"
