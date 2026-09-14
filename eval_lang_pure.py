@@ -52,6 +52,12 @@ def main():
                     help="max tokens to generate (256 for FLEURS; 128 truncates long utterances)")
     A.add_argument("--num-beams", type=int, default=1,
                    help="beam width; KV-cache makes beam affordable (5 typical)")
+    A.add_argument("--repetition-penalty", type=float, default=1.3,
+                   help="penalize repeated tokens (1.0 = disabled)")
+    A.add_argument("--temperature", type=float, default=0.8,
+                   help="sampling temperature (lower = more deterministic)")
+    A.add_argument("--top-k", type=int, default=40, help="top-k sampling")
+    A.add_argument("--top-p", type=float, default=0.95, help="nucleus sampling")
     A.add_argument("--no-cache", action="store_true",
                    help="disable KV cache (8.7x slower; outputs verified identical)")
     A.add_argument("--model-size", type=str, default="base", choices=["base", "small"],
@@ -84,6 +90,10 @@ def main():
             feats = feats[:, :, :3000].to(DEVICE)
             out = model.generate(feats, lang=a.lang, max_new_tokens=a.max_new_tokens,
                                  num_beams=a.num_beams,
+                                 repetition_penalty=a.repetition_penalty,
+                                 temperature=a.temperature,
+                                 top_k=a.top_k,
+                                 top_p=a.top_p,
                                  use_cache=not a.no_cache, task="transcribe")
             hyp = processor.decode(out[0], skip_special_tokens=True).strip()
             ref = r["text"].strip()
