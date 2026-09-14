@@ -36,6 +36,17 @@ ADAPTER_REGISTRY = {
 
 AVAILABLE_LANGS = list(ADAPTER_REGISTRY.keys())
 
+# Optimal decoding per language (FLEURS beam-5 + rep_penalty=1.3 eval, Sep 2026).
+# Beam-5 helps hi/ta/bn/mr by 2-5% relative; te degenerates under beam search
+# (100.1 -> 120.5 WER, repeated-token loops), so te stays greedy.
+OPTIMAL_BEAMS = {"hi": 5, "ta": 5, "te": 1, "bn": 5, "mr": 5}
+DEFAULT_REPETITION_PENALTY = 1.3
+
+
+def optimal_beams(lang):
+    """Return the validated optimal beam width for a language (default 1)."""
+    return OPTIMAL_BEAMS.get(lang, 1)
+
 
 def _get_processor(backbone="small"):
     """Get WhisperProcessor for the given backbone."""

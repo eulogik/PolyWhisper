@@ -10,7 +10,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional, List, Union
 
-from polywhisper.model import PolyWhisper, AVAILABLE_LANGS
+from polywhisper.model import (
+    PolyWhisper, AVAILABLE_LANGS, OPTIMAL_BEAMS, DEFAULT_REPETITION_PENALTY,
+)
 from polywhisper.audio import load_audio, audio_to_chunks, TARGET_SR
 
 
@@ -79,7 +81,8 @@ def transcribe(
     variant: str = "prod",
     device: str = "auto",
     max_new_tokens: int = 256,
-    num_beams: int = 1,
+    num_beams: Optional[int] = None,
+    repetition_penalty: float = DEFAULT_REPETITION_PENALTY,
     chunk_sec: float = 30.0,
     model: Optional[PolyWhisper] = None,
     language_probs: bool = False,
@@ -94,7 +97,8 @@ def transcribe(
         variant: adapter variant ("prod" or "base").
         device: "auto", "cuda", "mps", or "cpu".
         max_new_tokens: max generation length.
-        num_beams: beam width (1 = greedy).
+        num_beams: beam width (None = per-language optimal: 5 except te=1).
+        repetition_penalty: penalize repeated tokens (1.0 = disabled).
         chunk_sec: chunk long audio into this many seconds.
         model: pre-loaded PolyWhisper instance (avoids re-loading).
         language_probs: if lang is None, return probs for all languages.
@@ -120,7 +124,7 @@ def transcribe(
             processor = _get_processor(backbone)
             onnx = OnnxBackend(lang=lang or "hi")
             text = onnx.transcribe(audio_input, processor, max_new_tokens=max_new_tokens,
-                                   num_beams=num_beams, language=lang)
+                                   num_beams=num_beams or 1, language=lang)
             segments = [Segment(text=text, start_sec=0.0, end_sec=len(audio) / TARGET_SR)]
             return TranscriptionResult(text=text, lang=lang or "hi", segments=segments)
         except (FileNotFoundError, ImportError):
@@ -140,6 +144,9 @@ def transcribe(
     # Load adapter
     m.auto_load_adapter(lang, variant=variant)
 
+    # Resolve decoding defaults per language (te stays greedy: beam-5 degenerates it)
+    eff_beams = OPTIMAL_BEAMS.get(lang, 1) if num_beams is None else num_beams
+
     # Chunk and transcribe
     chunks = audio_to_chunks(audio, chunk_sec=chunk_sec)
     segments = []
@@ -149,7 +156,8 @@ def transcribe(
         feats = _prepare_features(m, chunk_audio)
         out = m.generate(
             feats, lang=lang, max_new_tokens=max_new_tokens,
-            num_beams=num_beams, use_cache=True, task="transcribe",
+            num_beams=eff_beams, repetition_penalty=repetition_penalty,
+            use_cache=True, task="transcribe",
         )
         text = _decode_tokens(m, out[0])
         if text:

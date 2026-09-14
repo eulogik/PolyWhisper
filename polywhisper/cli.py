@@ -44,6 +44,7 @@ def cmd_transcribe(args):
         device=args.device,
         max_new_tokens=args.max_tokens,
         num_beams=args.beams,
+        repetition_penalty=args.repetition_penalty,
         model=model,
         backend=args.backend,
     )
@@ -95,6 +96,7 @@ def cmd_batch(args):
         result = transcribe(
             f, lang=args.lang, backbone=args.backbone, variant=args.variant,
             device=args.device, max_new_tokens=args.max_tokens, num_beams=args.beams,
+            repetition_penalty=args.repetition_penalty,
             model=model,
         )
         dt = time.time() - t0
@@ -190,7 +192,10 @@ def main():
     t.add_argument("--variant", "-v", default="prod", help="Adapter variant (prod/base)")
     t.add_argument("--device", "-d", default="auto", help="Device (auto/cuda/mps/cpu)")
     t.add_argument("--max-tokens", type=int, default=256, help="Max tokens to generate")
-    t.add_argument("--beams", type=int, default=1, help="Beam width")
+    t.add_argument("--beams", type=int, default=None,
+                   help="Beam width (default: per-language optimal, 5 except te=1)")
+    t.add_argument("--repetition-penalty", type=float, default=1.3,
+                   help="Penalize repeated tokens (1.0 = disabled)")
     t.add_argument("--format", "-f", default="text", choices=["text", "json", "srt"],
                     help="Output format")
     t.add_argument("--backend", default="auto", choices=["auto", "torch", "onnx"],
@@ -205,7 +210,10 @@ def main():
     b.add_argument("--variant", "-v", default="prod")
     b.add_argument("--device", "-d", default="auto")
     b.add_argument("--max-tokens", type=int, default=256)
-    b.add_argument("--beams", type=int, default=1)
+    b.add_argument("--beams", type=int, default=None,
+                   help="Beam width (default: per-language optimal, 5 except te=1)")
+    b.add_argument("--repetition-penalty", type=float, default=1.3,
+                   help="Penalize repeated tokens (1.0 = disabled)")
     b.add_argument("--output", "-o", default=None, help="Output JSON file")
     b.set_defaults(func=cmd_batch)
 

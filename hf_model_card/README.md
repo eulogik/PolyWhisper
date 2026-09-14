@@ -145,6 +145,18 @@ Training with SpecAugment + speed perturbation on **all** languages damaged Hind
 | Hindi, Tamil | none (clean) | matches no-augment baseline |
 | Telugu, Bengali, Marathi | SpecAugment + 0.9×/1.1× speed perturb | large gains on hard languages |
 
+### 🎯 Decoding: per-language beam widths (measured, full FLEURS test)
+
+Beam-5 + repetition penalty 1.3 helps every language **except Telugu**, where beam search collapses into repeated-token loops (0/472 perfect samples, 326/472 over 100% WER). The library/CLI defaults encode this (`num_beams=None` → per-language optimal):
+
+| Language | beam-1 | beam-5 + rep 1.3 | Shipped default |
+|---|---|---|---|
+| Hindi | 46.3 | **45.0** (−2.8%) | beam-5 |
+| Tamil | 70.1 | **68.6** (−2.2%) | beam-5 |
+| Telugu | **100.1** | 120.5 (+20.4% ⚠️) | **beam-1** |
+| Bengali | 130.2 | **126.4** (−2.9%) | beam-5 |
+| Marathi | 96.7 | **91.5** (−5.4%) | beam-5 |
+
 ## 📦 Which adapter should I use?
 
 | Language | Adapter file | Backbone | WER |
@@ -250,7 +262,7 @@ Trained on IndicVoices-ST conversational speech, evaluated on FLEURS read speech
 
 - Absolute WER on Telugu/Bengali/Marathi is still high — usable for assistive/search/subtitle-draft workflows, not verbatim legal/medical transcription.
 - Evaluated on read speech (FLEURS); spontaneous conversational accuracy will differ.
-- Beam=1 numbers above; beam=5 decoding improves results at higher latency.
+- Beam=1 numbers in the benchmark table above (paper parity); shipped defaults use beam-5 + repetition penalty 1.3 except Telugu (beam-1), see decoding table.
 
 ## 📄 License & citation
 

@@ -50,8 +50,8 @@ def main():
     A.add_argument("--out", required=True)
     A.add_argument("--max-new-tokens", type=int, default=256,
                     help="max tokens to generate (256 for FLEURS; 128 truncates long utterances)")
-    A.add_argument("--num-beams", type=int, default=1,
-                   help="beam width; KV-cache makes beam affordable (5 typical)")
+    A.add_argument("--num-beams", type=int, default=None,
+                   help="beam width (default: per-language optimal, 5 except te=1)")
     A.add_argument("--repetition-penalty", type=float, default=1.3,
                    help="penalize repeated tokens (1.0 = disabled)")
     A.add_argument("--temperature", type=float, default=0.8,
@@ -67,7 +67,9 @@ def main():
     a = A.parse_args()
 
     records = json.load(open(a.test_json))
-    log(f"Records: {len(records)} | expert: {a.adapter} | backbone: {a.model_size}")
+    from polywhisper.model import OPTIMAL_BEAMS
+    eff_beams = OPTIMAL_BEAMS.get(a.lang, 1) if a.num_beams is None else a.num_beams
+    log(f"Records: {len(records)} | expert: {a.adapter} | backbone: {a.model_size} | beams: {eff_beams}")
 
     model = PolyWhisperV3(whisper_name=MODEL_SIZES[a.model_size],
                           encoder_lora=a.encoder_lora).to(DEVICE)
@@ -89,7 +91,7 @@ def main():
                 feats = torch.cat([feats, pad], dim=-1)
             feats = feats[:, :, :3000].to(DEVICE)
             out = model.generate(feats, lang=a.lang, max_new_tokens=a.max_new_tokens,
-                                 num_beams=a.num_beams,
+                                 num_beams=eff_beams,
                                  repetition_penalty=a.repetition_penalty,
                                  temperature=a.temperature,
                                  top_k=a.top_k,
