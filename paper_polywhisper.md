@@ -16,7 +16,7 @@ bibliography: paper.bib
 
 We present PolyWhisper, an efficient recipe for adapting OpenAI's Whisper model to Indic languages using per-language LoRA adapters over a frozen backbone. Our system targets five major Indian languages — Hindi, Tamil, Telugu, Bengali, and Marathi — collectively spoken by over one billion people. Rather than full fine-tuning (which requires ~1.5 GB per language), we train rank-16 LoRA adapters (~14 MB each) on the decoder and encoder attention projections, preserving the pretrained acoustic knowledge of the Whisper-Small backbone (244M parameters).
 
-We report one novel finding: **per-language augmentation asymmetry**. Applying SpecAugment and speed perturbation globally to all languages *damaged* Hindi and Tamil performance (inducing token-loop degeneration) while substantially improving Bengali (−34.5% relative WER) and Marathi (−43.2%). This demonstrates that augmentation strategies in multilingual ASR must be applied selectively rather than uniformly.
+We report one novel finding: **per-language augmentation asymmetry**. Applying SpecAugment and speed perturbation globally to all languages *damaged* Hindi and Tamil performance (inducing token-loop degeneration) while substantially improving Bengali (−28.2% relative WER) and Marathi (−79.6%). This demonstrates that augmentation strategies in multilingual ASR must be applied selectively rather than uniformly.
 
 Our final v9 system achieves FLEURS WERs of 46.3 (Hindi), 70.1 (Tamil), 100.1 (Telugu), 130.2 (Bengali), and 96.7 (Marathi) under beam=1 greedy decoding with normalized scoring. While these numbers remain far from production-grade SOTA (e.g., SraVaani at ~14–26% WER), PolyWhisper contributes an *efficient and reproducible recipe* that runs on consumer hardware (2× NVIDIA T4, free Kaggle notebooks) and deploys via ONNX INT8 to CPU with no GPU dependency. We release all adapters, training code, and an installable package (`pip install polywhisper`).
 
@@ -123,7 +123,7 @@ Table 1 presents our results alongside published baselines from the literature. 
 \toprule
 \textbf{System} & \textbf{Params} & \textbf{hi} & \textbf{ta} & \textbf{te} & \textbf{bn} & \textbf{mr} \\
 \midrule
-PolyWhisper v7 (no augment) & 244M + 5×14M & 43.0 & 68.2 & 105.9 & 198.8 & 170.1 \\
+PolyWhisper v7 (no augment) & 244M + 5×14M & 43.0 & 68.2 & 103.0 & 181.3 & 474.9 \\
 PolyWhisper v8 (global augment) & 244M + 5×14M & 52.5 & 73.6 & 120.2 & 169.9 & 82.9 \\
 \textbf{PolyWhisper v9 (selective)} & 244M + 5×14M & \textbf{46.3} & \textbf{70.1} & \textbf{100.1} & \textbf{130.2} & \textbf{96.7} \\
 \midrule
@@ -162,7 +162,7 @@ We trained three system variants to isolate the effect of augmentation:
 \toprule
 \textbf{Variant} & \textbf{hi} & \textbf{ta} & \textbf{te} & \textbf{bn} & \textbf{mr} \\
 \midrule
-v7 (no augment) & 43.0 & 68.2 & 105.9 & 198.8 & 170.1 \\
+v7 (no augment) & 43.0 & 68.2 & 103.0 & 181.3 & 474.9 \\
 v8 (global augment) & 52.5 & 73.6 & 120.2 & 169.9 & 82.9 \\
 v9 (selective augment) & 46.3 & 70.1 & 100.1 & 130.2 & 96.7 \\
 \midrule
@@ -176,7 +176,7 @@ The key observations:
 
 1. **Global augmentation (v8) hurts Hindi and Tamil.** Hindi WER increases from 43.0 to 52.5 (+21.6% relative) and Tamil from 68.2 to 73.6 (+8.0%). This is counterintuitive — SpecAugment is considered a standard technique that generally improves ASR robustness.
 
-2. **Global augmentation helps Bengali and Marathi.** Bengali improves from 198.8 to 169.9 (−14.5%) and Marathi from 170.1 to 82.9 (−51.2%). These are the two most difficult languages in our evaluation, and augmentation provides substantial gains.
+2. **Global augmentation helps Bengali and Marathi.** Bengali improves from 181.3 to 169.9 (−14.5%) and Marathi from 474.9 to 82.9 (−51.2%). These are the two most difficult languages in our evaluation, and augmentation provides substantial gains.
 
 3. **Selective augmentation (v9) recovers Hindi/Tamil while retaining gains.** By augmenting only Bengali and Marathi, we achieve v7-like performance on Hindi (46.3 vs 43.0, within 7.7%) and Tamil (70.1 vs 68.2, within 2.8%), while retaining most of the Bengali and Marathi improvements.
 

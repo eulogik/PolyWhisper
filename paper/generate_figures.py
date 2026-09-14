@@ -59,7 +59,7 @@ def fig1():
 def fig2():
     langs = ['hi', 'ta', 'te', 'bn', 'mr']
     lang_labels = ['Hindi', 'Tamil', 'Telugu', 'Bengali', 'Marathi']
-    v7 = [43.0, 68.2, 105.9, 198.8, 170.1]
+    v7 = [43.0, 68.2, 103.0, 181.3, 474.9]
     v8 = [52.5, 73.6, 120.2, 169.9, 82.9]
     v9 = [46.3, 70.1, 100.1, 130.2, 96.7]
     
@@ -88,10 +88,10 @@ def fig2():
 # ── Figure 3: Augmentation delta ──
 def fig3():
     langs = ['Hindi', 'Tamil', 'Telugu', 'Bengali', 'Marathi']
-    # v8 delta vs v7 (beam-mixed, approximate for te/bn/mr)
-    v8_delta = [+21.6, +8.0, +13.5, -14.5, -51.2]
-    # v9 delta vs v7 (verified for hi/ta, approximate for te/bn/mr)
-    v9_delta = [+7.7, +2.8, -5.5, -34.5, -43.2]
+    # v8 delta vs v7 (beam-mixed)
+    v8_delta = [+21.6, +8.0, +16.7, -6.3, -82.5]
+    # v9 delta vs v7
+    v9_delta = [+7.7, +2.8, -2.8, -28.2, -79.6]
     
     x = np.arange(len(langs))
     w = 0.35
@@ -107,7 +107,7 @@ def fig3():
     ax.legend(fontsize=8)
     ax.set_title('Augmentation Asymmetry: v7→v8 (global) vs v7→v9 (selective)', fontsize=11, fontweight='bold')
     ax.grid(axis='y', alpha=0.3)
-    ax.text(0.99, 0.01, '†v8 beam-5; v9 beam-1. v7 for te/bn/mr approximate.',
+    ax.text(0.99, 0.01, '†v8 beam-5; v9 beam-1.',
             transform=ax.transAxes, fontsize=7, ha='right', va='bottom', fontstyle='italic', color='gray')
     plt.tight_layout()
     plt.savefig(os.path.join(FIG_DIR, 'fig3_augment_delta.pdf'), bbox_inches='tight')

@@ -109,7 +109,7 @@ model-index:
 > by [Eulogik](https://eulogik.com) — Frontier Edge AI · Vernacular Intelligence · [eulogik.com](https://eulogik.com)
 
 
-> **TL;DR:** PolyWhisper v9 is a production-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−34.5%** and Marathi **−43.2%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
+> **TL;DR:** PolyWhisper v9 is a production-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−28.2%** and Marathi **−79.6%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
 
 ## ✨ Why PolyWhisper?
 
@@ -117,9 +117,9 @@ model-index:
 |---|---|---|
 | Storage per language | ~1.5 GB | **~14 MB (100× smaller)** |
 | Backbone | retrained each time | **frozen once, shared by all 5** |
-| Bengali (bn) FLEURS WER | 198.8 (baseline) | **130.2 (−34.5%)** |
-| Marathi (mr) FLEURS WER | 170.1 (baseline) | **96.7 (−43.2%)** |
-| Telugu (te) FLEURS WER | 105.9 (baseline) | **100.1 (−5.5%)** |
+| Bengali (bn) FLEURS WER | 181.3 (baseline) | **130.2 (−28.2%)** |
+| Marathi (mr) FLEURS WER | 474.9 (baseline) | **96.7 (−79.6%)** |
+| Telugu (te) FLEURS WER | 103.0 (baseline) | **100.1 (−2.8%)** |
 | Hindi (hi) FLEURS WER | 43.0 (baseline) | **46.3** |
 | Tamil (ta) FLEURS WER | 68.2 (baseline) | **70.1** |
 | CPU deployment | heavy | **ONNX INT8, no GPU needed** |
@@ -132,9 +132,9 @@ model-index:
 |---|---|---|---|---|---|
 | Hindi | `hi` | Devanagari | 43.0 | **46.3** | +7.7% |
 | Tamil | `ta` | Tamil | 68.2 | **70.1** | +2.8% |
-| Telugu | `te` | Telugu | 105.9 | **100.1** | ✅ **−5.5%** |
-| Bengali | `bn` | Bengali | 198.8 | **130.2** | ✅ **−34.5%** |
-| Marathi | `mr` | Devanagari | 170.1 | **96.7** | ✅ **−43.2%** |
+| Telugu | `te` | Telugu | 103.0 | **100.1** | ✅ **−2.8%** |
+| Bengali | `bn` | Bengali | 181.3 | **130.2** | ✅ **−28.2%** |
+| Marathi | `mr` | Devanagari | 474.9 | **96.7** | ✅ **−79.6%** |
 
 ### 🧪 The v9 finding: augment per language, not globally
 
@@ -235,7 +235,7 @@ PolyWhisper is an open-source Indic ASR toolkit: one frozen Whisper-Small backbo
 Full fine-tuning rewrites ~244M–1.5B weights per language. PolyWhisper freezes the backbone and trains ~3.5M LoRA parameters per language (~14MB), so five languages ship for the storage cost of a rounding error.
 
 **Which languages are production-ready?**
-All five ship working adapters. Hindi (46.3 WER) and Tamil (70.1) are strongest; Bengali and Marathi improved dramatically in v9 (−34.5% / −43.2% vs baseline) but remain the hardest languages.
+All five ship working adapters. Hindi (46.3 WER) and Tamil (70.1) are strongest; Bengali and Marathi improved dramatically in v9 (−28.2% / −79.6% vs baseline) but remain the hardest languages.
 
 **Can I run it on CPU?**
 Yes — export to ONNX INT8 and run with ONNX Runtime, no GPU required.
