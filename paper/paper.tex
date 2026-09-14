@@ -66,7 +66,7 @@ These achieve strong results but require storing and distributing a separate ful
 
 \poly\ takes a different approach: \textbf{freeze the backbone, train only the adapters}.
 We attach per-language LoRA (Low-Rank Adaptation~\cite{hu2022lora}) modules to the decoder and encoder attention projections of Whisper-Small, training approximately 3.5\,M parameters per language while keeping the 244\,M-parameter backbone entirely frozen.
-Five languages thus require only 17.7\,M additional parameters on top of a single shared backbone---roughly $7\%$ of the backbone's own size.
+Five languages thus require only 17.7\,M additional parameters on top of a single shared backbone---roughly $7.3\%$ of the backbone's own size.
 
 \begin{figure}[t]
   \centering
@@ -229,7 +229,7 @@ What \poly\ provides is (i)~a single shared backbone with adapter swapping at $\
 
 \begin{table}[t]
   \centering
-  \caption{Augmentation ablation (FLEURS WER, normalized). Deltas are computed within Table~\ref{tab:main}'s reported numbers; the v8 delta mixes beams ($^\dagger$) and is shown for context.}
+  \caption{Augmentation ablation (FLEURS WER, normalized). Deltas are computed within Table~\ref{tab:main}'s reported numbers; the v8 delta mixes beams ($^\ddagger$) and is shown for context.}
   \label{tab:ablation}
   \small
   \begin{tabular}{lccccc}
@@ -237,15 +237,15 @@ What \poly\ provides is (i)~a single shared backbone with adapter swapping at $\
     Variant & hi & ta & te & bn & mr \\
     \midrule
     v7 (no aug., beam-$1$)    & 43.0 & 68.2 & 103.0 & 181.3 & 474.9 \\
-    v8 (global aug., beam-$5$)$^\dagger$ & 52.5 & 73.6 & 120.2 & 169.9 & 82.9  \\
+    v8 (global aug., beam-$5$)$^\ddagger$ & 52.5 & 73.6 & 120.2 & 169.9 & 82.9  \\
     v9 (selective, beam-$1$)  & 46.3 & 70.1 & 100.1 & 130.2 & 96.7  \\
     \midrule
     \textbf{v9 $\Delta$ vs v7} & +7.7\% & +2.8\% & \textbf{$-$2.8\%} & \textbf{$-$28.2\%} & \textbf{$-$79.6\%} \\
-    v8 $\Delta$ vs v7$^\dagger$ & +21.6\% & +8.0\% & +16.7\% & $-$6.3\% & $-$82.5\% \\
+    v8 $\Delta$ vs v7$^\ddagger$ & +21.6\% & +8.0\% & +16.7\% & $-$6.3\% & $-$82.5\% \\
     \bottomrule
   \end{tabular}
   \vspace{1pt}
-  \caption*{\footnotesize $^\dagger$v8 was evaluated at beam-$5$; all other \poly\ rows are beam-$1$. The v8 vs v7 delta in Table~\ref{tab:ablation} is therefore not strictly apples-to-apples; we include it to show the global-augment effect observed during development. Additionally, the v7 baseline for Telugu/Bengali/Marathi was not saved as a structured eval artifact during development and is approximate; clean adapters for these languages will be retrained and re-evaluated to confirm these numbers.}
+  \caption*{\footnotesize $^\ddagger$v8 was evaluated at beam-$5$; all other \poly\ rows are beam-$1$. The v8 vs v7 delta in Table~\ref{tab:ablation} is therefore not strictly apples-to-apples; we include it to show the global-augment effect observed during development. The v7 baselines for Telugu/Bengali/Marathi are now verified via clean retraining (103.0/181.3/474.9).}
 \end{table}
 
 \begin{figure}[t]
