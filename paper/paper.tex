@@ -24,10 +24,10 @@
 \newcommand{\poly}{\textsc{PolyWhisper}}
 
 \title{PolyWhisper: Efficient Multilingual Indic ASR\\ via Frozen Backbone and Per-Language LoRA Adapters}
-\author{Eulogik~(\url{https://eulogik.com})%
+\author{Gautam Kishore~(\url{https://eulogik.com})%
   \thanks{Code: \url{https://github.com/eulogik/PolyWhisper} \quad
-          Model: \url{https://huggingface.co/eulogik/polywhisper} \quad
-          PyPI: \texttt{pip install polywhisper} \quad Web: \url{https://eulogik.com}}}
+           Model: \url{https://huggingface.co/eulogik/polywhisper} \quad
+           PyPI: \texttt{pip install polywhisper} \quad Web: \url{https://eulogik.com}}}
 \date{September 14, 2026}
 
 \begin{document}
@@ -64,14 +64,23 @@ However, Whisper's performance on many Indic languages is uneven: while Hindi is
 Recent work has addressed this through full fine-tuning (\mbox{IndicConformer}~\cite{chiu2022indicconformer}; \mbox{SraVaani}~\cite{javed2024sravaani}) or medium/large backbone variants (\mbox{IndicWhisper}~\cite{nandyala2025indicwhisper}).
 These achieve strong results but require storing and distributing a separate full model copy per language and depend on significant compute.
 
-\poly\ takes a different approach: \textbf{freeze the backbone, train only the adapters}.
-We attach per-language LoRA (Low-Rank Adaptation~\cite{hu2022lora}) modules to the decoder and encoder attention projections of Whisper-Small, training approximately 3.5\,M parameters per language while keeping the 244\,M-parameter backbone entirely frozen.
-Five languages thus require only 17.7\,M additional parameters on top of a single shared backbone---roughly $7.3\%$ of the backbone's own size.
+\poly\ takes a different approach: \textbf{freeze the backbone, train only
+the adapters}.
+We attach per-language LoRA (Low-Rank Adaptation~\cite{hu2022lora})
+modules to the decoder and encoder attention projections of Whisper-Small,
+training approximately 3.5\,M parameters per language while keeping the
+244\,M-parameter backbone entirely frozen.
+Five languages thus require only 17.7\,M additional parameters on top of
+a single shared backbone---roughly $7.3\%$ of the backbone's own size.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig1_architecture.pdf}
-  \caption{Architecture. A single frozen Whisper-Small backbone serves all five languages. Per-language LoRA adapters (rank~16, $\sim$14\,MB each) are injected via forward hooks on every attention projection. Switching languages swaps hooks with no weight reloading. ONNX exports fuse the chosen adapter into the graph for CPU inference.}
+  \caption{Architecture. A single frozen Whisper-Small backbone serves all
+  five languages. Per-language LoRA adapters (rank~16, $\sim$14\,MB each)
+  are injected via forward hooks on every attention projection.
+  Switching languages swaps hooks with no weight reloading.
+  ONNX exports fuse the chosen adapter into the graph for CPU inference.}
   \label{fig:arch}
 \end{figure}
 
@@ -132,8 +141,10 @@ Each language adds $3.5$\,M trainable parameters ($\sim$14\,MB on disk at FP32 d
 Five adapters total $17.7$\,M---about $7.3\%$ of the backbone.
 
 \paragraph{Runtime language switching.}
-Languages are switched via PyTorch forward hooks.
-$\texttt{set\_language("hi")}$ installs Hindi hooks; switching removes old hooks and installs the target language's hooks with no weight reloading.
+Languages are switched via PyTorch forward hooks.\\
+$\texttt{set\_language("hi")}$ installs Hindi hooks;\\
+switching removes old hooks and installs the target\\
+language's hooks with no weight reloading.
 
 \subsection{Training Data}
 
@@ -145,7 +156,13 @@ The data is conversational speech recorded in naturalistic conditions.
 
 All evaluation is on the FLEURS benchmark~\cite{conneau2022fleurs} (read speech, Wikipedia sentences).
 We report word error rate (WER) with beam-$1$ greedy decoding and normalized scoring (lowercase, punctuation-stripped).
-All \poly\ WERs quoted in Tables~\ref{tab:main}--\ref{tab:ablation} and Figures~\ref{fig:wer}--\ref{fig:delta} are the values published in our Hugging Face model card and in \texttt{final\_summary.json} on \texttt{eulogik/polywhisper} (beam-$1$ unless noted); they agree with the raw eval artifacts \texttt{eval\_\{lang\}\_pure\_fleurs*.json} within rounding.
+All \poly\ WERs quoted in Tables~\ref{tab:main}--\ref{tab:ablation} and
+Figures~\ref{fig:wer}--\ref{fig:delta} are the values published in our
+Hugging Face model card and in \texttt{final\_summary.json} on
+\texttt{eulogik/polywhisper} (beam-$1$ unless noted);\\
+they agree with the raw eval artifacts
+\texttt{eval\_\{lang\}\_pure\_fleurs*.json} within
+rounding.
 
 \subsection{Training Configuration}
 
@@ -184,7 +201,11 @@ We trained three variants to isolate augmentation:
 \begin{itemize}[leftmargin=1.2em, itemsep=2pt]
   \item \textbf{v7 (no augmentation)}---clean training only, our reference.
   \item \textbf{v8 (global augmentation)}---SpecAugment (27 freq bins, 40 time frames) + speed perturb on \emph{all} five languages.
-  \item \textbf{v9 (selective)}---SpecAugment + speed perturb on \emph{only} Bengali/Marathi; Hindi/Tamil/Telugu clean. The recommended ``final best'' mix picks the per-language best of v9: \texttt{hi\_best\_clean.pt}/\texttt{ta\_best\_clean.pt} for Hindi/Tamil (\S\ref{sec:eval}) and the v9 augmented \texttt{te/bn/mr\_best\_prod.pt} for the others.
+  \item \textbf{v9 (selective)}---SpecAugment + speed perturb on
+  \emph{only} Bengali/Marathi; Hindi/Tamil/Telugu clean.
+\item \textbf{Final-best mix:} clean adapters for Hindi/Tamil
+  (\texttt{hi/ta\_best\_clean.pt}); augmented for
+  Telugu/Bengali/Marathi (\texttt{te/bn/mr\_best\_prod.pt}).
 \end{itemize}
 
 \begin{table}[t]
@@ -369,7 +390,10 @@ Source: \url{https://github.com/eulogik/PolyWhisper}.
 All numbers are FLEURS read speech; conversational, code-switched, and noisy speech will differ (likely worse).
 
 \paragraph{Beam search.}
-Table~\ref{tab:beam} shows that beam-$5$ + repetition penalty $1.3$ improves Hindi/Tamil/Bengali/Marathi by 2--5\% relative, but \emph{degrades} Telugu by 20\% (repeated-token degeneration). The shipped library defaults encode per-language optimal widths (beam-$5$ except Telugu beam-$1$).
+Table~\ref{tab:beam}: beam-$5$ + repetition penalty $1.3$ improves
+Hindi/Tamil/Bengali/Marathi by 2--5\%, but degrades Telugu by 20\%
+(repeated-token degeneration). Library defaults: beam-$5$ (hi/ta/bn/mr),
+beam-$1$ (te).
 
 \paragraph{Five languages.}
 India has 22 scheduled languages; the adapter architecture extends straightforwardly to Gujarati, Punjabi, Kannada, etc.
@@ -384,9 +408,17 @@ larger backbones (Medium/Large), beam search $+$ shallow fusion with LMs, more l
 \section{Conclusion}
 %================================================================
 
-\poly\ provides a complete, reproducible recipe for efficient multilingual Indic ASR: freeze Whisper-Small, train per-language LoRA adapters ($\sim$14\,MB each on disk), and---critically---apply augmentation \emph{per language}, not globally.
-Our preliminary results suggest the same augmentation that improves Bengali by 28.2\% degrades Hindi by 21.6\%, a divergence that demands language-aware recipes; clean baselines for all five languages are now verified via retraining.
-We release all code, adapters, eval artifacts, and a PyPI package, plus 20 ONNX graphs on the Hub, to lower the barrier for Indic ASR and to provide a baseline for efficient speech adaptation.
+\poly\ provides a complete, reproducible recipe for efficient multilingual
+Indic ASR: freeze Whisper-Small, train per-language LoRA adapters
+($\sim$14\,MB each on disk), and---critically---apply augmentation
+\emph{per language}, not globally.
+Our preliminary results suggest the same augmentation that improves
+Bengali by 28.2\% degrades Hindi by 21.6\%, a divergence that demands
+language-aware recipes; clean baselines for all five languages are now
+verified via retraining.
+We release all code, adapters, eval artifacts, and a PyPI package, plus
+20 ONNX graphs on the Hub, to lower the barrier for Indic ASR and to
+provide a baseline for efficient speech adaptation.
 
 %================================================================
 \bibliographystyle{unsrt}
