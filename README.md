@@ -11,7 +11,9 @@
 > by [Eulogik](https://eulogik.com) — Frontier Edge AI · Vernacular Intelligence · [eulogik.com](https://eulogik.com)
 
 
-> **TL;DR:** PolyWhisper v9 is a production-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−28.2%** and Marathi **−79.6%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
+> **TL;DR:** PolyWhisper v9 is a research-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−28.2%** and Marathi **−79.6%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
+
+![PolyWhisper architecture: frozen Whisper-Small backbone with swappable per-language LoRA adapters](paper/figures/fig1_architecture.png)
 
 ## ✨ Why PolyWhisper?
 
@@ -38,14 +40,18 @@
 | Bengali | `bn` | Bengali | 181.3 | **130.2** | ✅ **−28.2%** |
 | Marathi | `mr` | Devanagari | 474.9 | **96.7** | ✅ **−79.6%** |
 
+![FLEURS WER by language for v7, v8, and v9 variants](paper/figures/fig2_wer_variants.png)
+
 ### 🧪 The v9 finding: augment per language, not globally
 
-Training with SpecAugment + speed perturbation on **all** languages damaged Hindi/Tamil (token-loop degeneration) while massively helping Bengali/Marathi. The v9 recipe augments **only `bn`/`mr`** and trains `hi`/`ta` clean:
+Training with SpecAugment + speed perturbation on **all** languages damaged Hindi/Tamil (token-loop degeneration) while massively helping Bengali/Marathi. The v9 recipe augments **only `bn`/`mr`** and trains `hi`/`ta`/`te` clean:
 
 | Language | Augmentation | Result |
 |---|---|---|
-| Hindi, Tamil | none (clean) | matches no-augment baseline |
-| Telugu, Bengali, Marathi | SpecAugment + 0.9×/1.1× speed perturb | large gains on hard languages |
+| Hindi, Tamil, Telugu | none (clean) | avoids global-augment damage; stays near the no-augment baseline |
+| Bengali, Marathi | SpecAugment + 0.9×/1.1× speed perturb | large gains on hard languages |
+
+![Relative WER change from selective v9 versus global v8 augmentation](paper/figures/fig3_augment_delta.png)
 
 ### 🎯 Decoding: per-language beam widths (measured, full FLEURS test)
 
@@ -63,13 +69,13 @@ Beam-5 + repetition penalty 1.3 helps every language **except Telugu**, where be
 
 | Language | Adapter file | Backbone | WER |
 |---|---|---|---|
-| Hindi (`hi`) | `polywhisper_output_hi/adapters_v3/hi_best_clean.pt` | `openai/whisper-small` | 46.3 |
-| Tamil (`ta`) | `polywhisper_output_ta/adapters_v3/ta_best_clean.pt` | `openai/whisper-small` | 70.1 |
-| Telugu (`te`) | `polywhisper_output_gpu0/adapters_v3/te_best_prod.pt` | `openai/whisper-small` | 100.1 |
-| Bengali (`bn`) | `polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt` | `openai/whisper-small` | 130.2 |
-| Marathi (`mr`) | `polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt` | `openai/whisper-small` | 96.7 |
+| Hindi (`hi`) | [`polywhisper_output_hi/adapters_v3/hi_best_clean.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_hi/adapters_v3/hi_best_clean.pt) | `openai/whisper-small` | 46.3 |
+| Tamil (`ta`) | [`polywhisper_output_ta/adapters_v3/ta_best_clean.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_ta/adapters_v3/ta_best_clean.pt) | `openai/whisper-small` | 70.1 |
+| Telugu (`te`) | [`polywhisper_output_gpu0/adapters_v3/te_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu0/adapters_v3/te_best_prod.pt) | `openai/whisper-small` | 100.1 |
+| Bengali (`bn`) | [`polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt) | `openai/whisper-small` | 130.2 |
+| Marathi (`mr`) | [`polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt) | `openai/whisper-small` | 96.7 |
 
-All adapters are rank-16 LoRA (decoder + encoder attention), ~14MB each. Backbone weights are **not** included — they load from `openai/whisper-small` at runtime.
+All adapters are rank-16 LoRA (decoder + encoder attention), ~14MB each. Backbone weights are **not** included — they load from `openai/whisper-small` at runtime. The `_prod` suffix is the v9 production-run tag, not an augmentation marker: Telugu was trained clean in the selective v9 recipe.
 
 ## 🚀 Quickstart
 
@@ -119,6 +125,8 @@ Pre-exported v9 graphs live under `export/onnx/` on the [Hub](https://huggingfac
 
 Files are named `{lang}_{lang}_best_prod_{encoder,decoder}{,_int8}.onnx`. INT8 is ~4× smaller.
 
+![ONNX encoder/decoder sizes for fp32 versus INT8](paper/figures/fig4_onnx_sizes.png)
+
 **Verification:** fp32 ONNX vs PyTorch max diff < 1e-3 on all five languages (encoder + decoder). End-to-end greedy spot-checks (FLEURS audio, beam=1):
 
 | Lang | torch WER | ONNX INT8 WER |
@@ -148,8 +156,8 @@ PolyWhisper is an open-source Indic ASR toolkit: one frozen Whisper-Small backbo
 **How is it different from fine-tuning Whisper?**
 Full fine-tuning rewrites ~244M–1.5B weights per language. PolyWhisper freezes the backbone and trains ~3.5M LoRA parameters per language (~14MB), so five languages ship for the storage cost of a rounding error.
 
-**Which languages are production-ready?**
-All five ship working adapters. Hindi (46.3 WER) and Tamil (70.1) are strongest; Bengali and Marathi improved dramatically in v9 (−28.2% / −79.6% vs baseline) but remain the hardest languages.
+**Which languages are usable?**
+All five ship working adapters. Hindi (46.3 WER) and Tamil (70.1) are strongest; Telugu, Bengali, and Marathi remain high-WER research adapters, useful for assistive/search/subtitle-draft workflows rather than verbatim transcription.
 
 **Can I run it on CPU?**
 Yes — export to ONNX INT8 and run with ONNX Runtime, no GPU required.
@@ -172,8 +180,8 @@ MIT. Whisper weights © OpenAI. Training data: IndicVoices-ST (CC-BY) · Eval: F
 
 ```bibtex
 @misc{polywhisper2026,
-  title  = {PolyWhisper: Efficient Multilingual Indic ASR via Frozen Backbone + Per-Language LoRA},
-  author = {Eulogik},
+  title  = {PolyWhisper: Efficient Multilingual Indic ASR via Frozen Backbone and Per-Language LoRA Adapters},
+  author = {Kishore, Gautam},
   year   = {2026},
   publisher = {HuggingFace},
   url    = {https://huggingface.co/eulogik/polywhisper}

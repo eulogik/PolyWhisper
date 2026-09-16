@@ -3,7 +3,9 @@ title: "PolyWhisper: Efficient Multilingual Indic ASR via Frozen Backbone and Pe
 message: "If you use this software, please cite it as below."
 type: software
 authors:
-  - name: "Eulogik"
+  - family-names: "Kishore"
+    given-names: "Gautam"
+    affiliation: "Eulogik"
     website: "https://eulogik.com"
 repository-code: "https://github.com/eulogik/PolyWhisper"
 license: MIT
@@ -15,5 +17,5 @@ keywords:
   - adapter
   - pytorch
   - deep-learning
-version: "0.2.1"
-date-released: "2026-09-10"
+version: "0.2.2"
+date-released: "2026-09-16"

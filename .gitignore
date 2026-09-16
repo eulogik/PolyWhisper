@@ -7,6 +7,12 @@
 # artifacts: checkpoints, audio caches, logs, derived data
 # (polywhisper_output is a symlink to an external SSD; result snapshots live in results/)
 polywhisper_output
+polywhisper_output_*/
+*_run.log
+logs/
+*.pt
+!polywhisper_output_hi/adapters_v3/hi_best_prod.pt
+!polywhisper_output_ta/adapters_v3/ta_best_prod.pt
 
 # old model checkpoints
 models/
