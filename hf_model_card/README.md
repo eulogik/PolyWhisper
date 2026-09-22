@@ -96,6 +96,8 @@ model-index:
             name: WER (beam=1, normalized)
 ---
 
+![PolyWhisper — one frozen Whisper-Small backbone, five per-language LoRA adapters](https://raw.githubusercontent.com/eulogik/PolyWhisper/main/polywhisper-banner.png)
+
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-eulogik%2Fpolywhisper-ffd21e)](https://huggingface.co/eulogik/polywhisper)
 [![GitHub](https://img.shields.io/badge/GitHub-eulogik%2FPolyWhisper-181717?style=flat&logo=github)](https://github.com/eulogik/PolyWhisper)
 [![Release](https://img.shields.io/github/v/release/eulogik/PolyWhisper?label=release)](https://github.com/eulogik/PolyWhisper/releases)
