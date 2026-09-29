@@ -177,7 +177,7 @@ rounding.
 
 \subsection{Training Configuration}
 
-AdamW ($\text{wd}=0.01$), cosine LR schedule with peak $1\times10^{-4}$, 100-step warmup, batch size~4/GPU, 3--5 epochs/language, WER-gated checkpoint selection on FLEURS dev slices, max 256 decode tokens, 2$\times$ NVIDIA T4 GPUs (free Kaggle notebooks).
+AdamW ($\text{wd}=0.01$), cosine LR schedule with peak $1\times10^{-4}$, 100-step warmup, batch size~4/GPU, 3--5 epochs/language, WER-gated checkpoint selection on FLEURS test slices (the same split used for final reporting; see Limitations), max 256 decode tokens, 2$\times$ NVIDIA T4 GPUs (free Kaggle notebooks).
 
 \subsection{Augmentation Strategy (v9 Recipe)}
 
@@ -308,7 +308,7 @@ We measured beam-$5$ + repetition penalty $1.3$ on the full FLEURS test set for 
     \bottomrule
   \end{tabular}
   \vspace{1pt}
-  \caption*{\footnotesize Full FLEURS test set, 417--1005 samples/language. Telugu beam-$5$ produces degenerate repeated-token outputs (e.g., ``\textit{and\=al\=u and\=al\=u\,...}'') for 326/472 samples, confirming that beam search amplifies errors when the adapter is weak. All other languages benefit modestly from beam search.}
+  \caption*{\footnotesize Full FLEURS test set, 417--1015 samples/language. Telugu beam-$5$ produces degenerate repeated-token outputs (e.g., ``\textit{and\=al\=u and\=al\=u\,...}'') for 326/472 samples, confirming that beam search amplifies errors when the adapter is weak. All other languages benefit modestly from beam search.}
 \end{table}
 
 \paragraph{Key observations (Table~\ref{tab:ablation}, Fig.~\ref{fig:delta}):}
@@ -402,6 +402,9 @@ Source: \url{https://github.com/eulogik/PolyWhisper}.
 
 \paragraph{Read speech only.}
 All numbers are FLEURS read speech; conversational, code-switched, and noisy speech will differ (likely worse).
+
+\paragraph{Checkpoint selection shares the test split.}
+WER-gated checkpoint selection was run on the same FLEURS test split used for final reporting, so the reported numbers are optimistic relative to a held-out dev protocol. The cross-variant comparisons (v7/v8/v9) and the augmentation asymmetry use identical selection, so the relative deltas remain informative.
 
 \paragraph{Beam search.}
 Table~\ref{tab:beam}: beam-$5$ + repetition penalty $1.3$ improves
