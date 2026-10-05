@@ -13,7 +13,7 @@
 > by [Eulogik](https://eulogik.com) — Frontier Edge AI · Vernacular Intelligence · [eulogik.com](https://eulogik.com)
 
 
-> **TL;DR:** PolyWhisper v9 is a research-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−28.2%** and Marathi **−79.6%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
+> **TL;DR:** PolyWhisper v9 is a research-ready automatic speech recognition (ASR) system for **Hindi, Tamil, Telugu, Bengali, and Marathi**. It pairs a **frozen OpenAI Whisper-Small backbone (244M params)** with tiny **per-language LoRA adapters (~14MB each)**. Bengali WER drops **−28.2%** and Marathi **−75.4%** versus the no-augmentation baseline — at roughly **1% of the storage cost** of full fine-tuning.
 
 ![PolyWhisper architecture: frozen Whisper-Small backbone with swappable per-language LoRA adapters](paper/figures/fig1_architecture.png)
 
@@ -24,7 +24,7 @@
 | Storage per language | ~1.5 GB | **~14 MB (100× smaller)** |
 | Backbone | retrained each time | **frozen once, shared by all 5** |
 | Bengali (bn) FLEURS WER | 181.3 (baseline) | **130.2 (−28.2%)** |
-| Marathi (mr) FLEURS WER | 474.9 (baseline) | **96.7 (−79.6%)** |
+| Marathi (mr) FLEURS WER | 474.9 (baseline) | **116.9 (−75.4%)** |
 | Telugu (te) FLEURS WER | 103.0 (baseline) | **100.1 (−2.8%)** |
 | Hindi (hi) FLEURS WER | 43.0 (baseline) | **46.3** |
 | Tamil (ta) FLEURS WER | 68.2 (baseline) | **70.1** |
@@ -40,7 +40,7 @@
 | Tamil | `ta` | Tamil | 68.2 | **70.1** | +2.8% |
 | Telugu | `te` | Telugu | 103.0 | **100.1** | ✅ **−2.8%** |
 | Bengali | `bn` | Bengali | 181.3 | **130.2** | ✅ **−28.2%** |
-| Marathi | `mr` | Devanagari | 474.9 | **96.7** | ✅ **−79.6%** |
+| Marathi | `mr` | Devanagari | 474.9 | **116.9** | ✅ **−75.4%** |
 
 ![FLEURS WER by language for v7, v8, and v9 variants](paper/figures/fig2_wer_variants.png)
 
@@ -65,7 +65,7 @@ Beam-5 + repetition penalty 1.3 helps every language **except Telugu**, where be
 | Tamil | 70.1 | **68.6** (−2.2%) | beam-5 |
 | Telugu | **100.1** | 120.5 (+20.4% ⚠️) | **beam-1** |
 | Bengali | 130.2 | **126.4** (−2.9%) | beam-5 |
-| Marathi | 96.7 | **91.5** (−5.4%) | beam-5 |
+| Marathi | 116.9 | **91.5** (−21.7%) | beam-5 |
 
 ## 📦 Which adapter should I use?
 
@@ -75,7 +75,7 @@ Beam-5 + repetition penalty 1.3 helps every language **except Telugu**, where be
 | Tamil (`ta`) | [`polywhisper_output_ta/adapters_v3/ta_best_clean.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_ta/adapters_v3/ta_best_clean.pt) | `openai/whisper-small` | 70.1 |
 | Telugu (`te`) | [`polywhisper_output_gpu0/adapters_v3/te_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu0/adapters_v3/te_best_prod.pt) | `openai/whisper-small` | 100.1 |
 | Bengali (`bn`) | [`polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu0/adapters_v3/bn_best_prod.pt) | `openai/whisper-small` | 130.2 |
-| Marathi (`mr`) | [`polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt) | `openai/whisper-small` | 96.7 |
+| Marathi (`mr`) | [`polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt`](https://huggingface.co/eulogik/polywhisper/resolve/main/polywhisper_output_gpu1/adapters_v3/mr_best_prod.pt) | `openai/whisper-small` | 116.9 |
 
 All adapters are rank-16 LoRA (decoder + encoder attention), ~14MB each. Backbone weights are **not** included — they load from `openai/whisper-small` at runtime. The `_prod` suffix is the v9 production-run tag, not an augmentation marker: Telugu was trained clean in the selective v9 recipe.
 
